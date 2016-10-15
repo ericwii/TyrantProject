@@ -29,14 +29,9 @@ bool Game::Init(WNDPROC aWindowProc)
 
 	InputManager::Initialize();
 
-	Model* ability = ModelLoader::LoadRectangle3D(Vector2<float>(0.025f, 0.05f), eEffectType3D::Textured, "Data/Textures/Icons/commanderIcon.png");
-	test.Init(ability);
-	test2.SetPosition({ 0.5f,0.9f,-0.1f });
-	instanser2.Add(&test);
-
 	Model* illu = ModelLoader::LoadRectangle3D(Vector2<float>(1.42f, 1.15f), eEffectType3D::Textured, "Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg");
 	test3.Init(illu, instanser2);
-	test3.SetPosition({ -0.0f, 0.38f, 0 });
+	test3.SetPosition({ -0.0f, 0.25f, 0 });
 	instanser.Add(&test3);
 
 	Model* cooldown = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.3f), eEffectType3D::Textured, "Data/Textures/Icons/cooldownIcon.png");
