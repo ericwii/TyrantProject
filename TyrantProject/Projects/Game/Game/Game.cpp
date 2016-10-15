@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "../../Engine/ModelLoader.h"
-#include "Card.h"
 
-Card cardTest;
+Instance cardTestInstance;
+Instance test2;
+Instance test;
+CU::GrowingArray<Instance*> instanser;
+CU::GrowingArray<Instance*> instanser2;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -17,13 +20,26 @@ Game::~Game()
 
 bool Game::Init(WNDPROC aWindowProc)
 {
+	instanser.Allocate(10);
+	instanser2.Allocate(10);
 	Engine::Start(aWindowProc, WindowSetupInfo(eWindowMode::Windowed));
 	myEngineInstance = Engine::GetInstance();
 	myEngineInstance->GetCamera().SetPosition(Vector3<float>(0, 0, -2.1f));
 
 	InputManager::Initialize();
 
-	cardTest.LoadFromXMl("Data/XML files/RadioOfficer.xml");
+	Model* ability = ModelLoader::LoadRectangle3D(Vector2<float>(0.025f, 0.05f), eEffectType3D::Textured, "Data/Textures/commanderIcon.png");
+	test.Init(ability);
+	test2.SetPosition({ 0.5f,0.9f,-0.11f });
+	instanser2.Add(&test);
+
+	Model* cooldown = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.3f), eEffectType3D::Textured, "Data/Textures/cooldownIcon.png");
+	test2.Init(cooldown,instanser2);
+	test2.SetPosition({ 0.5f,0.9f,-0.1f });
+	instanser.Add(&test2); 
+
+	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png");
+	cardTestInstance.Init(cardModel,instanser);
 
 	return true;
 }
@@ -63,6 +79,7 @@ bool Game::Update()
 
 void Game::Render()
 {
+	cardTestInstance.Render();
 	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
 
 	myEngineInstance->PresentBackBuffer();

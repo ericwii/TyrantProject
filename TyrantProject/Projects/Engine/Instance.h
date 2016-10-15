@@ -1,4 +1,5 @@
 #pragma once
+#include "../CommonUtilities/GrowingArray.h"
 
 class Model;
 
@@ -10,29 +11,21 @@ public:
 	~Instance();
 
 	void Init(Model* aModel, CU::Matrix44<float> anOrientation = CU::Matrix44<float>());
+	void Init(Model* aModel, CU::GrowingArray<Instance*> someInstaceChildren, CU::Matrix44<float> anOrientation = CU::Matrix44<float>());
 	void Render();
+	void RenderChilds();
 
-	inline void SetPosition(Vector3<float> aPosition);
-	inline void SetOrientation(CU::Matrix44<float> anOrientation);
+	void SetPosition(Vector3<float> aPosition);
+	void SetOrientation(CU::Matrix44<float> anOrientation);
 
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline Vector3<float> GetPosition() const;
 
 private:
 	Model* myModel;
+	CU::GrowingArray<Instance*> myInstances;
 	CU::Matrix44<float> myOrientation;
 };
-
-
-inline void Instance::SetPosition(Vector3<float> aPosition)
-{
-	myOrientation.SetPosition(aPosition);
-}
-
-inline void Instance::SetOrientation(CU::Matrix44<float> anOrientation)
-{
-	myOrientation = anOrientation;
-}
 
 
 inline const CU::Matrix44<float>& Instance::GetOrientation() const
