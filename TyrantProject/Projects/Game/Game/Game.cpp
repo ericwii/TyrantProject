@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "../../Engine/ModelLoader.h"
+#include "Card.h"
 
-Instance cardTestInstance;
+Card cardTest;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -22,8 +23,7 @@ bool Game::Init(WNDPROC aWindowProc)
 
 	InputManager::Initialize();
 
-	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png");
-	cardTestInstance.Init(cardModel);
+	cardTest.LoadFromXMl("Data/XML files/RadioOfficer.xml");
 
 	return true;
 }
@@ -63,7 +63,6 @@ bool Game::Update()
 
 void Game::Render()
 {
-	cardTestInstance.Render();
 	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
 
 	myEngineInstance->PresentBackBuffer();

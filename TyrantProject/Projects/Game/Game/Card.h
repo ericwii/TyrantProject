@@ -7,6 +7,8 @@ public:
 	Card();
 	~Card();
 
+	void LoadFromXMl(const string& anXmlFile);
+
 
 private:
 	Text myText;

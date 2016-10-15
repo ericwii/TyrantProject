@@ -3,14 +3,6 @@
 #include <time.h>
 #include <algorithm> 
 
-//#if defined (_DEBUG) || defined (DEBUG)
-//#pragma comment(lib, "../Debug/CommonUtilities.lib")
-//#pragma comment(lib, "../Debug/SoundEngine.lib")
-//#else 
-//#pragma comment(lib, "../Release/CommonUtilities.lib")
-//#pragma comment(lib, "../Release/SoundEngine.lib")
-//#endif
-
 #include "../../CommonUtilities/Vector4.h"
 #include "../../Engine/Engine.h"
 #include "../../Game/Game/Game.h"
