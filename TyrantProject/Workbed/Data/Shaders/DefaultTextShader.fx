@@ -71,6 +71,9 @@ void Geometry_Shader(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> tri
 float4 Pixel_Shader(PS_INPUT input) : SV_Target
 {
 	float4 albedoColor = DiffuseTexture.Sample(sampleLinear_Wrap, input.TexUV);
+	float albedoSum = saturate(albedoColor.x + albedoColor.y + albedoColor.z);
+	albedoColor = Color * albedoSum;
+	albedoColor.w *= Color.w;
 	
 	return albedoColor;
 }
