@@ -46,11 +46,11 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-.lib
-.obj
-.suo
-.sdf
-.pdb
-.idb
-.pch
+*.lib
+*.obj
+*.suo
+*.sdf
+*.pdb
+*.idb
+*.pch
 
