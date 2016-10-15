@@ -104,4 +104,5 @@ void Engine::OnStart()
 	}
 
 	directX.EnableAlphaBlend();
+	directX.DisableZBuffer();
 }
