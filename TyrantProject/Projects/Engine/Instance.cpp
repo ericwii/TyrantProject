@@ -34,8 +34,8 @@ void Instance::Render()
 {
 	DEBUG_ASSERT(myModel != nullptr, "Cannot render an instance without a model");
 	
-	RenderChilds();
 	myModel->Render(myOrientation);
+	RenderChilds();
 }
 
 void Instance::RenderChilds()
