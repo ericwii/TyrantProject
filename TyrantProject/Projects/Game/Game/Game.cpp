@@ -38,7 +38,7 @@ bool Game::Init(WNDPROC aWindowProc)
 	test2.SetPosition({ 0.5f,0.9f,-0.1f });
 	instanser.Add(&test2); 
 
-	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png");
+	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png", true);
 	cardTestInstance.Init(cardModel,instanser);
 
 	return true;

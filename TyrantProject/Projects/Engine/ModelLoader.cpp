@@ -156,7 +156,7 @@ Model* ModelLoader::LoadDebugTriangle(float aSize)
 	return newModel;
 }
 
-Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D anEffectType, const string& aTextureFile)
+Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D anEffectType, const string& aTextureFile, bool aDoubleSided)
 {
 	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(anEffectType);
 	if (newEffect == nullptr)
@@ -171,45 +171,78 @@ Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D a
 
 	float halfSizeX = aSize.x * 0.5f;
 	float halfSizeY = aSize.y * 0.5f;
-	VertexPositionUV vertexes[8] =
+
+	if (aDoubleSided == true)
 	{
-		//Frontside
-		VertexPositionUV({ -halfSizeX, halfSizeY, 0, 1.f }, { 0, 0}),      
-		VertexPositionUV({ halfSizeX, halfSizeY, 0, 1.f },	{ 0.5f, 0 }),   
-		VertexPositionUV({ halfSizeX, -halfSizeY, 0, 1.f }, { 0.5f, 1.f }), 
-		VertexPositionUV({ -halfSizeX, -halfSizeY, 0, 1.f },{ 0, 1.f }),   
+		VertexPositionUV vertexes[8] =
+		{
+			//Frontside
+			VertexPositionUV({ -halfSizeX, halfSizeY, 0, 1.f }, { 0, 0}),
+			VertexPositionUV({ halfSizeX, halfSizeY, 0, 1.f },	{ 0.5f, 0 }),
+			VertexPositionUV({ halfSizeX, -halfSizeY, 0, 1.f }, { 0.5f, 1.f }),
+			VertexPositionUV({ -halfSizeX, -halfSizeY, 0, 1.f },{ 0, 1.f }),
 
-		//Backside
-		VertexPositionUV({ halfSizeX, halfSizeY, 0, 1.f },{ 0.5f, 0 }),     
-		VertexPositionUV({ -halfSizeX, halfSizeY, 0, 1.f },{ 1.f, 0 }),    
-		VertexPositionUV({ -halfSizeX, -halfSizeY, 0, 1.f },{ 1.f, 1.f }), 
-		VertexPositionUV({ halfSizeX, -halfSizeY, 0, 1.f },{ 0.5f, 1.f }),  
-	};
+			//Backside
+			VertexPositionUV({ halfSizeX, halfSizeY, 0, 1.f },{ 0.5f, 0 }),
+			VertexPositionUV({ -halfSizeX, halfSizeY, 0, 1.f },{ 1.f, 0 }),
+			VertexPositionUV({ -halfSizeX, -halfSizeY, 0, 1.f },{ 1.f, 1.f }),
+			VertexPositionUV({ halfSizeX, -halfSizeY, 0, 1.f },{ 0.5f, 1.f }),
+		};
 
-	newModel->myVertexData.numberOfOfVertexes = 8;
-	newModel->myVertexData.stride = sizeof(VertexPositionUV);
-	newModel->myVertexData.size = sizeof(VertexPositionUV) * 8;
-	newModel->myVertexData.vertexType = eVertexType::Vertex_Position_UV;
-	newModel->myVertexData.vertexData = new char[newModel->myVertexData.size];
-	memcpy(newModel->myVertexData.vertexData, vertexes, newModel->myVertexData.size);
+		newModel->myVertexData.numberOfOfVertexes = 8;
+		newModel->myVertexData.stride = sizeof(VertexPositionUV);
+		newModel->myVertexData.size = sizeof(VertexPositionUV) * 8;
+		newModel->myVertexData.vertexType = eVertexType::Vertex_Position_UV;
+		newModel->myVertexData.vertexData = new char[newModel->myVertexData.size];
+		memcpy(newModel->myVertexData.vertexData, vertexes, newModel->myVertexData.size);
 
+		int indexes[12] =
+		{
+			//Frontside
+			0, 1, 2,
+			2, 3, 0,
 
-	int indexes[12] =
+			//Backside
+			4, 5, 6,
+			6, 7, 4
+		};
+
+		newModel->myIndexData.numberOfIndexes = 12;
+		newModel->myIndexData.format = DXGI_FORMAT_R32_UINT;
+		newModel->myIndexData.size = sizeof(int) * 12;
+		newModel->myIndexData.indexData = new char[newModel->myIndexData.size];
+		memcpy(newModel->myIndexData.indexData, indexes, newModel->myIndexData.size);
+	}
+	else
 	{
-		//Frontside
-		0, 1, 2,
-		2, 3, 0,
+		VertexPositionUV vertexes[4] =
+		{
+			VertexPositionUV({ -halfSizeX, halfSizeY, 0, 1.f },{ 0, 0 }),
+			VertexPositionUV({ halfSizeX, halfSizeY, 0, 1.f },{ 1.f, 0 }),
+			VertexPositionUV({ halfSizeX, -halfSizeY, 0, 1.f },{ 1.f, 1.f }),
+			VertexPositionUV({ -halfSizeX, -halfSizeY, 0, 1.f },{ 0, 1.f }),
+		};
 
-		//Backside
-		4, 5, 6,
-		6, 7, 4
-	};
+		newModel->myVertexData.numberOfOfVertexes = 4;
+		newModel->myVertexData.stride = sizeof(VertexPositionUV);
+		newModel->myVertexData.size = sizeof(VertexPositionUV) * 4;
+		newModel->myVertexData.vertexType = eVertexType::Vertex_Position_UV;
+		newModel->myVertexData.vertexData = new char[newModel->myVertexData.size];
+		memcpy(newModel->myVertexData.vertexData, vertexes, newModel->myVertexData.size);
 
-	newModel->myIndexData.numberOfIndexes = 12;
-	newModel->myIndexData.format = DXGI_FORMAT_R32_UINT;
-	newModel->myIndexData.size = sizeof(int) * 12;
-	newModel->myIndexData.indexData = new char[newModel->myIndexData.size];
-	memcpy(newModel->myIndexData.indexData, indexes, newModel->myIndexData.size);
+		int indexes[6] =
+		{
+			0, 1, 2,
+			2, 3, 0,
+		};
+
+		newModel->myIndexData.numberOfIndexes = 6;
+		newModel->myIndexData.format = DXGI_FORMAT_R32_UINT;
+		newModel->myIndexData.size = sizeof(int) * 6;
+		newModel->myIndexData.indexData = new char[newModel->myIndexData.size];
+		memcpy(newModel->myIndexData.indexData, indexes, newModel->myIndexData.size);
+	}
+
 
 	newModel->SetEffect(newEffect);
 
