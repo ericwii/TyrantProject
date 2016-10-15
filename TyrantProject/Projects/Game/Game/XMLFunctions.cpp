@@ -119,7 +119,7 @@ void CU::XMLFunctions::XMLErrorCheck(const tinyxml2::XMLError anXMLError, const 
 		{
 			errorMessage = "XML_NO_ATTRIBUTE\nFile: " + locFilename + "\nMessage: " + aMessage;
 		}
-		DEBUG_ASSERT(false, errorMessage.c_str())
+		DEBUG_ASSERT(false, errorMessage.c_str());
 	}
 }
 

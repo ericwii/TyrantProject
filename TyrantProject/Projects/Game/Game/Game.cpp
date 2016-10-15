@@ -3,6 +3,7 @@
 #include "../../Engine/ModelLoader.h"
 
 Instance cardTestInstance;
+Instance test3;
 Instance test2;
 Instance test;
 CU::GrowingArray<Instance*> instanser;
@@ -37,6 +38,11 @@ bool Game::Init(WNDPROC aWindowProc)
 	test2.Init(cooldown,instanser2);
 	test2.SetPosition({ 0.5f,0.9f,-0.1f });
 	instanser.Add(&test2); 
+
+	Model* illu = ModelLoader::LoadRectangle3D(Vector2<float>(1.42f, 1.15f), eEffectType3D::Textured, "Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg");
+	test3.Init(illu, instanser2);
+	test3.SetPosition({ -0.0f, 0.38f, 0 });
+	instanser.Add(&test3);
 
 	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png", true);
 	cardTestInstance.Init(cardModel,instanser);
