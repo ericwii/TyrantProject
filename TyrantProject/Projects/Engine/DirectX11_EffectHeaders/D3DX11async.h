@@ -11,7 +11,7 @@
 #ifndef __D3DX11ASYNC_H__
 #define __D3DX11ASYNC_H__
 
-#include "C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include/d3dx11.h"
+#include "..\..\..\..\..\Microsoft DirectX SDK (June 2010)\Include\d3dx11.h"
 
 #ifdef __cplusplus
 extern "C" {

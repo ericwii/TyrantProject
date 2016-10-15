@@ -71,14 +71,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\LibraryFiles\Engine\</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86\;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\..\Microsoft DirectX SDK (June 2010)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\..\Microsoft DirectX SDK (June 2010)\Lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\LibraryFiles\Engine\</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86\;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\..\Microsoft DirectX SDK (June 2010)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\..\..\Microsoft DirectX SDK (June 2010)\Lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
