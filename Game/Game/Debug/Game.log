@@ -1,0 +1,14 @@
+﻿Build started 2016-10-15 16:48:36.
+     1>Project "C:\Users\Eric\Desktop\TyrantProject\Projects\Game\Game\Game.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHa /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Game_Debug.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /wd4505 /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
+       Lib:
+         D:\Program (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Eric\Desktop\TyrantProject\Projects\Launcher\..\LibraryFiles\Game\Game_Debug.lib" /NOLOGO /ignore:4239,4006 Debug\Game.obj
+         Debug\stdafx.obj
+         Game.vcxproj -> C:\Users\Eric\Desktop\TyrantProject\Projects\Launcher\..\LibraryFiles\Game\Game_Debug.lib
+     1>Done Building Project "C:\Users\Eric\Desktop\TyrantProject\Projects\Game\Game\Game.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.30

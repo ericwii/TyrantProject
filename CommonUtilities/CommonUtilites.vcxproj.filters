@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Lists">
+      <UniqueIdentifier>{cae0aab1-78a1-4f6e-97c7-35f0c596eff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{a6aac371-1601-4340-b962-7c238e3a7543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{5b9c8190-2a6d-47bc-b863-94fbb20ee09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{f1da5282-47fd-4048-bb71-27a119a211d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BinaryTree.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleLinkedList.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleLinkedListNode.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="Greater.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="GrowingArray.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="Heap.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="Lesser.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticArray.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNode.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorOnStack.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="intersection.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="line.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="plane.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="planevolume.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="linevolume.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
