@@ -5,6 +5,8 @@
 #endif
 #include <sstream>
 
+#pragma warning (disable:4127)
+
 #ifndef _DEBUG
 	#define DEBUG_ASSERT(statement, message)     ((void)0)
 #else

@@ -28,12 +28,12 @@ bool Game::Init(WNDPROC aWindowProc)
 
 	InputManager::Initialize();
 
-	Model* ability = ModelLoader::LoadRectangle3D(Vector2<float>(0.025f, 0.05f), eEffectType3D::Textured, "Data/Textures/commanderIcon.png");
+	Model* ability = ModelLoader::LoadRectangle3D(Vector2<float>(0.025f, 0.05f), eEffectType3D::Textured, "Data/Textures/Icons/commanderIcon.png");
 	test.Init(ability);
 	test2.SetPosition({ 0.5f,0.9f,-0.11f });
 	instanser2.Add(&test);
 
-	Model* cooldown = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.3f), eEffectType3D::Textured, "Data/Textures/cooldownIcon.png");
+	Model* cooldown = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.3f), eEffectType3D::Textured, "Data/Textures/Icons/cooldownIcon.png");
 	test2.Init(cooldown,instanser2);
 	test2.SetPosition({ 0.5f,0.9f,-0.1f });
 	instanser.Add(&test2); 
