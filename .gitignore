@@ -53,4 +53,9 @@ Temporary Items
 *.pdb
 *.idb
 *.pch
-
+*.ilk
+*.tlog
+*.log
+*.ipch
+*.opensdf
+*.exe
