@@ -1,0 +1,3 @@
+CreateShaderResourceViewFromFile is deprecated in windows 8, maybe use something else in the future.
+
+https://msdn.microsoft.com/en-us/library/windows/desktop/ff476283(v=vs.85).aspx
