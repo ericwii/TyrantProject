@@ -3,6 +3,10 @@
 #include "../../Engine/ModelLoader.h"
 
 Instance cardTestInstance;
+Instance test2;
+Instance test;
+CU::GrowingArray<Instance*> instanser;
+CU::GrowingArray<Instance*> instanser2;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -16,14 +20,26 @@ Game::~Game()
 
 bool Game::Init(WNDPROC aWindowProc)
 {
+	instanser.Allocate(10);
+	instanser2.Allocate(10);
 	Engine::Start(aWindowProc, WindowSetupInfo(eWindowMode::Windowed));
 	myEngineInstance = Engine::GetInstance();
 	myEngineInstance->GetCamera().SetPosition(Vector3<float>(0, 0, -2.1f));
 
 	InputManager::Initialize();
 
+	Model* ability = ModelLoader::LoadRectangle3D(Vector2<float>(0.025f, 0.05f), eEffectType3D::Textured, "Data/Textures/commanderIcon.png");
+	test.Init(ability);
+	test2.SetPosition({ 0.5f,0.9f,-0.11f });
+	instanser2.Add(&test);
+
+	Model* cooldown = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.3f), eEffectType3D::Textured, "Data/Textures/cooldownIcon.png");
+	test2.Init(cooldown,instanser2);
+	test2.SetPosition({ 0.5f,0.9f,-0.1f });
+	instanser.Add(&test2); 
+
 	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png");
-	cardTestInstance.Init(cardModel);
+	cardTestInstance.Init(cardModel,instanser);
 
 	return true;
 }
