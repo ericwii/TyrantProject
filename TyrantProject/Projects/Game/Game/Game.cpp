@@ -9,7 +9,6 @@ Instance test2;
 Instance test;
 CU::GrowingArray<Instance*> instanser;
 CU::GrowingArray<Instance*> instanser2;
-CardFactory factory;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -23,6 +22,8 @@ Game::~Game()
 
 bool Game::Init(WNDPROC aWindowProc)
 {
+	CardFactory::Create();
+
 	instanser.Allocate(10);
 	instanser2.Allocate(10);
 	Engine::Start(aWindowProc, WindowSetupInfo(eWindowMode::Windowed));
@@ -46,8 +47,8 @@ bool Game::Init(WNDPROC aWindowProc)
 	cardModel->AddTexture("HighlightTexture", "Data/Textures/CardCanvas/highlight.png");
 	cardTestInstance.Init(cardModel,instanser);
 
-	factory.LoadCards();
-	CardData temp = factory.GetCard("Radio Officer");
+	CardFactory::GetInstance().LoadCards();
+	CardData temp = CardFactory::GetInstance().GetCard("Radio Officer");
 
 	return true;
 }

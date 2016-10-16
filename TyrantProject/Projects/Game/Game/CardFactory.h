@@ -3,14 +3,17 @@
 class CardFactory
 {
 public:
-	CardFactory();
-	~CardFactory();
 
-	void LoadCards();
-	void LoadCardsList(const string& anXmlFile);
-	CardData& GetCard(const string aCardName);
+	~CardFactory();
+	static void Create();
+	static CardFactory& GetInstance();
+	static void LoadCards();
+	static void LoadCardsList(const string& anXmlFile);
+	static CardData* GetCard(const string aCardName);
 
 private:
+	static CardFactory* myInstance;
 	std::unordered_map<std::string, CardData> myCardDatas;
+	CardFactory();
 };
 

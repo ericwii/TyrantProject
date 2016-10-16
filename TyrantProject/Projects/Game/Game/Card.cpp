@@ -3,6 +3,7 @@
 #include "XMLReader.h"
 #include "CardData.h"
 #include "../../Engine/ModelLoader.h"
+#include "CardFactory.h"
 
 using namespace tinyxml2;
 
@@ -104,4 +105,9 @@ void Card::LoadFromXMl(const string& anXmlFile)
 	card.health = static_cast<char>(element->IntAttribute("health"));
 
 	cardFaction = card.faction;
+}
+
+void Card::LoadCard(string aCardName)
+{
+	myCardData = CardFactory::GetCard(aCardName);
 }

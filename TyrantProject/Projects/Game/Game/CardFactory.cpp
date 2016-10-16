@@ -4,6 +4,8 @@
 
 using namespace tinyxml2;
 
+CardFactory* CardFactory::myInstance = nullptr;
+
 CardFactory::CardFactory()
 {
 }
@@ -11,6 +13,16 @@ CardFactory::CardFactory()
 
 CardFactory::~CardFactory()
 {
+}
+
+void CardFactory::Create()
+{
+	myInstance = new CardFactory();
+}
+
+CardFactory & CardFactory::GetInstance()
+{
+	return *myInstance;
 }
 
 void CardFactory::LoadCards()
@@ -115,10 +127,14 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 	card.attack = static_cast<char>(element->IntAttribute("attack"));
 	card.health = static_cast<char>(element->IntAttribute("health"));
 
-	myCardDatas[card.name.c_str()] = card;
+	myInstance->myCardDatas[card.name.c_str()] = card;
 }
 
-CardData & CardFactory::GetCard(const string aCardName)
+CardData* CardFactory::GetCard(const string aCardName)
 {
-	return myCardDatas[aCardName.c_str()];
+	if (myInstance->myCardDatas.find(aCardName.c_str) == myInstance->myCardDatas.end())
+	{
+		return nullptr;
+	}
+	return &myInstance->myCardDatas[aCardName.c_str()];
 }

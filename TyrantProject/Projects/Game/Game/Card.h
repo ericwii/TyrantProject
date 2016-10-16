@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Engine/Text.h"
+#include "CardData.h"
 
 class Card
 {
@@ -11,7 +12,10 @@ public:
 
 	void LoadFromXMl(const string& anXmlFile);
 
+	void LoadCard(string aCardName);
+
 
 private:
 	Instance myCanvas;
+	CardData* myCardData;
 };
