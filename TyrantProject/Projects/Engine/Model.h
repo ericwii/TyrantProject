@@ -16,9 +16,10 @@ public:
 
 	void Destroy();
 
-	void Render(const CU::Matrix44<float>& aParentSpace);
+	void Render(const CU::Matrix44<float>& aParentSpace, unsigned int aPassIndex = 0);
 	void RenderWireFrame(const CU::Matrix44<float>& aParentSpace);
 
+	void AddTexture(const string& aShaderVariableName, const string& aTextureFile, int surfaceIndex = 0);
 	inline void SetEffect(Effect* anEffect);
 
 	inline const Effect* GetEffect() const;

@@ -2,8 +2,11 @@
 #include "Card.h"
 #include "XMLReader.h"
 #include "CardData.h"
+#include "../../Engine/ModelLoader.h"
 
 using namespace tinyxml2;
+
+eCardFaction cardFaction;
 
 Card::Card()
 {
@@ -13,53 +16,63 @@ Card::~Card()
 {
 }
 
+void Card::Render()
+{
+	unsigned int passIndex = cardFaction;
+	myCanvas.Render(passIndex);
+}
+
 
 void Card::LoadFromXMl(const string& anXmlFile)
 {
+	Model* canvasModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.f, 2.f), eEffectType3D::Card, "Data/Textures/CardCanvas/canvas.png", true);
+	canvasModel->AddTexture("HighlightTexture", "Data/Textures/CardCanvas/highlight.png");
+	myCanvas.Init(canvasModel);
+
 	XMLReader reader;
 	reader.OpenDocument(anXmlFile.c_str());
 
 	XMLElement* element = reader.FindFirstChild("root");
 	element = element->FirstChildElement();
-
+	
 	CardData card;
 
 	card.name = element->Attribute("name");
-	if (element->Attribute("faction") == "Bloodthirsty")
+	string faction = element->Attribute("faction");
+	string cardType = element->Attribute("cardType");
+	string rarity = element->Attribute("rarity");
+
+
+	if (faction == "Bloodthirsty")
 	{
 		card.faction = eCardFaction::BloodThirsty;
 	}
-	else if (element->Attribute("faction") == "Imperial")
-	{
-		card.faction = eCardFaction::Imperial;
-	}
-	else if (element->Attribute("faction") == "Raider")
+	else if (faction == "raider")
 	{
 		card.faction = eCardFaction::Raider;
 	}
-	else if (element->Attribute("faction") == "Righteous")
+	else if (faction == "Righteous")
 	{
 		card.faction = eCardFaction::Righteous;
 	}
-	else if (element->Attribute("faction") == "Xeno")
+	else if (faction == "Xeno")
 	{
 		card.faction = eCardFaction::Xeno;
 	}
 	else
 	{
-		card.faction = eCardFaction::Action;
+		card.faction = eCardFaction::Imperial;
 	}
 
-
-	if (element->Attribute("cardType") == "Assult")
+	if (cardType == "Assult")
 	{
 		card.cardType = eCardType::Assult;
 	}
-	if (element->Attribute("cardType") == "Structure")
+	if (cardType == "Structure")
 	{
 		card.cardType = eCardType::Structure;
 	}
-	if (element->Attribute("cardType") == "Action")
+	if (cardType == "Action")
 	{
 		card.cardType = eCardType::Action;
 	}
@@ -68,15 +81,15 @@ void Card::LoadFromXMl(const string& anXmlFile)
 		card.cardType = eCardType::Commander;
 	}
 
-	if (element->Attribute("rarity") == "Rare")
+	if (rarity == "Rare")
 	{
 		card.rarity = eRarity::Rare;
 	}
-	if (element->Attribute("rarity") == "Legendary")
+	if (rarity == "Legendary")
 	{
 		card.rarity = eRarity::Legendary;
 	}
-	if (element->Attribute("rarity") == "Uncommon")
+	if (rarity == "Uncommon")
 	{
 		card.rarity = eRarity::Uncommon;
 	}
@@ -85,8 +98,10 @@ void Card::LoadFromXMl(const string& anXmlFile)
 		card.rarity = eRarity::Common;
 	}
 
-	card.unique = element->Attribute("unique");
-	card.cooldown = element->IntAttribute("cooldown");
-	card.attack = element->IntAttribute("attack");
-	card.health = element->IntAttribute("health");
+	card.unique = element->BoolAttribute("unique");
+	card.cooldown = static_cast<char>(element->IntAttribute("cooldown"));
+	card.attack = static_cast<char>(element->IntAttribute("attack"));
+	card.health = static_cast<char>(element->IntAttribute("health"));
+
+	cardFaction = card.faction;
 }

@@ -7,11 +7,11 @@ public:
 	Card();
 	~Card();
 
+	void Render();
+
 	void LoadFromXMl(const string& anXmlFile);
 
 
 private:
-	Text myText;
 	Instance myCanvas;
-	Model* myIllustration;
 };

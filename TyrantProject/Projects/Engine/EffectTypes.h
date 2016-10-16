@@ -1,11 +1,11 @@
 #pragma once
 
-enum eEffectType3D
+enum class eEffectType3D
 {
 	VertexColored,
 	UnTextured,
 	Textured,
-	Textured_Foiled
+	Card,
 };
 
 enum class eEffectType2D

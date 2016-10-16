@@ -32,7 +32,7 @@ void Model::Destroy()
 	}
 }
 
-void Model::Render(const CU::Matrix44<float>& aParentSpace)
+void Model::Render(const CU::Matrix44<float>& aParentSpace, unsigned int aPassIndex)
 {
 	DEBUG_ASSERT(myIsNullObject == false, "Cannot render a model that is not loaded");
 	DEBUG_ASSERT(myEffect != nullptr, "Cannot render a model with no effect set");
@@ -52,11 +52,9 @@ void Model::Render(const CU::Matrix44<float>& aParentSpace)
 	for (unsigned short i = 0; i < mySurfaces.Size(); ++i)
 	{
 		mySurfaces[i].UpdateShaderVariables();
-		for (UINT p = 0; p < techniqueDescription.Passes; ++p)
-		{
-			myEffect->GetTechnique()->GetPassByIndex(p)->Apply(0, context);
-			context->DrawIndexed(myIndexData.numberOfIndexes, 0, 0);
-		}
+
+		myEffect->GetTechnique()->GetPassByIndex(aPassIndex)->Apply(0, context);
+		context->DrawIndexed(myIndexData.numberOfIndexes, 0, 0);	
 	}
 }
 
@@ -67,6 +65,10 @@ void Model::RenderWireFrame(const CU::Matrix44<float>& aParentSpace)
 	GET_DIRECTX().DisableWireframe();
 }
 
+void Model::AddTexture(const string& aShaderVariableName, const string& aTextureFile, int surfaceIndex)
+{
+	mySurfaces[surfaceIndex].AddTexture(aShaderVariableName, aTextureFile);
+}
 
 
 //Private methods
