@@ -98,7 +98,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbilityBase.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardData.h" />
+    <ClInclude Include="CardFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -106,7 +109,9 @@
     <ClInclude Include="XMLReader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbilityBase.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

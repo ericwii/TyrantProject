@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+	<card
+		name = "Radio Officer"
+		faction = "raider"
+		cardType = "Assult"
+		rarity = "Rare"
+		illustration = "Raider/Assault/RadioOfficer.jpg"
+		unique = false
+		cooldown = 4
+		attack = 1
+		health = 9
+	/>
+
+</root>

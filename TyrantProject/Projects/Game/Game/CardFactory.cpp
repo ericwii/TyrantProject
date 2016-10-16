@@ -1,21 +1,25 @@
 #include "stdafx.h"
-#include "Card.h"
+#include "CardFactory.h"
 #include "XMLReader.h"
-#include "CardData.h"
 
 using namespace tinyxml2;
 
-Card::Card()
-{
-}
-
-Card::~Card()
+CardFactory::CardFactory()
 {
 }
 
 
-void Card::LoadFromXMl(const string& anXmlFile)
+CardFactory::~CardFactory()
 {
+}
+
+void CardFactory::LoadCards()
+{
+	if ()
+	{
+
+	}
+
 	XMLReader reader;
 	reader.OpenDocument(anXmlFile.c_str());
 

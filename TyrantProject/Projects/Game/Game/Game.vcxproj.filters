@@ -13,6 +13,8 @@
     <ClCompile Include="XMLReader.cpp">
       <Filter>XML</Filter>
     </ClCompile>
+    <ClCompile Include="CardFactory.cpp" />
+    <ClCompile Include="AbilityBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
@@ -27,6 +29,9 @@
     <ClInclude Include="XMLReader.h">
       <Filter>XML</Filter>
     </ClInclude>
+    <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="CardData.h" />
+    <ClInclude Include="AbilityBase.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
