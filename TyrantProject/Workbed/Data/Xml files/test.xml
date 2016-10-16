@@ -8,10 +8,10 @@
 		cardType = "Assult"
 		rarity = "Rare"
 		illustration = "Raider/Assault/RadioOfficer.jpg"
-		unique = false
-		cooldown = 4
-		attack = 1
-		health = 9
+		unique = "false"
+		cooldown = "4"
+		attack = "1"
+		health = "9"
 	/>
 
 </root>

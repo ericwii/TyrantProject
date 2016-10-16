@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "EffectContainer.h"
 #include "EffectText.h"
-#include "EffectFoil.h"
 
 
 EffectContainer::EffectContainer()
@@ -61,11 +60,10 @@ Effect* EffectContainer::GetEffectFromType(const eEffectType3D anEffectType)
 			newEffect->Init("Data/Shaders/DefaultShader.fx");
 			break;
 		}
-		case(eEffectType3D::Textured_Foiled) :
+		case(eEffectType3D::Card) :
 		{
-			EffectFoil* foilEffect = new EffectFoil();
-			foilEffect->Init("Data/Shaders/FoilShader.fx");
-			newEffect = foilEffect;
+			newEffect = new Effect();
+			newEffect->Init("Data/Shaders/CardShader.fx");
 			break;
 		}
 		default:

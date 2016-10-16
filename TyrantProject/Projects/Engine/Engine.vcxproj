@@ -149,7 +149,6 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Effect2D.h" />
     <ClInclude Include="EffectContainer.h" />
-    <ClInclude Include="EffectFoil.h" />
     <ClInclude Include="EffectText.h" />
     <ClInclude Include="EffectTypes.h" />
     <ClInclude Include="Instance.h" />
@@ -178,7 +177,6 @@
     <ClCompile Include="Effect2D.cpp" />
     <ClCompile Include="EffectContainer.cpp" />
     <ClCompile Include="EffectData.cpp" />
-    <ClCompile Include="EffectFoil.cpp" />
     <ClCompile Include="EffectText.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Instance.cpp" />
@@ -196,6 +194,10 @@
     <ClCompile Include="TextureContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\CardShader.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultShader.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -205,7 +207,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\FoilShader.fx">
+    <FxCompile Include="..\..\Workbed\Data\Shaders\CardFoilShader.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>

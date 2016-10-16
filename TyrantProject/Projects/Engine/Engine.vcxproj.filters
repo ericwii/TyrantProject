@@ -106,9 +106,6 @@
     <ClInclude Include="EffectText.h">
       <Filter>Shading\Effects\2D</Filter>
     </ClInclude>
-    <ClInclude Include="EffectFoil.h">
-      <Filter>Shading\Effects\3D</Filter>
-    </ClInclude>
     <ClInclude Include="Instance.h" />
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +158,6 @@
     <ClCompile Include="EffectText.cpp">
       <Filter>Shading\Effects\2D</Filter>
     </ClCompile>
-    <ClCompile Include="EffectFoil.cpp">
-      <Filter>Shading\Effects\3D</Filter>
-    </ClCompile>
     <ClCompile Include="Instance.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +182,10 @@
     <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderVariables2D.fx">
       <Filter>Shading\Shaders\Utilites</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\FoilShader.fx">
+    <FxCompile Include="..\..\Workbed\Data\Shaders\CardFoilShader.fx">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\CardShader.fx">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

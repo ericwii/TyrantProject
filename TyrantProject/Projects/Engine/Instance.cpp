@@ -30,21 +30,18 @@ void Instance::Init(Model * aModel, CU::GrowingArray<Instance*> someInstaceChild
 	myInstances = someInstaceChildren;
 }
 
-void Instance::Render()
+void Instance::Render(unsigned int aPassIndex)
 {
 	DEBUG_ASSERT(myModel != nullptr, "Cannot render an instance without a model");
 	
-	myModel->Render(myOrientation);
-	RenderChilds();
-}
+	myModel->Render(myOrientation, aPassIndex);
 
-void Instance::RenderChilds()
-{
-	for (unsigned short i = 0; i < myInstances.Size(); i++)
+	for (unsigned short i = 0; i < myInstances.Size(); ++i)
 	{
-		myInstances[i]->Render();
+		myInstances[i]->Render(aPassIndex);
 	}
 }
+
 
 void Instance::SetPosition(Vector3<float> aPosition)
 {
