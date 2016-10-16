@@ -132,7 +132,7 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 
 CardData* CardFactory::GetCard(const string aCardName)
 {
-	if (myInstance->myCardDatas.find(aCardName.c_str) == myInstance->myCardDatas.end())
+	if (myInstance->myCardDatas.find(aCardName.c_str()) == myInstance->myCardDatas.end())
 	{
 		return nullptr;
 	}

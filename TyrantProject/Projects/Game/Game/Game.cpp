@@ -48,7 +48,7 @@ bool Game::Init(WNDPROC aWindowProc)
 	cardTestInstance.Init(cardModel,instanser);
 
 	CardFactory::GetInstance().LoadCards();
-	CardData temp = CardFactory::GetInstance().GetCard("Radio Officer");
+	CardData* temp = CardFactory::GetInstance().GetCard("Radio Officer");
 
 	return true;
 }
