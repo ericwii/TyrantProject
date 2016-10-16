@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "CardFactory.h"
-#include "XMLReader.h"
-
-using namespace tinyxml2;
 
 CardFactory* CardFactory::myInstance = nullptr;
 

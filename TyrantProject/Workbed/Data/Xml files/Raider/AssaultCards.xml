@@ -8,7 +8,6 @@
 		faction = "raider"
 		cardType = "assult"
 		rarity = "rare"
-		illustration = "Raider/Assault/RadioOfficer.jpg"
 		unique = "false"
 		cooldown = "4"
 		attack = "1"

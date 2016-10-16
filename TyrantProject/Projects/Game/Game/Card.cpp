@@ -109,5 +109,5 @@ void Card::LoadFromXMl(const string& anXmlFile)
 
 void Card::LoadCard(string aCardName)
 {
-	myCardData = CardFactory::GetCard(aCardName);
+	myCardData = CardFactory::GetInstance().GetCard(aCardName);
 }

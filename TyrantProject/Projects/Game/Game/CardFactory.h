@@ -1,5 +1,9 @@
 #pragma once
 #include "CardData.h"
+#include "XMLReader.h"
+
+using namespace tinyxml2;
+
 class CardFactory
 {
 public:
