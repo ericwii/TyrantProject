@@ -4,6 +4,7 @@
 
 	<card
 		name = "Radio Officer"
+		illustration = "Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg"
 		faction = "raider"
 		cardType = "assult"
 		rarity = "rare"

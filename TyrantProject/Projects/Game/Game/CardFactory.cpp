@@ -47,6 +47,82 @@ void CardFactory::LoadCards()
 
 }
 
+void CardFactory::LoadCardData(CardData aCardData, XMLElement* aElement)
+{
+	aCardData.name = aElement->Attribute("name");
+	aCardData.illustrationPath = aElement->Attribute("illustration");
+	string faction = aElement->Attribute("faction");
+	if (faction == "bloodthirsty")
+	{
+		aCardData.faction = eCardFaction::BloodThirsty;
+	}
+	else if (faction == "imperial")
+	{
+		aCardData.faction = eCardFaction::Imperial;
+	}
+	else if (faction == "raider")
+	{
+		aCardData.faction = eCardFaction::Raider;
+	}
+	else if (faction == "righteous")
+	{
+		aCardData.faction = eCardFaction::Righteous;
+	}
+	else if (faction == "xeno")
+	{
+		aCardData.faction = eCardFaction::Xeno;
+	}
+	else
+	{
+		aCardData.faction = eCardFaction::Action;
+	}
+
+	string cardType = aElement->Attribute("cardType");
+
+	if (cardType == "assult")
+	{
+		aCardData.cardType = eCardType::Assult;
+	}
+	else if (cardType == "structure")
+	{
+		aCardData.cardType = eCardType::Structure;
+	}
+	else if (cardType == "action")
+	{
+		aCardData.cardType = eCardType::Action;
+	}
+	else
+	{
+		aCardData.cardType = eCardType::Commander;
+	}
+
+	string rarity = aElement->Attribute("rarity");
+
+	if (rarity == "rare")
+	{
+		aCardData.rarity = eRarity::Rare;
+	}
+	else if (rarity == "legendary")
+	{
+		aCardData.rarity = eRarity::Legendary;
+	}
+	else if (rarity == "uncommon")
+	{
+		aCardData.rarity = eRarity::Uncommon;
+	}
+	else
+	{
+		aCardData.rarity = eRarity::Common;
+	}
+
+	aCardData.unique = aElement->BoolAttribute("unique");
+	aCardData.cooldown = static_cast<char>(aElement->IntAttribute("cooldown"));
+	aCardData.attack = static_cast<char>(aElement->IntAttribute("attack"));
+	aCardData.health = static_cast<char>(aElement->IntAttribute("health"));
+
+	myInstance->myCardDatas[aCardData.name.c_str()] = aCardData;
+}
+
 void CardFactory::LoadCardsList(const string & anXmlFile)
 {
 	XMLReader reader;
@@ -57,77 +133,10 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 
 	CardData card;
 
-	card.name = element->Attribute("name");
-	string faction = element->Attribute("faction");
-	if (faction == "bloodthirsty")
+	for (XMLElement* element = reader.FindFirstChild("root")->FirstChildElement(); element != nullptr; element = element->NextSiblingElement("card"))
 	{
-		card.faction = eCardFaction::BloodThirsty;
+		LoadCardData(card, element);
 	}
-	else if (faction == "imperial")
-	{
-		card.faction = eCardFaction::Imperial;
-	}
-	else if (faction == "raider")
-	{
-		card.faction = eCardFaction::Raider;
-	}
-	else if (faction == "righteous")
-	{
-		card.faction = eCardFaction::Righteous;
-	}
-	else if (faction == "xeno")
-	{
-		card.faction = eCardFaction::Xeno;
-	}
-	else
-	{
-		card.faction = eCardFaction::Action;
-	}
-
-	string cardType = element->Attribute("cardType");
-
-	if (cardType == "assult")
-	{
-		card.cardType = eCardType::Assult;
-	}
-	else if (cardType == "structure")
-	{
-		card.cardType = eCardType::Structure;
-	}
-	else if (cardType == "action")
-	{
-		card.cardType = eCardType::Action;
-	}
-	else
-	{
-		card.cardType = eCardType::Commander;
-	}
-
-	string rarity = element->Attribute("rarity");
-
-	if (rarity == "rare")
-	{
-		card.rarity = eRarity::Rare;
-	}
-	else if (rarity == "legendary")
-	{
-		card.rarity = eRarity::Legendary;
-	}
-	else if (rarity == "uncommon")
-	{
-		card.rarity = eRarity::Uncommon;
-	}
-	else
-	{
-		card.rarity = eRarity::Common;
-	}
-
-	card.unique = element->BoolAttribute("unique");
-	card.cooldown = static_cast<char>(element->IntAttribute("cooldown"));
-	card.attack = static_cast<char>(element->IntAttribute("attack"));
-	card.health = static_cast<char>(element->IntAttribute("health"));
-
-	myInstance->myCardDatas[card.name.c_str()] = card;
 }
 
 CardData* CardFactory::GetCard(const string aCardName)

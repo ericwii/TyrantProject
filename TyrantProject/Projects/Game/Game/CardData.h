@@ -33,6 +33,7 @@ enum class eRarity
 struct CardData
 {
 	string name;
+	string illustrationPath;
 	eCardFaction faction;
 	eCardType cardType;
 	eRarity rarity;
