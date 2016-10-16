@@ -23,6 +23,9 @@ public:
 	void SetCharacterScale(float aScale);
 	void SetText(const string& someText);
 
+	inline const Vector2<float>& GetPosition() const;
+	inline void SetCharacterSpace(float aSpace);
+
 private:
 	void InitVertexBuffer();
 	void InitInputLayout();
@@ -38,4 +41,15 @@ private:
 	Vector2<float> myPosition;
 	ID3D11InputLayout* myVertexLayout;
 	TextFont* myFont;
+	float myCharacterSpace;
 };
+
+inline const Vector2<float>& Text::GetPosition() const
+{
+	return myPosition;
+}
+
+inline void Text::SetCharacterSpace(float aSpace)
+{
+	myCharacterSpace = aSpace;
+}

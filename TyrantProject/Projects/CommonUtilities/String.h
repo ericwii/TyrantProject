@@ -276,7 +276,7 @@ namespace CommonUtilities
 			}
 		}
 
-		myCurrentSize = i + 1;
+		myCurrentSize = i;
 		DEBUG_ASSERT(i < Size, "Size out of bounds");
 	}
 

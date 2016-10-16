@@ -20,9 +20,16 @@ public:
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline Vector3<float> GetPosition() const;
 
+	void AddChild(Instance* anInstance);
+	void AddChild(Text* aText);
+
+	void RemoveChild(Instance* anInstance);
+	void RemoveChild(Text* aText);
+
 private:
 	Model* myModel;
 	CU::GrowingArray<Instance*> myInstances;
+	CU::GrowingArray<Text*> myTexts;
 	CU::Matrix44<float> myOrientation;
 };
 

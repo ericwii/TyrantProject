@@ -64,7 +64,7 @@ float4 Righteous_Pixel_Shader(PS_INPUT input) : SV_Target
 {
 	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
 	float4 highlightColor = HighlightTexture.Sample(sampleLinear_Wrap, input.TexUV);
-	float4 factionColor = float4(0.3f, 0.3f, 0.3f, 0);
+	float4 factionColor = float4(0.2f, 0.2f, 0.2f, 0);
 
 	return albedoColor + factionColor * highlightColor;
 }
@@ -74,6 +74,17 @@ float4 Xeno_Pixel_Shader(PS_INPUT input) : SV_Target
 	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
 	float4 highlightColor = HighlightTexture.Sample(sampleLinear_Wrap, input.TexUV);
 	float4 factionColor = float4(0, 0, 0, 0);
+
+	return albedoColor + factionColor * highlightColor;
+}
+
+
+
+float4 Action_Pixel_Shader(PS_INPUT input) : SV_Target
+{
+	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
+	float4 highlightColor = HighlightTexture.Sample(sampleLinear_Wrap, input.TexUV);
+	float4 factionColor = float4(0.3f, 0.3f, 0.3f, 0.3f);
 
 	return albedoColor + factionColor * highlightColor;
 }
@@ -118,5 +129,12 @@ technique11 Render
 		SetVertexShader(CompileShader(vs_5_0, Vertex_Shader()));
 		SetGeometryShader(NULL);
 		SetPixelShader(CompileShader(ps_5_0, Xeno_Pixel_Shader()));
+	}
+
+	pass P5 //Action
+	{
+		SetVertexShader(CompileShader(vs_5_0, Vertex_Shader()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_5_0, Action_Pixel_Shader()));
 	}
 }

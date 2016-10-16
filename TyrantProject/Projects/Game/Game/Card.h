@@ -10,12 +10,19 @@ public:
 
 	void Render();
 
-	void LoadFromXMl(const string& anXmlFile);
-
 	void LoadCard(string aCardName);
 
 
 private:
 	Instance myCanvas;
+	Instance myIllustration;
+	Text myNameText;
+	Text myAttackText;
+	Text myHealthText;
+	Text myCooldownText;
 	CardData* myCardData;
+	unsigned int myRenderPassIndex;
+
+	void LoadModels();
+	void LoadText();
 };

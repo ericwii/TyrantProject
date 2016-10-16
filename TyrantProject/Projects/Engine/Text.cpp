@@ -5,7 +5,7 @@
 #include "TextFont.h"
 
 
-Text::Text() : myFont(nullptr)
+Text::Text() : myFont(nullptr), myCharacterSpace(1.f)
 {
 }
 
@@ -44,7 +44,7 @@ void Text::Render()
 
 	VertexPositionUV currentVertex;
 	Vector2<float> currentPosition(myPosition + ((myFont->myNormalizedCharacterSize * myCharacterScale) * 0.5f));
-	float stride = myFont->myNormalizedCharacterSize.x * myCharacterScale.x;
+	float stride = myFont->myNormalizedCharacterSize.x * myCharacterScale.x * myCharacterSpace;
 	for (int i = 0; i < size; ++i)
 	{
 		currentVertex.position = currentPosition;

@@ -1,5 +1,9 @@
 #pragma once
 #include "CardData.h"
+#include "XMLReader.h"
+
+using namespace tinyxml2;
+
 class CardFactory
 {
 public:
@@ -7,11 +11,13 @@ public:
 	~CardFactory();
 	static void Create();
 	static CardFactory& GetInstance();
-	static void LoadCards();
-	static void LoadCardsList(const string& anXmlFile);
-	static CardData* GetCard(const string aCardName);
+	void LoadCards();
+	CardData* GetCard(const string aCardName);
+
 
 private:
+	void LoadCardData(CardData aCardData, XMLElement* aElement);
+	void LoadCardsList(const string& anXmlFile);
 	static CardFactory* myInstance;
 	std::unordered_map<std::string, CardData> myCardDatas;
 	CardFactory();
