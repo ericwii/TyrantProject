@@ -111,9 +111,9 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 	}
 
 	card.unique = element->BoolAttribute("unique");
-	card.cooldown = element->IntAttribute("cooldown");
-	card.attack = element->IntAttribute("attack");
-	card.health = element->IntAttribute("health");
+	card.cooldown = static_cast<char>(element->IntAttribute("cooldown"));
+	card.attack = static_cast<char>(element->IntAttribute("attack"));
+	card.health = static_cast<char>(element->IntAttribute("health"));
 
 	myCardDatas[card.name.c_str()] = card;
 }

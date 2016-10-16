@@ -12,7 +12,7 @@ public:
 
 	void Init(Model* aModel, CU::Matrix44<float> anOrientation = CU::Matrix44<float>());
 	void Init(Model* aModel, CU::GrowingArray<Instance*> someInstaceChildren, CU::Matrix44<float> anOrientation = CU::Matrix44<float>());
-	void Render(unsigned int aPassIndex = 0);
+	void Render(bool aRenderChildren = true, unsigned int aPassIndex = 0);
 
 	void SetPosition(Vector3<float> aPosition);
 	void SetOrientation(CU::Matrix44<float> anOrientation);

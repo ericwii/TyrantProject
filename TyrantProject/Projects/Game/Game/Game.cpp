@@ -42,7 +42,8 @@ bool Game::Init(WNDPROC aWindowProc)
 	instanser.Add(&test2); 
 
 
-	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png", true);
+	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Card, "Data/Textures/CardCanvas/canvas.png", true);
+	cardModel->AddTexture("HighlightTexture", "Data/Textures/CardCanvas/highlight.png");
 	cardTestInstance.Init(cardModel,instanser);
 
 	factory.LoadCards();
