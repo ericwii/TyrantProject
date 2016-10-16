@@ -15,11 +15,28 @@ CardFactory::~CardFactory()
 
 void CardFactory::LoadCards()
 {
-	if ()
-	{
+	
 
+	XMLReader reader;
+	reader.OpenDocument("Data/XML files/cardFiles.xml");
+
+	XMLElement* rootelement = reader.FindFirstChild("root");
+	rootelement = rootelement->FirstChildElement();
+
+	for (XMLElement* element = reader.FindFirstChild("root")->FirstChildElement(); element != nullptr; element = element->NextSiblingElement("CardList"))
+	{
+		LoadCardsList(element->Attribute("structuresPath"));
+		LoadCardsList(element->Attribute("assultPath"));
+		//LoadCardsList(element->Attribute("commanderPath")); // missing xml files for commanders
 	}
 
+	/*rootelement = rootelement->NextSiblingElement("ActionCardList");
+	LoadCardsList(rootelement->Attribute("actionsPath"));*/
+
+}
+
+void CardFactory::LoadCardsList(const string & anXmlFile)
+{
 	XMLReader reader;
 	reader.OpenDocument(anXmlFile.c_str());
 
@@ -29,37 +46,43 @@ void CardFactory::LoadCards()
 	CardData card;
 
 	card.name = element->Attribute("name");
-	if (element->Attribute("faction") == "Bloodthirsty")
+	string faction = element->Attribute("faction");
+	if (faction == "bloodthirsty")
 	{
 		card.faction = eCardFaction::BloodThirsty;
 	}
-	else if (element->Attribute("faction") == "Raider")
+	else if (faction == "imperial")
+	{
+		card.faction = eCardFaction::Imperial;
+	}
+	else if (faction == "raider")
 	{
 		card.faction = eCardFaction::Raider;
 	}
-	else if (element->Attribute("faction") == "Righteous")
+	else if (faction == "righteous")
 	{
 		card.faction = eCardFaction::Righteous;
 	}
-	else if (element->Attribute("faction") == "Xeno")
+	else if (faction == "xeno")
 	{
 		card.faction = eCardFaction::Xeno;
 	}
 	else
 	{
-		card.faction = eCardFaction::Imperial;
+		card.faction = eCardFaction::Action;
 	}
 
+	string cardType = element->Attribute("cardType");
 
-	if (element->Attribute("cardType") == "Assult")
+	if (cardType == "assult")
 	{
 		card.cardType = eCardType::Assult;
 	}
-	if (element->Attribute("cardType") == "Structure")
+	else if (cardType == "structure")
 	{
 		card.cardType = eCardType::Structure;
 	}
-	if (element->Attribute("cardType") == "Action")
+	else if (cardType == "action")
 	{
 		card.cardType = eCardType::Action;
 	}
@@ -68,15 +91,17 @@ void CardFactory::LoadCards()
 		card.cardType = eCardType::Commander;
 	}
 
-	if (element->Attribute("rarity") == "Rare")
+	string rarity = element->Attribute("rarity");
+
+	if (rarity == "rare")
 	{
 		card.rarity = eRarity::Rare;
 	}
-	if (element->Attribute("rarity") == "Legendary")
+	else if (rarity == "legendary")
 	{
 		card.rarity = eRarity::Legendary;
 	}
-	if (element->Attribute("rarity") == "Uncommon")
+	else if (rarity == "uncommon")
 	{
 		card.rarity = eRarity::Uncommon;
 	}
@@ -85,8 +110,15 @@ void CardFactory::LoadCards()
 		card.rarity = eRarity::Common;
 	}
 
-	card.unique = element->Attribute("unique");
+	card.unique = element->BoolAttribute("unique");
 	card.cooldown = element->IntAttribute("cooldown");
 	card.attack = element->IntAttribute("attack");
 	card.health = element->IntAttribute("health");
+
+	myCardDatas[card.name.c_str()] = card;
+}
+
+CardData & CardFactory::GetCard(const string aCardName)
+{
+	return myCardDatas[aCardName.c_str()];
 }

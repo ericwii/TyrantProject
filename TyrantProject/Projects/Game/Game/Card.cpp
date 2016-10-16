@@ -29,6 +29,10 @@ void Card::LoadFromXMl(const string& anXmlFile)
 	{
 		card.faction = eCardFaction::BloodThirsty;
 	}
+	else if (element->Attribute("faction") == "Imperial")
+	{
+		card.faction = eCardFaction::Imperial;
+	}
 	else if (element->Attribute("faction") == "Raider")
 	{
 		card.faction = eCardFaction::Raider;
@@ -43,7 +47,7 @@ void Card::LoadFromXMl(const string& anXmlFile)
 	}
 	else
 	{
-		card.faction = eCardFaction::Imperial;
+		card.faction = eCardFaction::Action;
 	}
 
 

@@ -7,7 +7,8 @@ public:
 	~CardFactory();
 
 	void LoadCards();
-	CardData& GetCard();
+	void LoadCardsList(const string& anXmlFile);
+	CardData& GetCard(const string aCardName);
 
 private:
 	std::unordered_map<std::string, CardData> myCardDatas;

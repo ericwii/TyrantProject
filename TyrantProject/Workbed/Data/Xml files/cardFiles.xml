@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+	<CardList
+		structuresPath = "Data/XML files/Bloodthirsty/StructureCards.xml"
+		assultPath = "Data/XML files/Bloodthirsty/AssaultCards.xml"
+		commanderPath = ""
+	/>
+	<CardList
+		structuresPath = "Data/XML files/Imperial/StructureCards.xml"
+		assultPath = "Data/XML files/Imperial/AssaultCards.xml"
+		commanderPath = ""
+	/>
+	<CardList
+		structuresPath = "Data/XML files/Raider/StructureCards.xml"
+		assultPath = "Data/XML files/Raider/AssaultCards.xml"
+		commanderPath = ""
+	/>
+	<CardList
+		structuresPath = "Data/XML files/Righteous/StructureCards.xml"
+		assultPath = "Data/XML files/Righteous/AssaultCards.xml"
+		commanderPath = ""
+	/>
+	<CardList
+		structuresPath = "Data/XML files/Xeno/StructureCards.xml"
+		assultPath = "Data/XML files/Xeno/AssaultCards.xml"
+		commanderPath = ""
+	/>
+	<ActionCardList
+		actionsPath = "Data/XML files/ActionCards.xml"
+	/>
+
+</root>

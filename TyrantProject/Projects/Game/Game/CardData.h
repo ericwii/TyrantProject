@@ -8,6 +8,7 @@ enum eCardFaction
 	Raider,
 	Righteous,
 	Xeno,
+	Action,
 	NumberofFactions
 };
 

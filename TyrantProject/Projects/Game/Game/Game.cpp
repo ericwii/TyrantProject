@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "../../Engine/ModelLoader.h"
+#include "CardFactory.h"
 
 Instance cardTestInstance;
 Instance test3;
@@ -8,6 +9,7 @@ Instance test2;
 Instance test;
 CU::GrowingArray<Instance*> instanser;
 CU::GrowingArray<Instance*> instanser2;
+CardFactory factory;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -42,6 +44,9 @@ bool Game::Init(WNDPROC aWindowProc)
 
 	Model* cardModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.5f, 2.f), eEffectType3D::Textured, "Data/Textures/cardCanvas.png", true);
 	cardTestInstance.Init(cardModel,instanser);
+
+	factory.LoadCards();
+	CardData temp = factory.GetCard("Radio Officer");
 
 	return true;
 }
