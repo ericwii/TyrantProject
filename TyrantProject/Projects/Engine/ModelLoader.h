@@ -6,7 +6,7 @@ class ModelLoader
 public:
 	static Model* LoadDebugCube(float aCubeSize);
 	static Model* LoadDebugTriangle(float aSize);
-	static Model* LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D anEffectType, const string& aTextureFile = string(), bool aDoubleSided = false);
+	static Model* LoadRectangle3D(const Vector2<float>& aSize, eEffectType anEffectType, const string& aTextureFile = string(), bool aDoubleSided = false);
 
 private:
 	ModelLoader();

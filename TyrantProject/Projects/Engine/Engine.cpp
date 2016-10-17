@@ -93,7 +93,7 @@ void Engine::OnStart()
 	EffectData::projectionMatrix = myCamera.GetProjection();
 	EffectData::resolution = myResolution;
 
-	TextFont* debugTextFont = myFontContainer.GetFont("Data/Fonts/debugFont.dds");
+	TextFont* debugTextFont = myFontContainer.GetFont("Data/Fonts/debugFont.dds", eEffectType::Text2D);
 	if (debugTextFont != nullptr)
 	{
 		myDebugText.Init(debugTextFont);

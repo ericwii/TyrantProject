@@ -1,5 +1,4 @@
 #pragma once
-#include "Effect.h"
 
 class Effect2D : public Effect
 {
@@ -7,7 +6,7 @@ public:
 	Effect2D();
 	~Effect2D();
 
-	virtual bool Init(const string& aEffectFile);
+	virtual bool Init(const string& aEffectFile) override;
 	virtual void Update() override;
 	
 

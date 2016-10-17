@@ -149,9 +149,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Effect2D.h" />
     <ClInclude Include="EffectContainer.h" />
-    <ClInclude Include="EffectText.h" />
+    <ClInclude Include="EffectText2D.h" />
+    <ClInclude Include="EffectText3D.h" />
     <ClInclude Include="EffectTypes.h" />
     <ClInclude Include="Instance.h" />
+    <ClInclude Include="Text3D.h" />
     <ClInclude Include="TextFont.h" />
     <ClInclude Include="FontContainer.h" />
     <ClInclude Include="ShaderBufferStructs.h" />
@@ -163,7 +165,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Surface.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="Text2D.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureContainer.h" />
     <ClInclude Include="VertexLayouts.h" />
@@ -177,9 +179,11 @@
     <ClCompile Include="Effect2D.cpp" />
     <ClCompile Include="EffectContainer.cpp" />
     <ClCompile Include="EffectData.cpp" />
-    <ClCompile Include="EffectText.cpp" />
+    <ClCompile Include="EffectText2D.cpp" />
+    <ClCompile Include="EffectText3D.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="Text3D.cpp" />
     <ClCompile Include="TextFont.cpp" />
     <ClCompile Include="FontContainer.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -189,7 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Surface.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Text2D.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureContainer.cpp" />
   </ItemGroup>
@@ -202,7 +206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultTextShader.fx">
+    <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader2D.fx">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -212,6 +216,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\NoTextureShader.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader3D.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </FxCompile>

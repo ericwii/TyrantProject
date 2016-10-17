@@ -1,11 +1,11 @@
 #pragma once
 #include "Effect2D.h"
 
-class EffectText : public Effect2D
+class EffectText2D : public Effect2D
 {
 public:
-	EffectText();
-	~EffectText();
+	EffectText2D();
+	~EffectText2D();
 
 	bool Init(const string& anEffectFile);
 	void Update() override;

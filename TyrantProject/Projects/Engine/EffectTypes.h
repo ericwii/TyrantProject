@@ -1,15 +1,11 @@
 #pragma once
 
-enum class eEffectType3D
+enum class eEffectType
 {
 	VertexColored,
 	UnTextured,
 	Textured,
 	Card,
-};
-
-enum class eEffectType2D
-{
-	Text,
-	Sprite
+	Text2D,
+	Text3D
 };

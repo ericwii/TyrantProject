@@ -5,7 +5,7 @@
 
 Model* ModelLoader::LoadDebugCube(float aSize)
 {
-	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType3D::VertexColored);
+	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored);
 	if (newEffect == nullptr)
 	{
 		return nullptr;
@@ -104,7 +104,7 @@ Model* ModelLoader::LoadDebugCube(float aSize)
 
 Model* ModelLoader::LoadDebugTriangle(float aSize)
 {
-	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType3D::VertexColored);
+	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored);
 	if (newEffect == nullptr)
 	{
 		return nullptr;
@@ -156,7 +156,7 @@ Model* ModelLoader::LoadDebugTriangle(float aSize)
 	return newModel;
 }
 
-Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D anEffectType, const string& aTextureFile, bool aDoubleSided)
+Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType anEffectType, const string& aTextureFile, bool aDoubleSided)
 {
 	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(anEffectType);
 	if (newEffect == nullptr)
@@ -250,7 +250,7 @@ Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType3D a
 	Surface newSurface;
 	newSurface.SetEffect(newEffect);
 
-	if (anEffectType != eEffectType3D::UnTextured)
+	if (anEffectType != eEffectType::UnTextured)
 	{
 		newSurface.AddTexture("AlbedoTexture", aTextureFile);
 	}

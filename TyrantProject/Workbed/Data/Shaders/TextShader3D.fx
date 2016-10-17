@@ -1,8 +1,9 @@
 #include "Utilities/ShaderSamplerStates.fx"
-#include "Utilities/ShaderVariables2D.fx"
 #include "Utilities/ShaderVariables.fx"
 
 
+float4 Color;
+float2 Scale;
 float2 CharacterSize;
 
 struct VS_INPUT
@@ -28,10 +29,7 @@ GS_INPUT Vertex_Shader(VS_INPUT input)
 {
 	GS_INPUT output = (GS_INPUT)0;
 
-	output.Pos = input.Pos * 2.f - 1.f;
-	output.Pos.y *= -1;
-	output.Pos.z = 0;
-	output.Pos.w = 1;
+	output.Pos = mul(input.Pos, World);
 	output.TexUV = input.TexUV;
 
 	return output;
@@ -40,12 +38,18 @@ GS_INPUT Vertex_Shader(VS_INPUT input)
 [maxvertexcount(4)]
 void Geometry_Shader(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> triangleStream)
 {
+	float4 right = float4(World._m10, World._m11, World._m12, World._m13);
+	float4 up = float4(World._m00, World._m01, World._m02, World._m03);
+
+	float4 sidePos = right * CharacterSize.x * Scale.x;
+	float4 upPos = up * CharacterSize.y * Scale.y;
+
 	const float4 offset[4] =
 	{
-		{ CharacterSize.x * Scale.x, -CharacterSize.y * Scale.y, 0, 0 }, 
-		{ -CharacterSize.x * Scale.x, -CharacterSize.y * Scale.y, 0, 0 },
-		{ CharacterSize.x * Scale.x, CharacterSize.y * Scale.y, 0, 0 },  
-		{ -CharacterSize.x * Scale.x, CharacterSize.y * Scale.y, 0, 0 } 
+		{ -sidePos + upPos }, 
+		{ -sidePos - upPos }, 
+		{ sidePos + upPos }, 
+		{ sidePos - upPos },  
 	};
 
 	const float2 uv_coordinates[4] =
@@ -60,6 +64,9 @@ void Geometry_Shader(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> tri
 	for (int i = 0; i < 4; ++i)
 	{
 		vertex.Pos = input[0].Pos + offset[i];
+
+		vertex.Pos = mul(vertex.Pos, View);
+		vertex.Pos = mul(vertex.Pos, Projection);
 		vertex.TexUV = uv_coordinates[i];
 
 		triangleStream.Append(vertex);
@@ -70,7 +77,7 @@ void Geometry_Shader(point GS_INPUT input[1], inout TriangleStream<PS_INPUT> tri
 
 float4 Pixel_Shader(PS_INPUT input) : SV_Target
 {
-	float4 albedoColor = DiffuseTexture.Sample(sampleLinear_Wrap, input.TexUV);
+	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
 	float albedoSum = saturate(albedoColor.x + albedoColor.y + albedoColor.z);
 	albedoColor = Color * albedoSum;
 	albedoColor.w *= Color.w;

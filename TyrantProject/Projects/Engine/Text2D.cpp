@@ -1,19 +1,18 @@
 #include "stdafx.h"
-#include "Text.h"
+#include "Text2D.h"
 #include "VertexLayouts.h"
-#include "EffectText.h"
 #include "TextFont.h"
 
 
-Text::Text() : myFont(nullptr), myCharacterSpace(1.f)
+Text2D::Text2D() : myFont(nullptr), myCharacterSpace(1.f)
 {
 }
 
-Text::~Text()
+Text2D::~Text2D()
 {
 }
 
-void Text::Destroy()
+void Text2D::Destroy()
 {
 	if (myVertexBuffer.vertexBuffer != nullptr)
 	{
@@ -21,7 +20,7 @@ void Text::Destroy()
 	}
 }
 
-void Text::Init(TextFont* aFont)
+void Text2D::Init(TextFont* aFont)
 {
 	DEBUG_ASSERT(myFont == nullptr, "Text should not be initialized more than once");
 	myFont = aFont;
@@ -32,54 +31,37 @@ void Text::Init(TextFont* aFont)
 	myCharacterScale.Set(1.f, 1.f);
 }
 
-void Text::Render()
+void Text2D::Render()
 {
 	DEBUG_ASSERT(myFont != nullptr, "Can't render uninitialized text");
 	if (myFont == nullptr) return;
 
 	UpdateShaderVariables();
 
-	const char* text = myText.c_str();
-	int size = myText.Lenght();
-
-	VertexPositionUV currentVertex;
-	Vector2<float> currentPosition(myPosition + ((myFont->myNormalizedCharacterSize * myCharacterScale) * 0.5f));
-	float stride = myFont->myNormalizedCharacterSize.x * myCharacterScale.x * myCharacterSpace;
-	for (int i = 0; i < size; ++i)
-	{
-		currentVertex.position = currentPosition;
-		currentVertex.position.w = 1.f;
-		currentVertex.UV = myFont->GetCharacterUV(text[i]);
-
-		myVertexes[i] = currentVertex;
-		currentPosition.x += stride;
-	}
-
-	UpdateVertexBuffer(size);
-	DrawPass(0,static_cast<unsigned int>(size));
+	DrawPass(0,static_cast<unsigned int>(myText.Lenght()));
 }
 
-void Text::SetColor(const Vector4<float>& aColor)
+void Text2D::SetColor(const Vector4<float>& aColor)
 {
 	myColor = aColor;
 }
 
-void Text::SetPosition(const Vector2<float>& aPosition)
+void Text2D::SetPosition(const Vector2<float>& aPosition)
 {
 	myPosition = aPosition;
 }
 
-void Text::SetCharacterScale(const Vector2<float>& aScale)
+void Text2D::SetCharacterScale(const Vector2<float>& aScale)
 {
 	myCharacterScale = aScale;
 }
 
-void Text::SetCharacterScale(float aScale)
+void Text2D::SetCharacterScale(float aScale)
 {
 	myCharacterScale.Set(aScale, aScale);
 }
 
-void Text::SetText(const string& someText)
+void Text2D::SetText(const string& someText)
 {
 	DEBUG_ASSERT(myFont != nullptr, "Can't set text without initializing with a font");
 	DEBUG_ASSERT(someText.Lenght() <= TEXT_MAX_CHARACTER_COUNT, "Trying set a text with to many characters");
@@ -91,7 +73,7 @@ void Text::SetText(const string& someText)
 
 	VertexPositionUV currentVertex;
 	Vector2<float> currentPosition(myPosition + ((myFont->myNormalizedCharacterSize * myCharacterScale) * 0.5f));
-	float stride = myFont->myNormalizedCharacterSize.x * myCharacterScale.x;
+	float stride = myFont->myNormalizedCharacterSize.x * myCharacterScale.x * myCharacterSpace;
 	for (int i = 0; i < size; ++i)
 	{
 		currentVertex.position = currentPosition;
@@ -109,7 +91,7 @@ void Text::SetText(const string& someText)
 
 //Private methods
 
-void Text::InitVertexBuffer()
+void Text2D::InitVertexBuffer()
 {
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
@@ -141,7 +123,7 @@ void Text::InitVertexBuffer()
 	}
 }
 
-void Text::InitInputLayout()
+void Text2D::InitInputLayout()
 {
 	int size = 2;
 	D3D11_INPUT_ELEMENT_DESC* layoutDescription = new D3D11_INPUT_ELEMENT_DESC[size];
@@ -167,7 +149,7 @@ void Text::InitInputLayout()
 	}
 }
 
-void Text::UpdateShaderVariables()
+void Text2D::UpdateShaderVariables()
 {
 	myFont->mySurface.UpdateShaderVariables();
 	EffectData::position.Set(myPosition);
@@ -178,7 +160,7 @@ void Text::UpdateShaderVariables()
 	myFont->myTextEffect->Update();
 }
 
-void Text::UpdateVertexBuffer(int aVertexCount)
+void Text2D::UpdateVertexBuffer(int aVertexCount)
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	ID3D11DeviceContext* context = GET_DIRECTX().GetDeviceContext();
@@ -195,7 +177,7 @@ void Text::UpdateVertexBuffer(int aVertexCount)
 	context->Unmap(myVertexBuffer.vertexBuffer, 0);
 }
 
-void Text::DrawPass(unsigned int aPassIndex, unsigned int aVertexCount)
+void Text2D::DrawPass(unsigned int aPassIndex, unsigned int aVertexCount)
 {
 	ID3D11DeviceContext* context = GET_DIRECTX().GetDeviceContext();
 

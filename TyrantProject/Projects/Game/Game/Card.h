@@ -1,6 +1,6 @@
 #pragma once
-#include "../../Engine/Text.h"
 #include "CardData.h"
+#include "../../Engine/Text3D.h"
 
 class Card
 {
@@ -16,10 +16,10 @@ public:
 private:
 	Instance myCanvas;
 	Instance myIllustration;
-	Text myNameText;
-	Text myAttackText;
-	Text myHealthText;
-	Text myCooldownText;
+	Text3D myNameText;
+	Text3D myAttackText;
+	Text3D myHealthText;
+	Text3D myCooldownText;
 	CardData* myCardData;
 	unsigned int myRenderPassIndex;
 

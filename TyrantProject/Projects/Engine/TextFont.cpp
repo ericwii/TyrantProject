@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "TextFont.h"
-#include "EffectText.h"
 
 
 TextFont::TextFont() : myTextEffect(nullptr)
@@ -12,10 +11,10 @@ TextFont::~TextFont()
 }
 
 
-bool TextFont::Init(Effect2D* aTextEffect, const string& aTextureFilepath, float aTextureWidth, float aTextureHeight)
+bool TextFont::Init(Effect* aTextEffect, const string& aTextureFilepath, float aTextureWidth, float aTextureHeight)
 {
 	mySurface.SetEffect(aTextEffect);
-	if (mySurface.AddTexture("DiffuseTexture", aTextureFilepath) == false)
+	if (mySurface.AddTexture("AlbedoTexture", aTextureFilepath) == false)
 	{
 		return false;
 	}

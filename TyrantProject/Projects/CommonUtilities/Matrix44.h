@@ -28,9 +28,9 @@ namespace CommonUtilities
 		static Matrix44<T> CreateRotateAroundY(T aAngleInRadians);
 		static Matrix44<T> CreateRotateAroundZ(T aAngleInRadians);
 
-		Vector4<T> GetUp() const;
-		Vector4<T> GetRight() const;
-		Vector4<T> GetForward() const;
+		Vector3<T> GetUp() const;
+		Vector3<T> GetRight() const;
+		Vector3<T> GetForward() const;
 
 		Vector4<T> GetTranslation() const;
 		Vector3<T> GetPosition() const;
@@ -429,21 +429,21 @@ namespace CommonUtilities
 	}
 
 	template<typename T>
-	Vector4<T> Matrix44<T>::GetRight() const
+	Vector3<T> Matrix44<T>::GetRight() const
 	{
-		return Vector4<T>(matrix[0], matrix[1], matrix[2], matrix[3]);
+		return Vector3<T>(matrix[0], matrix[1], matrix[2]);
 	}
 
 	template<typename T>
-	Vector4<T> Matrix44<T>::GetUp() const
+	Vector3<T> Matrix44<T>::GetUp() const
 	{
-		return Vector4<T>(matrix[4], matrix[5], matrix[6], matrix[7]);
+		return Vector3<T>(matrix[4], matrix[5], matrix[6]);
 	}
 
 	template<typename T>
-	Vector4<T> Matrix44<T>::GetForward() const
+	Vector3<T> Matrix44<T>::GetForward() const
 	{
-		return Vector4<T>(matrix[8], matrix[9], matrix[10], matrix[11]);
+		return Vector3<T>(matrix[8], matrix[9], matrix[10]);
 	}
 
 	template<typename T>

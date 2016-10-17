@@ -13,7 +13,7 @@ public:
 	Effect();
 	~Effect();
 
-	virtual bool Init(const string& anEffectFile, bool aCompileOnly = false);
+	virtual bool Init(const string& anEffectFile);
 	virtual void Update();
 
 	inline const string& GetFileName() const;
@@ -29,6 +29,7 @@ protected:
 	ID3DX11EffectMatrixVariable* myProjectionMatrixVariable;
 	ID3DX11EffectMatrixVariable* myViewMatrixVariable;
 	ID3DX11EffectMatrixVariable* myWorldMatrixVariable;
+	bool myCompileOnly;
 };
 
 inline const string& Effect::GetFileName() const

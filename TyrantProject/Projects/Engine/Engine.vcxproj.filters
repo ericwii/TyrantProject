@@ -88,9 +88,6 @@
       <Filter>Shading\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Text.h">
-      <Filter>Text</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderBufferStructs.h">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
@@ -103,10 +100,19 @@
     <ClInclude Include="Effect2D.h">
       <Filter>Shading\Effects\2D</Filter>
     </ClInclude>
-    <ClInclude Include="EffectText.h">
+    <ClInclude Include="Instance.h" />
+    <ClInclude Include="Text2D.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text3D.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectText2D.h">
       <Filter>Shading\Effects\2D</Filter>
     </ClInclude>
-    <ClInclude Include="Instance.h" />
+    <ClInclude Include="EffectText3D.h">
+      <Filter>Shading\Effects\3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectX.cpp">
@@ -143,9 +149,6 @@
       <Filter>Shading\Effects</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Text.cpp">
-      <Filter>Text</Filter>
-    </ClCompile>
     <ClCompile Include="FontContainer.cpp">
       <Filter>Containers</Filter>
     </ClCompile>
@@ -155,10 +158,19 @@
     <ClCompile Include="Effect2D.cpp">
       <Filter>Shading\Effects\2D</Filter>
     </ClCompile>
-    <ClCompile Include="EffectText.cpp">
+    <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="Text2D.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Text3D.cpp">
+      <Filter>Text</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectText2D.cpp">
       <Filter>Shading\Effects\2D</Filter>
     </ClCompile>
-    <ClCompile Include="Instance.cpp" />
+    <ClCompile Include="EffectText3D.cpp">
+      <Filter>Shading\Effects\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultShader.fx">
@@ -168,9 +180,6 @@
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader.fx">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultTextShader.fx">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderSamplerStates.fx">
@@ -186,6 +195,12 @@
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\CardShader.fx">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader2D.fx">
+      <Filter>Shading\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader3D.fx">
       <Filter>Shading\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

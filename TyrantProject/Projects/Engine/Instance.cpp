@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Instance.h"
 #include "Model.h"
+#include "Text3D.h"
 
 
 Instance::Instance() : myModel(nullptr)
@@ -9,7 +10,8 @@ Instance::Instance() : myModel(nullptr)
 	myTexts.Allocate(4);
 }
 
-Instance::Instance(Model* aModel, CU::Matrix44<float> anOrientation) : myModel(aModel), myOrientation(anOrientation)
+Instance::Instance(Model* aModel, CU::Matrix44<float> anOrientation) : 
+	myModel(aModel), myOrientation(anOrientation), myOriginalOrientation(anOrientation)
 {
 }
 
@@ -21,12 +23,14 @@ void Instance::Init(Model * aModel, CU::Matrix44<float> anOrientation)
 {
 	myModel = aModel;
 	myOrientation = anOrientation;
+	myOriginalOrientation = anOrientation;
 }
 
 void Instance::Init(Model * aModel, CU::GrowingArray<Instance*> someInstaceChildren, CU::Matrix44<float> anOrientation)
 {
 	myModel = aModel;
 	myOrientation = anOrientation;
+	myOriginalOrientation = anOrientation;
 	myInstances = someInstaceChildren;
 }
 
@@ -66,28 +70,31 @@ void Instance::SetPosition(Vector3<float> aPosition)
 	{
 		currentPosition = myTexts[i]->GetPosition();
 		currentPosition += aPosition;
-		myTexts[i]->SetPosition(currentPosition.AsVector2());
+		myTexts[i]->SetPosition(currentPosition);
 	}
 }
 
 void Instance::SetOrientation(CU::Matrix44<float> anOrientation)
 {
-	myOrientation = anOrientation;
+	CU::Matrix44<float> inverse(anOrientation.GetInverse());
 
 	CU::Matrix44<float> currentOrientation;
 	for (unsigned short i = 0; i < myInstances.Size(); i++)
 	{
-		currentOrientation = myInstances[i]->GetOrientation();
-		myInstances[i]->SetOrientation(currentOrientation * anOrientation);
+		currentOrientation = myInstances[i]->GetOriginalOrientation();
+		myInstances[i]->SetOrientation(currentOrientation * inverse);
 	}
 
-	Vector2<float> currentPosition;
 	for (unsigned short i = 0; i < myTexts.Size(); ++i)
 	{
-		currentPosition = myTexts[i]->GetPosition();
-		currentPosition += anOrientation.GetPosition().AsVector2();
-		myTexts[i]->SetPosition(currentPosition);
+		currentOrientation = myTexts[i]->GetOrientation();
+		currentOrientation *= myOrientation;
+		currentOrientation *= inverse;
+
+		myTexts[i]->SetOrientation(currentOrientation);
 	}
+
+	myOrientation = anOrientation;
 }
 
 
@@ -99,12 +106,9 @@ void Instance::AddChild(Instance* anInstance)
 	myInstances.Add(anInstance);
 }
 
-void Instance::AddChild(Text* aText)
+void Instance::AddChild(Text3D* aText)
 {
-	Vector2<float> position(0.5f, 0.5f);
-	position += aText->GetPosition();
-	position += myOrientation.GetPosition().AsVector2();
-	aText->SetPosition(position);
+	aText->SetOrientation(aText->GetOrientation() * myOrientation.GetInverse());
 	myTexts.Add(aText);
 }
 
@@ -113,7 +117,7 @@ void Instance::RemoveChild(Instance* anInstance)
 	myInstances.RemoveNonCyclic(anInstance);
 }
 
-void Instance::RemoveChild(Text* aText)
+void Instance::RemoveChild(Text3D* aText)
 {
 	myTexts.RemoveNonCyclic(aText);
 }

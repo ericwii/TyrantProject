@@ -1,6 +1,7 @@
 #pragma once
 #include "../CommonUtilities/GrowingArray.h"
 
+class Text3D;
 class Model;
 
 class Instance
@@ -18,25 +19,32 @@ public:
 	void SetOrientation(CU::Matrix44<float> anOrientation);
 
 	inline const CU::Matrix44<float>& GetOrientation() const;
+	inline const CU::Matrix44<float>& GetOriginalOrientation() const;
 	inline Vector3<float> GetPosition() const;
 
 	void AddChild(Instance* anInstance);
-	void AddChild(Text* aText);
+	void AddChild(Text3D* aText);
 
 	void RemoveChild(Instance* anInstance);
-	void RemoveChild(Text* aText);
+	void RemoveChild(Text3D* aText);
 
 private:
 	Model* myModel;
 	CU::GrowingArray<Instance*> myInstances;
-	CU::GrowingArray<Text*> myTexts;
+	CU::GrowingArray<Text3D*> myTexts;
 	CU::Matrix44<float> myOrientation;
+	CU::Matrix44<float> myOriginalOrientation;
 };
 
 
 inline const CU::Matrix44<float>& Instance::GetOrientation() const
 {
 	return myOrientation;
+}
+
+inline const CU::Matrix44<float>& Instance::GetOriginalOrientation() const
+{
+	return myOriginalOrientation;
 }
 
 inline Vector3<float> Instance::GetPosition() const

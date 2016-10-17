@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Model.h"
-#include "Effect.h"
 
 
 Model::Model() : myEffect(nullptr), myVertexLayout(nullptr), myIsNullObject(true)

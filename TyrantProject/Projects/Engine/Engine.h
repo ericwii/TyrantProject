@@ -4,7 +4,7 @@
 #include "EffectContainer.h"
 #include "FontContainer.h"
 #include "Camera.h"
-#include "Text.h"
+#include "Text2D.h"
 
 class Engine
 {
@@ -38,7 +38,7 @@ private:
 	EffectContainer myEffectContainer;
 	FontContainer myFontContainer;
 	Camera myCamera;
-	Text myDebugText;
+	Text2D myDebugText;
 	Vector2<float> myResolution;
 
 	float clearColor[4];

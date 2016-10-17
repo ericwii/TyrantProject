@@ -12,7 +12,8 @@ Effect2D::~Effect2D()
 
 bool Effect2D::Init(const string& anEffectFile)
 {
-	if (Effect::Init(anEffectFile, true))
+	myCompileOnly = true;
+	if (Effect::Init(anEffectFile))
 	{
 		myResolutionVariable = myEffect->GetVariableByName("Resolution")->AsVector();
 		DEBUG_ASSERT(myResolutionVariable->IsValid(), "Failed to find variable 'Resolution' in shader");

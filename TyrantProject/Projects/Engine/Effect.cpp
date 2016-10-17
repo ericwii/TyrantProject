@@ -22,7 +22,7 @@ Effect::~Effect()
 	}
 }
 
-bool Effect::Init(const string& anEffectFile, bool aCompileOnly)
+bool Effect::Init(const string& anEffectFile)
 {
 	myFileName = anEffectFile;
 	HRESULT hr;
@@ -88,7 +88,7 @@ bool Effect::Init(const string& anEffectFile, bool aCompileOnly)
 	}
 
 
-	if (aCompileOnly) return true;
+	if (myCompileOnly) return true;
 	
 
 	// Obtain the variables

@@ -104,9 +104,9 @@ Vector4<TYPE>::Vector4(const Vector4<TYPE>& aVector4)
 template<typename TYPE>
 Vector4<TYPE>::Vector4(const Vector3<TYPE>& aVector3, TYPE aW = 0)
 {
-	x = aVector3.X;
-	y = aVector3.Y;
-	z = aVector3.Z;
+	x = aVector3.x;
+	y = aVector3.y;
+	z = aVector3.z;
 	w = aW;
 }
 

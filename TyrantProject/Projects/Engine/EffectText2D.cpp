@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "EffectText.h"
+#include "EffectText2D.h"
 
-EffectText::EffectText() : myCharacterSizeVariable(nullptr)
+EffectText2D::EffectText2D() : myCharacterSizeVariable(nullptr)
 {
 }
 
-EffectText::~EffectText()
+EffectText2D::~EffectText2D()
 {
 }
 
 
 
-bool EffectText::Init(const string& anEffectFile)
+bool EffectText2D::Init(const string& anEffectFile)
 {
 	Effect2D::Init(anEffectFile);
 
@@ -26,7 +26,7 @@ bool EffectText::Init(const string& anEffectFile)
 	return true;
 }
 
-void EffectText::Update()
+void EffectText2D::Update()
 {
 	Effect2D::Update();
 	myCharacterSizeVariable->SetFloatVector(EffectData::characterSize.array);

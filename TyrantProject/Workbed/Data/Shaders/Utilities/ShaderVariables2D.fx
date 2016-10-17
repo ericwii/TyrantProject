@@ -1,4 +1,4 @@
-Texture2D DiffuseTexture;
+Texture2D AlbedoTexture;
 
 float4 Color;
 float4 Position;

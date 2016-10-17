@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Surface.h"
 #include "Texture.h"
-#include "Effect.h"
 
 Surface::Surface() : myEffect(nullptr)
 {

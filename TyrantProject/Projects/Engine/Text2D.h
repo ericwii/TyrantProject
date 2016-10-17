@@ -7,11 +7,11 @@
 
 class TextFont;
 
-class Text
+class Text2D
 {
 public:
-	Text();
-	~Text();
+	Text2D();
+	~Text2D();
 
 	void Destroy();
 	void Init(TextFont* aFont);
@@ -44,12 +44,12 @@ private:
 	float myCharacterSpace;
 };
 
-inline const Vector2<float>& Text::GetPosition() const
+inline const Vector2<float>& Text2D::GetPosition() const
 {
 	return myPosition;
 }
 
-inline void Text::SetCharacterSpace(float aSpace)
+inline void Text2D::SetCharacterSpace(float aSpace)
 {
 	myCharacterSpace = aSpace;
 }

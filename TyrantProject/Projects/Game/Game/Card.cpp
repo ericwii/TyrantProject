@@ -40,11 +40,11 @@ void Card::LoadCard(string aCardName)
 
 void Card::LoadModels()
 {
-	Model* canvasModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.3f, 2.f), eEffectType3D::Card, "Data/Textures/CardCanvas/canvas.png", true);
+	Model* canvasModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.3f, 2.f), eEffectType::Card, "Data/Textures/CardCanvas/canvas.png", true);
 	canvasModel->AddTexture("HighlightTexture", "Data/Textures/CardCanvas/highlight.png");
 	myCanvas.Init(canvasModel);
 
-	Model* illustrationModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.24f, 1.1f), eEffectType3D::Textured, myCardData->illustrationPath);
+	Model* illustrationModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.24f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.23f, 0));
 
@@ -56,13 +56,13 @@ void Card::LoadModels()
 void Card::LoadText()
 {
 	FontContainer& container = Engine::GetInstance()->GetFontContainer();
-
-	myNameText.Init(container.GetFont("Data/Fonts/DebugFont.dds"));
+	
+	myNameText.Init(container.GetFont("Data/Fonts/DebugFont.dds",eEffectType::Text3D));
 	myNameText.SetText(myCardData->name);
-	myNameText.SetPosition(Vector2<float>(-0.1f, -0.22f));
-	myNameText.SetCharacterScale(0.35f);
-	myNameText.SetCharacterSpace(0.47f);
-
-
+	myNameText.SetPosition(Vector2<float>(-0.58f, 0.88f));
+	//myNameText.SetCharacterScale(0.35f);
+	//myNameText.SetCharacterSpace(0.47f);
+	
+	
 	myCanvas.AddChild(&myNameText);
 }
