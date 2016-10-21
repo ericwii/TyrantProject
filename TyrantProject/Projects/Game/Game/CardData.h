@@ -1,6 +1,8 @@
 #pragma once
-#include "AbilityBase.h"
-#include "stdafx.h"
+#include "../../CommonUtilities/VectorOnStack.h"
+
+class AbilityBase;
+
 enum eCardFaction
 {
 	BloodThirsty,

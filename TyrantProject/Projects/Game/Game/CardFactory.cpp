@@ -1,16 +1,19 @@
 #include "stdafx.h"
 #include "CardFactory.h"
 
+using namespace tinyxml2;
+
 CardFactory* CardFactory::myInstance = nullptr;
 
 CardFactory::CardFactory()
 {
 }
 
-
 CardFactory::~CardFactory()
 {
 }
+
+
 
 void CardFactory::Create()
 {
@@ -21,6 +24,9 @@ CardFactory & CardFactory::GetInstance()
 {
 	return *myInstance;
 }
+
+
+
 
 void CardFactory::LoadCards()
 {
@@ -43,8 +49,49 @@ void CardFactory::LoadCards()
 
 }
 
-void CardFactory::LoadCardData(CardData aCardData, XMLElement* aElement)
+CardData* CardFactory::GetCard(const string& aCardName)
 {
+	if (myInstance->myCardDatas.find(aCardName.c_str()) == myInstance->myCardDatas.end())
+	{
+		return nullptr;
+	}
+	return &myInstance->myCardDatas[aCardName.c_str()];
+}
+
+CU::VectorOnStack<CardData*, DECK_MAX_SIZE> CardFactory::GetDeck(const string& anXmlFile)
+{
+	CU::VectorOnStack<CardData*, DECK_MAX_SIZE> deckToReturn;
+
+	XMLReader reader;
+	reader.OpenDocument(anXmlFile.c_str());
+
+	XMLElement* element = reader.FindFirstChild("root");
+	element = element->FirstChildElement();
+
+	XMLElement* commanderElement = element->FirstChildElement("commander");
+	DEBUG_ASSERT(commanderElement != nullptr, "No commander found for card deck");
+
+	deckToReturn.Add(GetCard(commanderElement->Attribute("name")));
+
+	element = element->FirstChildElement("card");
+	for (; element != nullptr; element = element->NextSiblingElement("card"))
+	{
+		deckToReturn.Add(GetCard(element->Attribute("name")));
+	}
+
+	return deckToReturn;
+}
+
+
+
+
+
+//Private methods
+
+void CardFactory::LoadCardData(XMLElement* aElement)
+{
+	CardData aCardData;
+
 	aCardData.name = aElement->Attribute("name");
 	aCardData.illustrationPath = aElement->Attribute("illustration");
 	string faction = aElement->Attribute("faction");
@@ -127,19 +174,8 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 	XMLElement* element = reader.FindFirstChild("root");
 	element = element->FirstChildElement();
 
-	CardData card;
-
 	for (XMLElement* element = reader.FindFirstChild("root")->FirstChildElement(); element != nullptr; element = element->NextSiblingElement("card"))
 	{
-		LoadCardData(card, element);
+		LoadCardData(element);
 	}
-}
-
-CardData* CardFactory::GetCard(const string aCardName)
-{
-	if (myInstance->myCardDatas.find(aCardName.c_str()) == myInstance->myCardDatas.end())
-	{
-		return nullptr;
-	}
-	return &myInstance->myCardDatas[aCardName.c_str()];
 }

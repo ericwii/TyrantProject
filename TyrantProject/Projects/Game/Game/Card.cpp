@@ -1,15 +1,11 @@
 #include "stdafx.h"
 #include "Card.h"
-#include "XMLReader.h"
-#include "CardData.h"
-#include "../../Engine/ModelLoader.h"
-#include "CardFactory.h"
 
 using namespace tinyxml2;
 
 eCardFaction cardFaction;
 
-Card::Card() : myCardData(nullptr), myRenderPassIndex(0)
+Card::Card() : myRenderPassIndex(0)
 {
 }
 
@@ -34,6 +30,19 @@ void Card::LoadCard(string aCardName)
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 }
 
+void Card::LoadCard(CardData* someData)
+{
+	myCardData = someData;
+	LoadModels();
+	LoadText();
+
+	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
+}
+
+void Card::SetPosition(const Vector3<float>& aPosition)
+{
+	myCanvas.SetPosition(aPosition);
+}
 
 
 //Private methods
@@ -47,9 +56,9 @@ void Card::LoadModels()
 	Model* illustrationModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.24f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.23f, 0));
-
-
-
+	
+	
+	
 	myCanvas.AddChild(&myIllustration);
 }
 

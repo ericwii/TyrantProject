@@ -8,11 +8,11 @@
 #include <string>
 #include <bitset>
 
-#include "../../CommonUtilities\GrowingArray.h"
-#include "../../CommonUtilities\VectorOnStack.h"
-#include "../../CommonUtilities\Matrix44.h"
-#include "../../CommonUtilities\Intersection.h"
-#include "../../CommonUtilities\Macro.h"
+#include "../../CommonUtilities/GrowingArray.h"
+#include "../../CommonUtilities/VectorOnStack.h"
+#include "../../CommonUtilities/Matrix44.h"
+#include "../../CommonUtilities/Intersection.h"
+#include "../../CommonUtilities/Macro.h"
 
 #include "../../Input/InputManager.h"
 
@@ -20,3 +20,8 @@
 
 #include "../../Engine/Engine.h"
 #include "../../Engine/Instance.h"
+#include "../../Engine/ModelLoader.h"
+
+#include "PollingStation.h"
+#include "CardFactory.h"
+#include "XMLReader.h"

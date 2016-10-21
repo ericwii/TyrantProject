@@ -6,6 +6,7 @@ enum class eEffectType
 	UnTextured,
 	Textured,
 	Card,
+	Sprite,
 	Text2D,
 	Text3D
 };

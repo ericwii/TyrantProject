@@ -1,12 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
-#include "../../Engine/ModelLoader.h"
-#include "CardFactory.h"
-#include "Card.h"
+#include "CardGameState.h"
 
-Card testCard;
-CU::GrowingArray<Instance*> instanser;
-CU::GrowingArray<Instance*> instanser2;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -25,11 +20,12 @@ bool Game::Init(WNDPROC aWindowProc)
 	myEngineInstance->GetCamera().SetPosition(Vector3<float>(0, 0, -2.1f));
 
 	InputManager::Initialize();
-
 	CardFactory::Create();
 	CardFactory::GetInstance().LoadCards();
 
-	testCard.LoadCard("Radio Officer");
+	myStates.Allocate(3);
+	myStates.Add(new CardGameState());
+	myStates.GetLast()->OnEnter();
 
 	return true;
 }
@@ -62,15 +58,17 @@ void Game::UnPause()
 bool Game::Update()
 {
 	UpdateCameraMovement();
-
 	UpdateUtilities();
+
+	myStates.GetLast()->Update();
 	return true;
 }
 
 void Game::Render()
 {
-	testCard.Render();
 	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
+
+	myStates.GetLast()->Render();
 
 	myEngineInstance->PresentBackBuffer();
 }

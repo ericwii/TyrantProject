@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Card.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="tinyxml2.cpp">
@@ -13,11 +12,25 @@
     <ClCompile Include="XMLReader.cpp">
       <Filter>XML</Filter>
     </ClCompile>
-    <ClCompile Include="CardFactory.cpp" />
-    <ClCompile Include="AbilityBase.cpp" />
+    <ClCompile Include="Card.cpp">
+      <Filter>Card</Filter>
+    </ClCompile>
+    <ClCompile Include="CardFactory.cpp">
+      <Filter>Card</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityBase.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseState.cpp">
+      <Filter>GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CardGameState.cpp">
+      <Filter>GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="PollingStation.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Card.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml2.h">
@@ -29,13 +42,39 @@
     <ClInclude Include="XMLReader.h">
       <Filter>XML</Filter>
     </ClInclude>
-    <ClInclude Include="CardFactory.h" />
-    <ClInclude Include="CardData.h" />
-    <ClInclude Include="AbilityBase.h" />
+    <ClInclude Include="Card.h">
+      <Filter>Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardData.h">
+      <Filter>Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardFactory.h">
+      <Filter>Card</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityBase.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGameState.h">
+      <Filter>GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="PollingStation.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
       <UniqueIdentifier>{ea1adb9a-f994-4b7b-8f0e-ade0cdd77af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Card">
+      <UniqueIdentifier>{58a92d00-8924-4a2d-80d8-c66d93250b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abilities">
+      <UniqueIdentifier>{91e66654-3168-4535-87c3-cb867fae0883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStates">
+      <UniqueIdentifier>{5a626095-10e2-4478-99c4-76ebbd6205c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

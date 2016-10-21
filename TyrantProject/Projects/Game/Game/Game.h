@@ -1,4 +1,7 @@
 #pragma once
+#include "../../CommonUtilities/GrowingArray.h"
+
+class BaseState;
 
 class Game
 {
@@ -23,4 +26,5 @@ private:
 	void UpdateCameraMovement();
 
 	Engine* myEngineInstance;
+	CU::GrowingArray<BaseState*> myStates;
 };

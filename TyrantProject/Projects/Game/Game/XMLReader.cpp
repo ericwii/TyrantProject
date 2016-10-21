@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "XMLReader.h"
 
 
 XMLReader::XMLReader()

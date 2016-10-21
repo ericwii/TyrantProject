@@ -40,6 +40,12 @@
     <Filter Include="Shading\Effects\3D">
       <UniqueIdentifier>{5537e799-455f-4680-bd01-4436318ef4b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shading\Shaders\2D">
+      <UniqueIdentifier>{f63d80eb-7945-4524-84ee-9c95e6c3833c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shading\Shaders\3D">
+      <UniqueIdentifier>{06b92b04-d5dc-45a6-bf26-ae9102b6e6a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX.h">
@@ -173,15 +179,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultShader.fx">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\NoTextureShader.fx">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader.fx">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderSamplerStates.fx">
       <Filter>Shading\Shaders\Utilites</Filter>
     </FxCompile>
@@ -191,17 +188,26 @@
     <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderVariables2D.fx">
       <Filter>Shading\Shaders\Utilites</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\CardFoilShader.fx">
-      <Filter>Shading\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\CardShader.fx">
-      <Filter>Shading\Shaders</Filter>
+      <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\DefaultShader.fx">
+      <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\NoTextureShader.fx">
+      <Filter>Shading\Shaders\3D</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader2D.fx">
-      <Filter>Shading\Shaders</Filter>
+      <Filter>Shading\Shaders\2D</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader3D.fx">
-      <Filter>Shading\Shaders</Filter>
+      <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader.fx">
+      <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\SpriteShader.fx">
+      <Filter>Shading\Shaders\2D</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

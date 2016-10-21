@@ -1,5 +1,4 @@
 #pragma once
-#include "../CommonUtilities/GrowingArray.h"
 
 class Text3D;
 class Model;

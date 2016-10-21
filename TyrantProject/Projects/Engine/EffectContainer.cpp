@@ -57,6 +57,14 @@ Effect* EffectContainer::GetEffectFromType(const eEffectType anEffectType)
 			newEffect->Init("Data/Shaders/CardShader.fx");
 			break;
 		}
+		case(eEffectType::Sprite) :
+		{
+			Effect2D* spriteEffect = new Effect2D();
+			spriteEffect->Init("Data/Shaders/SpriteShader.fx");
+
+			newEffect = spriteEffect;
+			break;
+		}
 		case(eEffectType::Text2D) :
 		{
 			EffectText2D* textEffect = new EffectText2D();

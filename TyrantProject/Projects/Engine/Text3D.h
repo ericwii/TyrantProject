@@ -1,7 +1,6 @@
 #pragma once
 #include "VertexStructs.h"
 #include "ShaderBufferStructs.h"
-#include "../CommonUtilities/StaticArray.h"
 
 #define TEXT_MAX_CHARACTER_COUNT 64
 

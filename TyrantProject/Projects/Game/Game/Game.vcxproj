@@ -102,7 +102,11 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardData.h" />
     <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="CardGameState.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="BaseState.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PollingStation.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="XMLFunctions.h" />
@@ -112,7 +116,11 @@
     <ClCompile Include="AbilityBase.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
+    <ClCompile Include="CardGameState.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="BaseState.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PollingStation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

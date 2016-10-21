@@ -1,5 +1,4 @@
 #pragma once
-#include "CardData.h"
 #include "../../Engine/Text3D.h"
 
 class Card
@@ -11,7 +10,9 @@ public:
 	void Render();
 
 	void LoadCard(string aCardName);
+	void LoadCard(CardData* someData);
 
+	void SetPosition(const Vector3<float>& aPosition);
 
 private:
 	Instance myCanvas;

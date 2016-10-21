@@ -1,6 +1,6 @@
 #pragma once
 
-#include <assert.h>
+#include "Assert.h"
 #include <memory.h>
 
 namespace CommonUtilities
@@ -92,7 +92,7 @@ CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator=(const Vecto
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](const CountType & aIndex)
 {
-	assert(aIndex < myCurrentSize && "Index is out of bounds");
+	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
 
 	return myList[aIndex];
 }
@@ -101,7 +101,7 @@ inline T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline const T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](const CountType & aIndex) const
 {
-	assert(aIndex < myCurrentSize && "Index is out of bounds");
+	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
 
 	return myList[aIndex];
 }
@@ -113,7 +113,7 @@ inline const T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::opera
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Add(const T& aObject)
 {
-	assert(myCurrentSize < MaxSize && "VectorOnStack list is already full");
+	DEBUG_ASSERT(myCurrentSize < MaxSize, "VectorOnStack list is already full");
 
 	myList[myCurrentSize] = aObject;
 	++myCurrentSize;
@@ -123,7 +123,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Add(const
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Insert(CountType aIndex, T& aObject)
 {
-	assert(aIndex < myCurrentSize && "Index is out of bounds");
+	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
 
 	if (myCurrentSize >= MaxSize)
 	{
@@ -157,7 +157,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyc
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyclicAtIndex(CountType aItemNumber)
 {
-	assert(aItemNumber < myCurrentSize && "Index is out of bounds");
+	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
 
 	delete myList[aItemNumber];
 	myList[aItemNumber] = myList[myCurrentSize - 1];
@@ -182,7 +182,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyc
 template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyclicAtIndex(CountType aItemNumber)
 {
-	assert(aItemNumber < myCurrentSize && "Index is out of bounds");
+	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
 
 	myList[aItemNumber] = myList[myCurrentSize - 1];
 	--myCurrentSize;
