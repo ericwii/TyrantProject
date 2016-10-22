@@ -29,6 +29,7 @@ GS_INPUT Vertex_Shader(VS_INPUT input)
 {
 	GS_INPUT output = (GS_INPUT)0;
 
+
 	output.Pos = mul(input.Pos, World);
 	output.TexUV = input.TexUV;
 

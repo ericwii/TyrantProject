@@ -16,6 +16,7 @@ Card::~Card()
 void Card::Render()
 {
 	myCanvas.Render(true, myRenderPassIndex);
+	UpdateText();
 }
 
 
@@ -45,6 +46,31 @@ void Card::LoadCard(CardData* someData)
 void Card::SetPosition(const Vector3<float>& aPosition)
 {
 	myCanvas.SetPosition(aPosition);
+}
+
+void Card::UpdateText()
+{
+	if (myCardData->cardType != eCardType::Action)
+	{
+		string healthText;
+		healthText += static_cast<int>(myCardData->health);
+		myHealthText.SetText(healthText);
+
+	}
+
+	if (myCardData->cardType == eCardType::Assault)
+	{
+		string attackText;
+		attackText += static_cast<int>(myCardData->attack);
+		myAttackText.SetText(attackText);
+	}
+
+	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
+	{
+		string cooldownText;
+		cooldownText += static_cast<int>(myCardData->cooldown);
+		myCooldownText.SetText(cooldownText);
+	}
 }
 
 
@@ -101,6 +127,7 @@ void Card::LoadText()
 		healthText += static_cast<int>(myCardData->health);
 
 		myHealthText.Init(font);
+		myHealthText.SetTextPositioning(eTextPositioning::eRight);
 		myHealthText.SetCharacterSpace(0.8f);
 		myHealthText.SetCharacterScale(2.5f);
 		myHealthText.SetText(healthText);

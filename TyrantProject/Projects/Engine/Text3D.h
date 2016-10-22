@@ -6,6 +6,13 @@
 
 class TextFont;
 
+enum class eTextPositioning
+{
+	eLeft,
+	eRight,
+	eMiddle
+};
+
 class Text3D
 {
 public:
@@ -27,6 +34,7 @@ public:
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline const Vector3<float> GetPosition() const;
 	inline void SetCharacterSpace(float aSpace);
+	inline void SetTextPositioning(eTextPositioning aTextPositionEnum);
 
 private:
 	void InitVertexBuffer();
@@ -44,6 +52,7 @@ private:
 	ID3D11InputLayout* myVertexLayout;
 	TextFont* myFont;
 	float myCharacterSpace;
+	eTextPositioning myTextPositioning;
 };
 
 inline const CU::Matrix44<float>& Text3D::GetOrientation() const
@@ -64,4 +73,9 @@ inline void Text3D::SetCharacterSpace(float aSpace)
 inline const string& Text3D::GetText() const
 {
 	return myText;
+}
+
+inline void Text3D::SetTextPositioning(eTextPositioning aTextPositionEnum)
+{
+	myTextPositioning = aTextPositionEnum;
 }

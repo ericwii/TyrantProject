@@ -29,6 +29,7 @@ void Text3D::Init(TextFont* aFont)
 	InitInputLayout();
 	myColor.Set(1.f, 1.f, 1.f, 1.f);
 	myCharacterScale.Set(1.f, 1.f);
+	myTextPositioning = eTextPositioning::eLeft;
 }
 
 void Text3D::Render()
@@ -77,16 +78,31 @@ void Text3D::SetText(const string& someText)
 	int size = someText.Lenght();
 	
 	VertexPositionUV currentVertex;
-	Vector3<float> currentPosition(myOrientation.GetTranslation());
+	Vector3<float> currentPosition;
 	Vector3<float> strideDeltaPos = myOrientation.GetRight() * (myFont->myNormalizedCharacterSize.x * myCharacterScale.x) * myCharacterSpace;
-	for (int i = 0; i < size; ++i)
+	if (myTextPositioning == eTextPositioning::eLeft)
 	{
-		currentVertex.position = currentPosition;
-		currentVertex.position.w = 1.f;
-		currentVertex.UV = myFont->GetCharacterUV(text[i]);
+		for (int i = 0; i < size; ++i)
+		{
+			currentVertex.position = currentPosition;
+			currentVertex.position.w = 1.f;
+			currentVertex.UV = myFont->GetCharacterUV(text[i]);
 	
-		myVertexes[i] = currentVertex;
-		currentPosition += strideDeltaPos;
+			myVertexes[i] = currentVertex;
+			currentPosition += strideDeltaPos;
+		}
+	}
+	else if (myTextPositioning == eTextPositioning::eRight)
+	{
+		for (int i = size-1; i >= 0; --i)
+		{
+			currentVertex.position = currentPosition;
+			currentVertex.position.w = 1.f;
+			currentVertex.UV = myFont->GetCharacterUV(text[i]);
+
+			myVertexes[i] = currentVertex;
+			currentPosition -= strideDeltaPos;
+		}
 	}
 	
 	UpdateVertexBuffer(size);

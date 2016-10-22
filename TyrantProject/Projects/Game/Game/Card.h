@@ -15,6 +15,10 @@ public:
 	void SetPosition(const Vector3<float>& aPosition);
 
 private:
+	void UpdateText();
+
+
+private:
 	Instance myCanvas;
 	Instance myIllustration;
 	Instance myHealthIcon;
