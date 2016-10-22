@@ -26,4 +26,5 @@ private:
 
 	void LoadModels();
 	void LoadText();
+	void LoadCanvas();
 };

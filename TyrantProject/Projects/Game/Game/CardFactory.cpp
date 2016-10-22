@@ -5,6 +5,9 @@ using namespace tinyxml2;
 
 CardFactory* CardFactory::myInstance = nullptr;
 
+string illustrationStartPath = "Data/Textures/Illustrations/";
+
+
 CardFactory::CardFactory()
 {
 }
@@ -41,7 +44,7 @@ void CardFactory::LoadCards()
 	{
 		LoadCardsList(element->Attribute("structuresPath"));
 		LoadCardsList(element->Attribute("assultPath"));
-		//LoadCardsList(element->Attribute("commanderPath")); // missing xml files for commanders
+		LoadCardsList(element->Attribute("commanderPath"));
 	}
 
 	/*rootelement = rootelement->NextSiblingElement("ActionCardList");
@@ -53,6 +56,7 @@ CardData* CardFactory::GetCard(const string& aCardName)
 {
 	if (myInstance->myCardDatas.find(aCardName.c_str()) == myInstance->myCardDatas.end())
 	{
+		DEBUG_ASSERT(false, "Failed to get card from CardFactory");
 		return nullptr;
 	}
 	return &myInstance->myCardDatas[aCardName.c_str()];
@@ -93,7 +97,8 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	CardData aCardData;
 
 	aCardData.name = aElement->Attribute("name");
-	aCardData.illustrationPath = aElement->Attribute("illustration");
+	aCardData.illustrationPath = illustrationStartPath + aElement->Attribute("illustration");
+
 	string faction = aElement->Attribute("faction");
 	if (faction == "bloodthirsty")
 	{
@@ -121,8 +126,7 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	}
 
 	string cardType = aElement->Attribute("cardType");
-
-	if (cardType == "assult")
+	if (cardType == "assault")
 	{
 		aCardData.cardType = eCardType::Assult;
 	}
@@ -140,7 +144,6 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	}
 
 	string rarity = aElement->Attribute("rarity");
-
 	if (rarity == "rare")
 	{
 		aCardData.rarity = eRarity::Rare;
@@ -159,9 +162,16 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	}
 
 	aCardData.unique = aElement->BoolAttribute("unique");
-	aCardData.cooldown = static_cast<char>(aElement->IntAttribute("cooldown"));
-	aCardData.attack = static_cast<char>(aElement->IntAttribute("attack"));
 	aCardData.health = static_cast<char>(aElement->IntAttribute("health"));
+
+	if (aCardData.cardType == eCardType::Assult || aCardData.cardType == eCardType::Structure)
+	{
+		aCardData.cooldown = static_cast<char>(aElement->IntAttribute("cooldown"));
+	}
+	if (aCardData.cardType == eCardType::Assult)
+	{
+		aCardData.attack = static_cast<char>(aElement->IntAttribute("attack"));
+	}
 
 	myInstance->myCardDatas[aCardData.name.c_str()] = aCardData;
 }
@@ -174,7 +184,7 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 	XMLElement* element = reader.FindFirstChild("root");
 	element = element->FirstChildElement();
 
-	for (XMLElement* element = reader.FindFirstChild("root")->FirstChildElement(); element != nullptr; element = element->NextSiblingElement("card"))
+	for (; element != nullptr; element = element->NextSiblingElement("card"))
 	{
 		LoadCardData(element);
 	}

@@ -5,8 +5,11 @@
 	<CardList
 		structuresPath = "Data/XML files/Bloodthirsty/StructureCards.xml"
 		assultPath = "Data/XML files/Bloodthirsty/AssaultCards.xml"
-		commanderPath = ""
+		commanderPath = "Data/XML files/Bloodthirsty/CommanderCards.xml"
 	/>
+	
+	<!--
+	
 	<CardList
 		structuresPath = "Data/XML files/Imperial/StructureCards.xml"
 		assultPath = "Data/XML files/Imperial/AssaultCards.xml"
@@ -30,5 +33,6 @@
 	<ActionCardList
 		actionsPath = "Data/XML files/ActionCards.xml"
 	/>
-
+	
+	-->
 </root>

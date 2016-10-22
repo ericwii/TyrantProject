@@ -34,14 +34,14 @@ enum class eRarity
 
 struct CardData
 {
-	string name;
-	string illustrationPath;
-	eCardFaction faction;
-	eCardType cardType;
-	eRarity rarity;
+	string name = "none";
+	string illustrationPath = "none";
+	eCardFaction faction = eCardFaction::NumberofFactions;
+	eCardType cardType = eCardType::Action;
+	eRarity rarity = eRarity::Common;
 	CU::VectorOnStack<AbilityBase*, 3> abilitys;
-	bool unique;
-	char cooldown;
-	char attack;
-	char health;
+	bool unique = false;
+	char cooldown = 0;
+	char attack = 0;
+	char health = 0;
 };

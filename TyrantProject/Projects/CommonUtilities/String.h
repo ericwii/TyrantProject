@@ -156,9 +156,11 @@ namespace CommonUtilities
 		int i = 0;
 		while (aLiteralString[i] != '\0')
 		{
-			if (myCurrentSize > Size)
+			if (myCurrentSize >= Size)
 			{
-				DEBUG_ASSERT(myCurrentSize <= Size, "Size out of bounds");
+				DEBUG_ASSERT(myCurrentSize < Size, "Size out of bounds");
+				--myCurrentSize;
+				break;
 			}
 			else
 			{
@@ -421,5 +423,5 @@ namespace CommonUtilities
 
 namespace CU = CommonUtilities;
 using stringSmall = CommonUtilities::String<32>;
-using string = CommonUtilities::String<64>;
-using stringLong = CommonUtilities::String<128>;
+using string = CommonUtilities::String<128>;
+using stringLong = CommonUtilities::String<256>;

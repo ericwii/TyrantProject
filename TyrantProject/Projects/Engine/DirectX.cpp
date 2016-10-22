@@ -239,8 +239,8 @@ bool DirectX::DeviceSetup(const WindowSetupInfo& setupInfo)
 	else
 	{
 		myUseMSAA = true;
-		//myMSAACount = 4;
-		//myMSAAQuality = m4xMsaaQuality - 1;
+		myMSAACount = 4;
+	    myMSAAQuality = m4xMsaaQuality - 1;
 	}
 
 	swapChainDesc.SampleDesc.Count = myMSAACount;

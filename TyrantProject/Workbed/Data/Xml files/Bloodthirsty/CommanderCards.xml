@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+	<card
+		name = "Dementia"
+		illustration = "BloodThirsty/Commander/Dementia.jpg"
+		faction = "bloodthirsty"
+		cardType = "commander"
+		rarity = "rare"
+		unique = "false"
+		health = "13"
+	/>
+	
+	<card
+		name = "Dracorex"
+		illustration = "BloodThirsty/Commander/Dracorex.jpg"
+		faction = "bloodthirsty"
+		cardType = "commander"
+		rarity = "rare"
+		unique = "false"
+		health = "9"
+	/>
+	
+	<card
+		name = "Gnorlock"
+		illustration = "BloodThirsty/Commander/Gnorlock.jpg"
+		faction = "bloodthirsty"
+		cardType = "commander"
+		rarity = "rare"
+		unique = "false"
+		health = "6"
+	/>
+	
+	<card
+		name = "Marrowtok"
+		illustration = "BloodThirsty/Commander/Marrowtok.jpg"
+		faction = "bloodthirsty"
+		cardType = "commander"
+		rarity = "rare"
+		unique = "false"
+		health = "18"
+	/>
+
+</root>

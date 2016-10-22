@@ -3,18 +3,18 @@
 <root>
 
   <deck>
-		<commander name="Radio Officer"/>
+		<commander name="Gnorlock"/>
 		
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
-		<card name="Radio Officer"/>
+		<card name="Mawcor"/>
+		<card name="Grimclaw"/>
+		<card name="Grimclaw"/>
+		<card name="Scythe Overseer"/>
+		<card name="Scythe Overseer"/>
+		<card name="Scythe Overseer"/>
+		<card name="Hades"/>
+		<card name="Hungry Blood Pool"/>
+		<card name="Necro Nest"/>
+		<card name="Necro Nest"/>
   </deck>
 
 </root>

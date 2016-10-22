@@ -3,15 +3,36 @@
 <root>
 
 	<card
-		name = "Radio Officer"
-		illustration = "Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg"
-		faction = "raider"
-		cardType = "assult"
+		name = "Blood Pool"
+		illustration = "BloodThirsty/Structure/Blood Pool.jpg"
+		faction = "bloodthirsty"
+		cardType = "structure"
 		rarity = "rare"
 		unique = "false"
-		cooldown = "4"
-		attack = "1"
-		health = "9"
+		cooldown = "3"
+		health = "6"
+	/>
+	
+	<card
+		name = "Hungry Blood Pool"
+		illustration = "BloodThirsty/Structure/Hungry Blood Pool.jpg"
+		faction = "bloodthirsty"
+		cardType = "structure"
+		rarity = "rare"
+		unique = "false"
+		cooldown = "1"
+		health = "6"
+	/>
+	
+	<card
+		name = "Necro Nest"
+		illustration = "BloodThirsty/Structure/Necro Nest.jpg"
+		faction = "bloodthirsty"
+		cardType = "structure"
+		rarity = "rare"
+		unique = "false"
+		cooldown = "2"
+		health = "6"
 	/>
 
 </root>
