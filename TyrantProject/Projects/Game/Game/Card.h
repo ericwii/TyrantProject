@@ -17,6 +17,10 @@ public:
 private:
 	Instance myCanvas;
 	Instance myIllustration;
+	Instance myHealthIcon;
+	Instance myAttackIcon;
+	Instance myCooldownIcon;
+	Instance myCardTypeIcon;
 	Text3D myNameText;
 	Text3D myAttackText;
 	Text3D myHealthText;
@@ -27,4 +31,5 @@ private:
 	void LoadModels();
 	void LoadText();
 	void LoadCanvas();
+	void LoadCardTypeIcon();
 };

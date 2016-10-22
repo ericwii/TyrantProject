@@ -128,7 +128,7 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	string cardType = aElement->Attribute("cardType");
 	if (cardType == "assault")
 	{
-		aCardData.cardType = eCardType::Assult;
+		aCardData.cardType = eCardType::Assault;
 	}
 	else if (cardType == "structure")
 	{
@@ -164,11 +164,11 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	aCardData.unique = aElement->BoolAttribute("unique");
 	aCardData.health = static_cast<char>(aElement->IntAttribute("health"));
 
-	if (aCardData.cardType == eCardType::Assult || aCardData.cardType == eCardType::Structure)
+	if (aCardData.cardType == eCardType::Assault || aCardData.cardType == eCardType::Structure)
 	{
 		aCardData.cooldown = static_cast<char>(aElement->IntAttribute("cooldown"));
 	}
-	if (aCardData.cardType == eCardType::Assult)
+	if (aCardData.cardType == eCardType::Assault)
 	{
 		aCardData.attack = static_cast<char>(aElement->IntAttribute("attack"));
 	}

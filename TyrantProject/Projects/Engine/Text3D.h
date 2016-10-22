@@ -23,6 +23,7 @@ public:
 	void SetCharacterScale(float aScale);
 	void SetText(const string& someText);
 
+	inline const string& GetText() const;
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline const Vector3<float> GetPosition() const;
 	inline void SetCharacterSpace(float aSpace);
@@ -58,4 +59,9 @@ inline const Vector3<float> Text3D::GetPosition() const
 inline void Text3D::SetCharacterSpace(float aSpace)
 {
 	myCharacterSpace = aSpace;
+}
+
+inline const string& Text3D::GetText() const
+{
+	return myText;
 }

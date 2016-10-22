@@ -210,7 +210,7 @@ namespace CommonUtilities
 		
 		do
 		{
-			assert(currentSize + myCurrentSize < Size && "Size out of bounds");
+			DEBUG_ASSERT(currentSize + myCurrentSize < Size, "Size out of bounds");
 		
 			litteralString[currentSize++] = IntToChar(copy % 10);
 		
@@ -223,7 +223,7 @@ namespace CommonUtilities
 			myArray[myCurrentSize++] = litteralString[i];
 		}
 		
-		myArray[myCurrentSize++] = '\0';
+		myArray[myCurrentSize] = '\0';
 		return (*this);
 	}
 
@@ -411,13 +411,13 @@ namespace CommonUtilities
 		char min = '0';
 		char max = '9';
 
-		char charNumber = min + aInt;
+		char charNumber = static_cast<char>(min + aInt);
 
 		if (charNumber > max)
 		{
 			return '\0';
 		}
-		return charNUmber;
+		return charNumber;
 	}
 }
 

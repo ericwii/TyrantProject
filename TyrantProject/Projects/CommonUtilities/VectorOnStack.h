@@ -5,7 +5,7 @@
 
 namespace CommonUtilities
 {
-	template <typename T, const unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+	template <typename T, const unsigned int MaxSize, typename CountType = int, bool UseSafeModeFlag = true>
 	class VectorOnStack
 	{
 	public:

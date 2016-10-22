@@ -18,7 +18,7 @@ enum class eCardType
 {
 	Structure,
 	Commander,
-	Assult,
+	Assault,
 	Action
 };
 
