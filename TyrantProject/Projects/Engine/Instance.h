@@ -20,6 +20,7 @@ public:
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline const CU::Matrix44<float>& GetOriginalOrientation() const;
 	inline Vector3<float> GetPosition() const;
+	inline void SetCurrentOrientationAsOriginal();
 
 	void AddChild(Instance* anInstance);
 	void AddChild(Text3D* aText);
@@ -35,6 +36,10 @@ private:
 	CU::Matrix44<float> myOriginalOrientation;
 };
 
+inline void Instance::SetCurrentOrientationAsOriginal()
+{
+	myOriginalOrientation = myOrientation;
+}
 
 inline const CU::Matrix44<float>& Instance::GetOrientation() const
 {

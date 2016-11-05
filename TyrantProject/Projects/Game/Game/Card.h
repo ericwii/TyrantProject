@@ -12,6 +12,7 @@ public:
 	void LoadCard(string aCardName);
 	void LoadCard(CardData* someData);
 
+	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
 private:

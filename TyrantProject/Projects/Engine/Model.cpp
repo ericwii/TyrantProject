@@ -37,6 +37,7 @@ void Model::Render(const CU::Matrix44<float>& aParentSpace, unsigned int aPassIn
 	DEBUG_ASSERT(myEffect != nullptr, "Cannot render a model with no effect set");
 
 	EffectData::worldMatrix = aParentSpace;
+	EffectData::position = aParentSpace.GetTranslation();
 
 	ID3D11DeviceContext* context = GET_DIRECTX().GetDeviceContext();
 

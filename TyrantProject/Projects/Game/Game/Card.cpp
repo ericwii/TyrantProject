@@ -43,6 +43,11 @@ void Card::LoadCard(CardData* someData)
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 }
 
+void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
+{
+	myCanvas.SetOrientation(anOrientation);
+}
+
 void Card::SetPosition(const Vector3<float>& aPosition)
 {
 	myCanvas.SetPosition(aPosition);
@@ -78,7 +83,7 @@ void Card::UpdateText()
 
 void Card::LoadModels()
 {
-	Model* illustrationModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.24f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
+	Model* illustrationModel = ModelLoader::LoadRectangle(Vector2<float>(1.24f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));	
 	
@@ -86,7 +91,7 @@ void Card::LoadModels()
 
 	if (myCardData->cardType != eCardType::Action)
 	{
-		Model* healthIconModel = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/healthIcon.png");
+		Model* healthIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/healthIcon.png");
 		myHealthIcon.Init(healthIconModel);
 		myHealthIcon.SetPosition(Vector3<float>(0.53f, -0.88f, 0));
 		myCanvas.AddChild(&myHealthIcon);
@@ -94,14 +99,14 @@ void Card::LoadModels()
 
 	if (myCardData->cardType == eCardType::Assault)
 	{
-		Model* attackIconModel = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/attackIcon.png");
+		Model* attackIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/attackIcon.png");
 		myAttackIcon.Init(attackIconModel);
 		myAttackIcon.SetPosition(Vector3<float>(-0.53f, -0.88f, 0));
 		myCanvas.AddChild(&myAttackIcon);
 	}
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
 	{
-		Model* cooldownIconModel = ModelLoader::LoadRectangle3D(Vector2<float>(0.3f, 0.3f), eEffectType::Textured, "Data/Textures/Icons/cooldownIcon.png");
+		Model* cooldownIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.3f, 0.3f), eEffectType::Textured, "Data/Textures/Icons/cooldownIcon.png");
 		myCooldownIcon.Init(cooldownIconModel);
 		myCooldownIcon.SetPosition(Vector3<float>(0.48f, 0.82f, 0));
 		myCanvas.AddChild(&myCooldownIcon);
@@ -198,7 +203,7 @@ void Card::LoadCanvas()
 			break;
 		}
 	}
-	Model* canvasModel = ModelLoader::LoadRectangle3D(Vector2<float>(1.3f, 2.f), eEffectType::Card, canvasPath, true);
+	Model* canvasModel = ModelLoader::LoadRectangle(Vector2<float>(1.3f, 2.f), eEffectType::Card, canvasPath, true);
 	myCanvas.Init(canvasModel);
 }
 

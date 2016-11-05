@@ -100,6 +100,7 @@ void Instance::SetOrientation(CU::Matrix44<float> anOrientation)
 
 void Instance::AddChild(Instance* anInstance)
 {
+	anInstance->SetCurrentOrientationAsOriginal();
 	CU::Matrix44<float> orientation = myOrientation;
 	orientation *= anInstance->GetOrientation();
 	anInstance->SetOrientation(orientation);

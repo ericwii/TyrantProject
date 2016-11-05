@@ -17,5 +17,7 @@ public:
 private:
 	Player myPlayerUser;
 	Player myPlayerOpponent;
+	Instance myBackground;
+	Instance myDeckGUI;
 };
 

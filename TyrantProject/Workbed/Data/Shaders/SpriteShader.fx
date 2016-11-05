@@ -18,9 +18,8 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 {
 	PS_INPUT output = (PS_INPUT)0;
 
-	output.Pos = input.Pos * 2.f - 1.f;
+	output.Pos = input.Pos;
 	output.Pos += Position;
-	output.Pos.y *= -1;
 	output.Pos.z = 0;
 	output.Pos.w = 1;
 	output.TexUV = input.TexUV;

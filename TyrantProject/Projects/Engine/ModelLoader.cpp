@@ -156,7 +156,7 @@ Model* ModelLoader::LoadDebugTriangle(float aSize)
 	return newModel;
 }
 
-Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType anEffectType, const string& aTextureFile, bool aDoubleSided)
+Model* ModelLoader::LoadRectangle(const Vector2<float>& aSize, eEffectType anEffectType, const string& aTextureFile, bool aDoubleSided)
 {
 	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(anEffectType);
 	if (newEffect == nullptr)
@@ -263,6 +263,8 @@ Model* ModelLoader::LoadRectangle3D(const Vector2<float>& aSize, eEffectType anE
 	newModel->myIsNullObject = false;
 	return newModel;
 }
+
+
 
 
 

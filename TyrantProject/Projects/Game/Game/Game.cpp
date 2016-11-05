@@ -17,7 +17,7 @@ bool Game::Init(WNDPROC aWindowProc)
 {
 	Engine::Start(aWindowProc, WindowSetupInfo(eWindowMode::Windowed));
 	myEngineInstance = Engine::GetInstance();
-	myEngineInstance->GetCamera().SetPosition(Vector3<float>(0, 0, -2.1f));
+	myEngineInstance->GetCamera().SetPosition(Vector3<float>(0, 0, -5.f));
 
 	InputManager::Initialize();
 	CardFactory::Create();
@@ -87,7 +87,8 @@ void Game::UpdateCameraMovement()
 {
 	Camera& cam = myEngineInstance->GetCamera();
 	float deltaTime = Time::DeltaTime();
-	float speed = 3.f;
+	float speed = 10.f;
+	float rotationSpeed = 2.f;
 
 	if (InputManager::Keyboard.IsKeyDown(DIK_S))
 	{
@@ -107,7 +108,7 @@ void Game::UpdateCameraMovement()
 	}
 
 
-	float rotation = 0.5f * deltaTime;
+	float rotation = rotationSpeed * deltaTime;
 	if (InputManager::Keyboard.IsKeyDown(DIK_UPARROW))
 	{
 		cam.RotateX(-rotation);
