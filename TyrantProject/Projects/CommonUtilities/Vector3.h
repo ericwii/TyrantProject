@@ -375,7 +375,7 @@ void Vector3<TYPE>::Set(TYPE aX, TYPE aY, TYPE aZ)
 {
 	x = aX;
 	y = aY;
-	x = aZ;
+	z = aZ;
 }
 
 template<typename TYPE>

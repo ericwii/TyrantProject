@@ -79,7 +79,8 @@ void Text3D::SetText(const string& someText)
 	
 	VertexPositionUV currentVertex;
 	Vector3<float> currentPosition;
-	Vector3<float> strideDeltaPos = myOrientation.GetRight() * (myFont->myNormalizedCharacterSize.x * myCharacterScale.x) * myCharacterSpace;
+	Vector3<float> strideDeltaPos(1.f, 0, 0);
+	strideDeltaPos *= (myFont->myNormalizedCharacterSize.x * myCharacterScale.x) * myCharacterSpace;
 	if (myTextPositioning == eTextPositioning::eLeft)
 	{
 		for (int i = 0; i < size; ++i)

@@ -32,9 +32,12 @@ public:
 
 	inline const string& GetText() const;
 	inline const CU::Matrix44<float>& GetOrientation() const;
+	inline const CU::Matrix44<float>& GetOriginalOrientation() const;
 	inline const Vector3<float> GetPosition() const;
 	inline void SetCharacterSpace(float aSpace);
 	inline void SetTextPositioning(eTextPositioning aTextPositionEnum);
+
+	inline void SetCurrentOrientationAsOriginal();
 
 private:
 	void InitVertexBuffer();
@@ -47,6 +50,7 @@ private:
 	string myText;
 	VertexBufferWrapper myVertexBuffer;
 	CU::Matrix44<float> myOrientation;
+	CU::Matrix44<float> myOriginalOrientation;
 	Vector4<float> myColor;
 	Vector2<float> myCharacterScale;
 	ID3D11InputLayout* myVertexLayout;
@@ -54,6 +58,11 @@ private:
 	float myCharacterSpace;
 	eTextPositioning myTextPositioning;
 };
+
+inline const CU::Matrix44<float>& Text3D::GetOriginalOrientation() const
+{
+	return myOriginalOrientation;
+}
 
 inline const CU::Matrix44<float>& Text3D::GetOrientation() const
 {
@@ -78,4 +87,9 @@ inline const string& Text3D::GetText() const
 inline void Text3D::SetTextPositioning(eTextPositioning aTextPositionEnum)
 {
 	myTextPositioning = aTextPositionEnum;
+}
+
+inline void Text3D::SetCurrentOrientationAsOriginal()
+{
+	myOriginalOrientation = myOrientation;
 }

@@ -57,20 +57,21 @@ void Instance::Render(bool aRenderChildren, unsigned int aPassIndex)
 
 void Instance::SetPosition(Vector3<float> aPosition)
 {
+	Vector3<float> deltaPosition = aPosition - myOrientation.GetPosition();
 	myOrientation.SetPosition(aPosition);
 
 	Vector3<float> currentPosition;
-	for (unsigned short i = 0; i < myInstances.Size(); ++i)
+	for (unsigned short i = 0; i < myInstances.Size(); i++)
 	{
 		currentPosition = myInstances[i]->GetPosition();
-		myInstances[i]->SetPosition(currentPosition + aPosition);
+		myInstances[i]->SetPosition(currentPosition + deltaPosition);
 	}
 
 	for (unsigned short i = 0; i < myTexts.Size(); ++i)
 	{
 		currentPosition = myTexts[i]->GetPosition();
-		currentPosition += aPosition;
-		myTexts[i]->SetPosition(currentPosition);
+
+		myTexts[i]->SetPosition(currentPosition + deltaPosition);
 	}
 }
 
@@ -87,11 +88,8 @@ void Instance::SetOrientation(CU::Matrix44<float> anOrientation)
 
 	for (unsigned short i = 0; i < myTexts.Size(); ++i)
 	{
-		currentOrientation = myTexts[i]->GetOrientation();
-		currentOrientation *= myOrientation;
-		currentOrientation *= inverse;
-
-		myTexts[i]->SetOrientation(currentOrientation);
+		currentOrientation = myTexts[i]->GetOriginalOrientation();
+		myTexts[i]->SetOrientation(currentOrientation * inverse);
 	}
 
 	myOrientation = anOrientation;

@@ -57,7 +57,7 @@ void Game::UnPause()
 
 bool Game::Update()
 {
-	UpdateCameraMovement();
+	//UpdateCameraMovement();
 	UpdateUtilities();
 
 	myStates.GetLast()->Update();
@@ -89,6 +89,11 @@ void Game::UpdateCameraMovement()
 	float deltaTime = Time::DeltaTime();
 	float speed = 10.f;
 	float rotationSpeed = 2.f;
+
+	if (InputManager::Keyboard.IsKeyDown(DIK_LCONTROL))
+	{
+		speed *= 0.2f;
+	}
 
 	if (InputManager::Keyboard.IsKeyDown(DIK_S))
 	{
@@ -132,5 +137,14 @@ void Game::UpdateCameraMovement()
 	if (InputManager::Keyboard.IsKeyDown(DIK_Q))
 	{
 		cam.RotateZ(rotation);
+	}
+
+	if (InputManager::Keyboard.IsKeyDown(DIK_NUMPAD8))
+	{
+		cam.MoveUp(speed, deltaTime);
+	}
+	if (InputManager::Keyboard.IsKeyDown(DIK_NUMPAD2))
+	{
+		cam.MoveDown(speed, deltaTime);
 	}
 }

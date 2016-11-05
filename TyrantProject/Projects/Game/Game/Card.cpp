@@ -60,7 +60,6 @@ void Card::UpdateText()
 		string healthText;
 		healthText += static_cast<int>(myCardData->health);
 		myHealthText.SetText(healthText);
-
 	}
 
 	if (myCardData->cardType == eCardType::Assault)
@@ -83,7 +82,7 @@ void Card::UpdateText()
 
 void Card::LoadModels()
 {
-	Model* illustrationModel = ModelLoader::LoadRectangle(Vector2<float>(1.24f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
+	Model* illustrationModel = ModelLoader::LoadRectangle(Vector2<float>(1.4f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));	
 	
@@ -93,7 +92,7 @@ void Card::LoadModels()
 	{
 		Model* healthIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/healthIcon.png");
 		myHealthIcon.Init(healthIconModel);
-		myHealthIcon.SetPosition(Vector3<float>(0.53f, -0.88f, 0));
+		myHealthIcon.SetPosition(Vector3<float>(0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myHealthIcon);
 	}
 
@@ -101,12 +100,12 @@ void Card::LoadModels()
 	{
 		Model* attackIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/attackIcon.png");
 		myAttackIcon.Init(attackIconModel);
-		myAttackIcon.SetPosition(Vector3<float>(-0.53f, -0.88f, 0));
+		myAttackIcon.SetPosition(Vector3<float>(-0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myAttackIcon);
 	}
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
 	{
-		Model* cooldownIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.3f, 0.3f), eEffectType::Textured, "Data/Textures/Icons/cooldownIcon.png");
+		Model* cooldownIconModel = ModelLoader::LoadRectangle(Vector2<float>(0.45f, 0.3f), eEffectType::Textured, "Data/Textures/Icons/cooldownIcon.png");
 		myCooldownIcon.Init(cooldownIconModel);
 		myCooldownIcon.SetPosition(Vector3<float>(0.48f, 0.82f, 0));
 		myCanvas.AddChild(&myCooldownIcon);
@@ -122,6 +121,7 @@ void Card::LoadText()
 	myNameText.SetCharacterSpace(0.8f);
 	myNameText.SetText(myCardData->name);
 	myNameText.SetPosition(Vector2<float>(-0.55f, 0.88f));
+	myNameText.SetCurrentOrientationAsOriginal();
 
 	myCanvas.AddChild(&myNameText);
 
@@ -136,7 +136,8 @@ void Card::LoadText()
 		myHealthText.SetCharacterSpace(0.8f);
 		myHealthText.SetCharacterScale(2.5f);
 		myHealthText.SetText(healthText);
-		myHealthText.SetPosition(Vector2<float>(0.35f, -0.86f));
+		myHealthText.SetPosition(Vector2<float>(0.4f, -0.86f));
+		myHealthText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myHealthText);
 	}
 
@@ -149,7 +150,8 @@ void Card::LoadText()
 		myAttackText.SetCharacterSpace(0.8f);
 		myAttackText.SetCharacterScale(2.5f);
 		myAttackText.SetText(attackText);
-		myAttackText.SetPosition(Vector2<float>(-0.35f, -0.86f));
+		myAttackText.SetPosition(Vector2<float>(-0.4f, -0.86f));
+		myAttackText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myAttackText);
 	}
 	
@@ -163,6 +165,7 @@ void Card::LoadText()
 		myCooldownText.SetCharacterScale(2.5f);
 		myCooldownText.SetText(cooldownText);
 		myCooldownText.SetPosition(Vector2<float>(0.48f, 0.84f));
+		myCooldownText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myCooldownText);
 	}
 }
@@ -203,7 +206,7 @@ void Card::LoadCanvas()
 			break;
 		}
 	}
-	Model* canvasModel = ModelLoader::LoadRectangle(Vector2<float>(1.3f, 2.f), eEffectType::Card, canvasPath, true);
+	Model* canvasModel = ModelLoader::LoadRectangle(Vector2<float>(1.5f, 2.f), eEffectType::Card, canvasPath, true);
 	myCanvas.Init(canvasModel);
 }
 
