@@ -25,6 +25,7 @@ public:
 	inline const Effect* GetEffect() const;
 	inline int GetVertexCount() const;
 	inline int GetIndexCount() const;
+	inline Texture* GetTexture(const string& aShaderVariableName, int aSurfaceIndex = 0);
 
 private:
 	bool InitVertexBuffer();
@@ -69,4 +70,9 @@ inline int Model::GetVertexCount() const
 inline int Model::GetIndexCount() const
 {
 	return myIndexData.numberOfIndexes;
+}
+
+Texture* Model::GetTexture(const string& aShaderVariableName, int aSurfaceIndex)
+{
+	return mySurfaces[aSurfaceIndex].GetTexture(aShaderVariableName);
 }

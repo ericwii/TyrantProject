@@ -4,8 +4,7 @@
 
 Surface::Surface() : myEffect(nullptr)
 {
-	myTextures.Allocate(2);
-	myShaderVariables.Allocate(2);
+	myData.Allocate(2);
 }
 
 Surface::~Surface()
@@ -17,11 +16,14 @@ void Surface::UpdateShaderVariables()
 {
 	GET_DIRECTX().GetDeviceContext()->IASetPrimitiveTopology(myPrimologyType);
 
-	for (int i = 0; i < myShaderVariables.Size(); ++i)
+
+	SurfaceData* currentData(nullptr);
+	for (int i = 0; i < myData.Size(); ++i)
 	{
-		if (myShaderVariables[i]->IsValid() == TRUE)
+		currentData = &myData[i];
+		if (currentData->shaderVariable->IsValid() == TRUE)
 		{
-			myShaderVariables[i]->SetResource(myTextures[i]->GetShaderView());
+			currentData->shaderVariable->SetResource(currentData->texture->GetShaderView());
 		}
 	}
 }
@@ -44,8 +46,7 @@ bool Surface::AddTexture(const string& aShaderVariableName, const string& aTextu
 		return false;
 	}
 
-	myTextures.Add(temp);
-	myShaderVariables.Add(tempShaderResourceVar);
+	myData.Add(SurfaceData(tempShaderResourceVar, temp, aShaderVariableName));
 
 	return true;
 }

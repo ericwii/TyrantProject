@@ -8,5 +8,6 @@ enum class eEffectType
 	Card,
 	Sprite,
 	Text2D,
-	Text3D
+	Text3D,
+	Animated
 };

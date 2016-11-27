@@ -13,6 +13,8 @@ struct EffectData
 
 	static Vector2<float> resolution;
 	static Vector2<float> characterSize;
+	static Vector2<float> animationFrameSize;
+	static Vector2<float> animationUV;
 
 	static float rotation_2D;
 

@@ -12,5 +12,7 @@ Vector3<float> EffectData::scale;
 
 Vector2<float> EffectData::resolution;
 Vector2<float> EffectData::characterSize;
+Vector2<float> EffectData::animationFrameSize;
+Vector2<float> EffectData::animationUV;
 
 float EffectData::rotation_2D;

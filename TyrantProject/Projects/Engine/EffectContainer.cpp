@@ -2,6 +2,7 @@
 #include "EffectContainer.h"
 #include "EffectText2D.h"
 #include "EffectText3D.h"
+#include "EffectAnimation.h"
 
 
 EffectContainer::EffectContainer()
@@ -79,6 +80,14 @@ Effect* EffectContainer::GetEffectFromType(const eEffectType anEffectType)
 			textEffect->Init("Data/Shaders/TextShader3D.fx");
 
 			newEffect = textEffect;
+			break;
+		}
+		case(eEffectType::Animated) :
+		{
+			EffectAnimation* animationEffect = new EffectAnimation();
+			animationEffect->Init("Data/Shaders/AnimationShader.fx");
+
+			newEffect = animationEffect;
 			break;
 		}
 		default:

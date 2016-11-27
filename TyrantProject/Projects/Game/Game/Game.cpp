@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "CardGameState.h"
+#include "../../Engine/Animation.h"
 
+Animation testAnimation;
 
 Game::Game() : myEngineInstance(nullptr)
 {
@@ -26,6 +28,10 @@ bool Game::Init(WNDPROC aWindowProc)
 	myStates.Allocate(3);
 	myStates.Add(new CardGameState());
 	myStates.GetLast()->OnEnter();
+
+	testAnimation.InitModel("Data/Textures/animation_test.png", Vector3<float>(), Vector2<float>(1.f, 1.5f));
+	testAnimation.InitAnimation(30, 5, 60.f, true);
+	testAnimation.Play();
 
 	return true;
 }
@@ -57,10 +63,12 @@ void Game::UnPause()
 
 bool Game::Update()
 {
+	myStates.GetLast()->Update();
+	testAnimation.Update();
+
 	//UpdateCameraMovement();
 	UpdateUtilities();
 
-	myStates.GetLast()->Update();
 	return true;
 }
 
@@ -69,6 +77,7 @@ void Game::Render()
 	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
 
 	myStates.GetLast()->Render();
+	testAnimation.Render();
 
 	myEngineInstance->PresentBackBuffer();
 }
