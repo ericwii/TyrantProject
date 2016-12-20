@@ -29,8 +29,16 @@ bool Game::Init(WNDPROC aWindowProc)
 	myStates.Add(new CardGameState());
 	myStates.GetLast()->OnEnter();
 
-	testAnimation.InitModel("Data/Textures/animation_test.png", Vector3<float>(), Vector2<float>(1.f, 1.5f));
-	testAnimation.InitAnimation(30, 5, 60.f, true);
+	AnimationData data
+	{
+		"Data/Textures/animation_test.png",
+		30,
+		5,
+		60.f,
+		true
+	};
+
+	testAnimation.Init(data, Vector3<float>(), Vector2<float>(1.f, 1.5f));
 	testAnimation.Play();
 
 	return true;

@@ -1,14 +1,46 @@
 #pragma once
 #include "Instance.h"
 
+struct AnimationData
+{
+	AnimationData(const string& aTextureFile, int anAmountOfFrames, int anAmountOfRows)
+	{
+		textureFileName = aTextureFile;
+		amountOfFrames = anAmountOfFrames;
+		amountOfRows = anAmountOfRows;
+	}
+
+	AnimationData(const string& aTextureFile, int anAmountOfFrames, int anAmountOfRows, float aframesPerSecond)
+	{
+		textureFileName = aTextureFile;
+		amountOfFrames = anAmountOfFrames;
+		amountOfRows = anAmountOfRows;
+		framesPerSecond = aframesPerSecond;
+	}
+
+	AnimationData(const string& aTextureFile, int anAmountOfFrames, int anAmountOfRows, float aframesPerSecond, bool aLoop)
+	{
+		textureFileName = aTextureFile;
+		amountOfFrames = anAmountOfFrames;
+		amountOfRows = anAmountOfRows;
+		framesPerSecond = aframesPerSecond;
+		loop = aLoop;
+	}
+
+	string textureFileName;
+	float framesPerSecond = 30.f;
+	int amountOfFrames;
+	int amountOfRows;
+	bool loop = false;
+};
+
 class Animation
 {
 public:
 	Animation();
 	~Animation();
 
-	void InitModel(const string& aTextureFileName, const Vector3<float>& aPosition, const Vector2<float> aSize);
-	void InitAnimation(int amountOfFrames, int amountOfRows, float framesPerSecond = 1.f, bool loop = false);
+	void Init(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float> aSize);
 
 	void Update();
 	void Render();
@@ -18,6 +50,8 @@ public:
 	inline const Instance& GetInstance();
 
 private:
+	void InitAnimation(int amountOfFrames, int amountOfRows, float framesPerSecond, bool loop);
+
 	Instance myInstance;
 	Texture* myTexture;
 	Vector2<float> myNormalizedFrameSize;
