@@ -26,7 +26,7 @@ struct WindowSetupInfo
 
 	~WindowSetupInfo() {}
 
-	string title = "No Title";
+	string title = "Tyrant Reborn";
 	int resolution_X = 1080;
 	int resolution_Y = 720;
 	eWindowMode windowMode = eWindowMode::Windowed;
