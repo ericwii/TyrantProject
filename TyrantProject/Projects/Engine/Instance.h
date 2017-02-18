@@ -17,7 +17,7 @@ public:
 	void SetPosition(Vector3<float> aPosition);
 	void SetOrientation(CU::Matrix44<float> anOrientation);
 
-	inline const CU::Matrix44<float>& GetOrientation() const;
+	inline CU::Matrix44<float>& GetOrientation();
 	inline const CU::Matrix44<float>& GetOriginalOrientation() const;
 	inline Vector3<float> GetPosition() const;
 	inline void SetCurrentOrientationAsOriginal();
@@ -41,7 +41,7 @@ inline void Instance::SetCurrentOrientationAsOriginal()
 	myOriginalOrientation = myOrientation;
 }
 
-inline const CU::Matrix44<float>& Instance::GetOrientation() const
+inline CU::Matrix44<float>& Instance::GetOrientation()
 {
 	return myOrientation;
 }

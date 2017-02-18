@@ -7,17 +7,20 @@ public:
 	Card();
 	~Card();
 
+	void Update(float aDeltaTime);
 	void Render();
 
 	void LoadCard(string aCardName);
 	void LoadCard(CardData* someData);
+	void LowerCooldown();
+	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
-	void LowerCooldown();
-
 	inline eCardType GetCardType();
+	inline CU::Matrix44<float>& GetOrientation();
+	inline bool IsLerping();
 
 private:
 	void UpdateText();
@@ -34,9 +37,16 @@ private:
 	Text3D myAttackText;
 	Text3D myHealthText;
 	Text3D myCooldownText;
+
+	CU::Matrix44<float> myLerpStart;
+	CU::Matrix44<float> myLerpTarget;
+	float myCurrentLerpTime;
+	float myTargetLerpTime;
 	CardData* myCardData;
 	unsigned int myRenderPassIndex;
 	char myCooldown;
+	char myHealth;
+	char myAttack;
 
 	void LoadModels();
 	void LoadText();
@@ -55,4 +65,14 @@ inline eCardType Card::GetCardType()
 	{
 		return eCardType::Action;
 	}
+}
+
+inline CU::Matrix44<float>& Card::GetOrientation()
+{
+	return myCanvas.GetOrientation();
+}
+
+inline bool Card::IsLerping()
+{
+	return myTargetLerpTime > 0;
 }

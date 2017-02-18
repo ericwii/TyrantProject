@@ -5,12 +5,38 @@ using namespace tinyxml2;
 
 eCardFaction cardFaction;
 
-Card::Card() : myRenderPassIndex(0)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f)
 {
 }
 
 Card::~Card()
 {
+}
+
+void Card::Update(float aDeltaTime)
+{
+	if (myTargetLerpTime > 0)
+	{
+		myCurrentLerpTime += aDeltaTime;
+		float lerp = MIN(myCurrentLerpTime / myTargetLerpTime, 1.f);
+
+		CU::Matrix44<float> orientation;
+		for (int i = 0; i < 15; ++i)
+		{
+			orientation.matrix[i] = LERP(myLerpStart.matrix[i], myLerpTarget.matrix[i], lerp);
+		}
+
+		Vector3<float> position = orientation.GetPosition();
+		orientation.SetPosition(Vector3<float>(0, 0, 0));
+		myCanvas.SetOrientation(orientation);
+		myCanvas.SetPosition(position);
+
+		if (myCurrentLerpTime >= myTargetLerpTime)
+		{
+			myTargetLerpTime = -1.f;
+			myCurrentLerpTime = 0;
+		}
+	}
 }
 
 void Card::Render()
@@ -30,6 +56,8 @@ void Card::LoadCard(string aCardName)
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 	myCooldown = myCardData->cooldown;
+	myAttack = myCardData->attack;
+	myHealth = myCardData->health;
 }
 
 void Card::LoadCard(CardData* someData)
@@ -42,16 +70,6 @@ void Card::LoadCard(CardData* someData)
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 	myCooldown = myCardData->cooldown;
-}
-
-void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
-{
-	myCanvas.SetOrientation(anOrientation);
-}
-
-void Card::SetPosition(const Vector3<float>& aPosition)
-{
-	myCanvas.SetPosition(aPosition);
 }
 
 void Card::LowerCooldown()
@@ -70,6 +88,26 @@ void Card::LowerCooldown()
 			myCanvas.RemoveChild(&myCooldownText);
 		}
 	}
+}
+
+void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
+{
+	myLerpStart = myCanvas.GetOrientation();
+	myLerpTarget = aOrientation;
+	myTargetLerpTime = aTime;
+	myCurrentLerpTime = 0;
+}
+
+
+
+void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
+{
+	myCanvas.SetOrientation(anOrientation);
+}
+
+void Card::SetPosition(const Vector3<float>& aPosition)
+{
+	myCanvas.SetPosition(aPosition);
 }
 
 

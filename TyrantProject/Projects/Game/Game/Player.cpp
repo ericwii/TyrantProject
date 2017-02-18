@@ -2,10 +2,11 @@
 #include "Player.h"
 #include <time.h>
 
-Vector2<float> deckOffsetPerCard(0.01f, 0.01f);
+Vector2<float> deckOffsetPerCard(-0.01f, 0.01f);
 Vector2<float> assaultCardStartPosition(-2.7f, -1.3f);
 Vector2<float> structureCardStartPosition(-0.9f, -3.7f);
 float playedCardsOffset = 1.8f;
+float cardPlayLerpTime = 0.2f;
 
 
 Player::Player()
@@ -57,6 +58,12 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType)
 
 bool Player::Update(eGamePhase aPhase)
 {
+	float deltaTime = Time::DeltaTime();
+	for (int i = 0; i < myOwnedCards.Size(); ++i)
+	{
+		myOwnedCards[i].Update(deltaTime);
+	}
+
 	switch (aPhase)
 	{
 		case (Upkeep):
@@ -122,29 +129,29 @@ bool Player::UpdateUpkeep()
 	return false;
 }
 
+Card* myPlayedCard = nullptr;
 bool Player::UpdatePlay()
 {
-	if (myPlayerType == ePlayerType::User)
+	if (myPlayedCard == nullptr)
 	{
-		if (myDeckCards.Size() > 0)
+		if (myDeckCards.Size() == 0) return false;
+
+		if (myPlayerType == ePlayerType::User)
 		{
 			if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
 			{
 				PlayCard(myDeckCards.GetLast());
-				return false;
 			}
 		}
-		else
-		{
-			return false;
-		}
-	}
-	else if (myPlayerType == ePlayerType::AI_Opponent)
-	{
-		if (myDeckCards.Size() > 0)
+		else if (myPlayerType == ePlayerType::AI_Opponent)
 		{
 			PlayCard(myDeckCards.GetLast());
 		}
+	}
+
+	if (myPlayedCard != nullptr && myPlayedCard->IsLerping() == false)
+	{
+		myPlayedCard = nullptr;
 		return false;
 	}
 
@@ -161,13 +168,15 @@ bool Player::UpdateCleanup()
 	return false;
 }
 
+
+
+
 void Player::PlayCard(Card* aCard)
 {
+	Vector2<float> position;
 	if (aCard->GetCardType() == eCardType::Assault)
 	{
-		aCard->SetOrientation(CU::Matrix44<float>());
-
-		Vector2<float> position = assaultCardStartPosition;
+		position = assaultCardStartPosition;
 		position.x += playedCardsOffset * myAssaultCards.Size();
 		if (myPlayerType != ePlayerType::User)
 		{
@@ -179,9 +188,7 @@ void Player::PlayCard(Card* aCard)
 	}
 	if (aCard->GetCardType() == eCardType::Structure)
 	{
-		aCard->SetOrientation(CU::Matrix44<float>());
-
-		Vector2<float> position = structureCardStartPosition;
+		position = structureCardStartPosition;
 		position.x += playedCardsOffset * myStructureCards.Size();
 		if (myPlayerType != ePlayerType::User)
 		{
@@ -192,6 +199,11 @@ void Player::PlayCard(Card* aCard)
 		myStructureCards.Add(aCard);
 	}
 
+	CU::Matrix44<float> lerpTarget;
+	lerpTarget.SetPosition(position);
+
+	myPlayedCard = aCard;
+	myPlayedCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
 	myDeckCards.RemoveNonCyclic(aCard);
 }
 
@@ -209,7 +221,7 @@ void Player::ShuffleDeck()
 	Vector3<float> deckPosition;
 	if (myPlayerType == ePlayerType::User)
 	{
-		deckPosition.Set(-4.8f, -1.8f, -0.55f);
+		deckPosition.Set(-4.77f, -1.8f, -0.55f);
 	}
 	else
 	{

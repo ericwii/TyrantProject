@@ -1,11 +1,13 @@
 #pragma once
 
-#define MIN(a,b) (a) < (b) ? a : b;
-#define MAX(a,b) (a) > (b) ? a : b;
+#define MIN(a,b) (a) < (b) ? a : b
+#define MAX(a,b) (a) > (b) ? a : b
 
-#define ABS(x) (x) < 0 ? (-x) : (x);
+#define ABS(x) (x) < 0 ? (-x) : (x)
 
 #define SAFE_DELETE(x) delete x; x = nullptr;
+
+#define LERP(start, end, lerpValue) (start) + (((end) - (start)) * lerpValue)
 
 #define PI 3.14159265359f
 #define PI_2 1.57079632679f

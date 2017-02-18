@@ -1,6 +1,7 @@
 #pragma once
 #include "Card.h"
 
+
 enum eGamePhase
 {
 	Upkeep,
