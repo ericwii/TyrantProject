@@ -41,13 +41,15 @@ public:
 	~Animation();
 
 	void Init(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float> aSize);
+	void SetRotation(float someRadians);
 
-	void Update();
+	void Update(float aDeltaTime);
 	void Render();
 
 	inline void Play();
 	inline void Stop();
 	inline const Instance& GetInstance();
+	inline bool IsPlaying();
 
 private:
 	void InitAnimation(int amountOfFrames, int amountOfRows, float framesPerSecond, bool loop);
@@ -82,4 +84,9 @@ inline void Animation::Stop()
 inline const Instance& Animation::GetInstance()
 {
 	return myInstance;
+}
+
+inline bool Animation::IsPlaying()
+{
+	return myShouldRender;
 }

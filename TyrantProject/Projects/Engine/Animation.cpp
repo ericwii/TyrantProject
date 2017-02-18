@@ -30,13 +30,18 @@ void Animation::Init(const AnimationData& someData, const Vector3<float>& aPosit
 	InitAnimation(someData.amountOfFrames, someData.amountOfRows, someData.framesPerSecond, someData.loop);
 }
 
-void Animation::Update()
+void Animation::SetRotation(float someRadians)
+{
+	Vector3<float> position = myInstance.GetPosition();
+	myInstance.SetOrientation(CU::Matrix44<float>::CreateRotateAroundZ(someRadians));
+	myInstance.SetPosition(position);
+}
+
+void Animation::Update(float aDeltaTime)
 {
 	if (myShouldRender == false) return;
 
-	float deltaTime = Time::DeltaTime();
-
-	myCurrentFrameDelay += deltaTime;
+	myCurrentFrameDelay += aDeltaTime;
 
 	if (myCurrentFrameDelay >= myFrameDelay)
 	{

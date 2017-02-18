@@ -27,8 +27,9 @@
     <ClCompile Include="CardGameState.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="PollingStation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="CombatManager.cpp" />
+    <ClCompile Include="AnimationStack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -60,8 +61,9 @@
     <ClInclude Include="CardGameState.h">
       <Filter>GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="PollingStation.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="CombatManager.h" />
+    <ClInclude Include="AnimationStack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

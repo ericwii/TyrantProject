@@ -39,7 +39,7 @@ struct CardData
 	eCardFaction faction = eCardFaction::NumberofFactions;
 	eCardType cardType = eCardType::Action;
 	eRarity rarity = eRarity::Common;
-	CU::VectorOnStack<AbilityBase*, 3> abilitys;
+	CU::VectorOnStack<AbilityBase*, 3> abilities;
 	bool unique = false;
 	char cooldown = 0;
 	char attack = 0;

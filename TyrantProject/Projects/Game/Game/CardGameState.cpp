@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CardGameState.h"
+#include "AnimationStack.h"
 
 
 CardGameState::CardGameState()
@@ -15,8 +16,8 @@ CardGameState::~CardGameState()
 
 void CardGameState::OnEnter()
 {
-	myPlayerUser.Init("Data/Xml files/starterDeck.xml", ePlayerType::User);
-	myPlayerOpponent.Init("Data/Xml files/starterDeck.xml", ePlayerType::AI_Opponent);
+	myPlayerUser.Init("Data/Xml files/starterDeck.xml", ePlayerType::User, &myPlayerOpponent);
+	myPlayerOpponent.Init("Data/Xml files/starterDeck.xml", ePlayerType::AI_Opponent, &myPlayerUser);
 
 	Model* backgroundModel = ModelLoader::LoadRectangle(Vector2<float>(2.f, 2.f), eEffectType::Sprite, "Data/Textures/Field/playingField.png");
 	myBackground.Init(backgroundModel);
@@ -29,38 +30,36 @@ void CardGameState::OnEnter()
 	usersTurn = true;
 }
 
+
+bool playerHasFinishedUpdate = false;
 void CardGameState::Update()
 {
-	if (usersTurn)
+	if (playerHasFinishedUpdate == false)
 	{
-		if (myPlayerUser.Update(myCurrentPhase) == false)
+		if (usersTurn)
 		{
-			if (myCurrentPhase != eGamePhase::Cleanup)
-			{
-				myCurrentPhase = eGamePhase(myCurrentPhase + 1);
-			}
-			else
-			{
-				myCurrentPhase = Upkeep;
-				usersTurn = false;
-			}
+			playerHasFinishedUpdate = !myPlayerUser.Update(myCurrentPhase);
+		}
+		else
+		{
+			playerHasFinishedUpdate = !myPlayerOpponent.Update(myCurrentPhase);
 		}
 	}
-	else
+	else if (AnimationStack::IsEmpty())
 	{
-		if (myPlayerOpponent.Update(myCurrentPhase) == false)
+		playerHasFinishedUpdate = false;
+		if (myCurrentPhase != eGamePhase::Cleanup)
 		{
-			if (myCurrentPhase != eGamePhase::Cleanup)
-			{
-				myCurrentPhase = eGamePhase(myCurrentPhase + 1);
-			}
-			else
-			{
-				myCurrentPhase = Upkeep;
-				usersTurn = true;
-			}
+			myCurrentPhase = eGamePhase(myCurrentPhase + 1);
+		}
+		else
+		{
+			myCurrentPhase = Upkeep;
+			usersTurn = !usersTurn;
 		}
 	}
+
+	AnimationStack::Update(Time::DeltaTime());
 }
 
 void CardGameState::Render()
@@ -70,6 +69,8 @@ void CardGameState::Render()
 
 	myPlayerUser.Render();
 	myPlayerOpponent.Render();
+
+	AnimationStack::Render();
 }
 
 void CardGameState::OnExit()

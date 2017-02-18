@@ -21,7 +21,7 @@
 #include "../../Engine/Engine.h"
 #include "../../Engine/Instance.h"
 #include "../../Engine/ModelLoader.h"
+#include "../../Engine/Animation.h"
 
-#include "PollingStation.h"
 #include "CardFactory.h"
 #include "XMLReader.h"

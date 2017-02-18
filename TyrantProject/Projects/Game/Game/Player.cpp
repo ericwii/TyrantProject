@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "CombatManager.h"
 #include <time.h>
 
 Vector2<float> deckOffsetPerCard(-0.01f, 0.01f);
@@ -18,8 +19,9 @@ Player::~Player()
 }
 
 
-void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType)
+void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* anOpponent)
 {
+	myOpponent = anOpponent;
 	myPlayerType = aPlayerType;
 	Vector3<float> commanderPosition(-2.7f, -3.7f, 0);
 
@@ -76,6 +78,11 @@ bool Player::Update(eGamePhase aPhase)
 			return UpdatePlay();
 			break;
 		}
+		case (PreCombat) :
+		{
+			return UpdatePrecombat();
+			break;
+		}
 		case (Combat) :
 		{
 			return UpdateCombat();
@@ -129,6 +136,7 @@ bool Player::UpdateUpkeep()
 	return false;
 }
 
+
 Card* myPlayedCard = nullptr;
 bool Player::UpdatePlay()
 {
@@ -158,8 +166,14 @@ bool Player::UpdatePlay()
 	return true;
 }
 
+bool Player::UpdatePrecombat()
+{
+	return false;
+}
+
 bool Player::UpdateCombat()
 {
+	CombatManager::DoCombat(this, myOpponent);
 	return false;
 }
 
