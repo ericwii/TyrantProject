@@ -1,0 +1,239 @@
+Jet Trooper
+Rifter
+Poseidon
+Lord of Tartarus
+Mech Aid
+Soot Launcher
+APC
+Abomination
+Absolver
+Achawin
+Acid Spewer
+Acid Spout
+Acropolis
+Angelwing
+Apparition
+Aquabat
+Arc Trooper
+Armored Slab
+Atelier
+Barrage Tank
+Battle Mount
+Bazooka Marine
+Bio Drone
+Blaster
+Blight Crusher
+Blight Geyser
+Blight Golem
+Blight Tower
+Blitz Armor
+Blood Rider
+Bloody Mary
+Bonestalker
+Boris
+Bridge of Destiny
+Brood Walker
+Bruiser
+Burrower
+Caitalia
+Cannon Walker
+Carcass Scrounge
+Cavern Smelter
+Cerberus
+Chaos Scab
+Chimera
+Cluster Ballista
+Corrupt Archfiend
+Cover Fire
+Credo Flak
+Credo Mech
+Crippler
+Crypt Mercenary
+Cybertron
+Cyborg Slayer
+Cyclone
+Daizon
+Deadblow
+Death from Above
+Death from Above
+Deep Harrier
+Defender Pods
+Destiny Crafter
+Destruction
+Destructive Portal
+Devastator
+Disposer
+Disruptor
+Dominator
+Dread Panzer
+Egor
+Empress
+Enclave Pylon
+Enclave Remnant
+Enclave Warp Gate
+Energy Containment
+Energy Skimmer
+Escort Azusu
+Evacuaters
+Executioner
+Exodrone
+Exoskeleton
+Fane Guardian
+Fang
+Feral Scorpion
+Flame Guard
+Flamethrower
+Flanker
+Flash Breaker
+Flesheater
+Fortifier
+Front Line Warrior
+Fulfilling Myst
+Fury Walker
+Fusillade
+Gabriel
+Gigagoth
+Glider Hauler
+Gore Crawler
+Guerilla
+Guerilla Leader
+Gun Raven
+Gustmich
+Halcyon the Corrupt
+Halcyon the Corrupt (Limited)
+Harbor Command
+Hatchet
+Hawkeye
+Heartripper
+Heaving Mass
+Heavy Gunner
+Hemorrhage
+Hierophant
+Holy Beacon
+Hovering Pest
+Hunter Spotter
+Hydroblade
+Hypastryx
+Hyperion Prototype
+Impeding Tank
+Infected Grunt
+Infiltrator
+Infrablaze
+Insignia Gunner
+Interdictor
+Javelin
+Juggernaut
+Jungle Savior
+Landing Pods
+Lead Trooper
+Lucina
+Lucina the Wicked
+Lummox
+Mad Cur
+Mark of Hope
+Marmoda
+Marshal
+Mawcor
+Medic
+Merciless Invader
+Missile Barrage
+Mobile Magnacannon
+Monsoon X
+Monstrosity
+Mortar Bunker
+Mortar Bunker
+Multi-Strike
+Muon Walker
+Neutron Purge
+Ningeco
+Offshore Platform
+Opak
+Orbital Cannon
+Overwhelming Swarm
+Panic Disperser
+Patriarch
+Pelican
+Pestilent Injector
+Piranha
+Placid Glider
+Plasma Spark
+Plated Brute
+Pouncer
+Praetor
+Predator
+Prepped Ward
+Prism
+Pungent
+Purifying Rider
+Purity Golem
+Quad Walker
+Quadrishot
+Quilled Blaster
+Radiance
+Raging Prowler
+Raider Encampment
+Rally Infantry
+Rancor
+Ravager
+Razing Madcap
+Reaper
+Relinquish Power
+Reloader
+Replenishing Ray
+Retriever
+Revolution
+Revolver
+Rocket Ballista
+Rocket Infantry
+Rumbler
+Samantha
+Sap
+Saw Tank
+Scorpinox
+Scorpion
+Scrapper
+Seeker
+Sentry
+Servant of Light
+Shapeshifter
+Shrapnel Engine
+Sidoze
+Signal Towers
+Silent Surveyor
+Slasher
+Slayer
+Slug Borg
+Smog Unit
+Spectre
+Splinter
+Stoic Accorder
+Sub Delver
+Subterfuge
+Sulfuris Acid Pit
+Support Rover
+Surveyor Drones
+Sustained Wall
+Swarmling
+T-4 Medivac
+Tabitha
+Tainted Whip
+Tank Buster
+Tartarus Anomaly
+Tartarus Pits
+Tempest
+Terminator
+Terrogor
+Thadius
+The Butcher
+Thunderer
+Transceiver Mech
+Transmitter
+Tremor Hunter
+Tunneller
+Twister
+Vampire
+Watchman
+Worshipper
+Xeno Forcefield
+Xeno Interceptor
+Xeno Mothership

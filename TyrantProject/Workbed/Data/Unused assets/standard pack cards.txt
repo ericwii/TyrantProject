@@ -1,0 +1,131 @@
+Alaric
+Atlas
+Bianca
+Cyrus
+Duncan
+Elena
+Freddie
+Isabelle
+Lord Alexander
+Malort
+Natasha
+The Oracle
+Vyander
+Whisper
+Abomination
+Annelid Mass
+Aegis
+Apex
+Aquabat
+Artemis Tank
+Banshee
+Barrage Tank
+Bazooka Marine
+Benediction
+Blight Ooze
+Blitz
+Blitz Armor
+Blood Grunt
+Bombardment Tanks
+Bonestalker
+Brood Walker
+Carbine
+Cerberus
+Chimera
+Chopper
+Chronos
+Combat Specialist
+Contaminant Scour
+Cyclone
+Daemon
+Devastator
+Devourer
+Dominated Hatchlings
+Draconian Queen
+Dreadnaught
+Dread Panzer
+Drones
+Eagletron
+Echo Hunter
+Enclave Champion
+Enclave Parasite
+Enfeebler
+Exogrunt
+Exosoldier
+Flame Guard
+Gravity Tank
+Grunt
+Gunjack
+Hatchet
+Havenship
+Havoc
+Hawkeye
+Heavy Infantry
+Hydra
+Hyperion Prototype
+Indebted Veteran
+Infantry
+Infected Grunt
+Infiltrator
+Knight
+Locust Swarm
+Malgoth
+Marauder
+Medic
+Neocyte Guard
+Nimbus
+Nightstalker
+Orca
+Omega
+Peacekeeper
+Pelican
+Plague Duster
+Pylon
+Quad Walker
+Rally Infantry
+Ravager
+Reaper
+Reconnoiter
+Rocket Infantry
+Sabre
+Sand Crawler
+Sanguiphage
+Sawblade
+Saw Tank
+Scorpion
+Selfless Soldier
+Shock Grunt
+Spine Crawler
+Stormrunner
+Tank Buster
+Tempest
+Terminator
+Tiamat
+Twinblade
+Valkyrie
+Vampire
+Vigil
+Xeno Mauler
+Xeno Mothership
+Adytum
+Asylum
+Blood Pool
+Command Center
+Communications Array
+Foundry
+Harbor Command
+Medic Bay
+Missile Silo
+Orbital Cannon
+Raider Wall
+Rally Flag
+Regeneration Bay
+Sanctuary
+Xeno Singularis
+Airstrike
+Demolish
+Electromagnetic Pulse
+Halt Advance
+Irradiation
+Mend Wounds
+Pandemic

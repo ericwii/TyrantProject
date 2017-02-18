@@ -16,7 +16,6 @@ Card::~Card()
 void Card::Render()
 {
 	myCanvas.Render(true, myRenderPassIndex);
-	UpdateText();
 }
 
 
@@ -30,6 +29,7 @@ void Card::LoadCard(string aCardName)
 	LoadText();
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
+	myCooldown = myCardData->cooldown;
 }
 
 void Card::LoadCard(CardData* someData)
@@ -41,6 +41,7 @@ void Card::LoadCard(CardData* someData)
 	LoadText();
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
+	myCooldown = myCardData->cooldown;
 }
 
 void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
@@ -52,6 +53,29 @@ void Card::SetPosition(const Vector3<float>& aPosition)
 {
 	myCanvas.SetPosition(aPosition);
 }
+
+void Card::LowerCooldown()
+{
+	if (myCooldown > 0)
+	{
+		--myCooldown;
+
+		string newCooldown;
+		newCooldown += myCooldown;
+		myCooldownText.SetText(newCooldown);
+
+		if (myCooldown < 1)
+		{
+			myCanvas.RemoveChild(&myCooldownIcon);
+			myCanvas.RemoveChild(&myCooldownText);
+		}
+	}
+}
+
+
+
+
+//Private methods
 
 void Card::UpdateText()
 {
@@ -76,9 +100,6 @@ void Card::UpdateText()
 		myCooldownText.SetText(cooldownText);
 	}
 }
-
-
-//Private methods
 
 void Card::LoadModels()
 {

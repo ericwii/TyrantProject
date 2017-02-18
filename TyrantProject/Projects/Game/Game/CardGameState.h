@@ -19,5 +19,8 @@ private:
 	Player myPlayerOpponent;
 	Instance myBackground;
 	Instance myDeckGUI;
+	eGamePhase myCurrentPhase;
+
+	bool usersTurn;
 };
 

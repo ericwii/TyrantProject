@@ -3,9 +3,11 @@
 #include "Assert.h"
 #include <memory.h>
 
+#define VectorOnStackTemplate template <typename T, int MaxSize, typename CountType = int, bool UseSafeModeFlag = true>
+
 namespace CommonUtilities
 {
-	template <typename T, const unsigned int MaxSize, typename CountType = int, bool UseSafeModeFlag = true>
+	VectorOnStackTemplate
 	class VectorOnStack
 	{
 	public:
@@ -25,6 +27,7 @@ namespace CommonUtilities
 		inline void DeleteCyclicAtIndex(CountType aItemNumber);
 		inline void RemoveCyclic(const T& aObject);
 		inline void RemoveCyclicAtIndex(CountType aItemNumber);
+		inline T& GetLast();
 
 		inline void Clear();
 		inline void DeleteAll();
@@ -42,13 +45,13 @@ namespace CU = CommonUtilities;
 
 //Constructors\Destructor
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::VectorOnStack()
 {
 	myCurrentSize = 0;
 };
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::VectorOnStack(const VectorOnStack& aVectorOnStack)
 {
 	if (UseSafeModeFlag == true)
@@ -65,7 +68,7 @@ CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::VectorOnStack(const V
 	myCurrentSize = aVectorOnStack.myCurrentSize;
 };
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::~VectorOnStack()
 {
 	myCurrentSize = 0;
@@ -74,7 +77,7 @@ CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::~VectorOnStack()
 
 //Operators
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>&
 CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator=(const VectorOnStack& aVectorOnStack)
 {
@@ -89,7 +92,7 @@ CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator=(const Vecto
 };
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](const CountType & aIndex)
 {
 	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
@@ -98,7 +101,7 @@ inline T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline const T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::operator[](const CountType & aIndex) const
 {
 	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
@@ -110,7 +113,7 @@ inline const T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::opera
 
 //Utility methods
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Add(const T& aObject)
 {
 	DEBUG_ASSERT(myCurrentSize < MaxSize, "VectorOnStack list is already full");
@@ -120,7 +123,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Add(const
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Insert(CountType aIndex, T& aObject)
 {
 	DEBUG_ASSERT(aIndex < myCurrentSize, "Index is out of bounds");
@@ -139,7 +142,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Insert(Co
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyclic(T& aObject)
 {
 	for (unsigned int i = 0; i < myCurrentSize; ++i)
@@ -154,7 +157,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyc
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyclicAtIndex(CountType aItemNumber)
 {
 	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
@@ -165,7 +168,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteCyc
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyclic(const T& aObject)
 {
 	for (unsigned int i = 0; i < myCurrentSize; ++i)
@@ -179,7 +182,7 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyc
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyclicAtIndex(CountType aItemNumber)
 {
 	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
@@ -189,14 +192,14 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyc
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Clear()
 {
 	myCurrentSize = 0;
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteAll()
 {
 	for (int i = myCurrentSize - 1; i >= 0; --i)
@@ -207,8 +210,14 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteAll
 }
 
 
-template <typename T, unsigned int MaxSize, typename CountType = unsigned short, bool UseSafeModeFlag = true>
+VectorOnStackTemplate
 inline CountType CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Size() const
 {
 	return myCurrentSize;
+}
+
+VectorOnStackTemplate
+inline T& CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::GetLast()
+{
+	return myList[myCurrentSize - 1];
 }

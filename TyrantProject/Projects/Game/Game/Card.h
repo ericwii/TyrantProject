@@ -15,6 +15,10 @@ public:
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
+	void LowerCooldown();
+
+	inline eCardType GetCardType();
+
 private:
 	void UpdateText();
 
@@ -32,9 +36,23 @@ private:
 	Text3D myCooldownText;
 	CardData* myCardData;
 	unsigned int myRenderPassIndex;
+	char myCooldown;
 
 	void LoadModels();
 	void LoadText();
 	void LoadCanvas();
 	void LoadCardTypeIcon();
 };
+
+
+inline eCardType Card::GetCardType()
+{
+	if (myCardData != nullptr)
+	{
+		return myCardData->cardType;
+	}
+	else
+	{
+		return eCardType::Action;
+	}
+}

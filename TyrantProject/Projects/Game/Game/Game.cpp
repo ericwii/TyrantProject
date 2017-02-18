@@ -3,8 +3,6 @@
 #include "CardGameState.h"
 #include "../../Engine/Animation.h"
 
-Animation testAnimation;
-
 Game::Game() : myEngineInstance(nullptr)
 {
 }
@@ -29,17 +27,17 @@ bool Game::Init(WNDPROC aWindowProc)
 	myStates.Add(new CardGameState());
 	myStates.GetLast()->OnEnter();
 
-	AnimationData data
-	{
-		"Data/Textures/animation_test.png",
-		30,
-		5,
-		60.f,
-		true
-	};
-
-	testAnimation.Init(data, Vector3<float>(), Vector2<float>(1.f, 1.5f));
-	testAnimation.Play();
+	//AnimationData data
+	//{
+	//	"Data/Textures/animation_test.png",
+	//	30,
+	//	5,
+	//	60.f,
+	//	true
+	//};
+	//
+	//testAnimation.Init(data, Vector3<float>(), Vector2<float>(1.f, 1.5f));
+	//testAnimation.Play();
 
 	return true;
 }
@@ -72,7 +70,6 @@ void Game::UnPause()
 bool Game::Update()
 {
 	myStates.GetLast()->Update();
-	testAnimation.Update();
 
 	//UpdateCameraMovement();
 	UpdateUtilities();
@@ -85,7 +82,6 @@ void Game::Render()
 	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
 
 	myStates.GetLast()->Render();
-	testAnimation.Render();
 
 	myEngineInstance->PresentBackBuffer();
 }
