@@ -13,7 +13,10 @@ FontContainer::~FontContainer()
 
 TextFont* FontContainer::GetFont(const string& aFontFile, eEffectType anEffectType, Vector2<float> aFontTextureSize)
 {
-	if (myFonts.find(aFontFile.c_str()) == myFonts.end())
+	std::string fontKey = aFontFile.c_str();
+	fontKey += std::to_string((int)anEffectType);
+
+	if (myFonts.find(fontKey) == myFonts.end())
 	{
 		DEBUG_ASSERT(Engine::GetInstance() != nullptr, "Need to start engine before initializing text fonts");
 		TextFont* newFont = new TextFont();
@@ -25,12 +28,12 @@ TextFont* FontContainer::GetFont(const string& aFontFile, eEffectType anEffectTy
 	
 		if (newFont->Init(newEffect, aFontFile, aFontTextureSize.x, aFontTextureSize.y))
 		{
-			myFonts.insert(std::make_pair(aFontFile.c_str(), newData));
+			myFonts.insert(std::make_pair(fontKey, newData));
 		}
 		else
 		{
 			return nullptr;
 		}
 	}
-	return myFonts.at(aFontFile.c_str()).font;
+	return myFonts.at(fontKey).font;
 }

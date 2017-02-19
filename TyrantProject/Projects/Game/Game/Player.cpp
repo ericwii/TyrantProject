@@ -60,12 +60,6 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 
 bool Player::Update(eGamePhase aPhase)
 {
-	float deltaTime = Time::DeltaTime();
-	for (int i = 0; i < myOwnedCards.Size(); ++i)
-	{
-		myOwnedCards[i].Update(deltaTime);
-	}
-
 	switch (aPhase)
 	{
 		case (Upkeep):
@@ -179,6 +173,25 @@ bool Player::UpdateCombat()
 
 bool Player::UpdateCleanup()
 {
+	for (int i = 0; i < myAssaultCards.Size(); ++i)
+	{
+		if (myAssaultCards[i]->IsDead())
+		{
+			myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+	RepositionPlayedCards();
+
+	for (int i = 0; i < myOpponent->myAssaultCards.Size(); ++i)
+	{
+		if (myOpponent->myAssaultCards[i]->IsDead())
+		{
+			myOpponent->myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+	myOpponent->RepositionPlayedCards();
 	return false;
 }
 
@@ -206,7 +219,7 @@ void Player::PlayCard(Card* aCard)
 		position.x += playedCardsOffset * myStructureCards.Size();
 		if (myPlayerType != ePlayerType::User)
 		{
-			position.y *= -1;
+			position.y *= -1.f;
 		}
 
 		aCard->SetPosition(position);
@@ -252,5 +265,20 @@ void Player::ShuffleDeck()
 
 		myDeckCards[i] = unshuffledDeck[currentIndex];
 		myDeckCards[i]->SetPosition(deckPosition + deckOffsetPerCard * static_cast<float>(i));
+	}
+}
+
+void Player::RepositionPlayedCards()
+{
+	Vector3<float> currentPosition = assaultCardStartPosition;
+	if (myPlayerType != ePlayerType::User)
+	{
+		currentPosition.y *= -1.f;
+	}
+
+	for (int i = 0; i < myAssaultCards.Size(); ++i)
+	{
+		myAssaultCards[i]->SetPosition(currentPosition);
+		currentPosition.x += playedCardsOffset;
 	}
 }

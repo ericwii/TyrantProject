@@ -27,9 +27,16 @@
     <ClCompile Include="CardGameState.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="CombatManager.cpp" />
-    <ClCompile Include="AnimationStack.cpp" />
+    <ClCompile Include="AnimationStack.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatManager.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageTextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -61,9 +68,16 @@
     <ClInclude Include="CardGameState.h">
       <Filter>GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="CombatManager.h" />
-    <ClInclude Include="AnimationStack.h" />
+    <ClInclude Include="AnimationStack.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageTextManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
@@ -77,6 +91,9 @@
     </Filter>
     <Filter Include="GameStates">
       <UniqueIdentifier>{5a626095-10e2-4478-99c4-76ebbd6205c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CardGame">
+      <UniqueIdentifier>{c2c08fb1-04c1-4738-b849-1b33e62dc157}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

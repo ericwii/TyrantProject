@@ -27,17 +27,32 @@ void CombatManager::DoCombat(Player* anAttacker, Player* aDefender)
 {
 	Vector3<float> position;
 	Vector2<float> size(2.f, 2.f);
+	
+	Card* currentCard;
 	for (int i = 0; i < anAttacker->myAssaultCards.Size(); ++i)
 	{
-		position = anAttacker->myAssaultCards[i]->GetOrientation().GetPosition();
+		currentCard = anAttacker->myAssaultCards[i];
+		if (currentCard->GetCooldown() < 1)
+		{
+			position = anAttacker->myAssaultCards[i]->GetOrientation().GetPosition();
 
-		if (position.y < 0)
-		{
-			AnimationStack::AddAnimation(attackAnimation, position, size);
-		}
-		else
-		{
-			AnimationStack::AddAnimation(attackAnimation, position, size, PI);
+			if (position.y < 0)
+			{
+				AnimationStack::AddAnimation(attackAnimation, position, size);
+			}
+			else
+			{
+				AnimationStack::AddAnimation(attackAnimation, position, size, PI);
+			}
+
+			if (aDefender->myAssaultCards.Size() > i)
+			{
+				aDefender->myAssaultCards[i]->TakeDamage(currentCard->GetAttack());
+			}
+			else
+			{
+				aDefender->myComander->TakeDamage(currentCard->GetAttack());
+			}
 		}
 	}
 

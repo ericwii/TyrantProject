@@ -57,7 +57,7 @@ namespace CommonUtilities
 	//Constructors/Destructor
 
 	StringTemplate
-	String<Size>::String() : myCurrentSize(1)
+	String<Size>::String() : myCurrentSize(0)
 	{
 		myArray[0] = '\0';
 	}
@@ -217,7 +217,7 @@ namespace CommonUtilities
 			copy /= 10;
 		} while (copy != 0);
 		
-		--myCurrentSize;
+		//--myCurrentSize;
 		for (int i = currentSize - 1; i >= 0; --i)
 		{
 			myArray[myCurrentSize++] = litteralString[i];

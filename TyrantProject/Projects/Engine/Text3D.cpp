@@ -60,11 +60,15 @@ void Text3D::SetPosition(const Vector3<float>& aPosition)
 void Text3D::SetCharacterScale(const Vector2<float>& aScale)
 {
 	myCharacterScale = aScale;
+
+	if (myText.Lenght() > 0) SetText(myText);
 }
 
 void Text3D::SetCharacterScale(float aScale)
 {
 	myCharacterScale.Set(aScale, aScale);
+
+	if (myText.Lenght() > 0) SetText(myText);
 }
 
 void Text3D::SetText(const string& someText)

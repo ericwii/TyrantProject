@@ -15,11 +15,14 @@ public:
 	void OnExit() override;
 
 private:
+	bool UpdateCards();
+
 	Player myPlayerUser;
 	Player myPlayerOpponent;
 	Instance myBackground;
 	Instance myDeckGUI;
 	eGamePhase myCurrentPhase;
+	bool myGameIsOver;
 
 	bool usersTurn;
 };

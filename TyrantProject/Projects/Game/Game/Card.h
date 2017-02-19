@@ -12,15 +12,22 @@ public:
 
 	void LoadCard(string aCardName);
 	void LoadCard(CardData* someData);
-	void LowerCooldown();
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
+	void LowerCooldown();
+	void TakeDamage(char someDamage);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
 	inline eCardType GetCardType();
 	inline CU::Matrix44<float>& GetOrientation();
-	inline bool IsLerping();
+	inline bool IsLerping() const;
+	inline bool IsDying() const;
+	inline bool IsDead() const;
+
+	inline char GetAttack();
+	inline char GetCooldown();
+	inline char GetHealth();
 
 private:
 	void UpdateText();
@@ -42,8 +49,11 @@ private:
 	CU::Matrix44<float> myLerpTarget;
 	float myCurrentLerpTime;
 	float myTargetLerpTime;
+	float myCurrentDeathFadeTime;
 	CardData* myCardData;
 	unsigned int myRenderPassIndex;
+	bool myIsDying;
+	bool myIsDead;
 	char myCooldown;
 	char myHealth;
 	char myAttack;
@@ -72,7 +82,32 @@ inline CU::Matrix44<float>& Card::GetOrientation()
 	return myCanvas.GetOrientation();
 }
 
-inline bool Card::IsLerping()
+inline bool Card::IsLerping() const
 {
 	return myTargetLerpTime > 0;
+}
+
+inline char Card::GetAttack()
+{
+	return myAttack;
+}
+
+inline char Card::GetCooldown()
+{
+	return myCooldown;
+}
+
+inline char Card::GetHealth()
+{
+	return myHealth;
+}
+
+inline bool Card::IsDying() const
+{
+	return myIsDying;
+}
+
+inline bool Card::IsDead() const
+{
+	return myIsDead;
 }

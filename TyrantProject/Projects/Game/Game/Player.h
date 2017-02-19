@@ -32,6 +32,10 @@ public:
 	bool Update(eGamePhase aPhase);
 	void Render();
 
+	inline CU::VectorOnStack<Card, DECK_MAX_SIZE>& GetOwnedCards();
+
+	inline bool CommanderIsDead();
+
 private:
 	bool UpdateUpkeep();
 	bool UpdatePlay();
@@ -40,6 +44,7 @@ private:
 	bool UpdateCleanup();
 	void PlayCard(Card* aCard);
 	void ShuffleDeck();
+	void RepositionPlayedCards();
 
 	CU::GrowingArray<Card*> myDeckCards;
 	CU::GrowingArray<Card*> myAssaultCards;
@@ -50,3 +55,13 @@ private:
 	Player* myOpponent;
 };
 
+
+inline CU::VectorOnStack<Card, DECK_MAX_SIZE>& Player::GetOwnedCards()
+{
+	return myOwnedCards;
+}
+
+inline bool Player::CommanderIsDead()
+{
+	return myComander->GetHealth() < 1;
+}

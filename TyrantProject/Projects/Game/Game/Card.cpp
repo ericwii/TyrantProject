@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Card.h"
+#include "DamageTextManager.h"
 
 using namespace tinyxml2;
 
-eCardFaction cardFaction;
+float deathFadeTime = 0.1f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false)
 {
 }
 
@@ -36,6 +37,23 @@ void Card::Update(float aDeltaTime)
 			myTargetLerpTime = -1.f;
 			myCurrentLerpTime = 0;
 		}
+	}
+
+	if (myIsDead == false && myIsDying == true)
+	{
+		myCurrentDeathFadeTime += aDeltaTime;
+
+		float alpha = 1 - myCurrentDeathFadeTime / deathFadeTime;
+		if (myCurrentDeathFadeTime >= deathFadeTime)
+		{
+			alpha = 0;
+			myIsDying = false;
+			myIsDead = true;
+		}
+
+		//Fade alpha
+
+		
 	}
 }
 
@@ -70,6 +88,16 @@ void Card::LoadCard(CardData* someData)
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 	myCooldown = myCardData->cooldown;
+	myAttack = myCardData->attack;
+	myHealth = myCardData->health;
+}
+
+void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
+{
+	myLerpStart = myCanvas.GetOrientation();
+	myLerpTarget = aOrientation;
+	myTargetLerpTime = aTime;
+	myCurrentLerpTime = 0;
 }
 
 void Card::LowerCooldown()
@@ -90,13 +118,24 @@ void Card::LowerCooldown()
 	}
 }
 
-void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
+void Card::TakeDamage(char someDamage)
 {
-	myLerpStart = myCanvas.GetOrientation();
-	myLerpTarget = aOrientation;
-	myTargetLerpTime = aTime;
-	myCurrentLerpTime = 0;
+	DamageTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
+
+	myHealth -= someDamage;
+	if (myHealth <= 0)
+	{
+		myIsDying = true;
+		myCurrentDeathFadeTime = 0;
+		myHealth = 0;
+	}
+
+	string health;
+	health += myHealth;
+	myHealthText.SetText(health);
 }
+
+
 
 
 
@@ -174,7 +213,7 @@ void Card::LoadModels()
 void Card::LoadText()
 {
 	FontContainer& container = Engine::GetInstance()->GetFontContainer();
-	TextFont* font = container.GetFont("Data/Fonts/DebugFont.dds", eEffectType::Text3D);
+	TextFont* font = container.GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
 	
 	myNameText.Init(font);
 	myNameText.SetCharacterSpace(0.8f);
@@ -182,7 +221,7 @@ void Card::LoadText()
 	myNameText.SetPosition(Vector2<float>(-0.55f, 0.88f));
 	myNameText.SetCurrentOrientationAsOriginal();
 
-	myCanvas.AddChild(&myNameText);
+	//myCanvas.AddChild(&myNameText);
 
 
 	if (myCardData->cardType != eCardType::Action)

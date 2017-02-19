@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CardGameState.h"
 #include "AnimationStack.h"
+#include "DamageTextManager.h"
 
 
 CardGameState::CardGameState()
@@ -28,38 +29,52 @@ void CardGameState::OnEnter()
 
 	myCurrentPhase = Upkeep;
 	usersTurn = true;
+	myGameIsOver = false;
 }
 
 
 bool playerHasFinishedUpdate = false;
 void CardGameState::Update()
 {
-	if (playerHasFinishedUpdate == false)
+	if (myGameIsOver == false)
 	{
-		if (usersTurn)
+		if (playerHasFinishedUpdate == false)
 		{
-			playerHasFinishedUpdate = !myPlayerUser.Update(myCurrentPhase);
+			if (usersTurn)
+			{
+				playerHasFinishedUpdate = !myPlayerUser.Update(myCurrentPhase);
+			}
+			else
+			{
+				playerHasFinishedUpdate = !myPlayerOpponent.Update(myCurrentPhase);
+			}
+			UpdateCards();
 		}
-		else
+		else if (AnimationStack::IsEmpty() && UpdateCards() == true)
 		{
-			playerHasFinishedUpdate = !myPlayerOpponent.Update(myCurrentPhase);
-		}
-	}
-	else if (AnimationStack::IsEmpty())
-	{
-		playerHasFinishedUpdate = false;
-		if (myCurrentPhase != eGamePhase::Cleanup)
-		{
-			myCurrentPhase = eGamePhase(myCurrentPhase + 1);
-		}
-		else
-		{
-			myCurrentPhase = Upkeep;
-			usersTurn = !usersTurn;
+			playerHasFinishedUpdate = false;
+			if (myCurrentPhase != eGamePhase::Cleanup)
+			{
+				myCurrentPhase = eGamePhase(myCurrentPhase + 1);
+			}
+			else
+			{
+				if (myPlayerUser.CommanderIsDead() || myPlayerOpponent.CommanderIsDead())
+				{
+					myGameIsOver = true;
+				}
+				else
+				{
+					myCurrentPhase = Upkeep;
+					usersTurn = !usersTurn;
+				}
+			}
 		}
 	}
 
-	AnimationStack::Update(Time::DeltaTime());
+	float deltaTime = Time::DeltaTime();
+	AnimationStack::Update(deltaTime);
+	DamageTextManager::Update(deltaTime);
 }
 
 void CardGameState::Render()
@@ -71,9 +86,53 @@ void CardGameState::Render()
 	myPlayerOpponent.Render();
 
 	AnimationStack::Render();
+	DamageTextManager::Render();
+
+	if (myGameIsOver)
+	{
+		if (myPlayerOpponent.CommanderIsDead())
+		{
+			Engine::GetInstance()->RenderDebugText("You Win", Vector2<float>(0.43f,0.47f));
+		}
+		else
+		{
+			Engine::GetInstance()->RenderDebugText("You Lose", Vector2<float>(0.4f, 0.47f));
+		}
+	}
 }
 
 void CardGameState::OnExit()
 {
 
+}
+
+
+
+//Private Methods
+
+bool CardGameState::UpdateCards()
+{
+	 CU::VectorOnStack<Card, 20>& userCards = myPlayerUser.GetOwnedCards();
+	 CU::VectorOnStack<Card, 20>& opponentCards = myPlayerOpponent.GetOwnedCards();
+
+	float deltaTime = Time::DeltaTime();
+
+	for (int i = 0; i < userCards.Size(); ++i)
+	{
+		userCards[i].Update(deltaTime);
+		if (userCards[i].IsDying())
+		{
+			return false;
+		}
+	}
+	for (int i = 0; i < opponentCards.Size(); ++i)
+	{
+		opponentCards[i].Update(deltaTime);
+		if (opponentCards[i].IsDying())
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
