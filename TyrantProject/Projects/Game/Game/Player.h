@@ -40,6 +40,8 @@ private:
 	ePlayerType myPlayerType;
 	Card* myComander;
 	Player* myOpponent;
+
+	bool myShouldRenderhand;
 };
 
 inline bool Player::CommanderIsDead()

@@ -12,6 +12,7 @@ float cardPlayLerpTime = 0.2f;
 
 Player::Player()
 {
+	myShouldRenderhand = false;
 }
 
 Player::~Player()
@@ -83,7 +84,7 @@ void Player::Render()
 		myStructureCards[i]->Render();
 	}
 
-	if (myPlayerType == ePlayerType::User)
+	if (myPlayerType == ePlayerType::User && myShouldRenderhand == true)
 	{
 		for (int i = 0; i < myHand.Size(); i++)
 		{
@@ -94,17 +95,20 @@ void Player::Render()
 
 int Player::ChooseCardToPlay()
 {
+	myShouldRenderhand = true;
 	if (myHand.Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
 
 	if (myPlayerType == ePlayerType::User)
 	{
 		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
 		{
+			myShouldRenderhand = false;
 			return 0;
 		}
 	}
 	else if (myPlayerType == ePlayerType::AI_Opponent)
 	{
+		myShouldRenderhand = false;
 		return 0;
 	}
 
