@@ -5,6 +5,7 @@
 Vector2<float> deckOffsetPerCard(-0.01f, 0.01f);
 Vector2<float> assaultCardStartPosition(-2.7f, -1.3f);
 Vector2<float> structureCardStartPosition(-0.9f, -3.7f);
+Vector2<float> handStartPosition(0.1f, 0.1f);
 float playedCardsOffset = 1.8f;
 float cardPlayLerpTime = 0.2f;
 
@@ -23,6 +24,8 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myOpponent = anOpponent;
 	myPlayerType = aPlayerType;
 	Vector3<float> commanderPosition(-2.7f, -3.7f, 0);
+
+	myHand.Allocate(3);
 
 	if (myPlayerType != ePlayerType::User)
 	{
@@ -55,6 +58,9 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myStructureCards.Allocate(16);
 
 	ShuffleDeck();
+
+	//sets the render position for the "hand" and adds the top 3 cards of the deck to it as well
+	UpdateHand();
 }
 
 void Player::Render()
@@ -71,6 +77,14 @@ void Player::Render()
 	for (int i = 0; i < myStructureCards.Size(); ++i)
 	{
 		myStructureCards[i]->Render();
+	}
+
+	if (myPlayerType == ePlayerType::User)
+	{
+		for (int i = 0; i < myHand.Size(); i++)
+		{
+			myHand[i].Render();
+		}
 	}
 }
 
@@ -131,6 +145,10 @@ void Player::PlayCard(Card* aCard)
 
 	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
 	myDeckCards.RemoveNonCyclic(aCard);
+	if (aCard != nullptr)
+	{
+		UpdateHand();
+	}
 }
 
 void Player::ShuffleDeck()
@@ -164,6 +182,30 @@ void Player::ShuffleDeck()
 
 		myDeckCards[i] = unshuffledDeck[currentIndex];
 		myDeckCards[i]->SetPosition(deckPosition + deckOffsetPerCard * static_cast<float>(i));
+	}
+}
+
+void Player::UpdateHand()
+{
+	myHand.RemoveAll();
+	if (myPlayerType == ePlayerType::User)
+	{
+		for (int i = myDeckCards.Size() - 1; i > myDeckCards.Size() - 4; i--)
+		{
+			if (myDeckCards.Size() <= 2)
+			{
+				break;
+			}
+			myHand.Add(*myDeckCards[i]);
+		}
+		Vector2<float> position;
+		for (int i = 0; i < myHand.Size(); i++)
+		{
+			position = handStartPosition;
+			position.x += playedCardsOffset*i;
+			myHand[i].SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
+			myHand[i].SetPosition(position);
+		}
 	}
 }
 
