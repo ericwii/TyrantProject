@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "CombatManager.h"
 #include <time.h>
 
 Vector2<float> deckOffsetPerCard(-0.01f, 0.01f);
@@ -58,42 +57,6 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	ShuffleDeck();
 }
 
-bool Player::Update(eGamePhase aPhase)
-{
-	switch (aPhase)
-	{
-		case (Upkeep):
-		{
-			return UpdateUpkeep();
-			break;
-		}
-		case (Play) :
-		{
-			return UpdatePlay();
-			break;
-		}
-		case (PreCombat) :
-		{
-			return UpdatePrecombat();
-			break;
-		}
-		case (Combat) :
-		{
-			return UpdateCombat();
-			break;
-		}
-		case (Cleanup) :
-		{
-			return UpdateCleanup();
-			break;
-		}
-	    default:
-		{
-			return false;
-		}
-	}
-}
-
 void Player::Render()
 {
 	myComander->Render();
@@ -111,92 +74,29 @@ void Player::Render()
 	}
 }
 
+int Player::ChooseCardToPlay()
+{
+	if (myDeckCards.Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
+
+	if (myPlayerType == ePlayerType::User)
+	{
+		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
+		{
+			return myDeckCards.Size() - 1;
+		}
+	}
+	else if (myPlayerType == ePlayerType::AI_Opponent)
+	{
+		return myDeckCards.Size() - 1;
+	}
+
+	return -1;
+}
+
 
 
 
 //Private methods
-
-bool Player::UpdateUpkeep()
-{
-	for (int i = 0; i < myAssaultCards.Size(); ++i)
-	{
-		myAssaultCards[i]->LowerCooldown();
-	}
-	for (int i = 0; i < myStructureCards.Size(); ++i)
-	{
-		myStructureCards[i]->LowerCooldown();
-	}
-
-	return false;
-}
-
-
-Card* myPlayedCard = nullptr;
-bool Player::UpdatePlay()
-{
-	if (myPlayedCard == nullptr)
-	{
-		if (myDeckCards.Size() == 0) return false;
-
-		if (myPlayerType == ePlayerType::User)
-		{
-			if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
-			{
-				PlayCard(myDeckCards.GetLast());
-			}
-		}
-		else if (myPlayerType == ePlayerType::AI_Opponent)
-		{
-			PlayCard(myDeckCards.GetLast());
-		}
-	}
-
-	if (myPlayedCard != nullptr && myPlayedCard->IsLerping() == false)
-	{
-		myPlayedCard = nullptr;
-		return false;
-	}
-
-	return true;
-}
-
-bool Player::UpdatePrecombat()
-{
-	return false;
-}
-
-bool Player::UpdateCombat()
-{
-	CombatManager::DoCombat(this, myOpponent);
-	return false;
-}
-
-bool Player::UpdateCleanup()
-{
-	for (int i = 0; i < myAssaultCards.Size(); ++i)
-	{
-		if (myAssaultCards[i]->IsDead())
-		{
-			myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
-	RepositionPlayedCards();
-
-	for (int i = 0; i < myOpponent->myAssaultCards.Size(); ++i)
-	{
-		if (myOpponent->myAssaultCards[i]->IsDead())
-		{
-			myOpponent->myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
-	myOpponent->RepositionPlayedCards();
-	return false;
-}
-
-
-
 
 void Player::PlayCard(Card* aCard)
 {
@@ -229,8 +129,7 @@ void Player::PlayCard(Card* aCard)
 	CU::Matrix44<float> lerpTarget;
 	lerpTarget.SetPosition(position);
 
-	myPlayedCard = aCard;
-	myPlayedCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
+	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
 	myDeckCards.RemoveNonCyclic(aCard);
 }
 

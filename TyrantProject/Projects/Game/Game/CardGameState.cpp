@@ -4,6 +4,7 @@
 #include "DamageTextManager.h"
 
 
+
 CardGameState::CardGameState()
 {
 
@@ -28,47 +29,29 @@ void CardGameState::OnEnter()
 	myDeckGUI.SetPosition(Vector3<float>(-0.75f, -0.01f, 0));
 
 	myCurrentPhase = Upkeep;
-	usersTurn = true;
+	myUsersTurn = true;
 	myGameIsOver = false;
 }
 
 
-bool playerHasFinishedUpdate = false;
 void CardGameState::Update()
 {
 	if (myGameIsOver == false)
 	{
-		if (playerHasFinishedUpdate == false)
+		if (myUsersTurn == true)
 		{
-			if (usersTurn)
+			if (CardGameManager::Update(myCurrentPhase, myPlayerUser, myPlayerOpponent) == true)
 			{
-				playerHasFinishedUpdate = !myPlayerUser.Update(myCurrentPhase);
+				ChangePhase();
 			}
-			else
-			{
-				playerHasFinishedUpdate = !myPlayerOpponent.Update(myCurrentPhase);
-			}
-			UpdateCards();
 		}
-		else if (AnimationStack::IsEmpty() && UpdateCards() == true)
+		else
 		{
-			playerHasFinishedUpdate = false;
-			if (myCurrentPhase != eGamePhase::Cleanup)
+			if (CardGameManager::Update(myCurrentPhase, myPlayerOpponent, myPlayerUser) == true)
 			{
-				myCurrentPhase = eGamePhase(myCurrentPhase + 1);
+				ChangePhase();
 			}
-			else
-			{
-				if (myPlayerUser.CommanderIsDead() || myPlayerOpponent.CommanderIsDead())
-				{
-					myGameIsOver = true;
-				}
-				else
-				{
-					myCurrentPhase = Upkeep;
-					usersTurn = !usersTurn;
-				}
-			}
+
 		}
 	}
 
@@ -110,29 +93,21 @@ void CardGameState::OnExit()
 
 //Private Methods
 
-bool CardGameState::UpdateCards()
+void CardGameState::ChangePhase()
 {
-	 CU::VectorOnStack<Card, 20>& userCards = myPlayerUser.GetOwnedCards();
-	 CU::VectorOnStack<Card, 20>& opponentCards = myPlayerOpponent.GetOwnedCards();
-
-	float deltaTime = Time::DeltaTime();
-
-	for (int i = 0; i < userCards.Size(); ++i)
+	if (myPlayerUser.CommanderIsDead() || myPlayerOpponent.CommanderIsDead())
 	{
-		userCards[i].Update(deltaTime);
-		if (userCards[i].IsDying())
-		{
-			return false;
-		}
-	}
-	for (int i = 0; i < opponentCards.Size(); ++i)
-	{
-		opponentCards[i].Update(deltaTime);
-		if (opponentCards[i].IsDying())
-		{
-			return false;
-		}
+		myGameIsOver = true;
+		return;
 	}
 
-	return true;
+	if (myCurrentPhase == eGamePhase::Cleanup)
+	{
+		myCurrentPhase = eGamePhase::Upkeep;
+		myUsersTurn = !myUsersTurn;
+	}
+	else
+	{
+		myCurrentPhase = eGamePhase(myCurrentPhase + 1);
+	}
 }

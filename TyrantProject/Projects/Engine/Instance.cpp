@@ -95,6 +95,20 @@ void Instance::SetOrientation(CU::Matrix44<float> anOrientation)
 	myOrientation = anOrientation;
 }
 
+void Instance::SetAlpha(float alpha)
+{
+	myModel->SetAlpha(alpha);
+
+	for (int i = 0; i < myInstances.Size(); ++i)
+	{
+		myInstances[i]->SetAlpha(alpha);
+	}
+	for (int i = 0; i < myTexts.Size(); ++i)
+	{
+		myTexts[i]->SetAlpha(alpha);
+	}
+}
+
 
 void Instance::AddChild(Instance* anInstance)
 {

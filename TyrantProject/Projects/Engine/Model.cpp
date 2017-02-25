@@ -2,7 +2,7 @@
 #include "Model.h"
 
 
-Model::Model() : myEffect(nullptr), myVertexLayout(nullptr), myIsNullObject(true)
+Model::Model() : myEffect(nullptr), myVertexLayout(nullptr), myIsNullObject(true), myAlpha(1.f)
 {
 }
 
@@ -38,6 +38,7 @@ void Model::Render(const CU::Matrix44<float>& aParentSpace, unsigned int aPassIn
 
 	EffectData::worldMatrix = aParentSpace;
 	EffectData::position = aParentSpace.GetTranslation();
+	EffectData::alpha = myAlpha;
 
 	ID3D11DeviceContext* context = GET_DIRECTX().GetDeviceContext();
 

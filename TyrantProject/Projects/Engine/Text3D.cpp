@@ -113,6 +113,10 @@ void Text3D::SetText(const string& someText)
 	UpdateVertexBuffer(size);
 }
 
+void Text3D::SetAlpha(float anAlpha)
+{
+	myColor.w = anAlpha;
+}
 
 
 //Private methods

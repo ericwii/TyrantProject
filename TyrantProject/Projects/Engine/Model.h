@@ -21,6 +21,7 @@ public:
 
 	void AddTexture(const string& aShaderVariableName, const string& aTextureFile, int surfaceIndex = 0);
 	inline void SetEffect(Effect* anEffect);
+	inline void SetAlpha(float anAlpha);
 
 	inline const Effect* GetEffect() const;
 	inline int GetVertexCount() const;
@@ -43,6 +44,7 @@ private:
 
 	ID3D11InputLayout* myVertexLayout;
 
+	float myAlpha;
 	bool myIsNullObject;
 };
 
@@ -54,6 +56,11 @@ inline void Model::SetEffect(Effect* anEffect)
 	{
 		mySurfaces[i].SetEffect(anEffect);
 	}
+}
+
+inline void Model::SetAlpha(float anAlpha)
+{
+	myAlpha = anAlpha;
 }
 
 

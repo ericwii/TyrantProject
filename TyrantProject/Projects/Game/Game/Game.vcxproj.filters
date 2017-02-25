@@ -30,13 +30,13 @@
     <ClCompile Include="AnimationStack.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
-    <ClCompile Include="CombatManager.cpp">
-      <Filter>CardGame</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
     <ClCompile Include="DamageTextManager.cpp" />
+    <ClCompile Include="CardGameManager.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -71,13 +71,13 @@
     <ClInclude Include="AnimationStack.h">
       <Filter>CardGame</Filter>
     </ClInclude>
-    <ClInclude Include="CombatManager.h">
-      <Filter>CardGame</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>CardGame</Filter>
     </ClInclude>
     <ClInclude Include="DamageTextManager.h" />
+    <ClInclude Include="CardGameManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

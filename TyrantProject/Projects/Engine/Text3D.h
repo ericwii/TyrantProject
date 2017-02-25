@@ -29,6 +29,7 @@ public:
 	void SetCharacterScale(const Vector2<float>& aScale);
 	void SetCharacterScale(float aScale);
 	void SetText(const string& someText);
+	void SetAlpha(float anAlpha);
 
 	inline const string& GetText() const;
 	inline const CU::Matrix44<float>& GetOrientation() const;

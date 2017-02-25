@@ -110,6 +110,12 @@ bool Effect::Init(const string& anEffectFile)
 		DEBUG_ASSERT(false, "Projection matrix in effect is not valid");
 	}
 
+	myAlphaVariable = myEffect->GetVariableByName("Alpha")->AsScalar();
+	if (myAlphaVariable->IsValid() == false)
+	{
+		DEBUG_ASSERT(false, "Alpha in effect is not valid");
+	}
+
 	return true;
 }
 
@@ -133,6 +139,12 @@ void Effect::Update()
 	if (FAILED(hr))
 	{
 		PRINT_HRES_ERROR(hr, "Failed to set projection matrix for shader");
+	}
+
+	hr = myAlphaVariable->SetFloat(EffectData::alpha);
+	if (FAILED(hr))
+	{
+		PRINT_HRES_ERROR(hr, "Failed to set alpha for shader");
 	}
 }
 

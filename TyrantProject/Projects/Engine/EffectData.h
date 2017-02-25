@@ -17,6 +17,7 @@ struct EffectData
 	static Vector2<float> animationUV;
 
 	static float rotation_2D;
+	static float alpha;
 
 private:
 	EffectData() = default;

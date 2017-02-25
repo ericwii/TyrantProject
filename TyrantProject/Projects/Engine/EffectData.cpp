@@ -16,3 +16,4 @@ Vector2<float> EffectData::animationFrameSize;
 Vector2<float> EffectData::animationUV;
 
 float EffectData::rotation_2D;
+float EffectData::alpha;

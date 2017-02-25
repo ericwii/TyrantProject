@@ -16,6 +16,7 @@ public:
 
 	void SetPosition(Vector3<float> aPosition);
 	void SetOrientation(CU::Matrix44<float> anOrientation);
+	void SetAlpha(float alpha);
 
 	inline CU::Matrix44<float>& GetOrientation();
 	inline const CU::Matrix44<float>& GetOriginalOrientation() const;

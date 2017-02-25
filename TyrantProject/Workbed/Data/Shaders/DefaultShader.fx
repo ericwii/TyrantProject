@@ -30,6 +30,7 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 float4 Pixel_Shader(PS_INPUT input) : SV_Target
 {
 	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
+	albedoColor.w *= Alpha;
 
 	return albedoColor;
 }

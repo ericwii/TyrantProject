@@ -29,6 +29,7 @@ protected:
 	ID3DX11EffectMatrixVariable* myProjectionMatrixVariable;
 	ID3DX11EffectMatrixVariable* myViewMatrixVariable;
 	ID3DX11EffectMatrixVariable* myWorldMatrixVariable;
+	ID3DX11EffectScalarVariable* myAlphaVariable;
 	bool myCompileOnly;
 };
 

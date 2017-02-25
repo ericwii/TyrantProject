@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseState.h"
 #include "Player.h"
+#include "CardGameManager.h"
 
 
 class CardGameState : public BaseState
@@ -15,7 +16,7 @@ public:
 	void OnExit() override;
 
 private:
-	bool UpdateCards();
+	void ChangePhase();
 
 	Player myPlayerUser;
 	Player myPlayerOpponent;
@@ -24,6 +25,6 @@ private:
 	eGamePhase myCurrentPhase;
 	bool myGameIsOver;
 
-	bool usersTurn;
+	bool myUsersTurn;
 };
 

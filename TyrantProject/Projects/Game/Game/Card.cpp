@@ -4,7 +4,7 @@
 
 using namespace tinyxml2;
 
-float deathFadeTime = 0.1f;
+float deathFadeTime = 0.3f;
 
 Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false)
 {
@@ -51,9 +51,7 @@ void Card::Update(float aDeltaTime)
 			myIsDead = true;
 		}
 
-		//Fade alpha
-
-		
+		myCanvas.SetAlpha(alpha);		
 	}
 }
 
