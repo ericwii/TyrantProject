@@ -80,7 +80,7 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 
 bool CardGameManager::PlayCard(Player& anActivePlayer)
 {
-	if (anActivePlayer.myDeckCards.Size() == 0)
+	if (anActivePlayer.myHand.Size() == 0)
 	{
 		return true;
 	}
@@ -89,7 +89,7 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 
 	if (myChoosenCardIndex >= 0)
 	{
-		Card* cardToPlay = anActivePlayer.myDeckCards[myChoosenCardIndex];
+		Card* cardToPlay = anActivePlayer.myHand[myChoosenCardIndex];
 		anActivePlayer.PlayCard(cardToPlay);
 		return true;
 	}

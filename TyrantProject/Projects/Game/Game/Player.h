@@ -32,7 +32,7 @@ private:
 	void ShuffleDeck();
 	void UpdateHand();
 
-	CU::GrowingArray<Card> myHand;
+	CU::GrowingArray<Card*> myHand;
 	CU::GrowingArray<Card*> myDeckCards;
 	CU::GrowingArray<Card*> myAssaultCards;
 	CU::GrowingArray<Card*> myStructureCards;

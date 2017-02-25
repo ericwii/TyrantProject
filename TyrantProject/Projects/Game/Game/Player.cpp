@@ -60,7 +60,22 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	ShuffleDeck();
 
 	//sets the render position for the "hand" and adds the top 3 cards of the deck to it as well
-	UpdateHand();
+	
+	for (size_t i = myDeckCards.Size()-5; i < myDeckCards.Size(); i++)
+	{
+		myHand.Add(myDeckCards[i]);
+		myDeckCards.RemoveNonCyclic(myDeckCards[i]);
+	}
+	
+	Vector2<float> position;
+	for (int i = 0; i < myHand.Size(); i++)
+	{
+		position = handStartPosition;
+		position.x += playedCardsOffset*i;
+		myHand[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
+		myHand[i]->SetPosition(position);
+	}
+	
 }
 
 void Player::Render()
@@ -83,25 +98,25 @@ void Player::Render()
 	{
 		for (int i = 0; i < myHand.Size(); i++)
 		{
-			myHand[i].Render();
+			myHand[i]->Render();
 		}
 	}
 }
 
 int Player::ChooseCardToPlay()
 {
-	if (myDeckCards.Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
+	if (myHand.Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
 
 	if (myPlayerType == ePlayerType::User)
 	{
 		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
 		{
-			return myDeckCards.Size() - 1;
+			return 0;
 		}
 	}
 	else if (myPlayerType == ePlayerType::AI_Opponent)
 	{
-		return myDeckCards.Size() - 1;
+		return 0;
 	}
 
 	return -1;
@@ -142,9 +157,9 @@ void Player::PlayCard(Card* aCard)
 
 	CU::Matrix44<float> lerpTarget;
 	lerpTarget.SetPosition(position);
-
+	
 	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
-	myDeckCards.RemoveNonCyclic(aCard);
+	myHand.RemoveNonCyclic(aCard);
 	if (aCard != nullptr)
 	{
 		UpdateHand();
@@ -187,26 +202,23 @@ void Player::ShuffleDeck()
 
 void Player::UpdateHand()
 {
-	myHand.RemoveAll();
-	if (myPlayerType == ePlayerType::User)
+	//myHand.RemoveAll();
+
+	if (myDeckCards.Size() > 0)
 	{
-		for (int i = myDeckCards.Size() - 1; i > myDeckCards.Size() - 4; i--)
-		{
-			if (myDeckCards.Size() <= 2)
-			{
-				break;
-			}
-			myHand.Add(*myDeckCards[i]);
-		}
-		Vector2<float> position;
-		for (int i = 0; i < myHand.Size(); i++)
-		{
-			position = handStartPosition;
-			position.x += playedCardsOffset*i;
-			myHand[i].SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
-			myHand[i].SetPosition(position);
-		}
+		myHand.Add(myDeckCards.GetLast());
+		myDeckCards.RemoveNonCyclic(myDeckCards.GetLast());
 	}
+
+	Vector2<float> position;
+	for (int i = 0; i < myHand.Size(); i++)
+	{
+		position = handStartPosition;
+		position.x += playedCardsOffset*i;
+		myHand[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
+		myHand[i]->SetPosition(position);
+	}
+	
 }
 
 void Player::RepositionPlayedCards()
