@@ -61,20 +61,9 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 
 	//sets the render position for the "hand" and adds the top 3 cards of the deck to it as well
 	
-	for (size_t i = myDeckCards.Size()-5; i < myDeckCards.Size(); i++)
-	{
-		myHand.Add(myDeckCards[i]);
-		myDeckCards.RemoveNonCyclic(myDeckCards[i]);
-	}
-	
-	Vector2<float> position;
-	for (int i = 0; i < myHand.Size(); i++)
-	{
-		position = handStartPosition;
-		position.x += playedCardsOffset*i;
-		myHand[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
-		myHand[i]->SetPosition(position);
-	}
+	UpdateHand();
+	UpdateHand();
+	UpdateHand();
 	
 }
 
