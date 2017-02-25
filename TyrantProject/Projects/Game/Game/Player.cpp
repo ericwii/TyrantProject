@@ -102,6 +102,7 @@ int Player::ChooseCardToPlay()
 	{
 		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
 		{
+			//make hitbox check on the cards in the hand and return it's index
 			myShouldRenderhand = false;
 			return 0;
 		}

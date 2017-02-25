@@ -39,6 +39,9 @@
     <ClCompile Include="DamageTextManager.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
+    <ClCompile Include="CardHand.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -80,6 +83,9 @@
       <Filter>CardGame</Filter>
     </ClInclude>
     <ClInclude Include="DamageTextManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CardHand.h">
       <Filter>CardGame</Filter>
     </ClInclude>
   </ItemGroup>

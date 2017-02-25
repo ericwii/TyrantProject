@@ -108,6 +108,7 @@
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardGameState.h" />
     <ClInclude Include="CardGameManager.h" />
+    <ClInclude Include="CardHand.h" />
     <ClInclude Include="DamageTextManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CardGameState.cpp" />
     <ClCompile Include="CardGameManager.cpp" />
+    <ClCompile Include="CardHand.cpp" />
     <ClCompile Include="DamageTextManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BaseState.cpp" />
