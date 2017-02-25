@@ -138,6 +138,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 				if (aDefender.CommanderIsDead())
 				{
+					myCurrentAttackerIndex = anAttacker.myAssaultCards.Size();
 					CleanUp(anAttacker, aDefender);
 				}
 			}

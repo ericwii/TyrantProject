@@ -28,6 +28,13 @@ void CardGameState::OnEnter()
 	myDeckGUI.Init(deckGuiModel);
 	myDeckGUI.SetPosition(Vector3<float>(-0.75f, -0.01f, 0));
 
+	TextFont* font = Engine::GetInstance()->GetFontContainer().GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
+	string text = "Turn:0";
+	myTurnCounterText.Init(font);
+	myTurnCounterText.SetPosition(Vector3<float>(-1.25f, 0.1f, -4.f));
+	myTurnCounterText.SetText(text);
+	myTurnCount = 0;
+
 	myCurrentPhase = Upkeep;
 	myUsersTurn = true;
 	myGameIsOver = false;
@@ -64,6 +71,7 @@ void CardGameState::Render()
 {
 	myBackground.Render();
 	myDeckGUI.Render();
+	myTurnCounterText.Render();
 
 	myPlayerUser.Render();
 	myPlayerOpponent.Render();
@@ -105,6 +113,11 @@ void CardGameState::ChangePhase()
 	{
 		myCurrentPhase = eGamePhase::Upkeep;
 		myUsersTurn = !myUsersTurn;
+
+		++myTurnCount;
+		string turnText("Turn:");
+		turnText += myTurnCount;
+		myTurnCounterText.SetText(turnText);
 	}
 	else
 	{

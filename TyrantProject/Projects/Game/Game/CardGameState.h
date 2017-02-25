@@ -22,9 +22,10 @@ private:
 	Player myPlayerOpponent;
 	Instance myBackground;
 	Instance myDeckGUI;
+	Text3D myTurnCounterText;
 	eGamePhase myCurrentPhase;
+	int myTurnCount;
 	bool myGameIsOver;
-
 	bool myUsersTurn;
 };
 

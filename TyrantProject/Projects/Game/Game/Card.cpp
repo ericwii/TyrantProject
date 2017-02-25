@@ -4,7 +4,7 @@
 
 using namespace tinyxml2;
 
-float deathFadeTime = 0.3f;
+float deathFadeTime = 0.8f;
 
 Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false)
 {

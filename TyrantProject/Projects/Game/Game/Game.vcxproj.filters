@@ -33,8 +33,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
-    <ClCompile Include="DamageTextManager.cpp" />
     <ClCompile Include="CardGameManager.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageTextManager.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,8 +76,10 @@
     <ClInclude Include="Player.h">
       <Filter>CardGame</Filter>
     </ClInclude>
-    <ClInclude Include="DamageTextManager.h" />
     <ClInclude Include="CardGameManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageTextManager.h">
       <Filter>CardGame</Filter>
     </ClInclude>
   </ItemGroup>
