@@ -21,6 +21,7 @@ public:
 
 	inline eCardType GetCardType();
 	inline CU::Matrix44<float>& GetOrientation();
+	inline Vector2<float> GetPosition();
 	inline bool IsLerping() const;
 	inline bool IsDying() const;
 	inline bool IsDead() const;
@@ -80,6 +81,11 @@ inline eCardType Card::GetCardType()
 inline CU::Matrix44<float>& Card::GetOrientation()
 {
 	return myCanvas.GetOrientation();
+}
+
+inline Vector2<float> Card::GetPosition()
+{
+	return myCanvas.GetPosition();
 }
 
 inline bool Card::IsLerping() const

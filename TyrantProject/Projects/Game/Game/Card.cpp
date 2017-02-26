@@ -180,7 +180,7 @@ void Card::LoadModels()
 {
 	Model* illustrationModel = ModelLoader::LoadRectangle(Vector2<float>(1.4f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
-	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));	
+	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));
 	
 	myCanvas.AddChild(&myIllustration);
 
