@@ -25,6 +25,22 @@ void CCardHand::Render()
 	{
 		myCards[i]->Render();
 	}
+
+	Vector2<float> mousePosition;
+
+	mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
+	mousePosition.x /= Engine::GetInstance()->GetResolution().x;
+	mousePosition.y /= Engine::GetInstance()->GetResolution().y;
+	//mousePosition = (mousePosition * 2) - 1;
+
+	string temp;
+	temp += "X: ";
+	temp += mousePosition.x;
+	temp += " Y: ";
+	temp += mousePosition.y;
+	Engine::GetInstance()->RenderDebugText(temp, {0,0}, 0.5f);
+
+	Engine::GetInstance()->RenderDebugText("M", mousePosition);
 }
 
 CU::GrowingArray<Card*>& CCardHand::GetCards()
@@ -51,13 +67,15 @@ int CCardHand::HitBoxCheck()
 	
 	for (int i = 0; i < myCards.Size(); i++)
 	{
-		rectangle = myCards[i]->GetPosition();
+		mousePosition = myCards[i]->GetPosition();
+		rectangle = myCards[i]->GetPosition()/5;
 		rectangle.z = canvasSize.x;
 		rectangle.w = canvasSize.y;
 
-		mousePosition = InputManager::Mouse.GetPosition();
-		mousePosition.x /= 1080;
-		mousePosition.y /= 1920;
+		mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
+		mousePosition.x /= Engine::GetInstance()->GetResolution().x;
+		mousePosition.y /= Engine::GetInstance()->GetResolution().y;
+		mousePosition = (mousePosition * 2) - 1;
 
 		if (Collision::PointVsAABB(mousePosition,rectangle) == true)
 		{

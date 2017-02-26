@@ -26,6 +26,7 @@ public:
 	inline FontContainer& GetFontContainer();
 	inline Camera& GetCamera();
 	inline const Vector2<float>& GetResolution();
+	inline HWND GetWindowHandle();
 
 private:
 	Engine();
@@ -73,4 +74,9 @@ inline Camera& Engine::GetCamera()
 inline const Vector2<float>& Engine::GetResolution()
 {
 	return myResolution;
+}
+
+inline HWND Engine::GetWindowHandle()
+{
+	return directX.myWindowHandle;
 }
