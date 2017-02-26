@@ -1,101 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
+	
+	<card>
+		<name>Balor</name>
+		<illustration>BloodThirsty/Assault/Balor.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>11</health>
+	</card>
 
-	<card
-		name = "Balor"
-		illustration = "BloodThirsty/Assault/Balor.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "legendary"
-		unique = "true"
-		cooldown = "4"
-		attack = "3"
-		health = "11"
-	/>
+	<card>
+		<name>Fenrir</name>
+		<illustration>BloodThirsty/Assault/Fenrir.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>2</cooldown>
+		<attack>4</attack>
+		<health>5</health>
+	</card>
+
+	<card>
+		<name>Gorrus</name>
+		<illustration>BloodThirsty/Assault/Gorrus.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>4</attack>
+		<health>12</health>
+	</card>
 	
-	<card
-		name = "Fenrir"
-		illustration = "BloodThirsty/Assault/Fenrir.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "legendary"
-		unique = "true"
-		cooldown = "2"
-		attack = "4"
-		health = "5"
-	/>
+	<card>
+		<name>Grimclaw</name>
+		<illustration>BloodThirsty/Assault/Grimclaw.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>8</health>
+	</card>
 	
-	<card
-		name = "Gorrus"
-		illustration = "BloodThirsty/Assault/Gorrus.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "legendary"
-		unique = "true"
-		cooldown = "3"
-		attack = "4"
-		health = "12"
-	/>
+	<card>
+		<name>Hades</name>
+		<illustration>BloodThirsty/Assault/Hades.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>4</cooldown>
+		<attack>2</attack>
+		<health>7</health>
+	</card>
 	
-	<card
-		name = "Grimclaw"
-		illustration = "BloodThirsty/Assault/Grimclaw.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "2"
-		attack = "2"
-		health = "8"
-	/>
+	<card>
+		<name>Mawcor</name>
+		<illustration>BloodThirsty/Assault/Mawcor.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>3</cooldown>
+		<attack>3</attack>
+		<health>6</health>
+	</card>
+
+	<card>
+		<name>Redeemer</name>
+		<illustration>BloodThirsty/Assault/Redeemer.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>6</health>
+	</card>
 	
-	<card
-		name = "Hades"
-		illustration = "BloodThirsty/Assault/Hades.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "legendary"
-		unique = "true"
-		cooldown = "4"
-		attack = "2"
-		health = "7"
-	/>
-	
-	<card
-		name = "Mawcor"
-		illustration = "BloodThirsty/Assault/Mawcor.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "3"
-		attack = "3"
-		health = "6"
-	/>
-	
-	<card
-		name = "Redeemer"
-		illustration = "BloodThirsty/Assault/Redeemer.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "2"
-		attack = "2"
-		health = "6"
-	/>
-	
-	<card
-		name = "Scythe Overseer"
-		illustration = "BloodThirsty/Assault/Scythe Overseer.jpg"
-		faction = "bloodthirsty"
-		cardType = "assault"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "4"
-		attack = "4"
-		health = "15"
-	/>
+	<card>
+		<name>Scythe Overseer</name>
+		<illustration>BloodThirsty/Assault/Scythe Overseer.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>9</health>
+		<skill name="strike" number="1" suffix="all"/>
+	</card>
 
 </root>

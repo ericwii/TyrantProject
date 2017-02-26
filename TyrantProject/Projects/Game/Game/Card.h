@@ -1,10 +1,14 @@
 #pragma once
 #include "../../Engine/Text3D.h"
 
+struct OnComingAction;
+class Player;
+
 class Card
 {
 public:
 	Card();
+	Card(Player* anOwner);
 	~Card();
 
 	void Update(float aDeltaTime);
@@ -14,6 +18,10 @@ public:
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
+
+	void OnAttacked(OnComingAction& anAction);
+	void OnTargeted(OnComingAction& anAction);
+
 	void TakeDamage(char someDamage);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
@@ -21,10 +29,10 @@ public:
 
 	inline eCardType GetCardType();
 	inline CU::Matrix44<float>& GetOrientation();
+	inline Player* GetOwner();
 	inline bool IsLerping() const;
 	inline bool IsDying() const;
 	inline bool IsDead() const;
-
 	inline char GetAttack();
 	inline char GetCooldown();
 	inline char GetHealth();
@@ -50,6 +58,7 @@ private:
 	float myCurrentLerpTime;
 	float myTargetLerpTime;
 	float myCurrentDeathFadeTime;
+	Player* myOwner;
 	CardData* myCardData;
 	unsigned int myRenderPassIndex;
 	bool myIsDying;
@@ -80,6 +89,11 @@ inline eCardType Card::GetCardType()
 inline CU::Matrix44<float>& Card::GetOrientation()
 {
 	return myCanvas.GetOrientation();
+}
+
+inline Player* Card::GetOwner()
+{
+	return myOwner;
 }
 
 inline bool Card::IsLerping() const

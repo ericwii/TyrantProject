@@ -1,12 +1,18 @@
 #include "stdafx.h"
 #include "Card.h"
 #include "DamageTextManager.h"
+#include "AbilityBase.h"
+
 
 using namespace tinyxml2;
 
 float deathFadeTime = 0.8f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr)
+{
+}
+
+Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner)
 {
 }
 
@@ -133,7 +139,23 @@ void Card::TakeDamage(char someDamage)
 	myHealthText.SetText(health);
 }
 
+void Card::OnAttacked(OnComingAction& anAction)
+{
+	anAction.target = this;
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		myCardData->abilities[i]->OnAttacked(anAction);
+	}
+}
 
+void Card::OnTargeted(OnComingAction& anAction)
+{
+	anAction.target = this;
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		myCardData->abilities[i]->OnTargeted(anAction);
+	}
+}
 
 
 

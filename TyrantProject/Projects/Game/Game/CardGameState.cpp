@@ -73,8 +73,8 @@ void CardGameState::Render()
 	myDeckGUI.Render();
 	myTurnCounterText.Render();
 
-	myPlayerUser.Render();
 	myPlayerOpponent.Render();
+	myPlayerUser.Render();
 
 	AnimationStack::Render();
 	DamageTextManager::Render();

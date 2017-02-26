@@ -2,37 +2,48 @@
 
 <root>
 
-	<card
-		name = "Blood Pool"
-		illustration = "BloodThirsty/Structure/Blood Pool.jpg"
-		faction = "bloodthirsty"
-		cardType = "structure"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "3"
-		health = "6"
-	/>
+	<card>
+		<name>Blood Pool</name>
+		<illustration>BloodThirsty/Structure/Blood Pool.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>structure</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>3</cooldown>
+		<health>6</health>
+	</card>
 	
-	<card
-		name = "Hungry Blood Pool"
-		illustration = "BloodThirsty/Structure/Hungry Blood Pool.jpg"
-		faction = "bloodthirsty"
-		cardType = "structure"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "1"
-		health = "6"
-	/>
+	<card>
+		<name>Hungry Blood Pool</name>
+		<illustration>BloodThirsty/Structure/Hungry Blood Pool.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>structure</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>1</cooldown>
+		<health>6</health>
+	</card>
 	
-	<card
-		name = "Necro Nest"
-		illustration = "BloodThirsty/Structure/Necro Nest.jpg"
-		faction = "bloodthirsty"
-		cardType = "structure"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "2"
-		health = "6"
-	/>
+	<card>
+		<name>Necro Nest</name>
+		<illustration>BloodThirsty/Structure/Necro Nest.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>structure</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<health>6</health>
+	</card>
+	
+	<card>
+		<name>Necro Nest</name>
+		<illustration>BloodThirsty/Structure/Necro Nest.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>structure</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<health>6</health>
+	</card>
 
 </root>

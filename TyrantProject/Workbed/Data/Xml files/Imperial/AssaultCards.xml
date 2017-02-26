@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-
-	<card
-		name = "Radio Officer"
-		illustration = "Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg"
-		faction = "raider"
-		cardType = "assult"
-		rarity = "rare"
-		unique = "false"
-		cooldown = "4"
-		attack = "1"
-		health = "9"
-	/>
+	
+	<card>
+		<name>Radio Officer</name>
+		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>1</attack>
+		<health>9</health>
+	</card>
 
 </root>

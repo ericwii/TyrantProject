@@ -102,6 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbilityBase.h" />
+    <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationStack.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardData.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StrikeAbility.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="XMLFunctions.h" />
     <ClInclude Include="XMLReader.h" />
@@ -132,6 +134,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StrikeAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="XMLFunctions.cpp" />
     <ClCompile Include="XMLReader.cpp" />

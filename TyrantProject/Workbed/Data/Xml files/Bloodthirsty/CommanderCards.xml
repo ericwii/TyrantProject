@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-
-	<card
-		name = "Dementia"
-		illustration = "BloodThirsty/Commander/Dementia.jpg"
-		faction = "bloodthirsty"
-		cardType = "commander"
-		rarity = "rare"
-		unique = "false"
-		health = "13"
-	/>
 	
-	<card
-		name = "Dracorex"
-		illustration = "BloodThirsty/Commander/Dracorex.jpg"
-		faction = "bloodthirsty"
-		cardType = "commander"
-		rarity = "rare"
-		unique = "false"
-		health = "9"
-	/>
+	<card>
+		<name>Dementia</name>
+		<illustration>BloodThirsty/Commander/Dementia.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>13</health>
+	</card>
 	
-	<card
-		name = "Gnorlock"
-		illustration = "BloodThirsty/Commander/Gnorlock.jpg"
-		faction = "bloodthirsty"
-		cardType = "commander"
-		rarity = "rare"
-		unique = "false"
-		health = "6"
-	/>
+	<card>
+		<name>Dracorex</name>
+		<illustration>BloodThirsty/Commander/Dracorex.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>9</health>
+	</card>
 	
-	<card
-		name = "Marrowtok"
-		illustration = "BloodThirsty/Commander/Marrowtok.jpg"
-		faction = "bloodthirsty"
-		cardType = "commander"
-		rarity = "rare"
-		unique = "false"
-		health = "18"
-	/>
+	<card>
+		<name>Gnorlock</name>
+		<illustration>BloodThirsty/Commander/Gnorlock.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>6</health>
+	</card>
+	
+	<card>
+		<name>Marrowtok</name>
+		<illustration>BloodThirsty/Commander/Marrowtok.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>18</health>
+	</card>
 
 </root>

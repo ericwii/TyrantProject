@@ -37,14 +37,14 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	CU::VectorOnStack<CardData*, DECK_MAX_SIZE> cardDataList = CardFactory::GetInstance().GetDeck(aDeckXmlFile);
 	myDeckCards.Allocate(DECK_MAX_SIZE);
 	myOwnedCards.Clear();
-	myOwnedCards.Add(Card());
+	myOwnedCards.Add(Card(this));
 	myOwnedCards[0].LoadCard(cardDataList[0]);
 
 	CU::Matrix44<float> cardOrientation = CU::Matrix44<float>::CreateRotateAroundY(PI);
 
 	for (int i = 1; i < cardDataList.Size(); ++i)
 	{
-		myOwnedCards.Add(Card());
+		myOwnedCards.Add(Card(this));
 		myOwnedCards[i].LoadCard(cardDataList[i]);
 
 		myDeckCards.Add(&myOwnedCards.GetLast());

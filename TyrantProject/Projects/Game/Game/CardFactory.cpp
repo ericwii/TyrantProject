@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CardFactory.h"
+#include "AllAbilities.h"
 
 using namespace tinyxml2;
 
@@ -96,10 +97,10 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 {
 	CardData aCardData;
 
-	aCardData.name = aElement->Attribute("name");
-	aCardData.illustrationPath = illustrationStartPath + aElement->Attribute("illustration");
+	aCardData.name = ReadStringElement(aElement->FirstChildElement("name"));
+	aCardData.illustrationPath = illustrationStartPath + ReadStringElement(aElement->FirstChildElement("illustration"));
 
-	string faction = aElement->Attribute("faction");
+	string faction = ReadStringElement(aElement->FirstChildElement("faction"));
 	if (faction == "bloodthirsty")
 	{
 		aCardData.faction = eCardFaction::BloodThirsty;
@@ -124,8 +125,8 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	{
 		aCardData.faction = eCardFaction::Action;
 	}
-
-	string cardType = aElement->Attribute("cardType");
+	
+	string cardType = ReadStringElement(aElement->FirstChildElement("cardType"));
 	if (cardType == "assault")
 	{
 		aCardData.cardType = eCardType::Assault;
@@ -142,8 +143,8 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	{
 		aCardData.cardType = eCardType::Commander;
 	}
-
-	string rarity = aElement->Attribute("rarity");
+	
+	string rarity = ReadStringElement(aElement->FirstChildElement("rarity"));
 	if (rarity == "rare")
 	{
 		aCardData.rarity = eRarity::Rare;
@@ -160,18 +161,20 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	{
 		aCardData.rarity = eRarity::Common;
 	}
-
-	aCardData.unique = aElement->BoolAttribute("unique");
-	aCardData.health = static_cast<char>(aElement->IntAttribute("health"));
-
+	
+	aCardData.unique = ReadBoolElement(aElement->FirstChildElement("unique"));
+	aCardData.health = static_cast<char>(ReadIntElement(aElement->FirstChildElement("health")));
+	
 	if (aCardData.cardType == eCardType::Assault || aCardData.cardType == eCardType::Structure)
 	{
-		aCardData.cooldown = static_cast<char>(aElement->IntAttribute("cooldown"));
+		aCardData.cooldown = static_cast<char>(ReadIntElement(aElement->FirstChildElement("cooldown")));
 	}
 	if (aCardData.cardType == eCardType::Assault)
 	{
-		aCardData.attack = static_cast<char>(aElement->IntAttribute("attack"));
+		aCardData.attack = static_cast<char>(ReadIntElement(aElement->FirstChildElement("attack")));
 	}
+
+	LoadCardAbilities(aCardData, aElement);
 
 	myInstance->myCardDatas[aCardData.name.c_str()] = aCardData;
 }
@@ -188,4 +191,66 @@ void CardFactory::LoadCardsList(const string & anXmlFile)
 	{
 		LoadCardData(element);
 	}
+}
+
+void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aCardElement)
+{
+	XMLElement* currentElement = aCardElement->FirstChildElement("skill");
+
+	string currentName;
+	char currentNumber = 0;
+	string currentSuffix;
+	for (int i = 0; i < 3; ++i)
+	{
+		if (currentElement != nullptr)
+		{
+			currentName = currentElement->Attribute("name");
+			if (currentElement->Attribute("number") != nullptr)
+			{
+				currentNumber = static_cast<char>(currentElement->IntAttribute("number"));
+			}
+			if (currentElement->Attribute("suffix") != nullptr)
+			{
+				currentSuffix = currentElement->Attribute("suffix");
+			}
+
+			AbilityBase* newAbility = GetAbility(currentName, currentSuffix, currentNumber);
+			if (newAbility != nullptr)
+			{
+				someData.abilities.Add(newAbility);
+			}
+			currentElement = currentElement->NextSiblingElement("skill");
+			currentSuffix = "";
+			currentNumber = 0;
+		}
+	}
+}
+
+AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix, char aNumber)
+{
+	if (aName == "strike")
+	{
+		return new StrikeAbility(aSuffix, aNumber);
+	}
+
+	return nullptr;
+}
+
+
+
+const char* CardFactory::ReadStringElement(tinyxml2::XMLElement* aElement)
+{
+	return aElement->FirstChild()->Value();
+}
+
+int CardFactory::ReadIntElement(tinyxml2::XMLElement* aElement)
+{
+	const char* intString = aElement->FirstChild()->Value();
+	return std::stoi(intString);
+}
+
+bool CardFactory::ReadBoolElement(tinyxml2::XMLElement* aElement)
+{
+	string boolString = aElement->FirstChild()->Value();
+	return boolString == "true";
 }

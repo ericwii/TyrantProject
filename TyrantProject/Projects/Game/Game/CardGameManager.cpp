@@ -2,6 +2,7 @@
 #include "CardGameManager.h"
 #include "Player.h"
 #include "AnimationStack.h"
+#include "AbilityBase.h"
 
 CardGameManager* CardGameManager::instance = new CardGameManager();
 AnimationData attackAnimation
@@ -128,13 +129,25 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 				AnimationStack::AddAnimation(attackAnimation, position, size, PI);
 			}
 
+			OnComingAction attackAction;
+			attackAction.source = currentCard;
+			attackAction.number = currentCard->GetAttack();
+			attackAction.hostile = true;
+
+			Card* defendingCard;
 			if (aDefender.myAssaultCards.Size() > myCurrentAttackerIndex)
 			{
-				aDefender.myAssaultCards[myCurrentAttackerIndex]->TakeDamage(currentCard->GetAttack());
+				defendingCard = aDefender.myAssaultCards[myCurrentAttackerIndex];
 			}
 			else
 			{
-				aDefender.myComander->TakeDamage(currentCard->GetAttack());
+				defendingCard = aDefender.myComander;
+			}
+
+			defendingCard->OnAttacked(attackAction);
+			if (attackAction.number > 0 && attackAction.target != nullptr)
+			{
+				attackAction.target->TakeDamage(attackAction.number);
 
 				if (aDefender.CommanderIsDead())
 				{

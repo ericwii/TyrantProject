@@ -2,8 +2,13 @@
 #include "AbilityBase.h"
 
 
-AbilityBase::AbilityBase()
+AbilityBase::AbilityBase() : myNumber(0)
 {
+}
+
+AbilityBase::AbilityBase(const string& aSuffix, char aNumber) : mySuffix(aSuffix), myNumber(aNumber)
+{
+
 }
 
 AbilityBase::~AbilityBase()
@@ -11,9 +16,10 @@ AbilityBase::~AbilityBase()
 }
 
 
-void AbilityBase::OnPlay() {}
-void AbilityBase::OnDeath() {}
-void AbilityBase::OnAttacked() {}
-void AbilityBase::OnDamaged() {}
-void AbilityBase::OnAbilityTageted() {}
-void AbilityBase::OnKill() {}
+void AbilityBase::OnPlay(Card* aCard) { aCard; }
+void AbilityBase::OnDeath(Card* aCard) { aCard; }
+void AbilityBase::OnDamaged(Card* aCard) { aCard; }
+void AbilityBase::OnKill(Card* aCard) { aCard; }
+void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
+void AbilityBase::OnAttacked(OnComingAction& anAction) { anAction; }
+void AbilityBase::OnTargeted(OnComingAction& anAction) { anAction; }

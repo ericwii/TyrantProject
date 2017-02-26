@@ -25,6 +25,7 @@ public:
 	int ChooseCardToPlay();
 
 	inline bool CommanderIsDead();
+	inline Player* GetOpponent();
 
 private:
 	void RepositionPlayedCards();
@@ -47,4 +48,9 @@ private:
 inline bool Player::CommanderIsDead()
 {
 	return myComander->GetHealth() < 1;
+}
+
+inline Player* Player::GetOpponent()
+{
+	return myOpponent;
 }

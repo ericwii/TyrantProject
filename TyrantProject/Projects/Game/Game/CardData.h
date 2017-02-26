@@ -42,6 +42,6 @@ struct CardData
 	CU::VectorOnStack<AbilityBase*, 3> abilities;
 	bool unique = false;
 	char cooldown = 0;
-	char attack = 0;
-	char health = 0;
+	char attack = 1;
+	char health = 1;
 };
