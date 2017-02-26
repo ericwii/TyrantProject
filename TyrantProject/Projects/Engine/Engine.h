@@ -19,6 +19,7 @@ public:
 	void PresentBackBuffer();
 	void ResizeScreen(const int aWidth, const int aHeight, bool aKeepRelativeSize = false);
 	void RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale = 1.f);
+	void RenderDebugLine(Vector2<float> aPoint, Vector2<float> aSecondPoint, Vector4<float> aColor = Vector4<float>(1.f, 0, 0, 1.f));
 
 	inline DirectX& GetDirectX();
 	inline TextureContainer& GetTextureContainer();
@@ -33,6 +34,7 @@ private:
 	~Engine();
 
 	void OnStart();
+	void InitDebugLine();
 
 	DirectX directX;
 	TextureContainer myTextureContainer;
@@ -40,8 +42,11 @@ private:
 	FontContainer myFontContainer;
 	Camera myCamera;
 	Text2D myDebugText;
+	VertexBufferWrapper myDebugLineVertexBuffer;
 	Vector2<float> myResolution;
-
+	VertexPositionColor myDebugLineVertexes[2];
+	Effect* myDebugLineEffect;
+	ID3D11InputLayout* myDebugLineInputLayout;
 	float clearColor[4];
 	static Engine* instance;
 };

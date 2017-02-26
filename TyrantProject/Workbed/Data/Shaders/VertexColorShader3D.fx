@@ -1,7 +1,4 @@
-//#include "ShaderVariables.fx"
-matrix World;
-matrix View;
-matrix Projection;
+#include "Utilities/ShaderVariables.fx"
 
 struct VS_INPUT
 {

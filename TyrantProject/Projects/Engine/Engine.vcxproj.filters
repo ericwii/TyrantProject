@@ -218,14 +218,17 @@
     <FxCompile Include="..\..\Workbed\Data\Shaders\TextShader3D.fx">
       <Filter>Shading\Shaders\3D</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader.fx">
-      <Filter>Shading\Shaders\3D</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\SpriteShader.fx">
       <Filter>Shading\Shaders\2D</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\AnimationShader.fx">
       <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader3D.fx">
+      <Filter>Shading\Shaders\3D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader2D.fx">
+      <Filter>Shading\Shaders\2D</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

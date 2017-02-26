@@ -42,6 +42,9 @@
     <ClCompile Include="StrikeAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="CardHand.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -90,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="AllAbilities.h">
       <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CardHand.h">
+      <Filter>CardGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

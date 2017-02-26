@@ -2,7 +2,8 @@
 
 enum class eEffectType
 {
-	VertexColored,
+	VertexColored3D,
+	VertexColored2D,
 	UnTextured,
 	Textured,
 	Card,

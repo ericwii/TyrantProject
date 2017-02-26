@@ -34,10 +34,16 @@ Effect* EffectContainer::GetEffectFromType(const eEffectType anEffectType)
 
 	switch (anEffectType)
 	{
-		case(eEffectType::VertexColored) :
+		case(eEffectType::VertexColored3D) :
 		{	
 			newEffect = new Effect();
-			newEffect->Init("Data/Shaders/VertexColorShader.fx");
+			newEffect->Init("Data/Shaders/VertexColorShader3D.fx");
+			break;
+		}
+		case(eEffectType::VertexColored2D) :
+		{
+			newEffect = new Effect();
+			newEffect->Init("Data/Shaders/VertexColorShader2D.fx");
 			break;
 		}
 		case(eEffectType::UnTextured) :

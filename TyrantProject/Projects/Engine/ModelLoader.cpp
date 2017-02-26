@@ -5,7 +5,7 @@
 
 Model* ModelLoader::LoadDebugCube(float aSize)
 {
-	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored);
+	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored3D);
 	if (newEffect == nullptr)
 	{
 		return nullptr;
@@ -104,7 +104,7 @@ Model* ModelLoader::LoadDebugCube(float aSize)
 
 Model* ModelLoader::LoadDebugTriangle(float aSize)
 {
-	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored);
+	Effect* newEffect = Engine::GetInstance()->GetEffectContainer().GetEffect(eEffectType::VertexColored3D);
 	if (newEffect == nullptr)
 	{
 		return nullptr;

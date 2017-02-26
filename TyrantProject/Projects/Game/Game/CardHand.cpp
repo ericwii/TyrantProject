@@ -4,6 +4,8 @@
 
 Vector2<float> canvasSize(1.5f, 2.0f);
 
+Vector2<float> mousePosition;
+
 CCardHand::CCardHand()
 {
 	myCards.Allocate(4);
@@ -26,12 +28,8 @@ void CCardHand::Render()
 		myCards[i]->Render();
 	}
 
-	Vector2<float> mousePosition;
-
 	mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
-	mousePosition.x /= Engine::GetInstance()->GetResolution().x;
-	mousePosition.y /= Engine::GetInstance()->GetResolution().y;
-	//mousePosition = (mousePosition * 2) - 1;
+	mousePosition /= Engine::GetInstance()->GetResolution();
 
 	string temp;
 	temp += "X: ";
@@ -41,6 +39,11 @@ void CCardHand::Render()
 	Engine::GetInstance()->RenderDebugText(temp, {0,0}, 0.5f);
 
 	Engine::GetInstance()->RenderDebugText("M", mousePosition);
+
+	//Vector3<float> lastPosition = myCards[0]->GetPosition();
+	//lastPosition.x = mousePosition.x * 5.f;
+	//lastPosition.y = mousePosition.y * 5.f;
+	//myCards[0]->SetPosition(lastPosition);
 }
 
 CU::GrowingArray<Card*>& CCardHand::GetCards()
@@ -50,7 +53,13 @@ CU::GrowingArray<Card*>& CCardHand::GetCards()
 
 Card * CCardHand::ChooseCardToPlay()
 {
-	return myCards[HitBoxCheck()];
+	int hitIndex = HitBoxCheck();
+
+	if (hitIndex >= 0)
+	{
+		return myCards[hitIndex];
+	}
+	return nullptr;
 }
 
 void CCardHand::LoadGUI()
@@ -63,27 +72,21 @@ void CCardHand::LoadGUI()
 int CCardHand::HitBoxCheck()
 {
 	Vector4<float> rectangle;
-	Vector2<float> mousePosition;
 	
-	for (int i = 0; i < myCards.Size(); i++)
-	{
-		mousePosition = myCards[i]->GetPosition();
-		rectangle = myCards[i]->GetPosition() * Engine::GetInstance()->GetCamera().GetProjection();
-		//Vector2<float> temp = canvasSize * Engine::GetInstance()->GetCamera().GetProjection();
-		rectangle.z = canvasSize.x;
-		rectangle.w = canvasSize.y;
 
-
-
-		mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
-		mousePosition.x /= Engine::GetInstance()->GetResolution().x;
-		mousePosition.y /= Engine::GetInstance()->GetResolution().y;
-		mousePosition = (mousePosition * 2) - 1;
-
-		if (Collision::PointVsAABB(mousePosition,rectangle) == true)
-		{
-			return i;
-		}
-	}
+	
+	//for (int i = 0; i < myCards.Size(); i++)
+	//{
+	//	//mousePosition = myCards[i]->GetPosition();
+	//	//rectangle = myCards[i]->GetPosition() * Engine::GetInstance()->GetCamera().GetProjection();
+	//	////Vector2<float> temp = canvasSize * Engine::GetInstance()->GetCamera().GetProjection();
+	//	//rectangle.z = canvasSize.x;
+	//	//rectangle.w = canvasSize.y;
+	//
+	//	if (Collision::PointVsAABB(mousePosition,rectangle) == true)
+	//	{
+	//		return i;
+	//	}
+	//}
 	return 0;
 }
