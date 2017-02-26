@@ -1,5 +1,7 @@
 #pragma once
 
+class Card;
+
 enum eGamePhase
 {
 	Upkeep,
@@ -34,7 +36,7 @@ private:
 
 	Player* myAttacker;
 	Player* myDefender;
-	int myChoosenCardIndex;
+	Card* myChoosenCard;
 	int myCurrentAttackerIndex;
 	bool myPhaseUpdateDone;
 };
