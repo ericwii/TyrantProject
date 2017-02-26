@@ -1,5 +1,6 @@
 #pragma once
 #include "Card.h"
+#include "CardHand.h"
 
 
 enum class ePlayerType
@@ -22,7 +23,7 @@ public:
 
 	void Render();
 
-	int ChooseCardToPlay();
+	Card* ChooseCardToPlay();
 
 	inline bool CommanderIsDead();
 	inline Player* GetOpponent();
@@ -32,8 +33,8 @@ private:
 	void PlayCard(Card* aCard);
 	void ShuffleDeck();
 	void UpdateHand();
-
-	CU::GrowingArray<Card*> myHand;
+	
+	CCardHand myHand;
 	CU::GrowingArray<Card*> myDeckCards;
 	CU::GrowingArray<Card*> myAssaultCards;
 	CU::GrowingArray<Card*> myStructureCards;

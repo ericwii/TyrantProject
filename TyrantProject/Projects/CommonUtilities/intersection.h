@@ -369,6 +369,26 @@ namespace Collision
 
 		return false;
 	}
+
+	static bool PointVsAABB(Vector2<float>& aPoint, Vector4<float> aRectangle)
+	{
+		/*if (aPoint.x < aRectangle.x + aRectangle.z &&
+			aPoint.x > aRectangle.x &&
+			aPoint.y < aRectangle.y + aRectangle.w &&
+			aPoint.y > aRectangle.y)
+		{
+			return true;
+		}
+
+		return false;*/
+
+		if (aPoint.x < aRectangle.x) return false;
+		if (aPoint.y < aRectangle.y) return false;
+		if (aPoint.x >= aRectangle.x + aRectangle.z) return false;
+		if (aPoint.y >= aRectangle.y + aRectangle.w) return false;
+
+		return true;
+	}
 }
 
 #pragma warning (pop)

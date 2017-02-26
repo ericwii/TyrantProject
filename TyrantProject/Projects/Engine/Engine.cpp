@@ -67,8 +67,8 @@ void Engine::ResizeScreen(const int aWidth, const int aHeight, bool aKeepRelativ
 void Engine::RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale)
 {
 	myDebugText.SetPosition(aPosition);
-	myDebugText.SetText(someText);
 	myDebugText.SetCharacterScale(aScale);
+	myDebugText.SetText(someText);
 	myDebugText.Render();
 }
 

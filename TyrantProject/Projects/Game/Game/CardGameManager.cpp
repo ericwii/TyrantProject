@@ -2,6 +2,7 @@
 #include "CardGameManager.h"
 #include "Player.h"
 #include "AnimationStack.h"
+#include "Card.h"
 #include "AbilityBase.h"
 
 CardGameManager* CardGameManager::instance = new CardGameManager();
@@ -59,7 +60,7 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 
 	if (instance->AllActionsDone(anActivePlayer, aOtherPlayer) == true && instance->myPhaseUpdateDone)
 	{
-		instance->myChoosenCardIndex = -1;
+		instance->myChoosenCard = nullptr;
 		instance->myCurrentAttackerIndex = 0;
 		instance->myPhaseUpdateDone = false;
 		return true;
@@ -81,17 +82,16 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 
 bool CardGameManager::PlayCard(Player& anActivePlayer)
 {
-	if (anActivePlayer.myHand.Size() == 0)
+	if (anActivePlayer.myHand.GetCards().Size() == 0)
 	{
 		return true;
 	}
 
-	myChoosenCardIndex = anActivePlayer.ChooseCardToPlay();
+	myChoosenCard = anActivePlayer.ChooseCardToPlay();
 
-	if (myChoosenCardIndex >= 0)
+	if (myChoosenCard != nullptr)
 	{
-		Card* cardToPlay = anActivePlayer.myHand[myChoosenCardIndex];
-		anActivePlayer.PlayCard(cardToPlay);
+		anActivePlayer.PlayCard(myChoosenCard);
 		return true;
 	}
 
@@ -192,7 +192,7 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 
 //Private Methods
 
-CardGameManager::CardGameManager() : myChoosenCardIndex(-1), myCurrentAttackerIndex(0), myPhaseUpdateDone(false)
+CardGameManager::CardGameManager() : myCurrentAttackerIndex(0), myPhaseUpdateDone(false)
 {
 }
 
