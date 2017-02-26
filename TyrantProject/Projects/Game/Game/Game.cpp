@@ -83,6 +83,9 @@ void Game::Render()
 
 	myStates.GetLast()->Render();
 
+	//Engine::GetInstance()->RenderDebugLine({ 0.1f, 0.1f }, { 0.9f, 0.9f });
+
+
 	myEngineInstance->PresentBackBuffer();
 }
 

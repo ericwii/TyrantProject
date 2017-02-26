@@ -20,10 +20,6 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 	output.Pos = input.Pos;
 	output.Pos.y *= -1.f;
 
-	output.Pos *= 2.f;
-	output.Pos.x -= 1.f;
-	output.Pos.y += 1.f;
-
 	output.Pos.z = 0;
 	output.Pos.w = 1.f;
 	output.Color = input.Color;

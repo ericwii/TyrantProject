@@ -27,7 +27,7 @@ GS_INPUT Vertex_Shader(VS_INPUT input)
 {
 	GS_INPUT output = (GS_INPUT)0;
 
-	output.Pos = input.Pos * 2.f - 1.f;
+	output.Pos = input.Pos;
 	output.Pos.y *= -1;
 	output.Pos.z = 0;
 	output.Pos.w = 1;

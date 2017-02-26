@@ -36,7 +36,7 @@ void CCardHand::Render()
 	temp += mousePosition.x;
 	temp += " Y: ";
 	temp += mousePosition.y;
-	Engine::GetInstance()->RenderDebugText(temp, {0,0}, 0.5f);
+	Engine::GetInstance()->RenderDebugText(temp, {-1.f,-1.f}, 0.5f);
 
 	Engine::GetInstance()->RenderDebugText("M", mousePosition);
 
