@@ -26,8 +26,6 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myPlayerType = aPlayerType;
 	Vector3<float> commanderPosition(-2.7f, -3.7f, 0);
 
-	myHand.Allocate(3);
-
 	if (myPlayerType != ePlayerType::User)
 	{
 		commanderPosition.y *= -1.f;
@@ -86,17 +84,14 @@ void Player::Render()
 
 	if (myPlayerType == ePlayerType::User && myShouldRenderhand == true)
 	{
-		for (int i = 0; i < myHand.Size(); i++)
-		{
-			myHand[i]->Render();
-		}
+		myHand.Render();
 	}
 }
 
-int Player::ChooseCardToPlay()
+Card* Player::ChooseCardToPlay()
 {
 	myShouldRenderhand = true;
-	if (myHand.Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
+	if (myHand.GetCards().Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
 
 	if (myPlayerType == ePlayerType::User)
 	{
@@ -104,16 +99,16 @@ int Player::ChooseCardToPlay()
 		{
 			//make hitbox check on the cards in the hand and return it's index
 			myShouldRenderhand = false;
-			return 0;
+			return myHand.ChooseCardToPlay();
 		}
 	}
 	else if (myPlayerType == ePlayerType::AI_Opponent)
 	{
 		myShouldRenderhand = false;
-		return 0;
+		return myHand.ChooseCardToPlay();
 	}
 
-	return -1;
+	return nullptr;
 }
 
 
@@ -153,7 +148,7 @@ void Player::PlayCard(Card* aCard)
 	lerpTarget.SetPosition(position);
 	
 	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
-	myHand.RemoveNonCyclic(aCard);
+	myHand.GetCards().RemoveNonCyclic(aCard);
 	if (aCard != nullptr)
 	{
 		UpdateHand();
@@ -200,17 +195,17 @@ void Player::UpdateHand()
 
 	if (myDeckCards.Size() > 0)
 	{
-		myHand.Add(myDeckCards.GetLast());
+		myHand.GetCards().Add(myDeckCards.GetLast());
 		myDeckCards.RemoveNonCyclic(myDeckCards.GetLast());
 	}
 
 	Vector2<float> position;
-	for (int i = 0; i < myHand.Size(); i++)
+	for (int i = 0; i < myHand.GetCards().Size(); i++)
 	{
 		position = handStartPosition;
 		position.x += playedCardsOffset*i;
-		myHand[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
-		myHand[i]->SetPosition(position);
+		myHand.GetCards()[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
+		myHand.GetCards()[i]->SetPosition(position);
 	}
 	
 }
