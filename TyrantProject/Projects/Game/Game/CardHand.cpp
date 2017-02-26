@@ -68,9 +68,12 @@ int CCardHand::HitBoxCheck()
 	for (int i = 0; i < myCards.Size(); i++)
 	{
 		mousePosition = myCards[i]->GetPosition();
-		rectangle = myCards[i]->GetPosition()/5;
+		rectangle = myCards[i]->GetPosition() * Engine::GetInstance()->GetCamera().GetProjection();
+		//Vector2<float> temp = canvasSize * Engine::GetInstance()->GetCamera().GetProjection();
 		rectangle.z = canvasSize.x;
 		rectangle.w = canvasSize.y;
+
+
 
 		mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
 		mousePosition.x /= Engine::GetInstance()->GetResolution().x;
