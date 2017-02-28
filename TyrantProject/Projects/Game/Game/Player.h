@@ -28,6 +28,9 @@ public:
 	inline bool CommanderIsDead();
 	inline Player* GetOpponent();
 
+	inline CU::GrowingArray<Card*>& GetAssaultCards();
+	inline CU::GrowingArray<Card*>& GetStructureCards();
+
 private:
 	void RepositionPlayedCards();
 	void PlayCard(Card* aCard);
@@ -54,4 +57,14 @@ inline bool Player::CommanderIsDead()
 inline Player* Player::GetOpponent()
 {
 	return myOpponent;
+}
+
+inline CU::GrowingArray<Card*>& Player::GetAssaultCards()
+{
+	return myAssaultCards;
+}
+
+inline CU::GrowingArray<Card*>& Player::GetStructureCards()
+{
+	return myStructureCards;
 }

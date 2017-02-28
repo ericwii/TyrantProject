@@ -53,7 +53,6 @@ void Card::Update(float aDeltaTime)
 		if (myCurrentDeathFadeTime >= deathFadeTime)
 		{
 			alpha = 0;
-			myIsDying = false;
 			myIsDead = true;
 		}
 
@@ -137,6 +136,14 @@ void Card::TakeDamage(char someDamage)
 	string health;
 	health += myHealth;
 	myHealthText.SetText(health);
+}
+
+void Card::PreCombat()
+{
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		myCardData->abilities[i]->OnPreCombat(this);
+	}
 }
 
 void Card::OnAttacked(OnComingAction& anAction)

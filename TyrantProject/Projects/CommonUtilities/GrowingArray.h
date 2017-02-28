@@ -451,7 +451,6 @@ inline void CU::GrowingArray<ObjectType>::RemoveNonCyclicAtIndex(const int anInd
 		myListPointer[anIndex + i] = myListPointer[anIndex + i + 1];
 	}
 	--myCurrentSize;
-	myListPointer[myCurrentSize] = 0;
 }
 
 template<typename ObjectType>

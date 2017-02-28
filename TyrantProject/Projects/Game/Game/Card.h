@@ -19,6 +19,7 @@ public:
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
 
+	void PreCombat();
 	void OnAttacked(OnComingAction& anAction);
 	void OnTargeted(OnComingAction& anAction);
 

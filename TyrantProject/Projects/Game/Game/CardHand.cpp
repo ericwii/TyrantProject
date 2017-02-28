@@ -28,17 +28,17 @@ void CCardHand::Render()
 		myCards[i]->Render();
 	}
 
-	mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
-	mousePosition /= Engine::GetInstance()->GetResolution();
-
-	string temp;
-	temp += "X: ";
-	temp += mousePosition.x;
-	temp += " Y: ";
-	temp += mousePosition.y;
-	Engine::GetInstance()->RenderDebugText(temp, {-1.f,-1.f}, 0.5f);
-
-	Engine::GetInstance()->RenderDebugText("M", mousePosition);
+	//mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
+	//mousePosition /= Engine::GetInstance()->GetResolution();
+	//
+	//string temp;
+	//temp += "X: ";
+	//temp += mousePosition.x;
+	//temp += " Y: ";
+	//temp += mousePosition.y;
+	//Engine::GetInstance()->RenderDebugText(temp, {-1.f,-1.f}, 0.5f);
+	//
+	//Engine::GetInstance()->RenderDebugText("M", mousePosition);
 
 	//Vector3<float> lastPosition = myCards[0]->GetPosition();
 	//lastPosition.x = mousePosition.x * 5.f;

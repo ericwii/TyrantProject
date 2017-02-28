@@ -83,11 +83,11 @@ void CardGameState::Render()
 	{
 		if (myPlayerOpponent.CommanderIsDead())
 		{
-			Engine::GetInstance()->RenderDebugText("You Win", Vector2<float>(0.43f,0.47f));
+			Engine::GetInstance()->RenderDebugText("You Win", Vector2<float>(-0.07f,-0.03f));
 		}
 		else
 		{
-			Engine::GetInstance()->RenderDebugText("You Lose", Vector2<float>(0.4f, 0.47f));
+			Engine::GetInstance()->RenderDebugText("You Lose", Vector2<float>(-0.1f, -0.03f));
 		}
 	}
 }
