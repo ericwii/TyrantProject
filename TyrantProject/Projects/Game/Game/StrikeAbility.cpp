@@ -7,15 +7,17 @@ AnimationData strikeAnimation = AnimationData
 		"Data/Textures/strikeAnimation.png",
 		18,
 		4,
-		16.f,
+		30.f,
 		false
 );
+
+float strikeDelay = 0.2f;
 
 
 
 StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber) : AbilityBase(aSuffix, aNumber)
 {
-	myIconTexturePath = "Data/Textures/Icons/strikeIcon.png";
+	iconTexturePath = "Data/Textures/Icons/strikeIcon.png";
 }
 
 StrikeAbility::~StrikeAbility()
@@ -23,23 +25,72 @@ StrikeAbility::~StrikeAbility()
 }
 
 
-
-void StrikeAbility::OnPreCombat(Card* aCard)
+void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	if (mySuffix.Lenght() == 0 && aCard->GetCooldown() < 1)
+	aCaster;
+	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		//Player* opponent = aCard->GetOwner()->GetOpponent();
+		if (!someTargets[i]->IsDying())
+		{
+			someTargets[i]->TakeDamage(myNumber);
+		}
 	}
 }
 
-void StrikeAbility::OnAttacked(OnComingAction& anAction)
+void StrikeAbility::OnPreCombat(Card* aCard)
 {
-	anAction;
+	if (aCard->GetCooldown() < 1)
+	{
+		Player* opponent = aCard->GetOwner()->GetOpponent();
+		if (mySuffix.Lenght() == 0)
+		{
+			Card* target = FindTarget(opponent->GetAssaultCards());
+
+			if (target != nullptr)
+			{
+				target = target->OnTargeted();
+				if (target != nullptr)
+				{
+					AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
+					AbilityStack::AddAbility(this, aCard, target, strikeDelay);
+				}
+			}
+		}
+		else if (mySuffix == "all")
+		{
+			Card* currentTarget;
+			CU::GrowingArray<Card*> targets = opponent->GetAssaultCards();
+			for (int i = targets.Size() - 1; i >= 0; --i)
+			{
+				currentTarget = targets[i];
+				if (!currentTarget->IsDying())
+				{
+					currentTarget = currentTarget->OnTargeted();
+				}
+
+				if (currentTarget == nullptr || currentTarget->IsDying())
+				{
+					targets.RemoveNonCyclicAtIndex(i);
+				}
+				else
+				{
+					AnimationManager::AddAnimation(strikeAnimation, currentTarget->GetPosition(), strikeAnimationSize);
+				}
+			}
+			AbilityStack::AddAbility(this, aCard, targets, strikeDelay);
+		}
+	}
+}
+
+void StrikeAbility::OnAttacked(char& someDamage)
+{
+	someDamage;
 	if (mySuffix == "on attacked")
 	{
 
 	}
 }
+
 
 
 //Private Methods

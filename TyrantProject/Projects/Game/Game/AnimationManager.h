@@ -1,6 +1,6 @@
 #pragma once
 
-class AnimationStack
+class AnimationManager
 {
 public:
 	static void Update(float aDeltaTime);

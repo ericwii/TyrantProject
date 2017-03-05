@@ -102,8 +102,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbilityBase.h" />
+    <ClInclude Include="AbilityStack.h" />
     <ClInclude Include="AllAbilities.h" />
-    <ClInclude Include="AnimationStack.h" />
+    <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardData.h" />
     <ClInclude Include="CardFactory.h" />
@@ -122,7 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbilityBase.cpp" />
-    <ClCompile Include="AnimationStack.cpp" />
+    <ClCompile Include="AbilityStack.cpp" />
+    <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CardGameState.cpp" />

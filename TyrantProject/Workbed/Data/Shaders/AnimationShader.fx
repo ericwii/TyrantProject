@@ -30,7 +30,7 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 	float x = ((input.Pos.x / abs(input.Pos.x)) + 1) / 2;
 	float y = ((input.Pos.y / abs(input.Pos.y)) + 1) / -2;
 	output.TexUV.x += FrameSize.x * x;
-	output.TexUV.y += FrameSize.y * y;
+	output.TexUV.y += FrameSize.y * y + FrameSize.y;
 
 	return output;
 }

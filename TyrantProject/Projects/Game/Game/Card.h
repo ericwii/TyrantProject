@@ -19,15 +19,15 @@ public:
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
 
-	void PreCombat();
-	void OnAttacked(OnComingAction& anAction);
-	void OnTargeted(OnComingAction& anAction);
+	void OnAttacked(char& someDamage);
+	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
+	inline CU::VectorOnStack<AbilityBase*, 3> GetAbilities();
 	inline eCardType GetCardType();
 	inline CU::Matrix44<float>& GetOrientation();
 	inline Vector2<float> GetPosition();
@@ -57,6 +57,7 @@ private:
 
 	CU::Matrix44<float> myLerpStart;
 	CU::Matrix44<float> myLerpTarget;
+	CU::VectorOnStack<Instance, 3> myAbilityIcons;
 	float myCurrentLerpTime;
 	float myTargetLerpTime;
 	float myCurrentDeathFadeTime;
@@ -72,9 +73,13 @@ private:
 	void LoadModels();
 	void LoadText();
 	void LoadCanvas();
-	void LoadCardTypeIcon();
+	void LoadIcons();
 };
 
+inline CU::VectorOnStack<AbilityBase*, 3> Card::GetAbilities()
+{
+	return myCardData->abilities;
+}
 
 inline eCardType Card::GetCardType()
 {

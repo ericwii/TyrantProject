@@ -25,3 +25,5 @@
 
 #include "CardFactory.h"
 #include "XMLReader.h"
+#include "AbilityStack.h"
+#include "AnimationManager.h"

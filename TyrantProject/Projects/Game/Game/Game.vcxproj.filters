@@ -27,9 +27,6 @@
     <ClCompile Include="CardGameState.cpp">
       <Filter>GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationStack.cpp">
-      <Filter>CardGame</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
@@ -43,6 +40,12 @@
       <Filter>Abilities</Filter>
     </ClCompile>
     <ClCompile Include="CardHand.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityStack.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,9 +79,6 @@
     <ClInclude Include="CardGameState.h">
       <Filter>GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationStack.h">
-      <Filter>CardGame</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>CardGame</Filter>
     </ClInclude>
@@ -95,6 +95,12 @@
       <Filter>Abilities</Filter>
     </ClInclude>
     <ClInclude Include="CardHand.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityStack.h">
       <Filter>CardGame</Filter>
     </ClInclude>
   </ItemGroup>

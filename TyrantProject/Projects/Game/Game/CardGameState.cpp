@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CardGameState.h"
-#include "AnimationStack.h"
 #include "DamageTextManager.h"
 
 
@@ -63,8 +62,9 @@ void CardGameState::Update()
 	}
 
 	float deltaTime = Time::DeltaTime();
-	AnimationStack::Update(deltaTime);
+	AnimationManager::Update(deltaTime);
 	DamageTextManager::Update(deltaTime);
+	AbilityStack::Update(deltaTime);
 }
 
 void CardGameState::Render()
@@ -76,7 +76,7 @@ void CardGameState::Render()
 	myPlayerOpponent.Render();
 	myPlayerUser.Render();
 
-	AnimationStack::Render();
+	AnimationManager::Render();
 	DamageTextManager::Render();
 
 	if (myGameIsOver)

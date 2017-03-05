@@ -59,8 +59,6 @@ void Animation::Update(float aDeltaTime)
 				myShouldRender = myLoop;
 			}
 		}
-		EffectData::animationFrameSize = myNormalizedFrameSize;
-		EffectData::animationUV = Vector2<float>(myCurrentFrame_X * myNormalizedFrameSize.x, myCurrentFrame_Y * myNormalizedFrameSize.y);
 	}
 }
 
@@ -68,6 +66,8 @@ void Animation::Render()
 {
 	if (myShouldRender == true)
 	{
+		EffectData::animationFrameSize = myNormalizedFrameSize;
+		EffectData::animationUV = Vector2<float>(myCurrentFrame_X * myNormalizedFrameSize.x, myCurrentFrame_Y * myNormalizedFrameSize.y);
 		myInstance.Render();
 	}
 }

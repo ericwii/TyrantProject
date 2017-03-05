@@ -37,7 +37,9 @@ private:
 	Player* myAttacker;
 	Player* myDefender;
 	Card* myChoosenCard;
-	int myCurrentAttackerIndex;
+	int myCurrentAssaultCardIndex;
+	int myCurrentStructureCardIndex;
+	int myCurrentAbilityIndex;
 	bool myPhaseUpdateDone;
 };
 

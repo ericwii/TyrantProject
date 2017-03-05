@@ -74,6 +74,7 @@ void Card::LoadCard(string aCardName)
 	LoadCanvas();
 	LoadModels();
 	LoadText();
+	LoadIcons();
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
 	myCooldown = myCardData->cooldown;
@@ -86,7 +87,7 @@ void Card::LoadCard(CardData* someData)
 	myCardData = someData;
 	LoadCanvas();
 	LoadModels();
-	LoadCardTypeIcon();
+	LoadIcons();
 	LoadText();
 
 	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
@@ -138,30 +139,26 @@ void Card::TakeDamage(char someDamage)
 	myHealthText.SetText(health);
 }
 
-void Card::PreCombat()
+void Card::OnAttacked(char& someDamage)
 {
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
-		myCardData->abilities[i]->OnPreCombat(this);
+		myCardData->abilities[i]->OnAttacked(someDamage);
 	}
 }
 
-void Card::OnAttacked(OnComingAction& anAction)
+Card* Card::OnTargeted()
 {
-	anAction.target = this;
+	Card* target = this;
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
-		myCardData->abilities[i]->OnAttacked(anAction);
+		if (target == this)
+		{
+			myCardData->abilities[i]->OnTargeted(target);
+		}
 	}
-}
 
-void Card::OnTargeted(OnComingAction& anAction)
-{
-	anAction.target = this;
-	for (int i = 0; i < myCardData->abilities.Size(); ++i)
-	{
-		myCardData->abilities[i]->OnTargeted(anAction);
-	}
+	return target;
 }
 
 
@@ -335,7 +332,7 @@ void Card::LoadCanvas()
 	myCanvas.Init(canvasModel);
 }
 
-void Card::LoadCardTypeIcon()
+void Card::LoadIcons()
 {
 	//Model* cardTypeIcon = nullptr;
 	//
@@ -371,4 +368,20 @@ void Card::LoadCardTypeIcon()
 	//myCardTypeIcon.SetPosition(Vector3<float>(-0.53f, 0.87f, 0));
 	//
 	//myCanvas.AddChild(&myCardTypeIcon);
+
+
+
+
+	float iconSpacing = 0.2f;
+	Model* iconModel;
+	Instance iconInstance;
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		iconModel = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, myCardData->abilities[i]->iconTexturePath);
+		iconInstance.Init(iconModel);
+		iconInstance.SetPosition(Vector3<float>(-0.5f + iconSpacing * i, -0.5f, 0));
+		
+		myAbilityIcons.Add(iconInstance);
+		myCanvas.AddChild(&myAbilityIcons[i]);
+	}
 }

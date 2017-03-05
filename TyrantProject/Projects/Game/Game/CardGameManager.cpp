@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "CardGameManager.h"
 #include "Player.h"
-#include "AnimationStack.h"
 #include "Card.h"
 #include "AbilityBase.h"
 
@@ -61,7 +60,9 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 	if (instance->AllActionsDone(anActivePlayer, aOtherPlayer) == true && instance->myPhaseUpdateDone)
 	{
 		instance->myChoosenCard = nullptr;
-		instance->myCurrentAttackerIndex = 0;
+		instance->myCurrentStructureCardIndex = 0;
+		instance->myCurrentAssaultCardIndex = 0;
+		instance->myCurrentAbilityIndex = 0;
 		instance->myPhaseUpdateDone = false;
 		return true;
 	}
@@ -100,64 +101,99 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 
 bool CardGameManager::PreCombat(Player& anActivePlayer)
 {
-	anActivePlayer;
-	return true;
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	{
+		Card* currentCard = nullptr;
+		CU::VectorOnStack<AbilityBase*,3> currentAbilities;
+		if (myCurrentStructureCardIndex < anActivePlayer.myStructureCards.Size())
+		{
+			currentCard = anActivePlayer.myStructureCards[myCurrentStructureCardIndex];
+			currentAbilities = currentCard->GetAbilities();
+
+			if (myCurrentAbilityIndex < currentAbilities.Size() && currentAbilities[myCurrentAbilityIndex] != nullptr)
+			{
+				currentAbilities[myCurrentAbilityIndex]->OnPreCombat(currentCard);
+				++myCurrentAbilityIndex;
+			}
+			else
+			{
+				++myCurrentStructureCardIndex;
+				myCurrentAbilityIndex = 0;
+			}
+		}
+		else if (myCurrentAssaultCardIndex < anActivePlayer.myAssaultCards.Size())
+		{
+			currentCard = anActivePlayer.myAssaultCards[myCurrentAssaultCardIndex];
+			currentAbilities = currentCard->GetAbilities();
+
+			if (myCurrentAbilityIndex < currentAbilities.Size() && currentAbilities[myCurrentAbilityIndex] != nullptr)
+			{
+				currentAbilities[myCurrentAbilityIndex]->OnPreCombat(currentCard);
+				++myCurrentAbilityIndex;
+			}
+			else
+			{
+				++myCurrentAssaultCardIndex;
+				myCurrentAbilityIndex = 0;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 {
 	Vector2<float> size(2.f, 2.f);
 
-	if (myCurrentAttackerIndex >= anAttacker.myAssaultCards.Size())
+	if (myCurrentAssaultCardIndex >= anAttacker.myAssaultCards.Size())
 	{
 		return true;
 	}
 
-	if (AnimationStack::IsEmpty())
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 	{
-		Card* currentCard = anAttacker.myAssaultCards[myCurrentAttackerIndex];
+		Card* currentCard = anAttacker.myAssaultCards[myCurrentAssaultCardIndex];
 		if (currentCard->GetCooldown() < 1)
 		{
-			Vector3<float> position = anAttacker.myAssaultCards[myCurrentAttackerIndex]->GetOrientation().GetPosition();
-
-			if (position.y < 0)
-			{
-				AnimationStack::AddAnimation(attackAnimation, position, size);
-			}
-			else
-			{
-				AnimationStack::AddAnimation(attackAnimation, position, size, PI);
-			}
-
-			OnComingAction attackAction;
-			attackAction.source = currentCard;
-			attackAction.number = currentCard->GetAttack();
-			attackAction.hostile = true;
-
 			Card* defendingCard;
-			if (aDefender.myAssaultCards.Size() > myCurrentAttackerIndex)
+			if (aDefender.myAssaultCards.Size() > myCurrentAssaultCardIndex && !aDefender.myAssaultCards[myCurrentAssaultCardIndex]->IsDying())
 			{
-				defendingCard = aDefender.myAssaultCards[myCurrentAttackerIndex];
+				defendingCard = aDefender.myAssaultCards[myCurrentAssaultCardIndex];
 			}
 			else
 			{
 				defendingCard = aDefender.myComander;
 			}
 
-			defendingCard->OnAttacked(attackAction);
-			if (attackAction.number > 0 && attackAction.target != nullptr)
+			char finalDamage = currentCard->GetAttack();
+			defendingCard->OnAttacked(finalDamage);
+			if (finalDamage > 0)
 			{
-				attackAction.target->TakeDamage(attackAction.number);
+				Vector3<float> position = anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetOrientation().GetPosition();
+				if (position.y < 0)
+				{
+					AnimationManager::AddAnimation(attackAnimation, position, size);
+				}
+				else
+				{
+					AnimationManager::AddAnimation(attackAnimation, position, size, PI);
+				}
 
+				defendingCard->TakeDamage(finalDamage);
 				if (aDefender.CommanderIsDead())
 				{
-					myCurrentAttackerIndex = anAttacker.myAssaultCards.Size();
+					myCurrentAssaultCardIndex = anAttacker.myAssaultCards.Size();
 					CleanUp(anAttacker, aDefender);
 				}
 			}
 		}
 
-		++myCurrentAttackerIndex;
+		++myCurrentAssaultCardIndex;
 	}
 
 	return false;
@@ -167,7 +203,7 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 {
 	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
 	{
-		if (anActivePlayer.myAssaultCards[i]->IsDead())
+		if (anActivePlayer.myAssaultCards[i]->IsDying())
 		{
 			anActivePlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
 			--i;
@@ -176,7 +212,7 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 
 	for (int i = 0; i < anOpponentPlayer.myAssaultCards.Size(); ++i)
 	{
-		if (anOpponentPlayer.myAssaultCards[i]->IsDead())
+		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
 		{
 			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
 			--i;
@@ -192,7 +228,7 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 
 //Private Methods
 
-CardGameManager::CardGameManager() : myCurrentAttackerIndex(0), myPhaseUpdateDone(false)
+CardGameManager::CardGameManager() : myCurrentAssaultCardIndex(0), myCurrentStructureCardIndex(0), myCurrentAbilityIndex(0), myPhaseUpdateDone(false)
 {
 }
 
@@ -237,5 +273,5 @@ bool CardGameManager::AllActionsDone(Player& aPlayer, Player& aOtherPlayer)
 	int actions = UpdateCards(aPlayer);
 	actions += UpdateCards(aOtherPlayer);
 
-	return actions < 1 && AnimationStack::IsEmpty();
+	return actions < 1 && AnimationManager::IsEmpty() && AbilityStack::IsEmpty();
 }

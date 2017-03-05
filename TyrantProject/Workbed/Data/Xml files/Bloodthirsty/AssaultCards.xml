@@ -96,7 +96,7 @@
 		<cooldown>4</cooldown>
 		<attack>3</attack>
 		<health>9</health>
-		<skill name="strike" number="3"/>
+		<skill name="strike" number="1" suffix="all"/>
 	</card>
 
 </root>
