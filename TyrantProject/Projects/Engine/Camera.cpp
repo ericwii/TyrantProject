@@ -134,6 +134,14 @@ void Camera::SetPosition(const Vector3<float>& aPosition)
 	myOrientation.SetPosition(aPosition);
 }
 
+Vector2<float> Camera::ToScreenPosition(const Vector3<float>& aPosition)
+{
+	Vector4<float> finalPosition = Vector4<float>(aPosition, 1.f) * myOrientation.GetInverse();
+	finalPosition *= myProjection;
+	finalPosition /= finalPosition.w;
+
+	return finalPosition;
+}
 
 //Private methods
 

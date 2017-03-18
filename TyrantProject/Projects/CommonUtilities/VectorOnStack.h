@@ -27,6 +27,8 @@ namespace CommonUtilities
 		inline void DeleteCyclicAtIndex(CountType aItemNumber);
 		inline void RemoveCyclic(const T& aObject);
 		inline void RemoveCyclicAtIndex(CountType aItemNumber);
+		inline void RemoveNonCyclic(const T& aObject);
+		inline void RemoveNonCyclicAtIndex(CountType aItemNumber);
 		inline T& GetLast();
 
 		inline void Clear();
@@ -183,11 +185,46 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyc
 
 
 VectorOnStackTemplate
-inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyclicAtIndex(CountType aItemNumber)
+inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveCyclicAtIndex(CountType anIndex)
 {
 	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
 
-	myList[aItemNumber] = myList[myCurrentSize - 1];
+	myList[anIndex] = myList[myCurrentSize - 1];
+	--myCurrentSize;
+}
+
+VectorOnStackTemplate
+inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveNonCyclic(const T& aObject)
+{
+	int objectIndex = -1;
+
+	for (int i = 0; i < myCurrentSize; ++i)
+	{
+		if (myList[i] == aObject)
+		{
+			objectIndex = i;
+			break;
+		}
+	}
+
+	DEBUG_ASSERT(objectIndex != -1, "Object to remove was not found");
+
+	for (int i = 0; i < myCurrentSize - objectIndex - 1; ++i)
+	{
+		myList[objectIndex + i] = myList[objectIndex + i + 1];
+	}
+	--myCurrentSize;
+}
+
+VectorOnStackTemplate
+inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::RemoveNonCyclicAtIndex(CountType anIndex)
+{
+	DEBUG_ASSERT(aItemNumber < myCurrentSize, "Index is out of bounds");
+
+	for (int i = 0; i < myCurrentSize - anIndex - 1; ++i)
+	{
+		myList[anIndex + i] = myListPointer[anIndex + i + 1];
+	}
 	--myCurrentSize;
 }
 

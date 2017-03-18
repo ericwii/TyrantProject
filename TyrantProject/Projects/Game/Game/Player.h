@@ -23,7 +23,7 @@ public:
 
 	void Render();
 
-	Card* ChooseCardToPlay();
+	bool ChooseCardToPlay(Card*& chosenCard);
 
 	inline bool CommanderIsDead();
 	inline Player* GetOpponent();
@@ -35,9 +35,9 @@ private:
 	void RepositionPlayedCards();
 	void PlayCard(Card* aCard);
 	void ShuffleDeck();
-	void UpdateHand();
+	void DrawCard();
 	
-	CCardHand myHand;
+	CardHand myHand;
 	CU::GrowingArray<Card*> myDeckCards;
 	CU::GrowingArray<Card*> myAssaultCards;
 	CU::GrowingArray<Card*> myStructureCards;

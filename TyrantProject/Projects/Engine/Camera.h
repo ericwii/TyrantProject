@@ -25,6 +25,8 @@ public:
 	void SetPosition(const Vector4<float>& aPosition);
 	void SetPosition(const Vector3<float>& aPosition);
 
+	Vector2<float> ToScreenPosition(const Vector3<float>& aPosition);
+
 	inline const CU::Matrix44<float>& GetOrientation() const;
 	inline const CU::Matrix44<float>& GetProjection() const;
 	inline const CU::Matrix44<float> GetInverse() const;

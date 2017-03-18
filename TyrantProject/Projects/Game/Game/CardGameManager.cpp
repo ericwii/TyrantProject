@@ -83,14 +83,12 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 
 bool CardGameManager::PlayCard(Player& anActivePlayer)
 {
-	if (anActivePlayer.myHand.GetCards().Size() == 0)
+	if (anActivePlayer.myHand.HasCards() == false)
 	{
 		return true;
 	}
 
-	myChoosenCard = anActivePlayer.ChooseCardToPlay();
-
-	if (myChoosenCard != nullptr)
+	if (anActivePlayer.ChooseCardToPlay(myChoosenCard) == true)
 	{
 		anActivePlayer.PlayCard(myChoosenCard);
 		return true;

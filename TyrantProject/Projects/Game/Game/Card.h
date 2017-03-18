@@ -30,7 +30,7 @@ public:
 	inline CU::VectorOnStack<AbilityBase*, 3> GetAbilities();
 	inline eCardType GetCardType();
 	inline CU::Matrix44<float>& GetOrientation();
-	inline Vector2<float> GetPosition();
+	inline Vector3<float> GetPosition();
 	inline Player* GetOwner();
 	inline bool IsLerping() const;
 	inline bool IsDying() const;
@@ -103,7 +103,7 @@ inline Player* Card::GetOwner()
 	return myOwner;
 }
 
-inline Vector2<float> Card::GetPosition()
+inline Vector3<float> Card::GetPosition()
 {
 	return myCanvas.GetPosition();
 }

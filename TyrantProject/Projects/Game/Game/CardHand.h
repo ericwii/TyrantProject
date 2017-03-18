@@ -4,27 +4,37 @@
 class Card;
 
 
-class CCardHand
+class CardHand
 {
 public:
-	CCardHand();
-	~CCardHand();
+	CardHand();
+	~CardHand();
 	
+	void AddCard(Card* aCard);
+	void RemoveCard(Card* aCard);
 	void Render();
 
-	CU::GrowingArray<Card*>& GetCards();
 
-	Card* ChooseCardToPlay();
+	bool ChooseCardToPlay(Card*& chosenCard);
 
+	inline bool HasCards();
+	inline CU::VectorOnStack<Card*, 3>& GetCards();
 
 private:
 	void LoadGUI();
-
 	int HitBoxCheck();
 
-private:
-	CU::GrowingArray<Card*> myCards;
-
+	CU::VectorOnStack<Card*,3> myCards;
 	Instance myHandGUI;
 };
 
+
+inline bool CardHand::HasCards()
+{
+	return myCards.Size() > 0;
+}
+
+inline CU::VectorOnStack<Card*, 3>& CardHand::GetCards()
+{
+	return myCards;
+}

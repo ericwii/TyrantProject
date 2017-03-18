@@ -5,7 +5,6 @@
 Vector2<float> deckOffsetPerCard(-0.01f, 0.01f);
 Vector2<float> assaultCardStartPosition(-2.7f, -1.3f);
 Vector2<float> structureCardStartPosition(-0.9f, -3.7f);
-Vector2<float> handStartPosition(0.1f, 0.1f);
 float playedCardsOffset = 1.8f;
 float cardPlayLerpTime = 0.2f;
 
@@ -56,14 +55,10 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myAssaultCards.Allocate(16);
 	myStructureCards.Allocate(16);
 
-	ShuffleDeck();
-
-	//sets the render position for the "hand" and adds the top 3 cards of the deck to it as well
-	
-	UpdateHand();
-	UpdateHand();
-	UpdateHand();
-	
+	ShuffleDeck();	
+	DrawCard();
+	DrawCard();
+	DrawCard();	
 }
 
 void Player::Render()
@@ -88,28 +83,26 @@ void Player::Render()
 	}
 }
 
-Card* Player::ChooseCardToPlay()
+bool Player::ChooseCardToPlay(Card*& chosenCard)
 {
-	myShouldRenderhand = true;
-	if (myHand.GetCards().Size() == 0) DEBUG_ASSERT(false, "Can't choose a card with no cards in deck");
+	DEBUG_ASSERT(myHand.HasCards(), "Can't choose a card with no cards in hand");
 
 	if (myPlayerType == ePlayerType::User)
 	{
-		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
+		myShouldRenderhand = true;
+		if(myHand.ChooseCardToPlay(chosenCard) == true)
 		{
-			//make hitbox check on the cards in the hand and return it's index
 			myShouldRenderhand = false;
-
-			return myHand.ChooseCardToPlay();
+			return true;
 		}
 	}
 	else if (myPlayerType == ePlayerType::AI_Opponent)
 	{
-		myShouldRenderhand = false;
-		return myHand.ChooseCardToPlay();
+		chosenCard = myHand.GetCards().GetLast();
+		return true;
 	}
 
-	return nullptr;
+	return false;
 }
 
 
@@ -119,6 +112,8 @@ Card* Player::ChooseCardToPlay()
 
 void Player::PlayCard(Card* aCard)
 {
+	aCard->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI));
+
 	Vector2<float> position;
 	if (aCard->GetCardType() == eCardType::Assault)
 	{
@@ -149,10 +144,11 @@ void Player::PlayCard(Card* aCard)
 	lerpTarget.SetPosition(position);
 	
 	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
-	myHand.GetCards().RemoveNonCyclic(aCard);
+
+	myHand.RemoveCard(aCard);
 	if (aCard != nullptr)
 	{
-		UpdateHand();
+		DrawCard();
 	}
 }
 
@@ -190,25 +186,13 @@ void Player::ShuffleDeck()
 	}
 }
 
-void Player::UpdateHand()
+void Player::DrawCard()
 {
-	//myHand.RemoveAll();
-
 	if (myDeckCards.Size() > 0)
 	{
-		myHand.GetCards().Add(myDeckCards.GetLast());
-		myDeckCards.RemoveNonCyclic(myDeckCards.GetLast());
+		myHand.AddCard(myDeckCards.GetLast());
+		myDeckCards.RemoveLast();
 	}
-
-	Vector2<float> position;
-	for (int i = 0; i < myHand.GetCards().Size(); i++)
-	{
-		position = handStartPosition;
-		position.x += playedCardsOffset*i;
-		myHand.GetCards()[i]->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
-		myHand.GetCards()[i]->SetPosition(position);
-	}
-	
 }
 
 void Player::RepositionPlayedCards()

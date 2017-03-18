@@ -31,6 +31,7 @@ namespace CommonUtilities
 		inline void DeleteNonCyclic(const ObjectType& aObject);
 		inline void DeleteNonCyclicAtIndex(const int anIndex);
 		   
+		inline void RemoveLast();
 		inline void RemoveCyclic(const ObjectType& aObject); 
 		inline void RemoveCyclicAtIndex(const int anIndex);
 		inline void RemoveNonCyclic(const ObjectType& aObject);
@@ -384,6 +385,14 @@ inline void CU::GrowingArray<ObjectType>::DeleteNonCyclicAtIndex(const int anInd
 }
 
 template<typename ObjectType>
+inline void CU::GrowingArray<ObjectType>::RemoveLast()
+{
+	DEBUG_ASSERT(myMaxSize > 0, "Array is not initialized");
+	DEBUG_ASSERT(myCurrentSize > 0, "No items to remove");
+	--myCurrentSize;
+}
+
+template<typename ObjectType>
 inline void CU::GrowingArray<ObjectType>::RemoveCyclic(const ObjectType& aObject)
 {
 	DEBUG_ASSERT(myMaxSize > 0, "Array is not initialized");
@@ -437,7 +446,6 @@ inline void CU::GrowingArray<ObjectType>::RemoveNonCyclic(const ObjectType& aObj
 		myListPointer[objectIndex + i] = myListPointer[objectIndex + i + 1];
 	}
 	--myCurrentSize;
-	myListPointer[myCurrentSize] = 0;
 }
 
 template<typename ObjectType>

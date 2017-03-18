@@ -293,7 +293,7 @@ namespace CommonUtilities
 
 		tempVector *= aMatrix;
 
-		return Vector3<T>(tempVector.X, tempVector.Y, tempVector.Z);
+		return Vector3<T>(tempVector.x, tempVector.y, tempVector.z);
 	}
 
 	template<typename T>
