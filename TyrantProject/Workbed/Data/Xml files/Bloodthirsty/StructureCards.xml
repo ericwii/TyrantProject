@@ -34,6 +34,7 @@
 		<unique>false</unique>
 		<cooldown>2</cooldown>
 		<health>6</health>
+    <skill name="refresh"/>
 	</card>
 	
 	<card>
