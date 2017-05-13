@@ -199,6 +199,9 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 {
+	
+
+
 	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
 	{
 		if (anActivePlayer.myAssaultCards[i]->IsDying())
@@ -219,6 +222,31 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 
 	anActivePlayer.RepositionPlayedCards();
 	anOpponentPlayer.RepositionPlayedCards();
+
+
+	CU::VectorOnStack<AbilityBase*, 3> currentAbilities = anActivePlayer.GetCommander()->GetAbilities();
+	for (short i = 0; i < currentAbilities.Size(); i++)
+	{
+		currentAbilities[i]->OnCleanUp(anActivePlayer.GetCommander());
+	}
+
+	for (short i = 0; i < anActivePlayer.GetStructureCards().Size(); i++)
+	{
+		currentAbilities = anActivePlayer.GetStructureCards()[i]->GetAbilities();
+		for (short j = 0; j < currentAbilities.Size(); j++)
+		{
+			currentAbilities[j]->OnCleanUp(anActivePlayer.GetStructureCards()[i]);
+		}
+	}
+
+	for (short i = 0; i < anActivePlayer.GetAssaultCards().Size(); i++)
+	{
+		currentAbilities = anActivePlayer.GetAssaultCards()[i]->GetAbilities();
+		for (short j = 0; j < currentAbilities.Size(); j++)
+		{
+			currentAbilities[j]->OnCleanUp(anActivePlayer.GetAssaultCards()[i]);
+		}
+	}
 }
 
 

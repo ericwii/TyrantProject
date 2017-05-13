@@ -116,6 +116,7 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RefreshAbility.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StrikeAbility.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RefreshAbility.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

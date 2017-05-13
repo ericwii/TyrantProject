@@ -22,6 +22,7 @@ void AbilityBase::OnDeath(Card* aCard) { aCard; }
 void AbilityBase::OnDamaged(Card* aCard) { aCard; }
 void AbilityBase::OnKill(Card* aCard) { aCard; }
 void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
+void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
 void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }
 void AbilityBase::OnAttacked(char& someDamage){ someDamage; }
 void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)

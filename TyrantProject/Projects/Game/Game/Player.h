@@ -30,6 +30,7 @@ public:
 
 	inline CU::GrowingArray<Card*>& GetAssaultCards();
 	inline CU::GrowingArray<Card*>& GetStructureCards();
+	inline Card* GetCommander();
 
 private:
 	void RepositionPlayedCards();
@@ -67,4 +68,9 @@ inline CU::GrowingArray<Card*>& Player::GetAssaultCards()
 inline CU::GrowingArray<Card*>& Player::GetStructureCards()
 {
 	return myStructureCards;
+}
+
+inline Card * Player::GetCommander()
+{
+	return myComander;
 }

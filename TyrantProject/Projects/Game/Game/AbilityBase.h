@@ -15,6 +15,7 @@ public:
 	virtual void OnDamaged(Card* aCard);
 	virtual void OnKill(Card* aCard);
 	virtual void OnPreCombat(Card* aCard);
+	virtual void OnCleanUp(Card* aCard);
 	virtual void OnTargeted(Card* aTarget);
 	virtual void OnAttacked(char& someDamage);
 	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);

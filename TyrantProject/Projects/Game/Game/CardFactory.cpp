@@ -223,6 +223,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new HealAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "refresh")
+	{
+		return new RefreshAbility();
+	}
 
 	return nullptr;
 }

@@ -51,6 +51,9 @@
     <ClCompile Include="HealAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="RefreshAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -107,6 +110,9 @@
       <Filter>CardGame</Filter>
     </ClInclude>
     <ClInclude Include="HealAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="RefreshAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
   </ItemGroup>
