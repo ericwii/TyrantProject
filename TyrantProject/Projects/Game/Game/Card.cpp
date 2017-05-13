@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "Card.h"
-#include "DamageTextManager.h"
+#include "CardGameTextManager.h"
 #include "AbilityBase.h"
+
+
+Vector4<float> damagedHealthColor(1.f, 0, 0, 1.f);
 
 
 using namespace tinyxml2;
@@ -124,7 +127,7 @@ void Card::LowerCooldown()
 
 void Card::TakeDamage(char someDamage)
 {
-	DamageTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
+	CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
 
 	myHealth -= someDamage;
 	if (myHealth <= 0)
@@ -137,6 +140,37 @@ void Card::TakeDamage(char someDamage)
 	string health;
 	health += myHealth;
 	myHealthText.SetText(health);
+
+	if (someDamage > 0)
+	{
+		myHealthText.SetColor(damagedHealthColor);
+	}
+}
+
+void Card::Heal(char someHealth)
+{
+	if (myCardData != nullptr && myHealth < myCardData->health)
+	{
+		if (myHealth + someHealth <=  myCardData->health)
+		{
+			CardGameTextManager::AddHealingText(someHealth, myCanvas.GetPosition());
+			myHealth += someHealth;
+		}
+		else
+		{
+			CardGameTextManager::AddHealingText(myCardData->health - myHealth, myCanvas.GetPosition());
+			myHealth = myCardData->health;
+		}
+
+		string health;
+		health += myHealth;
+		myHealthText.SetText(health);
+
+		if (myHealth == myCardData->health)
+		{
+			myHealthText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		}
+	}
 }
 
 void Card::OnAttacked(char& someDamage)

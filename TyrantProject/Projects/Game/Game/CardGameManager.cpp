@@ -7,7 +7,7 @@
 CardGameManager* CardGameManager::instance = new CardGameManager();
 AnimationData attackAnimation
 {
-	"Data/Textures/attackAnimation.png",
+	"Data/Textures/Animations/attackAnimation.png",
 		10,
 		2,
 		30.f,

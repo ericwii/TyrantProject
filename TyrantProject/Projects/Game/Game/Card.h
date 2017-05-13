@@ -23,12 +23,14 @@ public:
 	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);
+	void Heal(char someHealth);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
 	inline CU::VectorOnStack<AbilityBase*, 3> GetAbilities();
 	inline eCardType GetCardType();
+	inline eCardFaction GetFaction();
 	inline CU::Matrix44<float>& GetOrientation();
 	inline Vector3<float> GetPosition();
 	inline Player* GetOwner();
@@ -78,7 +80,14 @@ private:
 
 inline CU::VectorOnStack<AbilityBase*, 3> Card::GetAbilities()
 {
-	return myCardData->abilities;
+	if (myCardData != nullptr)
+	{
+		return myCardData->abilities;
+	}
+	else
+	{
+		return CU::VectorOnStack<AbilityBase*, 3>();
+	}
 }
 
 inline eCardType Card::GetCardType()
@@ -90,6 +99,18 @@ inline eCardType Card::GetCardType()
 	else
 	{
 		return eCardType::Action;
+	}
+}
+
+inline eCardFaction Card::GetFaction()
+{
+	if (myCardData != nullptr)
+	{
+		return myCardData->faction;
+	}
+	else
+	{
+		return eCardFaction::Action;
 	}
 }
 

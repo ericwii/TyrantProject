@@ -6,8 +6,8 @@ class AbilityStack
 {
 public:
 	static void Update(float aDeltaTime);
-	static void AddAbility(AbilityBase* anAbility, Card* aCaster, CU::GrowingArray<Card*> someTargets, float aDelay);
-	static void AddAbility(AbilityBase* anAbility, Card* aCaster, Card* aTarget, float aDelay);
+	static void AddAbility(AbilityBase* anAbility, Card* aCaster, CU::GrowingArray<Card*> someTargets, float aDelay = 0);
+	static void AddAbility(AbilityBase* anAbility, Card* aCaster, Card* aTarget, float aDelay = 0);
 
 	static bool IsEmpty();
 

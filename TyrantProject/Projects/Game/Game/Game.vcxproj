@@ -110,10 +110,11 @@
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardGameState.h" />
     <ClInclude Include="CardGameManager.h" />
+    <ClInclude Include="CardGameTextManager.h" />
     <ClInclude Include="CardHand.h" />
-    <ClInclude Include="DamageTextManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="HealAbility.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StrikeAbility.h" />
@@ -129,10 +130,11 @@
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CardGameState.cpp" />
     <ClCompile Include="CardGameManager.cpp" />
+    <ClCompile Include="CardGameTextManager.cpp" />
     <ClCompile Include="CardHand.cpp" />
-    <ClCompile Include="DamageTextManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BaseState.cpp" />
+    <ClCompile Include="HealAbility.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

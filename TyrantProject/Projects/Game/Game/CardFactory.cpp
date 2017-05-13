@@ -101,30 +101,7 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	aCardData.illustrationPath = illustrationStartPath + ReadStringElement(aElement->FirstChildElement("illustration"));
 
 	string faction = ReadStringElement(aElement->FirstChildElement("faction"));
-	if (faction == "bloodthirsty")
-	{
-		aCardData.faction = eCardFaction::BloodThirsty;
-	}
-	else if (faction == "imperial")
-	{
-		aCardData.faction = eCardFaction::Imperial;
-	}
-	else if (faction == "raider")
-	{
-		aCardData.faction = eCardFaction::Raider;
-	}
-	else if (faction == "righteous")
-	{
-		aCardData.faction = eCardFaction::Righteous;
-	}
-	else if (faction == "xeno")
-	{
-		aCardData.faction = eCardFaction::Xeno;
-	}
-	else
-	{
-		aCardData.faction = eCardFaction::Action;
-	}
+	aCardData.faction = GetFactionFromString(faction);
 	
 	string cardType = ReadStringElement(aElement->FirstChildElement("cardType"));
 	if (cardType == "assault")
@@ -198,8 +175,10 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 	XMLElement* currentElement = aCardElement->FirstChildElement("skill");
 
 	string currentName;
-	char currentNumber = 0;
 	string currentSuffix;
+	string currentFactionString;
+	AbilityBase* currentAbility;
+	char currentNumber = 0;
 	for (int i = 0; i < 3; ++i)
 	{
 		if (currentElement != nullptr)
@@ -213,11 +192,19 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 			{
 				currentSuffix = currentElement->Attribute("suffix");
 			}
-
-			AbilityBase* newAbility = GetAbility(currentName, currentSuffix, currentNumber);
-			if (newAbility != nullptr)
+			if (currentElement->Attribute("faction") != nullptr)
 			{
-				someData.abilities.Add(newAbility);
+				currentFactionString = currentElement->Attribute("suffix");
+				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, GetFactionFromString(currentFactionString));
+			}
+			else
+			{
+				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, eCardFaction::Action);
+			}
+
+			if (currentAbility != nullptr)
+			{
+				someData.abilities.Add(currentAbility);
 			}
 			currentElement = currentElement->NextSiblingElement("skill");
 			currentSuffix = "";
@@ -226,14 +213,44 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 	}
 }
 
-AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix, char aNumber)
+AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix, char aNumber, eCardFaction aFaction)
 {
 	if (aName == "strike")
 	{
-		return new StrikeAbility(aSuffix, aNumber);
+		return new StrikeAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "heal")
+	{
+		return new HealAbility(aSuffix, aNumber, aFaction);
 	}
 
 	return nullptr;
+}
+
+eCardFaction CardFactory::GetFactionFromString(string& aString)
+{
+	if (aString == "bloodthirsty")
+	{
+		return eCardFaction::BloodThirsty;
+	}
+	else if (aString == "imperial")
+	{
+		return eCardFaction::BloodThirsty;
+	}
+	else if (aString == "raider")
+	{
+		return eCardFaction::BloodThirsty;
+	}
+	else if (aString == "righteous")
+	{
+		return eCardFaction::BloodThirsty;
+	}
+	else if (aString == "xeno")
+	{
+		return eCardFaction::BloodThirsty;
+	}
+
+	return eCardFaction::Action;
 }
 
 

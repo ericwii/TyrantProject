@@ -33,9 +33,6 @@
     <ClCompile Include="CardGameManager.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
-    <ClCompile Include="DamageTextManager.cpp">
-      <Filter>CardGame</Filter>
-    </ClCompile>
     <ClCompile Include="StrikeAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
@@ -47,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="AbilityStack.cpp">
       <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="CardGameTextManager.cpp">
+      <Filter>CardGame</Filter>
+    </ClCompile>
+    <ClCompile Include="HealAbility.cpp">
+      <Filter>Abilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +88,6 @@
     <ClInclude Include="CardGameManager.h">
       <Filter>CardGame</Filter>
     </ClInclude>
-    <ClInclude Include="DamageTextManager.h">
-      <Filter>CardGame</Filter>
-    </ClInclude>
     <ClInclude Include="StrikeAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
@@ -102,6 +102,12 @@
     </ClInclude>
     <ClInclude Include="AbilityStack.h">
       <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGameTextManager.h">
+      <Filter>CardGame</Filter>
+    </ClInclude>
+    <ClInclude Include="HealAbility.h">
+      <Filter>Abilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

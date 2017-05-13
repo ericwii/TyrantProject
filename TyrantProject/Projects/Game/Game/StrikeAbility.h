@@ -1,12 +1,11 @@
 #pragma once
 #include "AbilityBase.h"
 
-class Card;
 
 class StrikeAbility : public AbilityBase
 {
 public:
-	StrikeAbility(const string& aSuffix, char aNumber);
+	StrikeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
 	~StrikeAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;
@@ -15,7 +14,5 @@ public:
 	void OnAttacked(char& someDamage) override;
 
 private:
-
-	Card* FindTarget(CU::GrowingArray<Card*>& cards);
 };
 

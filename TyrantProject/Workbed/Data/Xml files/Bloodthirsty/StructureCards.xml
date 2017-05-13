@@ -22,6 +22,7 @@
 		<unique>false</unique>
 		<cooldown>1</cooldown>
 		<health>6</health>
+		<skill name="heal" number="1" suffix="all" faction="bloodthirsty"/>
 	</card>
 	
 	<card>

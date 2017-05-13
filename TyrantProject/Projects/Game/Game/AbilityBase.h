@@ -6,7 +6,7 @@ class AbilityBase
 {
 public:
 	AbilityBase();
-	AbilityBase(const string& aSuffix, char aNumber);
+	AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
 	~AbilityBase();
 
 
@@ -22,5 +22,8 @@ public:
 	string iconTexturePath;
 protected:
 	string mySuffix;
+	eCardFaction mySpecificFaction;
 	char myNumber;
+
+	Card* FindTarget(CU::GrowingArray<Card*>& cards);
 };

@@ -6,9 +6,8 @@ AbilityBase::AbilityBase() : myNumber(0)
 {
 }
 
-AbilityBase::AbilityBase(const string& aSuffix, char aNumber) : mySuffix(aSuffix), myNumber(aNumber)
+AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction)
 {
-
 }
 
 AbilityBase::~AbilityBase()
@@ -29,4 +28,26 @@ void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster;
 	someTargets;
+}
+
+
+//Protected Methods
+
+Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
+{
+	if (cards.Size() > 0)
+	{
+		int randomIndex = rand() % cards.Size();
+		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
+		{
+			if (!cards[randomIndex]->IsDying() && (mySpecificFaction != eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
+			{
+				return cards[randomIndex];
+			}
+
+			++randomIndex;
+			randomIndex %= cards.Size();
+		}
+	}
+	return nullptr;
 }

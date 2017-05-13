@@ -4,7 +4,7 @@
 Vector2<float> strikeAnimationSize(2.f, 2.f);
 AnimationData strikeAnimation = AnimationData
 (
-		"Data/Textures/strikeAnimation.png",
+		"Data/Textures/Animations/strikeAnimation.png",
 		18,
 		4,
 		30.f,
@@ -15,9 +15,9 @@ float strikeDelay = 0.2f;
 
 
 
-StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber) : AbilityBase(aSuffix, aNumber)
+StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
-	iconTexturePath = "Data/Textures/Icons/strikeIcon.png";
+	iconTexturePath = "Data/Textures/Icons/Skills/strikeIcon.png";
 }
 
 StrikeAbility::~StrikeAbility()
@@ -89,27 +89,4 @@ void StrikeAbility::OnAttacked(char& someDamage)
 	{
 
 	}
-}
-
-
-
-//Private Methods
-
-Card* StrikeAbility::FindTarget(CU::GrowingArray<Card*>& cards)
-{
-	if (cards.Size() > 0)
-	{
-		int randomIndex = rand() % cards.Size();
-		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
-		{
-			if (!cards[randomIndex]->IsDying())
-			{
-				return cards[randomIndex];
-			}
-
-			++randomIndex;
-			randomIndex %= cards.Size();
-		}
-	}
-	return nullptr;
 }
