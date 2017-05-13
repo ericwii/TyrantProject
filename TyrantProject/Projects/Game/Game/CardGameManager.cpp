@@ -199,41 +199,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 {
-	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
-	{
-		if (anActivePlayer.myAssaultCards[i]->IsDying())
-		{
-			anActivePlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
-
-	for (int i = 0; i < anOpponentPlayer.myAssaultCards.Size(); ++i)
-	{
-		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
-		{
-			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
-
-	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
-	{
-		if (anActivePlayer.myStructureCards[i]->IsDying())
-		{
-			anActivePlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
-
-	for (int i = 0; i < anOpponentPlayer.myStructureCards.Size(); ++i)
-	{
-		if (anOpponentPlayer.myStructureCards[i]->IsDying())
-		{
-			anOpponentPlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-	}
+	RemoveDeadCards(anActivePlayer, anOpponentPlayer);
 
 	anActivePlayer.RepositionPlayedCards();
 	anOpponentPlayer.RepositionPlayedCards();
@@ -315,4 +281,43 @@ bool CardGameManager::AllActionsDone(Player& aPlayer, Player& aOtherPlayer)
 	actions += UpdateCards(aOtherPlayer);
 
 	return actions < 1 && AnimationManager::IsEmpty() && AbilityStack::IsEmpty();
+}
+
+void CardGameManager::RemoveDeadCards(Player & anActivePlayer, Player & anOpponentPlayer)
+{
+	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
+	{
+		if (anActivePlayer.myAssaultCards[i]->IsDying())
+		{
+			anActivePlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < anOpponentPlayer.myAssaultCards.Size(); ++i)
+	{
+		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
+		{
+			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
+	{
+		if (anActivePlayer.myStructureCards[i]->IsDying())
+		{
+			anActivePlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < anOpponentPlayer.myStructureCards.Size(); ++i)
+	{
+		if (anOpponentPlayer.myStructureCards[i]->IsDying())
+		{
+			anOpponentPlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
 }

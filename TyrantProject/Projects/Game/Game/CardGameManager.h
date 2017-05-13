@@ -25,6 +25,9 @@ public:
 	 void CleanUp(Player& anActivePlayer, Player& anOpponentPlayer);
 
 private:
+
+
+
 	CardGameManager();
 	~CardGameManager();
 
@@ -32,6 +35,9 @@ private:
 
 	bool AllActionsDone(Player& aPlayer, Player& aOtherPlayer);
 
+	void RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer);
+
+private:
 	static CardGameManager* instance;
 
 	Player* myAttacker;
