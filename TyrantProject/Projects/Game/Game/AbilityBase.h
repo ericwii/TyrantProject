@@ -22,9 +22,12 @@ public:
 
 	string iconTexturePath;
 protected:
+
+	CU::GrowingArray<Card*> myTargets;
 	string mySuffix;
 	eCardFaction mySpecificFaction;
 	char myNumber;
 
 	Card* FindTarget(CU::GrowingArray<Card*>& cards);
+	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards);
 };

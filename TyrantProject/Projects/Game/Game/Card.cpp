@@ -3,19 +3,20 @@
 #include "CardGameTextManager.h"
 #include "AbilityBase.h"
 
-
 Vector4<float> damagedHealthColor(1.f, 0, 0, 1.f);
+Vector4<float> ralliedAttackColor(0, 1.f, 0, 1.f);
+Vector4<float> weakenedAttackColor(1.f, 0, 0, 1.f);
 
 
 using namespace tinyxml2;
 
 float deathFadeTime = 0.8f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr), myTempAttackChange(0)
 {
 }
 
-Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner)
+Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner), myTempAttackChange(0)
 {
 }
 
@@ -125,6 +126,23 @@ void Card::LowerCooldown()
 	}
 }
 
+void Card::CleanUp()
+{
+	myTempAttackChange = 0;
+	string attack;
+	attack += myAttack;
+	myAttackText.SetText(attack);
+
+	if (myCardData != nullptr && myAttack > myCardData->attack)
+	{
+		myAttackText.SetColor(ralliedAttackColor);
+	}
+	else
+	{
+		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+	}
+}
+
 void Card::TakeDamage(char someDamage)
 {
 	CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
@@ -151,7 +169,7 @@ void Card::Heal(char someHealth)
 {
 	if (myCardData != nullptr && myHealth < myCardData->health)
 	{
-		if (myHealth + someHealth <=  myCardData->health)
+		if (myHealth + someHealth <= myCardData->health)
 		{
 			CardGameTextManager::AddHealingText(someHealth, myCanvas.GetPosition());
 			myHealth += someHealth;
@@ -170,6 +188,50 @@ void Card::Heal(char someHealth)
 		{
 			myHealthText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
 		}
+	}
+}
+
+void Card::Weaken(char someWeaken)
+{
+	myTempAttackChange -= someWeaken;
+
+	string attack;
+	attack += (myAttack + myTempAttackChange);
+	myAttackText.SetText(attack);
+
+	if (myTempAttackChange < 0)
+	{
+		myAttackText.SetColor(weakenedAttackColor);
+	}
+	else if (myTempAttackChange > 0)
+	{
+		myAttackText.SetColor(ralliedAttackColor);	
+	}
+	else
+	{
+		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+	}
+}
+
+void Card::Rally(char someRally)
+{
+	myTempAttackChange += someRally;
+
+	string attack;
+	attack += (myAttack + myTempAttackChange);
+	myAttackText.SetText(attack);
+
+	if (myTempAttackChange > 0)
+	{
+		myAttackText.SetColor(ralliedAttackColor);	
+	}
+	else if (myTempAttackChange < 0)
+	{
+		myAttackText.SetColor(weakenedAttackColor);
+	}
+	else
+	{
+		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
 	}
 }
 

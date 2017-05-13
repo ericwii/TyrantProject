@@ -14,6 +14,7 @@ namespace CommonUtilities
 	{
 	public:
 		String();
+		String(const char aChar);
 		String(const String& aCopy);
 		String(const char* aCopy);
 		~String();
@@ -60,6 +61,13 @@ namespace CommonUtilities
 	String<Size>::String() : myCurrentSize(0)
 	{
 		myArray[0] = '\0';
+	}
+
+	StringTemplate
+	String<Size>::String(const char aChar) : myCurrentSize(1)
+	{
+		myArray[0] = aChar;
+		myArray[1] = '\0';
 	}
 
 	StringTemplate

@@ -54,6 +54,7 @@
     <ClCompile Include="RefreshAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="RallyAbility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -115,6 +116,7 @@
     <ClInclude Include="RefreshAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
+    <ClInclude Include="RallyAbility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

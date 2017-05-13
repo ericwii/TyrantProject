@@ -227,6 +227,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new RefreshAbility();
 	}
+	else if (aName == "rally")
+	{
+		return new RallyAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }

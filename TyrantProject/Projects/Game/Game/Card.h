@@ -18,12 +18,15 @@ public:
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
+	void CleanUp();
 
 	void OnAttacked(char& someDamage);
 	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);
 	void Heal(char someHealth);
+	void Weaken(char someWeaken);
+	void Rally(char someRally);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
@@ -71,6 +74,7 @@ private:
 	char myCooldown;
 	char myHealth;
 	char myAttack;
+	char myTempAttackChange;
 
 	void LoadModels();
 	void LoadText();
@@ -136,7 +140,7 @@ inline bool Card::IsLerping() const
 
 inline char Card::GetAttack()
 {
-	return myAttack;
+	return myAttack + myTempAttackChange;
 }
 
 inline char Card::GetCooldown()

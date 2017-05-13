@@ -53,7 +53,7 @@ void CardGameTextManager::AddHealingText(char healing, const Vector2<float>& aPo
 	CardGameText newText;
 	newText.text.Init(instance->myFont);
 
-	string text;
+	string text('+');
 	text += healing;
 	newText.position = aPosition + textStartOffset;
 	newText.text.SetText(text);

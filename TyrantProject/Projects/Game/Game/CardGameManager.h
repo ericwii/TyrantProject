@@ -40,6 +40,7 @@ private:
 	int myCurrentAssaultCardIndex;
 	int myCurrentStructureCardIndex;
 	int myCurrentAbilityIndex;
-	bool myPhaseUpdateDone;
+	bool myPhaseUpdateDone = false;
+	bool hasUpdatedCommander = false;
 };
 
