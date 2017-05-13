@@ -36,16 +36,5 @@
 		<health>6</health>
     <skill name="refresh"/>
 	</card>
-	
-	<card>
-		<name>Necro Nest</name>
-		<illustration>BloodThirsty/Structure/Necro Nest.jpg</illustration>
-		<faction>bloodthirsty</faction>
-		<cardType>structure</cardType>
-		<rarity>rare</rarity>
-		<unique>false</unique>
-		<cooldown>2</cooldown>
-		<health>6</health>
-	</card>
 
 </root>
