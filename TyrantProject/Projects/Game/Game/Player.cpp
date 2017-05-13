@@ -198,14 +198,22 @@ void Player::DrawCard()
 void Player::RepositionPlayedCards()
 {
 	Vector3<float> currentPosition = assaultCardStartPosition;
+	Vector3<float> currentStructurePosition = structureCardStartPosition;
 	if (myPlayerType != ePlayerType::User)
 	{
 		currentPosition.y *= -1.f;
+		currentStructurePosition.y *= -1.0f;
 	}
 
 	for (int i = 0; i < myAssaultCards.Size(); ++i)
 	{
 		myAssaultCards[i]->SetPosition(currentPosition);
 		currentPosition.x += playedCardsOffset;
+	}
+
+	for (int i = 0; i < myStructureCards.Size(); ++i)
+	{
+		myStructureCards[i]->SetPosition(currentStructurePosition);
+		currentStructurePosition.x += playedCardsOffset;
 	}
 }

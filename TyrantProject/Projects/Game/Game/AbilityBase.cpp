@@ -41,7 +41,7 @@ Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
 		int randomIndex = rand() % cards.Size();
 		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
 		{
-			if (!cards[randomIndex]->IsDying() && (mySpecificFaction != eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
+			if (!cards[randomIndex]->IsDying() && (mySpecificFaction == eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
 			{
 				return cards[randomIndex];
 			}

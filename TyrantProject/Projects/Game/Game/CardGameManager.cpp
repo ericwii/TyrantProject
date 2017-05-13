@@ -199,9 +199,6 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 {
-	
-
-
 	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
 	{
 		if (anActivePlayer.myAssaultCards[i]->IsDying())
@@ -216,6 +213,24 @@ void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
 		{
 			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
+	{
+		if (anActivePlayer.myStructureCards[i]->IsDying())
+		{
+			anActivePlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < anOpponentPlayer.myStructureCards.Size(); ++i)
+	{
+		if (anOpponentPlayer.myStructureCards[i]->IsDying())
+		{
+			anOpponentPlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
 			--i;
 		}
 	}
