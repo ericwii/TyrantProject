@@ -38,7 +38,7 @@ class InputManager
 		long GetScrollDelta() const;
 
 		Vector2<long> GetDeltaVector();
-		Vector2<float> GetWindowPosition(HWND aWindowHandle);
+		Vector2<float> GetWindowPosition(HWND aWindowHandle, Vector2<float> aResolution);
 		Vector2<float> GetPosition();
 
 	private:

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "VertexLayouts.h"
+#include "../CommonUtilities/Intersection.h"
 
 Engine* Engine::instance = nullptr;
 
@@ -102,6 +103,14 @@ void Engine::RenderDebugLine(Vector2<float> aPoint, Vector2<float> aSecondPoint,
 
 	myDebugLineEffect->GetTechnique()->GetPassByIndex(0)->Apply(0, context);
 	context->Draw(2, 0);
+}
+
+void Engine::RenderDebugHitbox2D(const Collider::Hitbox2D& aHitbox, Vector4<float> aColor)
+{
+	RenderDebugLine(aHitbox.GetCorner(aHitbox.Top_Left), aHitbox.GetCorner(aHitbox.Top_Right), aColor);
+	RenderDebugLine(aHitbox.GetCorner(aHitbox.Top_Right), aHitbox.GetCorner(aHitbox.Bottom_Right), aColor);
+	RenderDebugLine(aHitbox.GetCorner(aHitbox.Bottom_Right), aHitbox.GetCorner(aHitbox.Bottom_Left), aColor);
+	RenderDebugLine(aHitbox.GetCorner(aHitbox.Bottom_Left), aHitbox.GetCorner(aHitbox.Top_Left), aColor);
 }
 
 

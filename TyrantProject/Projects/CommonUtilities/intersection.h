@@ -179,6 +179,117 @@ namespace Collider
 		float myNearZ;
 		float myFarZ;
 	};
+
+	class Hitbox2D
+	{
+		public:
+			enum eHitbox2DCorner
+			{
+				Top_Left,
+				Top_Right,
+				Bottom_Left,
+				Bottom_Right
+			};
+
+			Hitbox2D() {};
+
+			Hitbox2D(Vector2<float> aPosition, Vector2<float> aSize)
+			{
+				x = aPosition.x;
+				y = aPosition.y;
+				width = aSize.x;
+				height = aSize.y;
+			}
+
+			Hitbox2D(float aX, float aY, float aWidth, float aHeight)
+			{
+				x = aX;
+				y = aY;
+				width = aWidth;
+				height = aHeight;
+			}
+
+			Vector2<float> GetPosition() const
+			{
+				return Vector2<float>(x, y);
+			}
+
+			Vector2<float> GetSize() const
+			{
+				return Vector2<float>(width, height);
+			}
+
+			Vector2<float> GetCorner(eHitbox2DCorner aCorner) const
+			{
+				switch (aCorner)
+				{
+					case(Top_Left):
+					{
+						return Vector2<float>(x, y);
+					}
+					case(Top_Right) :
+					{
+						return Vector2<float>(x + width, y);
+					}
+					case(Bottom_Left) :
+					{
+						return Vector2<float>(x, y + height);
+					}
+					case(Bottom_Right) :
+					{
+						return Vector2<float>(x + width, y + height);
+					}
+					default:
+					{
+						return Vector2<float>(x, y);
+					}
+				}
+			}
+
+			void SetPosition(Vector2<float> aPosition)
+			{
+				x = aPosition.x;
+				y = aPosition.y;
+			}
+
+			void SetPosition(float aX, float aY)
+			{
+				x = aX;
+				y = aY;
+			}
+
+			void SetSize(Vector2<float> aSize)
+			{
+				width = aSize.x;
+				height = aSize.y;
+			}
+
+			void SetSize(float aX, float aY)
+			{
+				width = aX;
+				height = aY;
+			}
+
+			bool Inside(Vector2<float> aPoint) const
+			{
+				if (aPoint.x > x && aPoint.x < x + width)
+				{
+					return aPoint.y > y && aPoint.y < y + height;
+				}
+				return false;
+			}
+
+			bool Colliding(Hitbox2D aHitbox) const
+			{
+				if (aHitbox.x > x - width && aHitbox.x < x + width)
+				{
+					return aHitbox.y > y - height && aHitbox.y < y + height;
+				}
+				return false;
+			}
+			
+			struct { float x, y, width, height; };
+	};
 }
 
 using namespace Collider;

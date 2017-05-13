@@ -48,27 +48,19 @@ void CardHand::Render()
 	//render gui
 	myHandGUI.Render();
 
-	for (int i = 0; i < myCards.Size(); i++)
+	for (int i = 0; i < myCards.Size(); ++i)
 	{
 		myCards[i]->Render();
 	}
 
-	//mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle());
-	//mousePosition /= Engine::GetInstance()->GetResolution();
-	//
-	//string temp;
-	//temp += "X: ";
-	//temp += mousePosition.x;
-	//temp += " Y: ";
-	//temp += mousePosition.y;
-	//Engine::GetInstance()->RenderDebugText(temp, {-1.f,-1.f}, 0.5f);
-	//
-	//Engine::GetInstance()->RenderDebugText("M", mousePosition);
-	//
-	//Vector3<float> lastPosition = myCards[0]->GetPosition();
-	//lastPosition.x = mousePosition.x * 5.f;
-	//lastPosition.y = mousePosition.y * 5.f;
-	//myCards[0]->SetPosition(lastPosition);
+	//Hitbox2D currentHitbox(0, 0, 0.2f, 0.4f);
+	//Vector2<float> hitboxOffset(0.1f, 0.24f);
+	//Camera camera = Engine::GetInstance()->GetCamera();
+	//for (int i = 0; i < myCards.Size(); ++i)
+	//{
+	//	currentHitbox.SetPosition(camera.ToScreenPosition(myCards[i]->GetPosition()) - hitboxOffset);
+	//	Engine::GetInstance()->RenderDebugHitbox2D(currentHitbox);
+	//}
 }
 
 
@@ -96,22 +88,20 @@ void CardHand::LoadGUI()
 
 int CardHand::HitBoxCheck()
 {
-	Vector4<float> rectangle;
+	Vector2<float> mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle(), Engine::GetInstance()->GetResolution());
+	Camera camera = Engine::GetInstance()->GetCamera();
+
+	Hitbox2D currentHitbox(0, 0, 0.2f, 0.4f);
+	Vector2<float> hitboxOffset(0.1f, 0.24f);
+	for (int i = 0; i < myCards.Size(); i++)
+	{
+		currentHitbox.SetPosition(camera.ToScreenPosition(myCards[i]->GetPosition()) - hitboxOffset);
 	
-	Vector2<float> cardPos = Engine::GetInstance()->GetCamera().ToScreenPosition(myCards[0]->GetPosition());
-	
-	//for (int i = 0; i < myCards.Size(); i++)
-	//{
-	//	//mousePosition = myCards[i]->GetPosition();
-	//	//rectangle = myCards[i]->GetPosition() * Engine::GetInstance()->GetCamera().GetProjection();
-	//	////Vector2<float> temp = canvasSize * Engine::GetInstance()->GetCamera().GetProjection();
-	//	//rectangle.z = canvasSize.x;
-	//	//rectangle.w = canvasSize.y;
-	//
-	//	if (Collision::PointVsAABB(mousePosition,rectangle) == true)
-	//	{
-	//		return i;
-	//	}
-	//}
-	return 0;
+		if (currentHitbox.Inside(mousePosition))
+		{
+			return i;
+		}
+	}
+
+	return -1;
 }

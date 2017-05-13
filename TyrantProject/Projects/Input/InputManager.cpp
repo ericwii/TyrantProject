@@ -104,7 +104,8 @@ Vector2<long> InputManager::MouseInput::GetDeltaVector()
 	return Vector2<long>(myMouseState.lX, myMouseState.lY);
 }
 
-Vector2<float> InputManager::MouseInput::GetWindowPosition(HWND aWindowHandle)
+const Vector2<float> mouseOffset(0.013f, 0.08f);
+Vector2<float> InputManager::MouseInput::GetWindowPosition(HWND aWindowHandle, Vector2<float> aResolution)
 {
 	DEBUG_ASSERT(aWindowHandle != NULL, "Cannot get mouse position from a null window handle");
 
@@ -114,10 +115,10 @@ Vector2<float> InputManager::MouseInput::GetWindowPosition(HWND aWindowHandle)
 	POINT cursorPoint;
 	GetCursorPos(&cursorPoint);
 	
-	float mouse_X = static_cast<float>((cursorPoint.x - screenPosition.left));
-	float mouse_Y = static_cast<float>((cursorPoint.y - screenPosition.top));
-	
-	return Vector2<float>(mouse_X, mouse_Y);
+	float mouse_X = static_cast<float>((cursorPoint.x - screenPosition.left)) / aResolution.x;
+	float mouse_Y = static_cast<float>((cursorPoint.y - screenPosition.top)) / aResolution.y;
+
+	return Vector2<float>(mouse_X * 2.f - 1.f, mouse_Y * 2.f - 1.f) - mouseOffset;
 }
 
 Vector2<float> InputManager::MouseInput::GetPosition()
