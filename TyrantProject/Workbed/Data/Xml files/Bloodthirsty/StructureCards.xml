@@ -11,6 +11,7 @@
 		<unique>false</unique>
 		<cooldown>3</cooldown>
 		<health>6</health>
+		<skill name="heal" number="1" suffix="all" faction="bloodthirsty"/>
 	</card>
 	
 	<card>
@@ -34,7 +35,8 @@
 		<unique>false</unique>
 		<cooldown>2</cooldown>
 		<health>6</health>
-    <skill name="refresh"/>
+		<skill name="refresh"/>
+		<skill name="rally" number="2" suffix="all" faction="bloodthirsty"/>
 	</card>
 
 </root>

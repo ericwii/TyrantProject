@@ -8,6 +8,10 @@ AbilityBase::AbilityBase() : myNumber(0)
 
 AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction)
 {
+	if (mySuffix == "all")
+	{
+		myTargets.Allocate(8);
+	}
 }
 
 AbilityBase::~AbilityBase()
@@ -56,4 +60,38 @@ Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
 		}
 	}
 	return nullptr;
+}
+
+CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& cards)
+{
+	myTargets.RemoveAll();
+
+	Card* currentTarget;
+
+	if (mySpecificFaction == eCardFaction::Action)
+	{
+		for (int i = cards.Size() - 1; i >= 0; --i)
+		{
+			currentTarget = cards[i];
+
+			if (currentTarget != nullptr && !currentTarget->IsDying())
+			{
+				myTargets.Add(currentTarget);
+			}
+		}
+	}
+	else
+	{
+		for (int i = cards.Size() - 1; i >= 0; --i)
+		{
+			currentTarget = cards[i];
+
+			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction)
+			{
+				myTargets.Add(currentTarget);
+			}
+		}
+	}
+
+	return myTargets;
 }

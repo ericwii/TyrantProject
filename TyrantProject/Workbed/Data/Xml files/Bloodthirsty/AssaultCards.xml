@@ -62,7 +62,7 @@
 		<attack>2</attack>
 		<health>7</health>
 		<skill name="strike" number="1" suffix="all"/>
-    <skill name="refresh"/>
+		<skill name="refresh"/>
 	</card>
 	
 	<card>
@@ -100,7 +100,7 @@
 		<attack>3</attack>
 		<health>9</health>
 		<skill name="strike" number="1" suffix="all"/>
-    <skill name="refresh"/>
+		<skill name="refresh"/>
 	</card>
 
 </root>

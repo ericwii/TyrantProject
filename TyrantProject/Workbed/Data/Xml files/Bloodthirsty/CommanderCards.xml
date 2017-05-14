@@ -30,6 +30,7 @@
 		<rarity>rare</rarity>
 		<unique>false</unique>
 		<health>6</health>
+		<skill name="rally" number="1" suffix="all" faction="bloodthirsty"/>
 	</card>
 	
 	<card>

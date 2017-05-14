@@ -116,6 +116,7 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="RefreshAbility.h" />
     <ClInclude Include="SiegeAbility.h" />
     <ClInclude Include="stdafx.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="RefreshAbility.cpp" />
     <ClCompile Include="SiegeAbility.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -58,26 +58,16 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			Card* currentTarget;
-			CU::GrowingArray<Card*> targets = opponent->GetAssaultCards();
-			for (int i = targets.Size() - 1; i >= 0; --i)
-			{
-				currentTarget = targets[i];
-				if (!currentTarget->IsDying())
-				{
-					currentTarget = currentTarget->OnTargeted();
-				}
+			CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetAssaultCards());
 
-				if (currentTarget == nullptr || currentTarget->IsDying())
+			if (targets.Size() > 0)
+			{
+				for (int i = 0; i < targets.Size(); ++i)
 				{
-					targets.RemoveNonCyclicAtIndex(i);
+					AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
 				}
-				else
-				{
-					AnimationManager::AddAnimation(strikeAnimation, currentTarget->GetPosition(), strikeAnimationSize);
-				}
+				AbilityStack::AddAbility(this, aCard, targets, strikeDelay);
 			}
-			AbilityStack::AddAbility(this, aCard, targets, strikeDelay);
 		}
 	}
 }

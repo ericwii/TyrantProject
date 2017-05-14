@@ -2,7 +2,7 @@
 #include "RefreshAbility.h"
 
 
-RefreshAbility::RefreshAbility()
+RefreshAbility::RefreshAbility() : AbilityBase()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/refreshIcon.png";
 }
@@ -14,11 +14,13 @@ RefreshAbility::~RefreshAbility()
 
 void RefreshAbility::OnCleanUp(Card * aCard)
 {
-	
-	AbilityStack::AddAbility(this, aCard, aCard,0.20f);
+	AbilityStack::AddAbility(this, aCard, aCard, 0.2f);
 }
 
 void RefreshAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	aCaster->Heal(10000);
+	someTargets;
+
+	int heal = 100;
+	aCaster->Heal((char)heal);
 }

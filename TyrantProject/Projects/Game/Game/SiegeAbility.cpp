@@ -10,7 +10,7 @@ AnimationData siegeAnimation = AnimationData
 	4,
 	30.f,
 	false
-	);
+);
 
 float siegeDelay = 0.2f;
 
@@ -82,5 +82,5 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 
 void SiegeAbility::OnAttacked(char & someDamage)
 {
-
+	someDamage;
 }

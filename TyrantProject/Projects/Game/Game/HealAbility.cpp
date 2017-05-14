@@ -46,22 +46,16 @@ void HealAbility::OnPreCombat(Card* aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			Card* currentTarget;
-			CU::GrowingArray<Card*> targets = aCard->GetOwner()->GetAssaultCards();
-			for (int i = targets.Size() - 1; i >= 0; --i)
-			{
-				currentTarget = targets[i];
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards());
 
-				if (currentTarget == nullptr || currentTarget->IsDying())
-				{
-					targets.RemoveNonCyclicAtIndex(i);
-				}
-				else
-				{
-					//AnimationManager::AddAnimation(healAnimation, currentTarget->GetPosition(), healAnimationSize);
-				}
+			if (targets.Size() > 0)
+			{
+				//for (int i = 0; i < targets.Size(); ++i)
+				//{
+				//AnimationManager::AddAnimation(healAnimation, targets[i]->GetPosition(), healAnimationSize);
+				//}
+				AbilityStack::AddAbility(this, aCard, targets);
 			}
-			AbilityStack::AddAbility(this, aCard, targets);
 		}
 	}
 }

@@ -54,6 +54,7 @@
     <ClCompile Include="RefreshAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="SiegeAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
@@ -121,6 +122,7 @@
     <ClInclude Include="RefreshAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
+    <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="SiegeAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
