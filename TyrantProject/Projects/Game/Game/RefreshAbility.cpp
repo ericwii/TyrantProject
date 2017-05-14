@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RefreshAbility.h"
 
-Vector2<float> refreshAnimationSize(0.5f, 0.5f);
+Vector2<float> refreshAnimationSize(0.3f, 0.5f);
 AnimationData refreshAnimation = AnimationData
 (
 	"Data/Textures/Animations/refreshAnimation.png",
