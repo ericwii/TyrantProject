@@ -10,3 +10,4 @@
 #include "ArmorAbility.h"
 #include "PierceAbility.h"
 #include "CrushAbility.h"
+#include "BerserkAbility.h"

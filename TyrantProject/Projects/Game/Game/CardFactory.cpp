@@ -255,6 +255,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new CrushAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "berserk")
+	{
+		return new BerserkAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }

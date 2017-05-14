@@ -107,6 +107,7 @@
     <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="ArmorAbility.h" />
+    <ClInclude Include="BerserkAbility.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardData.h" />
     <ClInclude Include="CardFactory.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="AbilityStack.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="ArmorAbility.cpp" />
+    <ClCompile Include="BerserkAbility.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CardGameState.cpp" />
