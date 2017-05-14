@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="AbilityBase.h" />
     <ClInclude Include="AbilityStack.h" />
+    <ClInclude Include="AbilityTypes.h" />
     <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="ArmorAbility.h" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
+    <ClInclude Include="PierceAbility.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="RefreshAbility.h" />
@@ -142,6 +144,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
+    <ClCompile Include="PierceAbility.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="RefreshAbility.cpp" />

@@ -66,7 +66,12 @@
     <ClCompile Include="WeakenAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="ArmorAbility.cpp" />
+    <ClCompile Include="PierceAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -140,7 +145,15 @@
     <ClInclude Include="WeakenAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
-    <ClInclude Include="ArmorAbility.h" />
+    <ClInclude Include="AbilityTypes.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="PierceAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
