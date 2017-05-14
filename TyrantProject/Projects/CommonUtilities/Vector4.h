@@ -72,6 +72,8 @@ public:
 	void Normalize();
 	void Inverse();
 
+	static const Vector4<TYPE> Lerp(const Vector4<TYPE>& aVector4, const Vector4<TYPE>& aSecondVector4, TYPE aLerpVal);
+
 	union
 	{
 		struct { TYPE x, y, z, w; };
@@ -577,4 +579,16 @@ void Vector4<TYPE>::Inverse()
 	y = 1 / y;
 	z = 1 / z;
 	w = 1 / w;
+}
+
+template<typename TYPE>
+const Vector4<TYPE> Vector4<TYPE>::Lerp(const Vector4<TYPE>& aVector4, const Vector4<TYPE>& aSecondVector4, TYPE aLerpVal)
+{
+	Vector4<TYPE> lerpedVector;
+
+	lerpedVector.x = aVector4.x + (aSecondVector4.x - aVector4.x) * aLerpVal;
+	lerpedVector.y = aVector4.y + (aSecondVector4.y - aVector4.y) * aLerpVal;
+	lerpedVector.z = aVector4.z + (aSecondVector4.z - aVector4.z) * aLerpVal;
+	lerpedVector.w = aVector4.w + (aSecondVector4.w - aVector4.w) * aLerpVal;
+	return lerpedVector;
 }
