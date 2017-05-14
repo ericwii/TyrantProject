@@ -20,7 +20,7 @@ public:
 	void LowerCooldown();
 	void CleanUp();
 
-	void OnAttacked(char& someDamage);
+	void OnAttacked(char& someDamage, Card* anAttacker);
 	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);
