@@ -247,6 +247,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new ArmorAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "pierce")
+	{
+		return new PierceAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }
