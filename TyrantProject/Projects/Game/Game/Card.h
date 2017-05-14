@@ -40,6 +40,7 @@ public:
 	inline bool IsLerping() const;
 	inline bool IsDying() const;
 	inline bool IsDead() const;
+	inline bool IsAtMaxHealth() const;
 	inline char GetAttack();
 	inline char GetCooldown();
 	inline char GetHealth();
@@ -161,4 +162,9 @@ inline bool Card::IsDying() const
 inline bool Card::IsDead() const
 {
 	return myIsDead;
+}
+
+inline bool Card::IsAtMaxHealth() const
+{
+	return myCardData != nullptr && myHealth == myCardData->health;
 }

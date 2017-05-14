@@ -56,26 +56,15 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			Card* currentTarget;
-			CU::GrowingArray<Card*> targets = opponent->GetStructureCards();
-			for (int i = targets.Size() - 1; i >= 0; --i)
+			CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetStructureCards());
+			if (targets.Size() > 0)
 			{
-				currentTarget = targets[i];
-				if (!currentTarget->IsDying())
+				for (int i = targets.Size() - 1; i >= 0; --i)
 				{
-					currentTarget = currentTarget->OnTargeted();
+					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
 				}
-
-				if (currentTarget == nullptr || currentTarget->IsDying())
-				{
-					targets.RemoveNonCyclicAtIndex(i);
-				}
-				else
-				{
-					AnimationManager::AddAnimation(siegeAnimation, currentTarget->GetPosition(), siegeAnimationSize);
-				}
+				AbilityStack::AddAbility(this, aCard, targets, siegeDelay);
 			}
-			AbilityStack::AddAbility(this, aCard, targets, siegeDelay);
 		}
 	}
 }
