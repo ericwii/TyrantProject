@@ -71,12 +71,3 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 		}
 	}
 }
-
-void StrikeAbility::OnAttacked(char& someDamage)
-{
-	someDamage;
-	if (mySuffix == "on attacked")
-	{
-
-	}
-}

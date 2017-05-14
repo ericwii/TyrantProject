@@ -68,8 +68,3 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 		}
 	}
 }
-
-void SiegeAbility::OnAttacked(char & someDamage)
-{
-	someDamage;
-}

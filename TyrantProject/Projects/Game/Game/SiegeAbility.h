@@ -10,6 +10,5 @@ public:
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;
 
 	void OnPreCombat(Card* aCard) override;
-	void OnAttacked(char& someDamage) override;
 };
 
