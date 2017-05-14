@@ -115,6 +115,7 @@
     <ClInclude Include="CardGameManager.h" />
     <ClInclude Include="CardGameTextManager.h" />
     <ClInclude Include="CardHand.h" />
+    <ClInclude Include="CounterAbility.h" />
     <ClInclude Include="CrushAbility.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="CardGameManager.cpp" />
     <ClCompile Include="CardGameTextManager.cpp" />
     <ClCompile Include="CardHand.cpp" />
+    <ClCompile Include="CounterAbility.cpp" />
     <ClCompile Include="CrushAbility.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BaseState.cpp" />

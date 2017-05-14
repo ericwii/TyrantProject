@@ -76,6 +76,8 @@
 		<cooldown>3</cooldown>
 		<attack>3</attack>
 		<health>6</health>
+		<skill name="crush" number="5" />
+		<skill name="counter" number="3" />
 	</card>
 
 	<card>

@@ -12,5 +12,6 @@ enum class eAbilityTypes
 	eArmor,
 	ePierce,
 	eCrush,
-	eBerserk
+	eBerserk,
+	eCounter
 };

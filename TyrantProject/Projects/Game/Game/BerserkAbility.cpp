@@ -15,5 +15,7 @@ BerserkAbility::~BerserkAbility()
 
 void BerserkAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
 {
+	someDamage;
+	aDamagedCard;
 	aCard->Berserk(myNumber);
 }
