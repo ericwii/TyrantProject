@@ -46,8 +46,7 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 			}
 			case(eGamePhase::Cleanup) :
 			{
-				instance->CleanUp(anActivePlayer, aOtherPlayer);
-				instance->myPhaseUpdateDone = true;
+				instance->myPhaseUpdateDone = instance->CleanUp(anActivePlayer, aOtherPlayer);
 				break;
 			}
 			default:
@@ -64,6 +63,8 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 		instance->myCurrentAssaultCardIndex = 0;
 		instance->myCurrentAbilityIndex = 0;
 		instance->myPhaseUpdateDone = false;
+		instance->myHasUpdatedCommander = false;
+		instance->myHasRemovedDeadCards = false;
 		return true;
 	}
 	return false;
@@ -101,58 +102,26 @@ bool CardGameManager::PreCombat(Player& anActivePlayer)
 {
 	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 	{
-		Card* currentCard = nullptr;
-		CU::VectorOnStack<AbilityBase*,3> currentAbilities;
-		if (!hasUpdatedCommander)
+		if (myHasUpdatedCommander == false)
 		{
-			currentCard = anActivePlayer.myComander;
-			currentAbilities = currentCard->GetAbilities();
-			if (myCurrentAbilityIndex < currentAbilities.Size() && currentAbilities[myCurrentAbilityIndex] != nullptr)
-			{
-				currentAbilities[myCurrentAbilityIndex]->OnPreCombat(currentCard);
-				++myCurrentAbilityIndex;
-			}
-			else
-			{
-				hasUpdatedCommander = true;
-				myCurrentAbilityIndex = 0;
-			}
+			myHasUpdatedCommander = UpdateAbilities(anActivePlayer.myComander);
 		}
 		else if (myCurrentStructureCardIndex < anActivePlayer.myStructureCards.Size())
 		{
-			currentCard = anActivePlayer.myStructureCards[myCurrentStructureCardIndex];
-			currentAbilities = currentCard->GetAbilities();
-
-			if (myCurrentAbilityIndex < currentAbilities.Size() && currentAbilities[myCurrentAbilityIndex] != nullptr)
-			{
-				currentAbilities[myCurrentAbilityIndex]->OnPreCombat(currentCard);
-				++myCurrentAbilityIndex;
-			}
-			else
+			if (UpdateAbilities(anActivePlayer.myStructureCards[myCurrentStructureCardIndex]) == true)
 			{
 				++myCurrentStructureCardIndex;
-				myCurrentAbilityIndex = 0;
 			}
 		}
 		else if (myCurrentAssaultCardIndex < anActivePlayer.myAssaultCards.Size())
 		{
-			currentCard = anActivePlayer.myAssaultCards[myCurrentAssaultCardIndex];
-			currentAbilities = currentCard->GetAbilities();
-
-			if (myCurrentAbilityIndex < currentAbilities.Size() && currentAbilities[myCurrentAbilityIndex] != nullptr)
-			{
-				currentAbilities[myCurrentAbilityIndex]->OnPreCombat(currentCard);
-				++myCurrentAbilityIndex;
-			}
-			else
+			if (UpdateAbilities(anActivePlayer.myAssaultCards[myCurrentAssaultCardIndex]) == true)
 			{
 				++myCurrentAssaultCardIndex;
-				myCurrentAbilityIndex = 0;
 			}
 		}
 		else
 		{
-			hasUpdatedCommander = false;
 			return true;
 		}
 	}
@@ -213,61 +182,42 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 	return false;
 }
 
-void CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
+bool CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 {
-	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
+	if (myHasRemovedDeadCards == false)
 	{
-		if (anActivePlayer.myAssaultCards[i]->IsDying())
+		RemoveDeadCards(anActivePlayer, anOpponentPlayer);
+		anActivePlayer.RepositionPlayedCards();
+		anOpponentPlayer.RepositionPlayedCards();
+		myHasRemovedDeadCards = true;
+	}
+
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	{
+		if (myHasUpdatedCommander == false)
 		{
-			anActivePlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
+			myHasUpdatedCommander = UpdateAbilities(anActivePlayer.myComander, true);
+		}
+		else if (myCurrentStructureCardIndex < anActivePlayer.myStructureCards.Size())
+		{
+			if (UpdateAbilities(anActivePlayer.myStructureCards[myCurrentStructureCardIndex], true) == true)
+			{
+				++myCurrentStructureCardIndex;
+			}
+		}
+		else if (myCurrentAssaultCardIndex < anActivePlayer.myAssaultCards.Size())
+		{
+			if (UpdateAbilities(anActivePlayer.myAssaultCards[myCurrentAssaultCardIndex], true) == true)
+			{
+				++myCurrentAssaultCardIndex;
+			}
 		}
 		else
 		{
-			anActivePlayer.myAssaultCards[i]->CleanUp();
+			return true;
 		}
 	}
-
-	for (int i = 0; i < anOpponentPlayer.myAssaultCards.Size(); ++i)
-	{
-		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
-		{
-			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
-			--i;
-		}
-		else
-		{
-			anOpponentPlayer.myAssaultCards[i]->CleanUp();
-		}
-	}
-
-	anActivePlayer.RepositionPlayedCards();
-	anOpponentPlayer.RepositionPlayedCards();
-
-
-	CU::VectorOnStack<AbilityBase*, 3> currentAbilities = anActivePlayer.GetCommander()->GetAbilities();
-	for (short i = 0; i < currentAbilities.Size(); i++)
-	{
-		currentAbilities[i]->OnCleanUp(anActivePlayer.GetCommander());
-	}
-
-	for (short i = 0; i < anActivePlayer.GetStructureCards().Size(); i++)
-	{
-		currentAbilities = anActivePlayer.GetStructureCards()[i]->GetAbilities();
-		for (short j = 0; j < currentAbilities.Size(); j++)
-		{
-			currentAbilities[j]->OnCleanUp(anActivePlayer.GetStructureCards()[i]);
-		}
-	}
-
-	for (short i = 0; i < anActivePlayer.GetAssaultCards().Size(); i++)
-	{
-		currentAbilities = anActivePlayer.GetAssaultCards()[i]->GetAbilities();
-		for (short j = 0; j < currentAbilities.Size(); j++)
-		{
-			currentAbilities[j]->OnCleanUp(anActivePlayer.GetAssaultCards()[i]);
-		}
-	}
+	return false;
 }
 
 
@@ -321,4 +271,83 @@ bool CardGameManager::AllActionsDone(Player& aPlayer, Player& aOtherPlayer)
 	actions += UpdateCards(aOtherPlayer);
 
 	return actions < 1 && AnimationManager::IsEmpty() && AbilityStack::IsEmpty();
+}
+
+void CardGameManager::RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer)
+{
+	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
+	{
+		if (anActivePlayer.myAssaultCards[i]->IsDying())
+		{
+			anActivePlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+		else
+		{
+			anActivePlayer.myAssaultCards[i]->CleanUp();
+		}
+	}
+
+	for (int i = 0; i < anOpponentPlayer.myAssaultCards.Size(); ++i)
+	{
+		if (anOpponentPlayer.myAssaultCards[i]->IsDying())
+		{
+			anOpponentPlayer.myAssaultCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+		else
+		{
+			anOpponentPlayer.myAssaultCards[i]->CleanUp();
+		}
+	}
+
+	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
+	{
+		if (anActivePlayer.myStructureCards[i]->IsDying())
+		{
+			anActivePlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+		else
+		{
+			anActivePlayer.myStructureCards[i]->CleanUp();
+		}
+	}
+
+	for (int i = 0; i < anOpponentPlayer.myStructureCards.Size(); ++i)
+	{
+		if (anOpponentPlayer.myStructureCards[i]->IsDying())
+		{
+			anOpponentPlayer.myStructureCards.RemoveNonCyclicAtIndex(i);
+			--i;
+		}
+		else
+		{
+			anOpponentPlayer.myStructureCards[i]->CleanUp();
+		}
+	}
+}
+
+bool CardGameManager::UpdateAbilities(Card* aCard, bool cleanUp)
+{
+	myCurrentAbilities = aCard->GetAbilities();
+
+	if (myCurrentAbilityIndex < myCurrentAbilities.Size() && myCurrentAbilities[myCurrentAbilityIndex] != nullptr)
+	{
+		if (cleanUp)
+		{
+			myCurrentAbilities[myCurrentAbilityIndex]->OnCleanUp(aCard);
+		}
+		else
+		{
+			myCurrentAbilities[myCurrentAbilityIndex]->OnPreCombat(aCard);
+		}
+		++myCurrentAbilityIndex;
+	}
+	else
+	{
+		myCurrentAbilityIndex = 0;
+		return true;
+	}
+	return false;
 }
