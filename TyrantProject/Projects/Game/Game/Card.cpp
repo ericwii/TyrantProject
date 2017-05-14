@@ -198,8 +198,17 @@ void Card::Weaken(char someWeaken)
 {
 	myTempAttackChange -= someWeaken;
 
+
 	string attack;
-	attack += (myAttack + myTempAttackChange);
+	if (myAttack + myTempAttackChange < 0)
+	{
+		attack += "-";
+		attack += ABS(myAttack + myTempAttackChange);
+	}
+	else
+	{
+		attack += (myAttack + myTempAttackChange);
+	}
 	myAttackText.SetText(attack);
 
 	if (myTempAttackChange < 0)
@@ -221,7 +230,16 @@ void Card::Rally(char someRally)
 	myTempAttackChange += someRally;
 
 	string attack;
-	attack += (myAttack + myTempAttackChange);
+
+	if(myAttack + myTempAttackChange < 0)
+	{
+		attack += "-";
+		attack += ABS(myAttack + myTempAttackChange);
+	}
+	else
+	{
+		attack += (myAttack + myTempAttackChange);
+	}
 	myAttackText.SetText(attack);
 
 	if (myTempAttackChange > 0)
