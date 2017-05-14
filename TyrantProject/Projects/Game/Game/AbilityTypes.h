@@ -14,5 +14,7 @@ enum class eAbilityTypes
 	eCrush,
 	eBerserk,
 	eLeech,
-	eSiphon
+	eSiphon,
+	eFlying,
+	eAntiAir
 };
