@@ -1,6 +1,7 @@
 #pragma once
 #include "Card.h"
 #include "Player.h"
+#include "AbilityTypes.h"
 
 class AbilityBase
 {
@@ -21,9 +22,14 @@ public:
 	virtual void OnCommanderAttack(Card*& aCurrentTarget, Card* aUser);
 	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 
+
+	const eAbilityTypes GetAbilityType();
+	const char GetNumber();
+
 	string iconTexturePath;
 protected:
 
+	eAbilityTypes myAbilityType;
 	CU::GrowingArray<Card*> myTargets;
 	string mySuffix;
 	eCardFaction mySpecificFaction;
@@ -33,4 +39,5 @@ protected:
 	Card* FindTargetOffCoolDown(CU::GrowingArray<Card*>& cards);
 	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards);
 	CU::GrowingArray<Card*>& FindAllTargetsOffCoolDown(CU::GrowingArray<Card*>& cards);
+	
 };

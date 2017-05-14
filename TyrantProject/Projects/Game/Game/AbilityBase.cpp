@@ -40,6 +40,16 @@ void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	someTargets;
 }
 
+const eAbilityTypes AbilityBase::GetAbilityType()
+{
+	return myAbilityType;
+}
+
+const char AbilityBase::GetNumber()
+{
+	return myNumber;
+}
+
 
 //Protected Methods
 
