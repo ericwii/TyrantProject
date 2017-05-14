@@ -147,6 +147,7 @@ bool CardGameManager::PreCombat(Player& anActivePlayer)
 bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 {
 	Vector2<float> size(2.f, 2.f);
+	CU::VectorOnStack<AbilityBase*, 3> currentAbilities;
 
 	if (myCurrentAssaultCardIndex >= anAttacker.myAssaultCards.Size())
 	{
@@ -169,7 +170,20 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 			}
 
 			char finalDamage = currentCard->GetAttack();
+			if (defendingCard == aDefender.myComander)
+			{
+				for (short i = 0; i < aDefender.GetStructureCards().Size(); i++)
+				{
+					currentAbilities = aDefender.GetStructureCards()[i]->GetAbilities();
+					for (char j = 0; j < currentAbilities.Size(); j++)
+					{
+						currentAbilities[j]->OnCommanderAttack(defendingCard, aDefender.GetStructureCards()[i]);
+					}
+				}
+			}
+
 			defendingCard->OnAttacked(finalDamage);
+
 			if (finalDamage > 0)
 			{
 				Vector3<float> position = anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetOrientation().GetPosition();
