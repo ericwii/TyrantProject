@@ -61,6 +61,7 @@ public:
 	const TYPE Dot(Vector3<TYPE> aVector3) const;
 	const Vector3<TYPE> Cross(Vector3<TYPE>& aVector3) const;
 
+	static const Vector3<TYPE> Lerp(const Vector3<TYPE>& aVector3, const Vector2<TYPE>& aSecondVector3, TYPE aLerpVal);
 
 	union
 	{
@@ -464,4 +465,15 @@ const Vector3<TYPE> Vector3<TYPE>::Cross(Vector3<TYPE>& aVector3) const
 	vector.z = (x * aVector3.y - y * aVector3.x);
 
 	return vector;
+}
+
+template<typename TYPE>
+const Vector3<TYPE> Vector3<TYPE>::Lerp(const Vector3<TYPE>& aVector3, const Vector2<TYPE>& aSecondVector3, TYPE aLerpVal)
+{
+	Vector3<TYPE> lerpedVector;
+
+	lerpedVector.x = aVector3.x + (aSecondVector3.x - aVector3.x) * aLerpVal;
+	lerpedVector.y = aVector3.y + (aSecondVector3.y - aVector3.y) * aLerpVal;
+	lerpedVector.z = aVector3.z + (aSecondVector3.z - aVector3.z) * aLerpVal;
+	return lerpedVector;
 }

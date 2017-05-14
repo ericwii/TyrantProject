@@ -45,6 +45,8 @@ public:
 	void Normalize();
 	void Inverse();
 
+	static const Vector2<TYPE> Lerp(const Vector2<TYPE>& aVector2, const Vector2<TYPE>& aSecondVector2, TYPE aLerpVal);
+
 	union
 	{
 		struct { TYPE x, y; };
@@ -317,4 +319,14 @@ template<typename TYPE>
 const Vector2<TYPE> Vector2<TYPE>::GetInversed() const
 {
 	return Vector2<TYPE>(1 / x, 1 / y);
+}
+
+template<typename TYPE>
+const Vector2<TYPE> Lerp(const Vector2<TYPE>& aVector2, const Vector2<TYPE>& aSecondVector2, TYPE aLerpVal)
+{
+	Vector2<TYPE> lerpedVector;
+
+	lerpedVector.x = aVector2.x + (aSecondVector2.x - aVector2.x) * aLerpVal;
+	lerpedVector.y = aVector2.y + (aSecondVector2.y - aVector2.y) * aLerpVal;
+	return lerpedVector;
 }
