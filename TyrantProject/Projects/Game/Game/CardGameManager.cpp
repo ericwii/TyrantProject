@@ -319,7 +319,7 @@ void CardGameManager::RemoveDeadCards(Player& anActivePlayer, Player& anOpponent
 		}
 		else
 		{
-			anOpponentPlayer.myAssaultCards[i]->CleanUp();
+			//anOpponentPlayer.myAssaultCards[i]->CleanUp();
 		}
 	}
 
@@ -345,7 +345,7 @@ void CardGameManager::RemoveDeadCards(Player& anActivePlayer, Player& anOpponent
 		}
 		else
 		{
-			anOpponentPlayer.myStructureCards[i]->CleanUp();
+			//anOpponentPlayer.myStructureCards[i]->CleanUp();
 		}
 	}
 }
