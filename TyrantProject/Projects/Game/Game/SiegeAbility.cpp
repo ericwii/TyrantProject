@@ -17,6 +17,7 @@ float siegeDelay = 0.2f;
 SiegeAbility::SiegeAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix,aNumber,aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/siegeIcon.png";
+	myAbilityType = eAbilityTypes::eSiege;
 }
 
 SiegeAbility::~SiegeAbility()

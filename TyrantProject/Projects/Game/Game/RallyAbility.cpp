@@ -14,6 +14,7 @@ AnimationData rallyAnimation = AnimationData
 RallyAbility::RallyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/rallyIcon.png";
+	myAbilityType = eAbilityTypes::eRally;
 }
 
 

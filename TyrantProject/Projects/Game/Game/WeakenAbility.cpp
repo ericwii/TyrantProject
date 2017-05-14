@@ -5,6 +5,7 @@
 WeakenAbility::WeakenAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/weakenIcon.png";
+	myAbilityType = eAbilityTypes::eWeaken;
 }
 
 WeakenAbility::~WeakenAbility()

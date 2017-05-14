@@ -15,6 +15,7 @@ AnimationData healAnimation = AnimationData
 HealAbility::HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/healIcon.png";
+	myAbilityType = eAbilityTypes::eHeal;
 }
 
 HealAbility::~HealAbility()

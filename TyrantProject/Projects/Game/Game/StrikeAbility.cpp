@@ -18,6 +18,7 @@ float strikeDelay = 0.2f;
 StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/strikeIcon.png";
+	myAbilityType = eAbilityTypes::eStrike;
 }
 
 StrikeAbility::~StrikeAbility()

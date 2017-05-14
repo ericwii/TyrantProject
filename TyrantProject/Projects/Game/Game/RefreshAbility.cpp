@@ -15,6 +15,7 @@ AnimationData refreshAnimation = AnimationData
 RefreshAbility::RefreshAbility() : AbilityBase()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/refreshIcon.png";
+	myAbilityType = eAbilityTypes::eRefresh;
 }
 
 

@@ -5,6 +5,7 @@
 WallAbility::WallAbility()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/wallIcon.png";
+	myAbilityType = eAbilityTypes::eWall;
 }
 
 
