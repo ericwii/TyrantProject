@@ -66,6 +66,7 @@
     <ClCompile Include="WeakenAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
+    <ClCompile Include="ArmorAbility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="WeakenAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
+    <ClInclude Include="ArmorAbility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

@@ -172,7 +172,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 				}
 			}
 
-			defendingCard->OnAttacked(finalDamage);
+			defendingCard->OnAttacked(finalDamage, anAttacker.myAssaultCards[myCurrentAssaultCardIndex]);
 
 			if (finalDamage > 0)
 			{
