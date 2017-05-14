@@ -28,27 +28,22 @@ void RallyAbility::OnPreCombat(Card* aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards());
+			Card* target = FindTargetOffCoolDown(aCard->GetOwner()->GetAssaultCards());
 
+			
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target);
 			}
+			
+
 		}
 		else if (mySuffix == "all")
 		{   
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards());
+			CU::GrowingArray<Card*> targets = FindAllTargetsOffCoolDown(aCard->GetOwner()->GetAssaultCards());
 
 			if (targets.Size() > 0)
 			{
-				for (int i = targets.Size() - 1; i >= 0; --i)
-				{
-					if (targets[i]->GetCooldown() > 0)
-					{
-						targets.RemoveCyclicAtIndex(i);
-					}
-				    //AnimationManager::AddAnimation(rallyAnimation, targets[i]->GetPosition(), rallyAnimationSize);
-				}
 				AbilityStack::AddAbility(this, aCard, targets);
 			}
 		}
