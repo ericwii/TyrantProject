@@ -15,8 +15,8 @@ ArmorAbility::~ArmorAbility()
 
 void ArmorAbility::OnAttacked(char & someDamage, Card* anAttacker)
 {
-	short reductionReduction = 0;
-	short damageReduction = myNumber;
+	char reductionReduction = 0;
+	char damageReduction = myNumber;
 
 
 	for (short i = 0; i < anAttacker->GetAbilities().Size(); i++)

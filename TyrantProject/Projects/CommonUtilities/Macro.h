@@ -3,7 +3,7 @@
 #define MIN(a,b) (a) < (b) ? a : b
 #define MAX(a,b) (a) > (b) ? a : b
 
-#define ABS(x) (x) < 0 ? (-x) : (x)
+#define ABS(x) (x) < 0 ? -(x) : (x)
 
 #define SAFE_DELETE(x) delete x; x = nullptr;
 
