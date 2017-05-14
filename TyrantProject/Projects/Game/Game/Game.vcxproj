@@ -121,6 +121,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StrikeAbility.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="WallAbility.h" />
     <ClInclude Include="XMLFunctions.h" />
     <ClInclude Include="XMLReader.h" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="StrikeAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="WallAbility.cpp" />
     <ClCompile Include="XMLFunctions.cpp" />
     <ClCompile Include="XMLReader.cpp" />
   </ItemGroup>

@@ -54,7 +54,12 @@
     <ClCompile Include="RefreshAbility.cpp">
       <Filter>Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="SiegeAbility.cpp" />
+    <ClCompile Include="SiegeAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="WallAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -116,7 +121,12 @@
     <ClInclude Include="RefreshAbility.h">
       <Filter>Abilities</Filter>
     </ClInclude>
-    <ClInclude Include="SiegeAbility.h" />
+    <ClInclude Include="SiegeAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="WallAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
