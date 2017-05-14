@@ -21,6 +21,7 @@ public:
 	void CleanUp();
 
 	void OnAttacked(char& someDamage, Card* anAttacker);
+	void OnKill(Card* aCard, Card* akilledCard);
 	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);

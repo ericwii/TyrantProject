@@ -252,6 +252,14 @@ void Card::OnAttacked(char& someDamage, Card* anAttacker)
 
 }
 
+void Card::OnKill(Card* aCard, Card* akilledCard)
+{
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		myCardData->abilities[i]->OnKill(aCard, akilledCard);
+	}
+}
+
 Card* Card::OnTargeted()
 {
 	Card* target = this;

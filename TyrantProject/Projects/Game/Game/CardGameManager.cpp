@@ -190,11 +190,17 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 				}
 
 				defendingCard->TakeDamage(finalDamage);
+				if (defendingCard->IsDying() == true)
+				{
+					anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->OnKill(anAttacker.myAssaultCards[myCurrentAssaultCardIndex],defendingCard);
+				}
+
 				if (aDefender.CommanderIsDead())
 				{
 					myCurrentAssaultCardIndex = anAttacker.myAssaultCards.Size();
 					CleanUp(anAttacker, aDefender);
 				}
+
 			}
 		}
 
