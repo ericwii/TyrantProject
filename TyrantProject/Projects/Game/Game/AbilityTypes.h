@@ -15,5 +15,7 @@ enum class eAbilityTypes
 	eBerserk,
 	eCounter,
 	eLeech,
-	eSiphon
+	eSiphon,
+	eFlying,
+	eAntiAir
 };

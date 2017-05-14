@@ -14,3 +14,5 @@
 #include "CounterAbility.h"
 #include "LeechAbility.h"
 #include "SiphonAbility.h"
+#include "AntiAirAbility.h"
+#include "FlyingAbility.h"

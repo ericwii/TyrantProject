@@ -106,6 +106,7 @@
     <ClInclude Include="AbilityTypes.h" />
     <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="AntiAirAbility.h" />
     <ClInclude Include="ArmorAbility.h" />
     <ClInclude Include="BerserkAbility.h" />
     <ClInclude Include="Card.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="CardHand.h" />
     <ClInclude Include="CounterAbility.h" />
     <ClInclude Include="CrushAbility.h" />
+    <ClInclude Include="FlyingAbility.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
@@ -139,6 +141,7 @@
     <ClCompile Include="AbilityBase.cpp" />
     <ClCompile Include="AbilityStack.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="AntiAirAbility.cpp" />
     <ClCompile Include="ArmorAbility.cpp" />
     <ClCompile Include="BerserkAbility.cpp" />
     <ClCompile Include="Card.cpp" />
@@ -149,6 +152,7 @@
     <ClCompile Include="CardHand.cpp" />
     <ClCompile Include="CounterAbility.cpp" />
     <ClCompile Include="CrushAbility.cpp" />
+    <ClCompile Include="FlyingAbility.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />

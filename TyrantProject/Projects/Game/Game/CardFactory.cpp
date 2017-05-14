@@ -271,6 +271,14 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new CounterAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "antiair")
+	{
+		return new AntiAirAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "flying")
+	{
+		return new FlyingAbility();
+	}	
 	return nullptr;
 }
 
