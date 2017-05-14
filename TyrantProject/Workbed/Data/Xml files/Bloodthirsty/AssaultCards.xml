@@ -50,6 +50,7 @@
 		<health>8</health>
     <skill name="siege" number="2"/>
     <skill name="weaken" number="2"/>
+    <skill name="leech" number="3"/>
 	</card>
 	
 	<card>
@@ -76,6 +77,8 @@
 		<cooldown>3</cooldown>
 		<attack>3</attack>
 		<health>6</health>
+    
+    <skill name="siphon" number="2"/>
 	</card>
 
 	<card>
