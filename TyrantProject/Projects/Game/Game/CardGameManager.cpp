@@ -164,6 +164,11 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 					{
 						currentAbilities[j]->OnCommanderAttack(defendingCard, aDefender.GetStructureCards()[i]);
 					}
+
+					if (defendingCard != aDefender.myComander)
+					{
+						break;
+					}
 				}
 			}
 
