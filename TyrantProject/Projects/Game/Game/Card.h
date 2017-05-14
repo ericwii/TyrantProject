@@ -22,12 +22,14 @@ public:
 
 	void OnAttacked(char& someDamage, Card* anAttacker);
 	void OnKill(Card* aCard, Card* akilledCard);
+	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
 	Card* OnTargeted();
 
 	void TakeDamage(char someDamage);
 	void Heal(char someHealth);
 	void Weaken(char someWeaken);
 	void Rally(char someRally);
+	void Berserk(char someAttackIncrese);
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
@@ -77,6 +79,7 @@ private:
 	char myHealth;
 	char myAttack;
 	char myTempAttackChange;
+	char myPermanentAttackChange;
 
 	void LoadModels();
 	void LoadText();
@@ -142,7 +145,7 @@ inline bool Card::IsLerping() const
 
 inline char Card::GetAttack()
 {
-	return myAttack + myTempAttackChange;
+	return myAttack + myTempAttackChange + myPermanentAttackChange;
 }
 
 inline char Card::GetCooldown()

@@ -20,6 +20,7 @@ public:
 	virtual void OnTargeted(Card* aTarget);
 	virtual void OnAttacked(char& someDamage, Card* anAttacker);
 	virtual void OnCommanderAttack(Card*& aCurrentTarget, Card* aUser);
+	virtual void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
 	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 
 

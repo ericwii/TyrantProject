@@ -34,6 +34,12 @@ void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser)
 	aCurrentTarget;
 	aUser;
 }
+void AbilityBase::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
+{
+	aCard;
+	aDamagedCard;
+	someDamage;
+}
 void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster;

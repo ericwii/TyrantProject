@@ -12,11 +12,11 @@ using namespace tinyxml2;
 
 float deathFadeTime = 0.8f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr), myTempAttackChange(0)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr), myTempAttackChange(0), myPermanentAttackChange(0)
 {
 }
 
-Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner), myTempAttackChange(0)
+Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner), myTempAttackChange(0), myPermanentAttackChange(0)
 {
 }
 
@@ -256,6 +256,37 @@ void Card::Rally(char someRally)
 	}
 }
 
+void Card::Berserk(char someAttackIncrese)
+{
+	myAttack += someAttackIncrese;
+
+	string attack;
+
+	if (myAttack < 0)
+	{
+		attack += "-";
+		attack += ABS(myAttack + myTempAttackChange);
+	}
+	else
+	{
+		attack += (myAttack + myTempAttackChange);
+	}
+	myAttackText.SetText(attack);
+
+	if (myAttack > myCardData->attack)
+	{
+		myAttackText.SetColor(ralliedAttackColor);
+	}
+	else if (myAttack < myCardData->attack)
+	{
+		myAttackText.SetColor(weakenedAttackColor);
+	}
+	else
+	{
+		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+	}
+}
+
 void Card::OnAttacked(char& someDamage, Card* anAttacker)
 {
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
@@ -275,6 +306,14 @@ void Card::OnKill(Card* aCard, Card* akilledCard)
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
 		myCardData->abilities[i]->OnKill(aCard, akilledCard);
+	}
+}
+
+void Card::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
+{
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		myCardData->abilities[i]->OnDamageDealt(aCard, aDamagedCard, someDamage);
 	}
 }
 
