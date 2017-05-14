@@ -11,3 +11,5 @@
 #include "PierceAbility.h"
 #include "CrushAbility.h"
 #include "BerserkAbility.h"
+#include "LeechAbility.h"
+#include "SiphonAbility.h"
