@@ -17,5 +17,6 @@ enum class eAbilityTypes
 	eLeech,
 	eSiphon,
 	eFlying,
-	eAntiAir
+	eAntiAir,
+	eSummon,
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "AbilityBase.h"
 
-class WeakenAbility: public AbilityBase
+class WeakenAbility : public AbilityBase
 {
 public:
 	WeakenAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);

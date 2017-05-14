@@ -279,6 +279,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new FlyingAbility();
 	}	
+	else if (aName == "summon")
+	{
+		return new SummonAbility(aSuffix, aNumber, aFaction);
+	}
 	return nullptr;
 }
 

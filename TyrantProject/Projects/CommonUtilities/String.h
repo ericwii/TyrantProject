@@ -32,7 +32,7 @@ namespace CommonUtilities
 		String& operator+=(const int aInt);
 
 		char& operator[](const int aIndex);
-		char& operator[](const int aIndex) const;
+		const char& operator[](const int aIndex) const;
 
 
 		bool operator==(const String& aString) const;
@@ -294,18 +294,17 @@ namespace CommonUtilities
 	StringTemplate
 	String<Size> String<Size>::SubStr(const int aIndex, const int aLenght) const
 	{
-		DEBUG_ASSERT(aIndex >= 0, aIndex < myCurrentSize && "Index out of bounds");
+		DEBUG_ASSERT(aIndex >= 0 && aIndex < myCurrentSize, "Index out of bounds");
 		DEBUG_ASSERT(aLenght > 0, "Lenght cannot be less than 1");
 
-		aLenght = min(myCurrentSize - aIndex, aLenght);
+		int length = min(myCurrentSize - aIndex, aLenght);
 		char charArray[Size];
 
-		for (int i = 0; i < aLenght; ++i)
+		for (int i = 0; i < length; ++i)
 		{
-			char x = myArray[aIndex + i];
 			charArray[i] = myArray[aIndex + i];
 		}
-		charArray[aLenght] = '\0';
+		charArray[length] = '\0';
 
 		return String<Size>(charArray);
 	}
@@ -313,16 +312,16 @@ namespace CommonUtilities
 	StringTemplate
 	String<Size>& String<Size>::SetAsSubStr(const int aIndex, const int aLenght)
 	{
-		DEBUG_ASSERT(aIndex >= 0, aIndex < myCurrentSize && "Index out of bounds");
+		DEBUG_ASSERT(aIndex >= 0 && aIndex < myCurrentSize, "Index out of bounds");
 		DEBUG_ASSERT(aLenght > 0, "Lenght cannot be less than 1");
 
-		aLenght = min(myCurrentSize - aIndex, aLenght);
-		for (int i = 0; i < aLenght; ++i)
+		int length = min(myCurrentSize - aIndex, aLenght);
+		for (int i = 0; i < length; ++i)
 		{
 			myArray[i] = myArray[aIndex + i];
 		}
-		myArray[aLenght] = '\0';
-		myCurrentSize = aLenght;
+		myArray[length] = '\0';
+		myCurrentSize = length;
 
 		return (*this);
 	}
@@ -345,15 +344,15 @@ namespace CommonUtilities
 	StringTemplate
 	char& String<Size>::operator[](const int aIndex)
 	{
-		DEBUG_ASSERT(aIndex >= 0, aIndex < myCurrentSize && "Index out of bounds");
+		DEBUG_ASSERT(aIndex >= 0 && aIndex < myCurrentSize, "Index out of bounds");
 
 		return myArray[aIndex];
 	}
 
 	StringTemplate
-	char& String<Size>::operator[](const int aIndex) const
+	const char& String<Size>::operator[](const int aIndex) const
 	{
-		DEBUG_ASSERT(aIndex >= 0, aIndex < myCurrentSize && "Index out of bounds");
+		DEBUG_ASSERT(aIndex >= 0 && aIndex < myCurrentSize, "Index out of bounds");
 
 		return myArray[aIndex];
 	}

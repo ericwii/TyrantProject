@@ -131,6 +131,7 @@
     <ClInclude Include="SiphonAbility.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StrikeAbility.h" />
+    <ClInclude Include="SummonAbility.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="WallAbility.h" />
     <ClInclude Include="WeakenAbility.h" />
@@ -168,6 +169,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StrikeAbility.cpp" />
+    <ClCompile Include="SummonAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="WallAbility.cpp" />
     <ClCompile Include="WeakenAbility.cpp" />

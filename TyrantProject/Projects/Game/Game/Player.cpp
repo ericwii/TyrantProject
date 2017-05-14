@@ -54,6 +54,7 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 
 	myAssaultCards.Allocate(16);
 	myStructureCards.Allocate(16);
+	mySummonedCards.Allocate(16);
 
 	ShuffleDeck();	
 	DrawCard();
@@ -105,6 +106,44 @@ bool Player::ChooseCardToPlay(Card*& chosenCard)
 	return false;
 }
 
+void Player::SummonCard(const string& aCardToSummon)
+{
+	CardData* newCardData = CardFactory::GetInstance().GetCard(aCardToSummon);
+	if (newCardData == nullptr)
+	{
+		return;
+	}
+
+	mySummonedCards.Add(Card(this));
+	Card& newCard = mySummonedCards.GetLast();
+	newCard.LoadCard(newCardData);
+	
+	Vector2<float> position;
+	if (newCard.GetCardType() == eCardType::Assault)
+	{
+		position = assaultCardStartPosition;
+		position.x += playedCardsOffset * myAssaultCards.Size();
+		if (myPlayerType != ePlayerType::User)
+		{
+			position.y *= -1;
+		}
+
+		mySummonedCards.GetLast().SetPosition(position);
+		myAssaultCards.Add(&mySummonedCards.GetLast());
+	}
+	else if (newCard.GetCardType() == eCardType::Structure)
+	{
+		position = structureCardStartPosition;
+		position.x += playedCardsOffset * myStructureCards.Size();
+		if (myPlayerType != ePlayerType::User)
+		{
+			position.y *= -1.f;
+		}
+
+		mySummonedCards.GetLast().SetPosition(position);
+		myStructureCards.Add(&mySummonedCards.GetLast());
+	}
+}
 
 
 

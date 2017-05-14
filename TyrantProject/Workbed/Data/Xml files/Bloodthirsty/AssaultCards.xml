@@ -48,9 +48,9 @@
 		<cooldown>2</cooldown>
 		<attack>2</attack>
 		<health>8</health>
-    <skill name="siege" number="2"/>
-    <skill name="weaken" number="2"/>
-    <skill name="leech" number="3"/>
+		<skill name="siege" number="2"/>
+		<skill name="weaken" number="2"/>
+		<skill name="summon" suffix="Redeemer" />
 	</card>
 	
 	<card>
@@ -91,6 +91,7 @@
 		<cooldown>2</cooldown>
 		<attack>2</attack>
 		<health>6</health>
+		<skill name="siphon" number="2"/>
 	</card>
 	
 	<card>
@@ -105,7 +106,7 @@
 		<health>9</health>
 		<skill name="strike" number="1" suffix="all"/>
 		<skill name="refresh"/>
-    <skill name="berserk" number="2"/>
+		<skill name="berserk" number="2"/>
 	</card>
 
 </root>

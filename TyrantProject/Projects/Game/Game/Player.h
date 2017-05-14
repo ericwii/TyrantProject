@@ -24,6 +24,7 @@ public:
 	void Render();
 
 	bool ChooseCardToPlay(Card*& chosenCard);
+	void SummonCard(const string& aCardToSummon);
 
 	inline bool CommanderIsDead();
 	inline Player* GetOpponent();
@@ -42,6 +43,7 @@ private:
 	CU::GrowingArray<Card*> myDeckCards;
 	CU::GrowingArray<Card*> myAssaultCards;
 	CU::GrowingArray<Card*> myStructureCards;
+	CU::GrowingArray<Card> mySummonedCards;
 	CU::VectorOnStack<Card, DECK_MAX_SIZE> myOwnedCards;
 	ePlayerType myPlayerType;
 	Card* myComander;
