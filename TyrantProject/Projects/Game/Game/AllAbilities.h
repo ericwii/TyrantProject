@@ -7,3 +7,4 @@
 #include "SiegeAbility.h"
 #include "WallAbility.h"
 #include "WeakenAbility.h"
+#include "ArmorAbility.h"

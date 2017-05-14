@@ -243,6 +243,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new WeakenAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "armor")
+	{
+		return new ArmorAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }
