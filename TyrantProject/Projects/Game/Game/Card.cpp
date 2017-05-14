@@ -128,18 +128,21 @@ void Card::LowerCooldown()
 
 void Card::CleanUp()
 {
-	myTempAttackChange = 0;
-	string attack;
-	attack += myAttack;
-	myAttackText.SetText(attack);
+	if (myCardData != nullptr && myCardData->cardType == eCardType::Assault)
+	{
+		myTempAttackChange = 0;
+		string attack;
+		attack += myAttack;
+		myAttackText.SetText(attack);
 
-	if (myCardData != nullptr && myAttack > myCardData->attack)
-	{
-		myAttackText.SetColor(ralliedAttackColor);
-	}
-	else
-	{
-		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		if (myAttack > myCardData->attack)
+		{
+			myAttackText.SetColor(ralliedAttackColor);
+		}
+		else
+		{
+			myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		}
 	}
 }
 

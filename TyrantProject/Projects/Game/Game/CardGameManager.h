@@ -22,9 +22,12 @@ public:
 	 bool PlayCard(Player& anActivePlayer);
 	 bool PreCombat(Player& anActivePlayer);
 	 bool Combat(Player& anAttacker, Player& aDefender);
-	 void CleanUp(Player& anActivePlayer, Player& anOpponentPlayer);
+	 bool CleanUp(Player& anActivePlayer, Player& anOpponentPlayer);
 
 private:
+
+
+
 	CardGameManager();
 	~CardGameManager();
 
@@ -32,8 +35,13 @@ private:
 
 	bool AllActionsDone(Player& aPlayer, Player& aOtherPlayer);
 
+	void RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer);
+	bool UpdateAbilities(Card* aCard, bool cleanUp = false);
+
+private:
 	static CardGameManager* instance;
 
+	CU::VectorOnStack<AbilityBase*, 3> myCurrentAbilities;
 	Player* myAttacker;
 	Player* myDefender;
 	Card* myChoosenCard;
@@ -41,6 +49,7 @@ private:
 	int myCurrentStructureCardIndex;
 	int myCurrentAbilityIndex;
 	bool myPhaseUpdateDone = false;
-	bool hasUpdatedCommander = false;
+	bool myHasUpdatedCommander = false;
+	bool myHasRemovedDeadCards = false;
 };
 

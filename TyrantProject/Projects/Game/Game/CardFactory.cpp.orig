@@ -227,14 +227,17 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new RefreshAbility();
 	}
+<<<<<<< HEAD
 	else if (aName == "rally")
 	{
 		return new RallyAbility(aSuffix, aNumber, aFaction);
-	}
+=======
 	else if (aName == "siege")
 	{
 		return new SiegeAbility(aSuffix, aNumber, aFaction);
-	}	
+>>>>>>> 9ab0094e80ed10b7a541d610df8fa26a288e9d05
+	}
+
 	return nullptr;
 }
 

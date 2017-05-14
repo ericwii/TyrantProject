@@ -48,6 +48,7 @@
 		<cooldown>2</cooldown>
 		<attack>2</attack>
 		<health>8</health>
+    <skill name="siege" number="2"/>
 	</card>
 	
 	<card>
@@ -61,7 +62,7 @@
 		<attack>2</attack>
 		<health>7</health>
 		<skill name="strike" number="1" suffix="all"/>
-    <skill name="refresh"/>
+		<skill name="refresh"/>
 	</card>
 	
 	<card>
@@ -99,7 +100,7 @@
 		<attack>3</attack>
 		<health>9</health>
 		<skill name="strike" number="1" suffix="all"/>
-    <skill name="refresh"/>
+		<skill name="refresh"/>
 	</card>
 
 </root>
