@@ -18,6 +18,7 @@ public:
 	virtual void OnCleanUp(Card* aCard);
 	virtual void OnTargeted(Card* aTarget);
 	virtual void OnAttacked(char& someDamage);
+	virtual void OnCommanderAttack(Card*& aCurrentTarget, Card* aUser);
 	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 
 	string iconTexturePath;

@@ -5,3 +5,4 @@
 #include "RefreshAbility.h"
 #include "RallyAbility.h"
 #include "SiegeAbility.h"
+#include "WallAbility.h"

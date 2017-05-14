@@ -234,7 +234,12 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	else if (aName == "siege")
 	{
 		return new SiegeAbility(aSuffix, aNumber, aFaction);
-	}	
+	}
+	else if (aName == "wall")
+	{
+		return new WallAbility();
+	}
+
 	return nullptr;
 }
 

@@ -55,6 +55,12 @@
       <Filter>Abilities</Filter>
     </ClCompile>
     <ClCompile Include="RallyAbility.cpp" />
+    <ClCompile Include="SiegeAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="WallAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -117,6 +123,12 @@
       <Filter>Abilities</Filter>
     </ClInclude>
     <ClInclude Include="RallyAbility.h" />
+    <ClInclude Include="SiegeAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="WallAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
