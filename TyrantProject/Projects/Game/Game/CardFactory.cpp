@@ -239,6 +239,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new WallAbility();
 	}
+	else if (aName == "weaken")
+	{
+		return new WeakenAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }
