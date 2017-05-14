@@ -12,3 +12,5 @@
 #include "CrushAbility.h"
 #include "BerserkAbility.h"
 #include "CounterAbility.h"
+#include "LeechAbility.h"
+#include "SiphonAbility.h"

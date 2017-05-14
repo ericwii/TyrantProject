@@ -50,6 +50,7 @@
 		<health>8</health>
     <skill name="siege" number="2"/>
     <skill name="weaken" number="2"/>
+    <skill name="leech" number="3"/>
 	</card>
 	
 	<card>

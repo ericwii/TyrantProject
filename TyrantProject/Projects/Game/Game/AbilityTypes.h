@@ -14,4 +14,6 @@ enum class eAbilityTypes
 	eCrush,
 	eBerserk,
 	eCounter
+	eLeech,
+	eSiphon
 };

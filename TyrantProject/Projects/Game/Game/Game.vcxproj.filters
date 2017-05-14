@@ -33,9 +33,6 @@
     <ClCompile Include="CardGameManager.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
-    <ClCompile Include="StrikeAbility.cpp">
-      <Filter>Abilities</Filter>
-    </ClCompile>
     <ClCompile Include="CardHand.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
@@ -48,34 +45,45 @@
     <ClCompile Include="CardGameTextManager.cpp">
       <Filter>CardGame</Filter>
     </ClCompile>
-    <ClCompile Include="HealAbility.cpp">
-      <Filter>Abilities</Filter>
+    <ClCompile Include="WeakenAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
     </ClCompile>
-    <ClCompile Include="RefreshAbility.cpp">
-      <Filter>Abilities</Filter>
+    <ClCompile Include="StrikeAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
     </ClCompile>
     <ClCompile Include="SiegeAbility.cpp">
-      <Filter>Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="WallAbility.cpp">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Activation</Filter>
     </ClCompile>
     <ClCompile Include="RallyAbility.cpp">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Activation</Filter>
     </ClCompile>
-    <ClCompile Include="WeakenAbility.cpp">
-      <Filter>Abilities</Filter>
-    </ClCompile>
-    <ClCompile Include="PierceAbility.cpp">
-      <Filter>Abilities</Filter>
+    <ClCompile Include="HealAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
     </ClCompile>
     <ClCompile Include="ArmorAbility.cpp">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="RefreshAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="WallAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="BerserkAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="CrushAbility.cpp">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="BerserkAbility.cpp" />
+    <ClCompile Include="PierceAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="LeechAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="SiphonAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -113,9 +121,6 @@
     <ClInclude Include="CardGameManager.h">
       <Filter>CardGame</Filter>
     </ClInclude>
-    <ClInclude Include="StrikeAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
     <ClInclude Include="AllAbilities.h">
       <Filter>Abilities</Filter>
     </ClInclude>
@@ -131,37 +136,48 @@
     <ClInclude Include="CardGameTextManager.h">
       <Filter>CardGame</Filter>
     </ClInclude>
-    <ClInclude Include="HealAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="RefreshAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="SiegeAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="WallAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="RallyAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
-    <ClInclude Include="WeakenAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
     <ClInclude Include="AbilityTypes.h">
       <Filter>Abilities</Filter>
     </ClInclude>
-    <ClInclude Include="PierceAbility.h">
-      <Filter>Abilities</Filter>
+    <ClInclude Include="WeakenAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="StrikeAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="SiegeAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="RallyAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="HealAbility.h">
+      <Filter>Abilities\Activation</Filter>
     </ClInclude>
     <ClInclude Include="ArmorAbility.h">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="RefreshAbility.h">
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="WallAbility.h">
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="BerserkAbility.h">
+      <Filter>Abilities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="CrushAbility.h">
-      <Filter>Abilities</Filter>
+      <Filter>Abilities\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="BerserkAbility.h" />
+    <ClInclude Include="PierceAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="LeechAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="SiphonAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
@@ -178,6 +194,15 @@
     </Filter>
     <Filter Include="CardGame">
       <UniqueIdentifier>{c2c08fb1-04c1-4738-b849-1b33e62dc157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abilities\Activation">
+      <UniqueIdentifier>{1fc38ea5-c8c3-45c0-8b77-bdc21812b348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abilities\Combat">
+      <UniqueIdentifier>{1bc4ea0e-3701-41af-b358-49448fd8f338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abilities\Defensive">
+      <UniqueIdentifier>{43568b22-2d4b-4de6-8092-67072ef75a1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

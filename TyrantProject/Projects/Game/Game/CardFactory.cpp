@@ -259,11 +259,18 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new BerserkAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "leech")
+	{
+		return new LeechAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "siphon")
+	{
+		return new SiphonAbility(aSuffix, aNumber, aFaction);
+	}
 	else if (aName == "counter")
 	{
 		return new CounterAbility(aSuffix, aNumber, aFaction);
 	}
-
 	return nullptr;
 }
 
