@@ -7,6 +7,8 @@ public:
 	static void Update();
 	static float DeltaTime();
 
+	static void SetTimeScale(float timeScale);
+
 private:
 	Time();
 	~Time();
@@ -16,5 +18,6 @@ private:
 	LARGE_INTEGER frequency;
 	LARGE_INTEGER startTime;
 	LARGE_INTEGER lastUpdateTime;
+	float timeScale;
 	bool initialized;
 };

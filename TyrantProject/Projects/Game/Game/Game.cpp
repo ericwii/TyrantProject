@@ -71,7 +71,7 @@ bool Game::Update()
 {
 	myStates.GetLast()->Update();
 
-	//UpdateCameraMovement();
+	UpdateDebugInput();
 	UpdateUtilities();
 
 	return true;
@@ -99,68 +99,22 @@ void Game::UpdateUtilities()
 	InputManager::Update();
 }
 
-void Game::UpdateCameraMovement()
+void Game::UpdateDebugInput()
 {
-	Camera& cam = myEngineInstance->GetCamera();
-	float deltaTime = Time::DeltaTime();
-	float speed = 10.f;
-	float rotationSpeed = 2.f;
-
-	if (InputManager::Keyboard.IsKeyDown(DIK_LCONTROL))
+	if (InputManager::Keyboard.IsKeyDown(DIK_F1))
 	{
-		speed *= 0.2f;
+		Time::SetTimeScale(1.f);
 	}
-
-	if (InputManager::Keyboard.IsKeyDown(DIK_S))
+	else if (InputManager::Keyboard.IsKeyDown(DIK_F2))
 	{
-		cam.MoveBack(speed, deltaTime);
+		Time::SetTimeScale(2.f);
 	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_W))
+	else if (InputManager::Keyboard.IsKeyDown(DIK_F3))
 	{
-		cam.MoveForward(speed, deltaTime);
+		Time::SetTimeScale(3.f);
 	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_D))
+	else if (InputManager::Keyboard.IsKeyDown(DIK_F4))
 	{
-		cam.MoveLeft(speed, deltaTime);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_A))
-	{
-		cam.MoveRight(speed, deltaTime);
-	}
-
-
-	float rotation = rotationSpeed * deltaTime;
-	if (InputManager::Keyboard.IsKeyDown(DIK_UPARROW))
-	{
-		cam.RotateX(-rotation);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_DOWNARROW))
-	{
-		cam.RotateX(rotation);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_LEFTARROW))
-	{
-		cam.RotateY(-rotation);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_RIGHTARROW))
-	{
-		cam.RotateY(rotation);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_E))
-	{
-		cam.RotateZ(-rotation);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_Q))
-	{
-		cam.RotateZ(rotation);
-	}
-
-	if (InputManager::Keyboard.IsKeyDown(DIK_NUMPAD8))
-	{
-		cam.MoveUp(speed, deltaTime);
-	}
-	if (InputManager::Keyboard.IsKeyDown(DIK_NUMPAD2))
-	{
-		cam.MoveDown(speed, deltaTime);
+		Time::SetTimeScale(4.f);
 	}
 }

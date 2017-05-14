@@ -17,13 +17,18 @@ float Time::DeltaTime()
 
 	deltaTime = min(max(deltaTime, 0.001f),0.3f);
 
-	return deltaTime;
+	return deltaTime * instance.timeScale;
+}
+
+void Time::SetTimeScale(float timeScale)
+{
+	instance.timeScale = timeScale;
 }
 
 
 //Private methods
 
-Time::Time()
+Time::Time() : initialized(false), timeScale(1.f)
 {
 	QueryPerformanceFrequency(&instance.frequency);
 	QueryPerformanceCounter(&instance.startTime);

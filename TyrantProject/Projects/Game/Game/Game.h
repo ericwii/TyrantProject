@@ -23,7 +23,7 @@ public:
 
 private:
 	void UpdateUtilities();
-	void UpdateCameraMovement();
+	void UpdateDebugInput();
 
 	Engine* myEngineInstance;
 	CU::GrowingArray<BaseState*> myStates;
