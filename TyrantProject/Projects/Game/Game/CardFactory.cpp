@@ -251,6 +251,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new PierceAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "crush")
+	{
+		return new CrushAbility(aSuffix, aNumber, aFaction);
+	}
 
 	return nullptr;
 }

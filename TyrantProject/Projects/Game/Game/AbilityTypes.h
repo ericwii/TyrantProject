@@ -10,5 +10,6 @@ enum class eAbilityTypes
 	eRefresh,
 	eWall,
 	eArmor,
-	ePierce
+	ePierce,
+	eCrush
 };
