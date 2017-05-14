@@ -30,5 +30,7 @@ protected:
 	char myNumber;
 
 	Card* FindTarget(CU::GrowingArray<Card*>& cards);
+	Card* FindTargetOffCoolDown(CU::GrowingArray<Card*>& cards);
 	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards);
+	CU::GrowingArray<Card*>& FindAllTargetsOffCoolDown(CU::GrowingArray<Card*>& cards);
 };

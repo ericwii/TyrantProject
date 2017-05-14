@@ -62,6 +62,25 @@ Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
 	return nullptr;
 }
 
+Card* AbilityBase::FindTargetOffCoolDown(CU::GrowingArray<Card*>& cards)
+{
+	if (cards.Size() > 0)
+	{
+		int randomIndex = rand() % cards.Size();
+		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
+		{
+			if (!cards[randomIndex]->IsDying() && cards[randomIndex]->GetCooldown() < 1 && (mySpecificFaction == eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
+			{
+				return cards[randomIndex];
+			}
+
+			++randomIndex;
+			randomIndex %= cards.Size();
+		}
+	}
+	return nullptr;
+}
+
 CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& cards)
 {
 	myTargets.RemoveAll();
@@ -87,6 +106,40 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 			currentTarget = cards[i];
 
 			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction)
+			{
+				myTargets.Add(currentTarget);
+			}
+		}
+	}
+
+	return myTargets;
+}
+
+CU::GrowingArray<Card*>& AbilityBase::FindAllTargetsOffCoolDown(CU::GrowingArray<Card*>& cards)
+{
+	myTargets.RemoveAll();
+
+	Card* currentTarget;
+
+	if (mySpecificFaction == eCardFaction::Action)
+	{
+		for (int i = cards.Size() - 1; i >= 0; --i)
+		{
+			currentTarget = cards[i];
+
+			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetCooldown() < 1)
+			{
+				myTargets.Add(currentTarget);
+			}
+		}
+	}
+	else
+	{
+		for (int i = cards.Size() - 1; i >= 0; --i)
+		{
+			currentTarget = cards[i];
+
+			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction && currentTarget->GetCooldown() < 1)
 			{
 				myTargets.Add(currentTarget);
 			}
