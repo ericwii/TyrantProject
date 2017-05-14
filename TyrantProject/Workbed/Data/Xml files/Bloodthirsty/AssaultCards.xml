@@ -49,6 +49,7 @@
 		<attack>2</attack>
 		<health>8</health>
     <skill name="siege" number="2"/>
+    <skill name="weaken" number="2"/>
 	</card>
 	
 	<card>
