@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	
+	<card>
+		<name>Balor</name>
+		<illustration>BloodThirsty/Assault/Balor.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>11</health>
+	</card>
+
+	<card>
+		<name>Fenrir</name>
+		<illustration>BloodThirsty/Assault/Fenrir.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>2</cooldown>
+		<attack>4</attack>
+		<health>5</health>
+	</card>
+
+	<card>
+		<name>Gorrus</name>
+		<illustration>BloodThirsty/Assault/Gorrus.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>4</attack>
+		<health>12</health>
+	</card>
+	
+	<card>
+		<name>Grimclaw</name>
+		<illustration>BloodThirsty/Assault/Grimclaw.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>8</health>
+    <skill name="siege" number="2"/>
+    <skill name="weaken" number="2"/>
+    <skill name="leech" number="3"/>
+	</card>
+	
+	<card>
+		<name>Hades</name>
+		<illustration>BloodThirsty/Assault/Hades.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>4</cooldown>
+		<attack>2</attack>
+		<health>7</health>
+		<skill name="strike" number="1" suffix="all"/>
+		<skill name="refresh"/>
+	</card>
+	
+	<card>
+		<name>Mawcor</name>
+		<illustration>BloodThirsty/Assault/Mawcor.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>3</cooldown>
+		<attack>3</attack>
+		<health>6</health>
+<<<<<<< HEAD
+		<skill name="crush" number="5" />
+		<skill name="counter" number="3" />
+=======
+    
+    <skill name="siphon" number="2"/>
+>>>>>>> 870f788d98b5d8345c5a6e47d8bd425900f79c15
+	</card>
+
+	<card>
+		<name>Redeemer</name>
+		<illustration>BloodThirsty/Assault/Redeemer.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>6</health>
+	</card>
+	
+	<card>
+		<name>Scythe Overseer</name>
+		<illustration>BloodThirsty/Assault/Scythe Overseer.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>9</health>
+		<skill name="strike" number="1" suffix="all"/>
+		<skill name="refresh"/>
+    <skill name="berserk" number="2"/>
+	</card>
+
+</root>

@@ -59,14 +59,16 @@ const char AbilityBase::GetNumber()
 
 //Protected Methods
 
-Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
+Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards, int conditions)
 {
 	if (cards.Size() > 0)
 	{
 		int randomIndex = rand() % cards.Size();
 		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
 		{
-			if (!cards[randomIndex]->IsDying() && (mySpecificFaction == eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
+			if (!cards[randomIndex]->IsDying() && 
+				(mySpecificFaction == eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction) &&
+				CheckConditions(cards[randomIndex], conditions))
 			{
 				return cards[randomIndex];
 			}
@@ -78,29 +80,9 @@ Card* AbilityBase::FindTarget(CU::GrowingArray<Card*>& cards)
 	return nullptr;
 }
 
-Card* AbilityBase::FindTargetOffCoolDown(CU::GrowingArray<Card*>& cards)
-{
-	if (cards.Size() > 0)
-	{
-		int randomIndex = rand() % cards.Size();
-		for (int searchCount = 0; searchCount < cards.Size(); ++searchCount)
-		{
-			if (!cards[randomIndex]->IsDying() && cards[randomIndex]->GetCooldown() < 1 && (mySpecificFaction == eCardFaction::Action || cards[randomIndex]->GetFaction() == mySpecificFaction))
-			{
-				return cards[randomIndex];
-			}
-
-			++randomIndex;
-			randomIndex %= cards.Size();
-		}
-	}
-	return nullptr;
-}
-
-CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& cards)
+CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& cards, int conditions)
 {
 	myTargets.RemoveAll();
-
 	Card* currentTarget;
 
 	if (mySpecificFaction == eCardFaction::Action)
@@ -109,7 +91,7 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 		{
 			currentTarget = cards[i];
 
-			if (currentTarget != nullptr && !currentTarget->IsDying())
+			if (currentTarget != nullptr && !currentTarget->IsDying() && CheckConditions(currentTarget, conditions))
 			{
 				myTargets.Add(currentTarget);
 			}
@@ -121,7 +103,7 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 		{
 			currentTarget = cards[i];
 
-			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction)
+			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction && CheckConditions(currentTarget, conditions))
 			{
 				myTargets.Add(currentTarget);
 			}
@@ -131,36 +113,34 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 	return myTargets;
 }
 
-CU::GrowingArray<Card*>& AbilityBase::FindAllTargetsOffCoolDown(CU::GrowingArray<Card*>& cards)
+
+//Private Methods
+
+bool AbilityBase::CheckConditions(Card* aCard, int conditions)
 {
-	myTargets.RemoveAll();
+	if (conditions == 0) return true;
 
-	Card* currentTarget;
+	bool meetsConditions = true;
 
-	if (mySpecificFaction == eCardFaction::Action)
+	if (conditions >= eFindTargetCondition::IsOffCooldown)
 	{
-		for (int i = cards.Size() - 1; i >= 0; --i)
+		if (conditions & eFindTargetCondition::IsOffCooldown)
 		{
-			currentTarget = cards[i];
-
-			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetCooldown() < 1)
-			{
-				myTargets.Add(currentTarget);
-			}
+			meetsConditions &= aCard->GetCooldown() < 1;
+		}
+		else
+		{
+			meetsConditions &= aCard->GetCooldown() < 2;
 		}
 	}
-	else
+	if (conditions & eFindTargetCondition::HasAttack)
 	{
-		for (int i = cards.Size() - 1; i >= 0; --i)
-		{
-			currentTarget = cards[i];
-
-			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction && currentTarget->GetCooldown() < 1)
-			{
-				myTargets.Add(currentTarget);
-			}
-		}
+		meetsConditions &= aCard->GetAttack() > 0;
+	}
+	if (conditions & eFindTargetCondition::IsDamaged)
+	{
+		meetsConditions &= !aCard->IsAtMaxHealth();
 	}
 
-	return myTargets;
+	return meetsConditions;
 }

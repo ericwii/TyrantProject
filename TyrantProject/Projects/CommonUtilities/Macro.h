@@ -9,6 +9,8 @@
 
 #define LERP(start, end, lerpValue) (start) + (((end) - (start)) * lerpValue)
 
+#define CHECK_BIT(var, pos) ((var) & (1 << (pos)))
+
 #define PI 3.14159265359f
 #define PI_2 1.57079632679f
 #define PI_4 0.78539816339f

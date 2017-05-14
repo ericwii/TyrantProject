@@ -15,6 +15,9 @@ SiphonAbility::~SiphonAbility()
 
 void SiphonAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
 {
+	aDamagedCard;
+	someDamage;
+
 	if (aCard->GetOwner()->GetCommander()->IsAtMaxHealth() == false)
 	{
 		aCard->GetOwner()->GetCommander()->Heal(myNumber);

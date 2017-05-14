@@ -1,0 +1,19 @@
+#pragma once
+
+#include "StrikeAbility.h"
+#include "HealAbility.h"
+#include "RefreshAbility.h"
+#include "RallyAbility.h"
+#include "SiegeAbility.h"
+#include "WallAbility.h"
+#include "WeakenAbility.h"
+#include "ArmorAbility.h"
+#include "PierceAbility.h"
+#include "CrushAbility.h"
+#include "BerserkAbility.h"
+<<<<<<< HEAD
+#include "CounterAbility.h"
+=======
+#include "LeechAbility.h"
+#include "SiphonAbility.h"
+>>>>>>> 870f788d98b5d8345c5a6e47d8bd425900f79c15

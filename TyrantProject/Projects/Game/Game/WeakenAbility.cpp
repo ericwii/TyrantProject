@@ -27,7 +27,7 @@ void WeakenAbility::OnPreCombat(Card * aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTargetOffCoolDown(aCard->GetOwner()->GetOpponent()->GetAssaultCards());
+			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
 
 			if (target != nullptr)
 			{
@@ -36,7 +36,7 @@ void WeakenAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargetsOffCoolDown(aCard->GetOwner()->GetOpponent()->GetAssaultCards());
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
 
 			if (targets.Size() > 0)
 			{

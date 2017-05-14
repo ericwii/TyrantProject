@@ -30,15 +30,25 @@ public:
 	string iconTexturePath;
 protected:
 
+	enum eFindTargetCondition
+	{
+		None = 0,
+		IsDamaged = 2,
+		HasAttack = 4,
+		IsOffCooldown = 8,
+		IsOffCooldownNextTurn = 16
+	};
+
 	eAbilityTypes myAbilityType;
 	CU::GrowingArray<Card*> myTargets;
 	string mySuffix;
 	eCardFaction mySpecificFaction;
 	char myNumber;
 
-	Card* FindTarget(CU::GrowingArray<Card*>& cards);
-	Card* FindTargetOffCoolDown(CU::GrowingArray<Card*>& cards);
-	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards);
-	CU::GrowingArray<Card*>& FindAllTargetsOffCoolDown(CU::GrowingArray<Card*>& cards);
+	Card* FindTarget(CU::GrowingArray<Card*>& cards, int conditions = 0);
+	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards, int conditions = 0);
 	
+private:
+
+	bool CheckConditions(Card* aCard, int conditions);
 };

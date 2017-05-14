@@ -29,7 +29,7 @@ void RallyAbility::OnPreCombat(Card* aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTargetOffCoolDown(aCard->GetOwner()->GetAssaultCards());
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target);
@@ -37,7 +37,7 @@ void RallyAbility::OnPreCombat(Card* aCard)
 		}
 		else if (mySuffix == "all")
 		{   
-			CU::GrowingArray<Card*> targets = FindAllTargetsOffCoolDown(aCard->GetOwner()->GetAssaultCards());
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 
 			if (targets.Size() > 0)
 			{

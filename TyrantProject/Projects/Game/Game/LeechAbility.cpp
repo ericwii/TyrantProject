@@ -15,6 +15,9 @@ LeechAbility::~LeechAbility()
 
 void LeechAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
 {
+	aDamagedCard;
+	someDamage;
+
 	if (aCard->IsDying() == false && aCard->IsAtMaxHealth() == false)
 	{
 		aCard->Heal(myNumber);
