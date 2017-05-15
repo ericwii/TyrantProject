@@ -28,7 +28,7 @@ void AbilityBase::OnKill(Card* aCard, Card* aKilledCard) { aCard; aKilledCard; }
 void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
 void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
 void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }
-void AbilityBase::OnAttacked(char& someDamage, Card* anAttacker) { someDamage; anAttacker; }
+void AbilityBase::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) { someDamage; anAttacker; aUser; }
 void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser)
 {
 	aCurrentTarget;

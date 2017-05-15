@@ -7,6 +7,6 @@ public:
 	FlyingAbility();
 	~FlyingAbility();
 
-	void OnAttacked(char& someDamage, Card* anAttacker) override;
+	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) override;
 };
 

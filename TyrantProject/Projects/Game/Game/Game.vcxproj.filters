@@ -84,6 +84,12 @@
     <ClCompile Include="SiphonAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="FlyingAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAirAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -176,6 +182,12 @@
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="SiphonAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingAbility.h">
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAirAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
   </ItemGroup>

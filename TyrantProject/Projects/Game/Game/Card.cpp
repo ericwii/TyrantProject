@@ -287,11 +287,11 @@ void Card::Berserk(char someAttackIncrese)
 	}
 }
 
-void Card::OnAttacked(char& someDamage, Card* anAttacker)
+void Card::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker)
 {
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
-		myCardData->abilities[i]->OnAttacked(someDamage, anAttacker);
+		myCardData->abilities[i]->OnAttacked(aUser,someDamage, anAttacker);
 		if (someDamage > 0)
 		{
 			myCardData->abilities[i]->OnCombatDamaged(someDamage, this, anAttacker);

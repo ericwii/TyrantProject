@@ -142,7 +142,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 	{
 		Card* currentCard = anAttacker.myAssaultCards[myCurrentAssaultCardIndex];
-		if (currentCard->GetCooldown() < 1)
+		if (currentCard->GetCooldown() < 1 && currentCard->GetAttack() > 0)
 		{
 			Card* defendingCard;
 			if (aDefender.myAssaultCards.Size() > myCurrentAssaultCardIndex && !aDefender.myAssaultCards[myCurrentAssaultCardIndex]->IsDying())
@@ -175,19 +175,21 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 
 
-			defendingCard->OnAttacked(finalDamage, anAttacker.myAssaultCards[myCurrentAssaultCardIndex]);
+			defendingCard->OnAttacked(defendingCard ,finalDamage, anAttacker.myAssaultCards[myCurrentAssaultCardIndex]);
+
+			Vector3<float> position = anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetOrientation().GetPosition();
+			if (position.y < 0)
+			{
+				AnimationManager::AddAnimation(attackAnimation, position, size);
+			}
+			else
+			{
+				AnimationManager::AddAnimation(attackAnimation, position, size, PI);
+			}
+
 
 			if (finalDamage > 0)
 			{
-				Vector3<float> position = anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetOrientation().GetPosition();
-				if (position.y < 0)
-				{
-					AnimationManager::AddAnimation(attackAnimation, position, size);
-				}
-				else
-				{
-					AnimationManager::AddAnimation(attackAnimation, position, size, PI);
-				}
 
 				defendingCard->TakeDamage(finalDamage);
 				anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->OnDamageDealt(anAttacker.myAssaultCards[myCurrentAssaultCardIndex], defendingCard, finalDamage);
