@@ -3,7 +3,7 @@
 #include "CardGameState.h"
 #include "../../Engine/Animation.h"
 
-Game::Game() : myEngineInstance(nullptr)
+Game::Game() : myEngineInstance(nullptr), myShowFrameRate(false)
 {
 }
 
@@ -71,6 +71,7 @@ bool Game::Update()
 {
 	myStates.GetLast()->Update();
 
+	myFpsCounter.AddFrame(Time::DeltaTime());
 	UpdateDebugInput();
 	UpdateUtilities();
 
@@ -79,13 +80,12 @@ bool Game::Update()
 
 void Game::Render()
 {
-	myEngineInstance->RenderDebugText("Debug Text", Vector2<float>(0,0), 0.6f);
-
 	myStates.GetLast()->Render();
 
-	//Engine::GetInstance()->RenderDebugLine({ 0.1f, 0.1f }, { 0.9f, 0.9f });
-
-
+	if (myShowFrameRate)
+	{
+		myFpsCounter.RenderFrameRate();
+	}
 	myEngineInstance->PresentBackBuffer();
 }
 
@@ -101,20 +101,25 @@ void Game::UpdateUtilities()
 
 void Game::UpdateDebugInput()
 {
-	if (InputManager::Keyboard.IsKeyDown(DIK_F1))
+	if (InputManager::Keyboard.WasKeyJustPressed(DIK_F1))
 	{
 		Time::SetTimeScale(1.f);
 	}
-	else if (InputManager::Keyboard.IsKeyDown(DIK_F2))
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F2))
 	{
 		Time::SetTimeScale(2.f);
 	}
-	else if (InputManager::Keyboard.IsKeyDown(DIK_F3))
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F3))
 	{
 		Time::SetTimeScale(3.f);
 	}
-	else if (InputManager::Keyboard.IsKeyDown(DIK_F4))
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F4))
 	{
 		Time::SetTimeScale(4.f);
+	}
+
+	if (InputManager::Keyboard.WasKeyJustPressed(DIK_F5))
+	{
+		myShowFrameRate = !myShowFrameRate;
 	}
 }

@@ -31,6 +31,8 @@ namespace CommonUtilities
 		inline void RemoveNonCyclicAtIndex(CountType aItemNumber);
 		inline T& GetLast();
 
+		inline bool IsFull() const;
+
 		inline void Clear();
 		inline void DeleteAll();
 
@@ -235,6 +237,11 @@ inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::Clear()
 	myCurrentSize = 0;
 }
 
+VectorOnStackTemplate
+inline bool CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::IsFull() const
+{
+	return myCurrentSize >= MaxSize;
+}
 
 VectorOnStackTemplate
 inline void CU::VectorOnStack<T, MaxSize, CountType, UseSafeModeFlag>::DeleteAll()

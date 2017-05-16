@@ -23,7 +23,7 @@ public:
 	void ShutDown();
 	void PresentBackBuffer();
 	void ResizeScreen(const int aWidth, const int aHeight, bool aKeepRelativeSize = false);
-	void RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale = 1.f);
+	void RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale = 1.f, Vector4<float> aColor = Vector4<float>(1.f, 1.f, 1.f, 1.f));
 	void RenderDebugLine(Vector2<float> aPoint, Vector2<float> aSecondPoint, Vector4<float> aColor = Vector4<float>(1.f, 0, 0, 1.f));
 	void RenderDebugHitbox2D(const Collider::Hitbox2D& aHitbox, Vector4<float> aColor = Vector4<float>(1.f, 0, 0, 1.f));
 
