@@ -2,13 +2,13 @@
 #include "SiegeAbility.h"
 
 
-Vector2<float> siegeAnimationSize(2.f, 2.f);
+Vector2<float> siegeAnimationSize(1.9f, 2.3f);
 AnimationData siegeAnimation = AnimationData
 (
-	"Data/Textures/Animations/strikeAnimation.png",
-	18,
-	4,
-	30.f,
+	"Data/Textures/Animations/siegeAnimation.png",
+	12,
+	3,
+	20.f,
 	false
 );
 

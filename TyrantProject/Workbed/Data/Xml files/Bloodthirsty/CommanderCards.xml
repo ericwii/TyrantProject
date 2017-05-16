@@ -31,6 +31,7 @@
 		<unique>false</unique>
 		<health>6</health>
 		<skill name="rally" number="1" suffix="all" faction="bloodthirsty"/>
+		<skill name="siege" number="2" />
 	</card>
 	
 	<card>
