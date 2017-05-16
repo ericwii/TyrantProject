@@ -47,3 +47,12 @@ void SummonAbility::OnPreCombat(Card* aCard)
 		aCard->GetOwner()->SummonCard(myCardToSummon);
 	}
 }
+
+void SummonAbility::OnPlay(Card * aCard)
+{
+
+	if (mySuffix == " onplay")
+	{
+		aCard->GetOwner()->SummonCard(myCardToSummon);
+	}
+}

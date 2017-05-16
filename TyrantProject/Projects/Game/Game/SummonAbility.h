@@ -8,6 +8,8 @@ public:
 	~SummonAbility();
 
 	void OnPreCombat(Card* aCard) override;
+	void OnPlay(Card* aCard) override;
+
 
 private:
 	string myCardToSummon;
