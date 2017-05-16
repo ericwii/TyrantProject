@@ -19,4 +19,5 @@ enum class eAbilityTypes
 	eFlying,
 	eAntiAir,
 	eSummon,
+	eRegenerate,
 };

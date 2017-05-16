@@ -127,6 +127,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="RefreshAbility.h" />
+    <ClInclude Include="RegenerateAbility.h" />
     <ClInclude Include="SiegeAbility.h" />
     <ClInclude Include="SiphonAbility.h" />
     <ClInclude Include="stdafx.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="RefreshAbility.cpp" />
+    <ClCompile Include="RegenerateAbility.cpp" />
     <ClCompile Include="SiegeAbility.cpp" />
     <ClCompile Include="SiphonAbility.cpp" />
     <ClCompile Include="stdafx.cpp">

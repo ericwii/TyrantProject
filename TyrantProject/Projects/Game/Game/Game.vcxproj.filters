@@ -90,6 +90,15 @@
     <ClCompile Include="AntiAirAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="CounterAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="SummonAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="RegenerateAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -189,6 +198,15 @@
     </ClInclude>
     <ClInclude Include="AntiAirAbility.h">
       <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="CounterAbility.h">
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="SummonAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="RegenerateAbility.h">
+      <Filter>Abilities\Defensive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -17,3 +17,4 @@
 #include "AntiAirAbility.h"
 #include "FlyingAbility.h"
 #include "SummonAbility.h"
+#include "RegenerateAbility.h"
