@@ -151,11 +151,21 @@ void Card::TakeDamage(char someDamage)
 	CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
 
 	myHealth -= someDamage;
+
+
+	if (myHealth <= 0)
+	{
+		myHealth = 0;
+		for (char j = 0; j < myCardData->abilities.Size(); j++)
+		{
+			myCardData->abilities[j]->OnDeath(this);
+		}
+	}
+
 	if (myHealth <= 0)
 	{
 		myIsDying = true;
 		myCurrentDeathFadeTime = 0;
-		myHealth = 0;
 	}
 
 	string health;

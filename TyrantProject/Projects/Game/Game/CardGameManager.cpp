@@ -92,6 +92,16 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 	if (anActivePlayer.ChooseCardToPlay(myChoosenCard) == true)
 	{
 		anActivePlayer.PlayCard(myChoosenCard);
+
+		CU::VectorOnStack<AbilityBase*, 3> currentAbilities;
+
+		currentAbilities = myChoosenCard->GetAbilities();
+
+		for (char j = 0; j < currentAbilities.Size(); j++)
+		{
+			currentAbilities[j]->OnPlay(myChoosenCard);
+		}
+
 		return true;
 	}
 
