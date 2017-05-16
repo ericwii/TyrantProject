@@ -13,8 +13,10 @@ ArmorAbility::~ArmorAbility()
 {
 }
 
-void ArmorAbility::OnAttacked(char & someDamage, Card* anAttacker)
+void ArmorAbility::OnAttacked(Card* aUser, char & someDamage, Card* anAttacker)
 {
+	aUser;
+
 	char reductionReduction = 0;
 	char damageReduction = myNumber;
 
