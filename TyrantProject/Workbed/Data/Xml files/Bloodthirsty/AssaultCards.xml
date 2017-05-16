@@ -50,7 +50,7 @@
 		<health>8</health>
 		<skill name="siege" number="2"/>
 		<skill name="weaken" number="2"/>
-		<skill name="summon" suffix="Redeemer" />
+		<skill name="summon" suffix="Redeemer onplay" />
 	</card>
 	
 	<card>
@@ -92,6 +92,8 @@
 		<attack>2</attack>
 		<health>6</health>
 		<skill name="siphon" number="2"/>
+    <skill name="flying"/>
+    <skill name="regenerate" number="4"/>
 	</card>
 	
 	<card>
