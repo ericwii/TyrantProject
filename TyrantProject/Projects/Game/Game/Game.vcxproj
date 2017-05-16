@@ -124,6 +124,7 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
     <ClInclude Include="LeechAbility.h" />
+    <ClInclude Include="LegionAbility.h" />
     <ClInclude Include="PierceAbility.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RallyAbility.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
     <ClCompile Include="LeechAbility.cpp" />
+    <ClCompile Include="LegionAbility.cpp" />
     <ClCompile Include="PierceAbility.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RallyAbility.cpp" />

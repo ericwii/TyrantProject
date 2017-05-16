@@ -18,3 +18,4 @@
 #include "FlyingAbility.h"
 #include "SummonAbility.h"
 #include "RegenerateAbility.h"
+#include "LegionAbility.h"

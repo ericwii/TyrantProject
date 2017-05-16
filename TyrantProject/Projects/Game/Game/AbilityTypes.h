@@ -20,4 +20,5 @@ enum class eAbilityTypes
 	eAntiAir,
 	eSummon,
 	eRegenerate,
+	eLegion,
 };

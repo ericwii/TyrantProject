@@ -48,7 +48,7 @@
 		<cooldown>2</cooldown>
 		<attack>2</attack>
 		<health>8</health>
-		<skill name="siege" number="2"/>
+		<skill name="legion" number="2"/>
 		<skill name="weaken" number="2"/>
 		<skill name="summon" suffix="Redeemer onplay" />
 	</card>

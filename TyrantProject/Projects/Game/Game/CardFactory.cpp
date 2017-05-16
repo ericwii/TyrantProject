@@ -287,6 +287,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new RegenerateAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "legion")
+	{
+		return new LegionAbility(aSuffix, aNumber, aFaction);
+	}
 	return nullptr;
 }
 

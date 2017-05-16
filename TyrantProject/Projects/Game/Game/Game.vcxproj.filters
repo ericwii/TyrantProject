@@ -99,6 +99,8 @@
     <ClCompile Include="RegenerateAbility.cpp">
       <Filter>Abilities\Defensive</Filter>
     </ClCompile>
+    <ClCompile Include="FPS_Counter.cpp" />
+    <ClCompile Include="LegionAbility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -208,6 +210,8 @@
     <ClInclude Include="RegenerateAbility.h">
       <Filter>Abilities\Defensive</Filter>
     </ClInclude>
+    <ClInclude Include="FPS_Counter.h" />
+    <ClInclude Include="LegionAbility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
