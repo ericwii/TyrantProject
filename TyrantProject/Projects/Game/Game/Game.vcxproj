@@ -79,7 +79,7 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -119,6 +119,7 @@
     <ClInclude Include="CounterAbility.h" />
     <ClInclude Include="CrushAbility.h" />
     <ClInclude Include="FlyingAbility.h" />
+    <ClInclude Include="FPS_Counter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
@@ -155,7 +156,10 @@
     <ClCompile Include="CounterAbility.cpp" />
     <ClCompile Include="CrushAbility.cpp" />
     <ClCompile Include="FlyingAbility.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="FPS_Counter.cpp" />
+    <ClCompile Include="Game.cpp">
+      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
+    </ClCompile>
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
     <ClCompile Include="LeechAbility.cpp" />

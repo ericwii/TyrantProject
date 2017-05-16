@@ -66,10 +66,11 @@ void Engine::ResizeScreen(const int aWidth, const int aHeight, bool aKeepRelativ
 	//Don't know when you would want to change the viewports dimensions, seems to make everything wierd.
 }
 
-void Engine::RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale)
+void Engine::RenderDebugText(const string& someText, const Vector2<float>& aPosition, float aScale, Vector4<float> aColor)
 {
 	myDebugText.SetPosition(aPosition);
 	myDebugText.SetCharacterScale(aScale);
+	myDebugText.SetColor(aColor);
 	myDebugText.SetText(someText);
 	myDebugText.Render();
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "../../CommonUtilities/GrowingArray.h"
+#include "FPS_Counter.h"
 
 class BaseState;
 
@@ -27,4 +28,6 @@ private:
 
 	Engine* myEngineInstance;
 	CU::GrowingArray<BaseState*> myStates;
+	FPS_Counter myFpsCounter;
+	bool myShowFrameRate;
 };
