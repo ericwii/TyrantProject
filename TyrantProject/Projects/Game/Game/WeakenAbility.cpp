@@ -26,29 +26,26 @@ void WeakenAbility::OnPreCombat(Card * aCard)
 	aCard;
 }
 
-void WeakenAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void WeakenAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1)
+	if (data.attacker->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
 
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, data.attacker, target);
 			}
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets);
 			}
 		}
 	}

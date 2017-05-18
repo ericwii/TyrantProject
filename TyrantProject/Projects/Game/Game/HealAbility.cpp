@@ -33,24 +33,21 @@ void HealAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	}
 }
 
-void HealAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void HealAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1)
+	if (data.attacker->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, data.attacker, target);
 			}
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
 
 			if (targets.Size() > 0)
 			{
@@ -58,7 +55,7 @@ void HealAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & som
 				//{
 				//AnimationManager::AddAnimation(healAnimation, targets[i]->GetPosition(), healAnimationSize);
 				//}
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets);
 			}
 		}
 	}

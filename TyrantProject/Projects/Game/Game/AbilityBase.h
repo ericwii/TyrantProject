@@ -3,6 +3,20 @@
 #include "Player.h"
 #include "AbilityTypes.h"
 
+struct AttackData
+{
+	AttackData() : attackAnimation(nullptr)
+	{
+	}
+
+	AnimationData* attackAnimation;
+	Card* extraTargets[2];
+	Card* mainTarget;
+	Card* attacker;
+	int amountOfAttacks;
+};
+
+
 class AbilityBase
 {
 public:
@@ -11,18 +25,21 @@ public:
 	~AbilityBase();
 
 
+	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 	virtual void OnPlay(Card* aCard);
 	virtual void OnDeath(Card* aCard);
-	virtual void OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker);
+	virtual void OnTargeted(Card* aTarget);
 	virtual void OnKill(Card* aCard, Card* aKilledCard);
 	virtual void OnPreCombat(Card* aCard);
-	virtual void OnBeforeAttack(Card* aCard, Card*& currentTarget, char& someDamage);
 	virtual void OnCleanUp(Card* aCard);
-	virtual void OnTargeted(Card* aTarget);
+
+
+	virtual void OnCalculateAttack(AttackData& data);
+	virtual void OnAttack(Card* defendingCard, char& someDamage);
 	virtual void OnAttacked(Card* aUser ,char& someDamage, Card* anAttacker);
 	virtual void OnCommanderAttack(Card*& aCurrentTarget, Card* aUser);
+	virtual void OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker);
 	virtual void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
-	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 
 
 	const eAbilityTypes GetAbilityType();

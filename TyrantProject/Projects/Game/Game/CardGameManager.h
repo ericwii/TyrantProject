@@ -1,4 +1,5 @@
 #pragma once
+#include "AbilityBase.h"
 
 class Card;
 
@@ -9,6 +10,20 @@ enum eGamePhase
 	PreCombat,
 	Combat,
 	Cleanup
+};
+
+enum eCombatState
+{
+	Setup,
+	CalculateAttack,
+	DoAtack
+};
+
+enum eAbilityMethod
+{
+	eCleanup,
+	ePreCombat,
+	eCalculateAttack
 };
 
 class Player;
@@ -25,9 +40,6 @@ public:
 	 bool CleanUp(Player& anActivePlayer, Player& anOpponentPlayer);
 
 private:
-
-
-
 	CardGameManager();
 	~CardGameManager();
 
@@ -36,18 +48,27 @@ private:
 	bool AllActionsDone(Player& aPlayer, Player& aOtherPlayer);
 
 	void RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer);
-	bool UpdateAbilities(Card* aCard, bool cleanUp = false);
+	bool UpdateAbilities(Card* aCard, eAbilityMethod aMethod);
+
+	bool CombatSetup(Player& anAttacker, Player& aDefender);
+	bool CombatCalculations(Player& aDefender);
+	bool CombatAttack();
+	void AttackCard(Card* anAttacker, Card* aDefender);
 
 private:
+
 	static CardGameManager* instance;
 
+	AttackData myCurrentAttackData;
 	CU::VectorOnStack<AbilityBase*, 3> myCurrentAbilities;
 	Player* myAttacker;
 	Player* myDefender;
 	Card* myChoosenCard;
+	eCombatState myCombatState;
 	int myCurrentAssaultCardIndex;
 	int myCurrentStructureCardIndex;
 	int myCurrentAbilityIndex;
+	int myCurrentAttackIndex = 0;
 	bool myPhaseUpdateDone = false;
 	bool myHasUpdatedCommander = false;
 	bool myHasRemovedDeadCards = false;

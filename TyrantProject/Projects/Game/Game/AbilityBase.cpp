@@ -23,14 +23,13 @@ AbilityBase::~AbilityBase()
 
 void AbilityBase::OnPlay(Card* aCard) { aCard; }
 void AbilityBase::OnDeath(Card* aCard) { aCard; }
+void AbilityBase::OnAttack(Card* defendingCard, char& someDamage) { defendingCard; someDamage; }
 void AbilityBase::OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker) { someDamage; aCard; anAttacker; }
 void AbilityBase::OnKill(Card* aCard, Card* aKilledCard) { aCard; aKilledCard; }
 void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
-void AbilityBase::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void AbilityBase::OnCalculateAttack(AttackData& data)
 {
-	aCard;
-	currentTarget;
-	someDamage;
+	data;
 }
 void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
 void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }

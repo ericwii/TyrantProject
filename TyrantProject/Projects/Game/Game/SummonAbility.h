@@ -9,7 +9,7 @@ public:
 
 	void OnPreCombat(Card* aCard) override;
 	void OnPlay(Card* aCard) override;
-	void OnBeforeAttack(Card* aCard, Card*& currentTarget, char& someDamage) override;
+	void OnCalculateAttack(AttackData& data) override;
 
 private:
 	string myCardToSummon;

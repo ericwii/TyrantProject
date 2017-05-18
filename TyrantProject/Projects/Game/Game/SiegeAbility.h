@@ -8,7 +8,7 @@ public:
 	~SiegeAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;
-	void OnBeforeAttack(Card* aCard, Card*& currentTarget, char& someDamage) override;
+	void OnCalculateAttack(AttackData& data) override;
 	void OnPreCombat(Card* aCard) override;
 };
 

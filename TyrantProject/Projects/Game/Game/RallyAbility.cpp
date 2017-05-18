@@ -38,28 +38,25 @@ void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	}
 }
 
-void RallyAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void RallyAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1)
+	if (data.attacker->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, data.attacker, target);
 			}
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets);
 			}
 		}
 	}

@@ -53,13 +53,10 @@ void SummonAbility::OnPlay(Card * aCard)
 	}
 }
 
-void SummonAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void SummonAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1 && mySuffix.Lenght() == 0)
+	if (data.attacker->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
-		aCard->GetOwner()->SummonCard(myCardToSummon);
+		data.attacker->GetOwner()->SummonCard(myCardToSummon);
 	}
 }

@@ -26,15 +26,12 @@ SupplyAbility::~SupplyAbility()
 	
 }
 
-void SupplyAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void SupplyAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1 && mySuffix.Lenght() == 0)
+	if (data.attacker->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
-		FindAdjecentTargets(aCard, myTargets);
-		AbilityStack::AddAbility(this, aCard, myTargets);
+		FindAdjecentTargets(data.attacker, myTargets);
+		AbilityStack::AddAbility(this, data.attacker, myTargets);
 	}
 }
 

@@ -341,6 +341,10 @@ Card* Card::OnTargeted()
 	return target;
 }
 
+bool Card::CanAttack()
+{
+	return !myIsDying && (myAttack + myTempAttackChange) > 0;
+}
 
 
 void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)

@@ -13,8 +13,7 @@ FearAbility::~FearAbility()
 {
 }
 
-void FearAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void FearAbility::OnCalculateAttack(AttackData& data) 
 {
-	currentTarget = aCard->GetOwner()->GetOpponent()->GetCommander();
-	someDamage;
+	data.mainTarget = data.mainTarget->GetOwner()->GetCommander();
 }

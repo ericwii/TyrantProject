@@ -7,6 +7,6 @@ public:
 	FearAbility();
 	~FearAbility();
 
-	void OnBeforeAttack(Card* aCard, Card*& currentTarget, char& someDamage) override;
+	void OnCalculateAttack(AttackData& data) override;
 };
 

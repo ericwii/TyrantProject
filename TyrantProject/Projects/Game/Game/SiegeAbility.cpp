@@ -36,14 +36,11 @@ void SiegeAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void SiegeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void SiegeAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1)
+	if (data.attacker->GetCooldown() < 1)
 	{
-		Player* opponent = aCard->GetOwner()->GetOpponent();
+		Player* opponent = data.attacker->GetOwner()->GetOpponent();
 		if (mySuffix.Lenght() == 0)
 		{
 			Card* target = FindTarget(opponent->GetStructureCards());
@@ -54,7 +51,7 @@ void SiegeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & so
 				if (target != nullptr)
 				{
 					AnimationManager::AddAnimation(siegeAnimation, target->GetPosition(), siegeAnimationSize);
-					AbilityStack::AddAbility(this, aCard, target, siegeDelay);
+					AbilityStack::AddAbility(this, data.attacker, target, siegeDelay);
 				}
 			}
 		}
@@ -67,7 +64,7 @@ void SiegeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & so
 				{
 					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
 				}
-				AbilityStack::AddAbility(this, aCard, targets, siegeDelay);
+				AbilityStack::AddAbility(this, data.attacker, targets, siegeDelay);
 			}
 		}
 	}

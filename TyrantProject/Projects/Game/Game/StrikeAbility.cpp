@@ -38,14 +38,11 @@ void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void StrikeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
+void StrikeAbility::OnCalculateAttack(AttackData& data)
 {
-	currentTarget;
-	someDamage;
-
-	if (aCard->GetCooldown() < 1)
+	if (data.attacker->GetCooldown() < 1)
 	{
-		Player* opponent = aCard->GetOwner()->GetOpponent();
+		Player* opponent = data.attacker->GetOwner()->GetOpponent();
 		if (mySuffix.Lenght() == 0)
 		{
 			Card* target = FindTarget(opponent->GetAssaultCards());
@@ -56,7 +53,7 @@ void StrikeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & s
 				if (target != nullptr)
 				{
 					AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
-					AbilityStack::AddAbility(this, aCard, target, strikeDelay);
+					AbilityStack::AddAbility(this, data.attacker, target, strikeDelay);
 				}
 			}
 		}
@@ -70,7 +67,7 @@ void StrikeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & s
 				{
 					AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
 				}
-				AbilityStack::AddAbility(this, aCard, targets, strikeDelay);
+				AbilityStack::AddAbility(this, data.attacker, targets, strikeDelay);
 			}
 		}
 	}
