@@ -38,7 +38,7 @@ void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	}
 }
 
-void RallyAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void RallyAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

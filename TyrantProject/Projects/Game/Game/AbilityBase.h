@@ -16,7 +16,7 @@ public:
 	virtual void OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker);
 	virtual void OnKill(Card* aCard, Card* aKilledCard);
 	virtual void OnPreCombat(Card* aCard);
-	virtual void OnBeforeAttack(Card* aCard, Card* currentTarget, char& someDamage);
+	virtual void OnBeforeAttack(Card* aCard, Card*& currentTarget, char& someDamage);
 	virtual void OnCleanUp(Card* aCard);
 	virtual void OnTargeted(Card* aTarget);
 	virtual void OnAttacked(Card* aUser ,char& someDamage, Card* anAttacker);

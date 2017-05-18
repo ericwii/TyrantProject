@@ -26,7 +26,7 @@ void WeakenAbility::OnPreCombat(Card * aCard)
 	aCard;
 }
 
-void WeakenAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void WeakenAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

@@ -26,7 +26,7 @@ SupplyAbility::~SupplyAbility()
 	
 }
 
-void SupplyAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void SupplyAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

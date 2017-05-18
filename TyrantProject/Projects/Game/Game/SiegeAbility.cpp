@@ -36,7 +36,7 @@ void SiegeAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void SiegeAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void SiegeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

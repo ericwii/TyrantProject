@@ -38,7 +38,7 @@ void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void StrikeAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void StrikeAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

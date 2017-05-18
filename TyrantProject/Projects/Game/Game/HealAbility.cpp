@@ -33,7 +33,7 @@ void HealAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	}
 }
 
-void HealAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void HealAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;

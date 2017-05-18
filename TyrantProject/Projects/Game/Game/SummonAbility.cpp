@@ -53,7 +53,7 @@ void SummonAbility::OnPlay(Card * aCard)
 	}
 }
 
-void SummonAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+void SummonAbility::OnBeforeAttack(Card * aCard, Card *& currentTarget, char & someDamage)
 {
 	currentTarget;
 	someDamage;
