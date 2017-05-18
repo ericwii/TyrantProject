@@ -100,7 +100,12 @@
       <Filter>Abilities\Defensive</Filter>
     </ClCompile>
     <ClCompile Include="FPS_Counter.cpp" />
-    <ClCompile Include="LegionAbility.cpp" />
+    <ClCompile Include="LegionAbility.cpp">
+      <Filter>Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="SupplyAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -211,7 +216,12 @@
       <Filter>Abilities\Defensive</Filter>
     </ClInclude>
     <ClInclude Include="FPS_Counter.h" />
-    <ClInclude Include="LegionAbility.h" />
+    <ClInclude Include="LegionAbility.h">
+      <Filter>Abilities</Filter>
+    </ClInclude>
+    <ClInclude Include="SupplyAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
