@@ -26,6 +26,12 @@ void AbilityBase::OnDeath(Card* aCard) { aCard; }
 void AbilityBase::OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker) { someDamage; aCard; anAttacker; }
 void AbilityBase::OnKill(Card* aCard, Card* aKilledCard) { aCard; aKilledCard; }
 void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
+void AbilityBase::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+{
+	aCard;
+	currentTarget;
+	someDamage;
+}
 void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
 void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }
 void AbilityBase::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) { someDamage; anAttacker; aUser; }
@@ -106,6 +112,38 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 			if (currentTarget != nullptr && !currentTarget->IsDying() && currentTarget->GetFaction() == mySpecificFaction && CheckConditions(currentTarget, conditions))
 			{
 				myTargets.Add(currentTarget);
+			}
+		}
+	}
+
+	return myTargets;
+}
+
+CU::GrowingArray<Card*>& AbilityBase::FindAdjecentTargets(Card * aSearcher, CU::GrowingArray<Card*>& cards, int conditions)
+{
+	cards;
+	conditions;
+	myTargets.RemoveAll();
+
+	for (int i = 0; i < aSearcher->GetOwner()->GetAssaultCards().Size(); i++)
+	{
+		if (aSearcher->GetOwner()->GetAssaultCards()[i] == aSearcher)
+		{
+
+			if (i - 1 >= 0)
+			{
+				if (aSearcher->GetOwner()->GetAssaultCards()[i - 1]->IsDying() == false)
+				{
+					myTargets.Add(aSearcher->GetOwner()->GetAssaultCards()[i - 1]);
+				}
+			}
+
+			if (i + 1 <= aSearcher->GetOwner()->GetAssaultCards().Size() - 1)
+			{
+				if (aSearcher->GetOwner()->GetAssaultCards()[i + 1]->IsDying() == false)
+				{
+					myTargets.Add(aSearcher->GetOwner()->GetAssaultCards()[i + 1]);
+				}
 			}
 		}
 	}
