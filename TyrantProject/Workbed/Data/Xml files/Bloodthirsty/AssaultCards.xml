@@ -92,7 +92,7 @@
 		<attack>2</attack>
 		<health>6</health>
 		<skill name="siphon" number="2"/>
-    <skill name="flying"/>
+    <skill name="supply" number="3" suffix = ""/>
     <skill name="regenerate" number="4"/>
 	</card>
 	
