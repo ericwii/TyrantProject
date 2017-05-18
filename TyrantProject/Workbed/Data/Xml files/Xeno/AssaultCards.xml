@@ -3,15 +3,250 @@
 <root>
 
 	<card>
-		<name>Radio Officer</name>
-		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
-		<faction>raider</faction>
+		<name>Thule Hound</name>
+		<illustration>Data/Textures/Illustrations/Xeno/Assault/Thule Hound.jpg</illustration>
+		<faction>xeno</faction>
 		<cardType>assault</cardType>
 		<rarity>rare</rarity>
 		<unique>false</unique>
-		<cooldown>4</cooldown>
-		<attack>1</attack>
-		<health>9</health>
+		<cooldown>2</cooldown>
+		<attack>0</attack>
+		<health>6</health>
+    <skill name="fear"/>
+    <skill name="legion" number="2"/>
 	</card>
+
+  <card>
+    <name>Marrow Alerion</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Marrow Aileron.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>legendary</rarity>
+    <unique>true</unique>
+    <cooldown>3</cooldown>
+    <attack>3</attack>
+    <health>11</health>
+    <skill name="flying"/>
+    <skill name="poison" number="3"/>
+    <skill name="swipe"/>
+  </card>
+
+  <card>
+    <name>Vaporwing</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <attack>3</attack>
+    <health>4</health>
+    <skill name="evade"/>
+    <skill name="armor" number="2"/>
+    <skill name="flying"/>
+  </card>
+
+  <card>
+    <name>Warp Sculpture</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Warp Sculpture.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>legendary</rarity>
+    <unique>true</unique>
+    <cooldown>1</cooldown>
+    <attack>0</attack>
+    <health>9</health>
+    <skill name="summon" suffix = "Monstrosity "/>
+    <skill name="heal" number= "2" suffix ="all" faction ="xeno"/>
+    <skill name="rally" number="1" suffix = "all" faction ="xeno"/>
+  </card>
+
+  <card>
+    <name>Monstrosity</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Monstrosity.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>common</rarity>
+    <unique>false</unique>
+    <cooldown>3</cooldown>
+    <attack>3</attack>
+    <health>7</health>
+  </card>
+
+  <card>
+    <name>Terraformer</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/terraformer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>3</cooldown>
+    <attack>3</attack>
+    <health>9</health>
+    <skill name="stun"/>
+    <skill name="strike" number="4" suffix="onattack"/>
+    <skill name="heal" number="4" suffix="onattack"/>
+  </card>
+
+  <card>
+    <name>Talon</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>4</cooldown>
+    <attack>1</attack>
+    <health>12</health>
+    <skill name="emulate"/>
+    <skill name="legion" number="3"/>
+    <skill name="chaos" suffix="all"/>
+  </card>
+
+  <card>
+    <name>Goreus</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>4</cooldown>
+    <attack>5</attack>
+    <health>11</health>
+    <skill name="blitz"/>
+    <skill name="stun"/>
+    <skill name="summon" suffix="Pherous"/>
+  </card>
+
+  <card>
+    <name>Pherous</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Pherous.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>uncommon</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <attack>2</attack>
+    <health>6</health>
+    <skill name="flying"/>
+    <skill name="legion" number="3"/>
+  </card>
+
+  <card>
+    <name>Tremor Wyrm</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Tremor Wyrm.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>4</cooldown>
+    <attack>3</attack>
+    <health>7</health>
+    <skill name="armor" number="2"/>
+    <skill name="strike" number="2" suffix="all"/>
+  </card>
+
+  <card>
+    <name>Spew Glider</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>uncommon</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <attack>1</attack>
+    <health>7</health>
+    <skill name="blitz"/>
+    <skill name="flying"/>
+    <skill name="mimic"/>
+  </card>
+
+  <card>
+    <name>Lightning Strider</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Lightning Strider.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <attack>2</attack>
+    <health>7</health>
+    <skill name="blitz"/>
+    <skill name="chaos"/>
+    <skill name="summon" suffix="Spew Glider"/>
+  </card>
+
+  <card>
+    <name>Apex Overdrive</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Apex Overdrive.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>3</cooldown>
+    <attack>3</attack>
+    <health>8</health>
+    <skill name="flying"/>
+    <skill name="strike" number="1" suffix="all"/>
+    <skill name="siege" number="1" suffix="all"/>
+  </card>
+
+  <card>
+    <name>Invigilator</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Invigilator.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>4</cooldown>
+    <attack>0</attack>
+    <health>10</health>
+    <skill name="cleanse" suffix="all onattacked"/>
+    <skill name="legion" number="2"/>
+    <skill name="chaos"/>
+  </card>
+
+  <card>
+    <name>Kazzerrot</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Kazzerrot.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>legendary</rarity>
+    <unique>true</unique>
+    <cooldown>4</cooldown>
+    <attack>1</attack>
+    <health>12</health>
+    <skill name="flying"/>
+    <skill name="summon" suffix="Serak"/>
+    <skill name="rally" number="2" suffix="all" faction="xeno"/>
+  </card>
+
+  <card>
+    <name>Serak</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>common</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <attack>2</attack>
+    <health>6</health>
+    <skill name="strike" number="1"/>
+  </card>
+
+  <card>
+    <name>Cyclops</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Assault/Cyclops.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>3</cooldown>
+    <attack>2</attack>
+    <health>7</health>
+    <skill name="evade"/>
+    <skill name="stun"/>
+    <skill name="siege" number="2" suffix="all"/>
+  </card>
 
 </root>
