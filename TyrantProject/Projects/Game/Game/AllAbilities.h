@@ -19,3 +19,4 @@
 #include "SummonAbility.h"
 #include "RegenerateAbility.h"
 #include "LegionAbility.h"
+#include "SupplyAbility.h"

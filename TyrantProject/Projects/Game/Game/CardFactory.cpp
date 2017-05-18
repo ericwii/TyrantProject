@@ -291,6 +291,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new LegionAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "supply")
+	{
+		return new SupplyAbility(aSuffix, aNumber, aFaction);
+	}
 	return nullptr;
 }
 

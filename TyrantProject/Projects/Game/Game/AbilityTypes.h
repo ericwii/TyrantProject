@@ -21,4 +21,5 @@ enum class eAbilityTypes
 	eSummon,
 	eRegenerate,
 	eLegion,
+	eSupply,
 };
