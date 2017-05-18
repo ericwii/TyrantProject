@@ -152,9 +152,20 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 	{
 		Card* currentCard = anAttacker.myAssaultCards[myCurrentAssaultCardIndex];
+		Card* defendingCard = nullptr;
+		char finalDamage = currentCard->GetAttack();
+
+		if (currentCard->GetCooldown() < 1)
+		{
+			currentAbilities = currentCard->GetAbilities();
+			for (int i = 0; i < currentAbilities.Size(); i++)
+			{
+				currentAbilities[i]->OnBeforeAttack(currentCard, defendingCard, finalDamage);
+			}
+		}
+
 		if (currentCard->GetCooldown() < 1 && currentCard->GetAttack() > 0)
 		{
-			Card* defendingCard;
 			if (aDefender.myAssaultCards.Size() > myCurrentAssaultCardIndex && !aDefender.myAssaultCards[myCurrentAssaultCardIndex]->IsDying())
 			{
 				defendingCard = aDefender.myAssaultCards[myCurrentAssaultCardIndex];
@@ -164,7 +175,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 				defendingCard = aDefender.myComander;
 			}
 
-			char finalDamage = currentCard->GetAttack();
+			
 			if (defendingCard == aDefender.myComander)
 			{
 				for (short i = 0; i < aDefender.GetStructureCards().Size(); i++)
