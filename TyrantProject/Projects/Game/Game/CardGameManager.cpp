@@ -166,17 +166,18 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 
 		if (currentCard->GetCooldown() < 1 && currentCard->GetAttack() > 0)
 		{
-			if (aDefender.myAssaultCards.Size() > myCurrentAssaultCardIndex && !aDefender.myAssaultCards[myCurrentAssaultCardIndex]->IsDying())
+			if (defendingCard != aDefender.GetCommander())
 			{
-				defendingCard = aDefender.myAssaultCards[myCurrentAssaultCardIndex];
+				if (aDefender.myAssaultCards.Size() > myCurrentAssaultCardIndex && !aDefender.myAssaultCards[myCurrentAssaultCardIndex]->IsDying())
+				{
+					defendingCard = aDefender.myAssaultCards[myCurrentAssaultCardIndex];
+				}
+				else
+				{
+					defendingCard = aDefender.myComander;
+				}
 			}
 			else
-			{
-				defendingCard = aDefender.myComander;
-			}
-
-			
-			if (defendingCard == aDefender.myComander)
 			{
 				for (short i = 0; i < aDefender.GetStructureCards().Size(); i++)
 				{
