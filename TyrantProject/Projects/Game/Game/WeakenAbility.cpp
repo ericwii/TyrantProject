@@ -23,6 +23,14 @@ WeakenAbility::~WeakenAbility()
 
 void WeakenAbility::OnPreCombat(Card * aCard)
 {
+	aCard;
+}
+
+void WeakenAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+{
+	currentTarget;
+	someDamage;
+
 	if (aCard->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)

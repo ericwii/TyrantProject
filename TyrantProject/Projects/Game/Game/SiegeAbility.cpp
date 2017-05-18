@@ -36,8 +36,11 @@ void SiegeAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void SiegeAbility::OnPreCombat(Card * aCard)
+void SiegeAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
 {
+	currentTarget;
+	someDamage;
+
 	if (aCard->GetCooldown() < 1)
 	{
 		Player* opponent = aCard->GetOwner()->GetOpponent();
@@ -68,4 +71,9 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 			}
 		}
 	}
+}
+
+void SiegeAbility::OnPreCombat(Card * aCard)
+{
+	aCard;
 }

@@ -42,16 +42,23 @@ SummonAbility::~SummonAbility()
 
 void SummonAbility::OnPreCombat(Card* aCard)
 {
-	if (mySuffix.Lenght() == 0 && aCard->GetCooldown() < 1)
+	aCard;
+}
+
+void SummonAbility::OnPlay(Card * aCard)
+{
+	if (mySuffix == " onplay")
 	{
 		aCard->GetOwner()->SummonCard(myCardToSummon);
 	}
 }
 
-void SummonAbility::OnPlay(Card * aCard)
+void SummonAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
 {
+	currentTarget;
+	someDamage;
 
-	if (mySuffix == " onplay")
+	if (aCard->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
 		aCard->GetOwner()->SummonCard(myCardToSummon);
 	}

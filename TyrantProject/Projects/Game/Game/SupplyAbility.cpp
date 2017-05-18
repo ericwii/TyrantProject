@@ -26,33 +26,27 @@ SupplyAbility::~SupplyAbility()
 	
 }
 
-void SupplyAbility::OnPreCombat(Card * aCard)
+void SupplyAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
 {
-	if (aCard->GetCooldown() < 1)
+	currentTarget;
+	someDamage;
+
+	if (aCard->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
-		for (int i = 0; i < aCard->GetOwner()->GetAssaultCards().Size(); i++)
-		{
-			if (aCard->GetOwner()->GetAssaultCards()[i] == aCard)
-			{
-
-				if (i - 1 >= 0)
-				{
-					if (aCard->GetOwner()->GetAssaultCards()[i - 1]->IsDying() == false)
-					{
-						myTargets.Add(aCard->GetOwner()->GetAssaultCards()[i - 1]);
-					}
-				}
-
-				if (i + 1 <= aCard->GetOwner()->GetAssaultCards().Size() - 1)
-				{
-					if (aCard->GetOwner()->GetAssaultCards()[i + 1]->IsDying() == false)
-					{
-						myTargets.Add(aCard->GetOwner()->GetAssaultCards()[i + 1]);
-					}
-				}
-			}
-		}
+		FindAdjecentTargets(aCard, myTargets);
 		AbilityStack::AddAbility(this, aCard, myTargets);
+	}
+}
+
+void SupplyAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+{
+	someDamage;
+	anAttacker;
+
+	if (mySuffix == "onattacked")
+	{
+		FindAdjecentTargets(aUser, myTargets);
+		AbilityStack::AddAbility(this, aUser, myTargets);
 	}
 }
 

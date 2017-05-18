@@ -25,6 +25,24 @@ RallyAbility::~RallyAbility()
 
 void RallyAbility::OnPreCombat(Card* aCard)
 {
+	aCard;
+}
+
+void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
+{
+	aCaster;
+	for (int i = 0; i < someTargets.Size(); ++i)
+	{
+		someTargets[i]->Rally(myNumber);
+		AnimationManager::AddAnimation(rallyAnimation, someTargets[i]->GetPosition(), rallyAnimationSize);
+	}
+}
+
+void RallyAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
+{
+	currentTarget;
+	someDamage;
+
 	if (aCard->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
@@ -36,7 +54,7 @@ void RallyAbility::OnPreCombat(Card* aCard)
 			}
 		}
 		else if (mySuffix == "all")
-		{   
+		{
 			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 
 			if (targets.Size() > 0)
@@ -44,15 +62,5 @@ void RallyAbility::OnPreCombat(Card* aCard)
 				AbilityStack::AddAbility(this, aCard, targets);
 			}
 		}
-	}
-}
-
-void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
-{
-	aCaster;
-	for (int i = 0; i < someTargets.Size(); ++i)
-	{
-		someTargets[i]->Rally(myNumber);
-		AnimationManager::AddAnimation(rallyAnimation, someTargets[i]->GetPosition(), rallyAnimationSize);
 	}
 }

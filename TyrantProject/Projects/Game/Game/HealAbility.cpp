@@ -33,8 +33,11 @@ void HealAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	}
 }
 
-void HealAbility::OnPreCombat(Card* aCard)
+void HealAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
 {
+	currentTarget;
+	someDamage;
+
 	if (aCard->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
@@ -59,4 +62,9 @@ void HealAbility::OnPreCombat(Card* aCard)
 			}
 		}
 	}
+}
+
+void HealAbility::OnPreCombat(Card* aCard)
+{
+	aCard;
 }

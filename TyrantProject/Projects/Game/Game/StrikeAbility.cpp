@@ -38,8 +38,11 @@ void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets
 	}
 }
 
-void StrikeAbility::OnPreCombat(Card* aCard)
+void StrikeAbility::OnBeforeAttack(Card * aCard, Card * currentTarget, char & someDamage)
 {
+	currentTarget;
+	someDamage;
+
 	if (aCard->GetCooldown() < 1)
 	{
 		Player* opponent = aCard->GetOwner()->GetOpponent();
@@ -71,4 +74,9 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 			}
 		}
 	}
+}
+
+void StrikeAbility::OnPreCombat(Card* aCard)
+{
+	aCard;
 }
