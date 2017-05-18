@@ -2,6 +2,17 @@
 #include "LegionAbility.h"
 
 
+Vector2<float> legionAnimationSize(0.3f, 0.5f);
+AnimationData legionAnimation = AnimationData
+(
+	"Data/Textures/Animations/refreshGreenAnimation.png",
+	5,
+	1,
+	20.f,
+	false
+	);
+
+
 LegionAbility::LegionAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
 {
 	myAbilityType = eAbilityTypes::eLegion;
@@ -14,7 +25,6 @@ LegionAbility::~LegionAbility()
 
 void LegionAbility::OnPreCombat(Card * aCard)
 {
-
 	for (int i = 0; i < aCard->GetOwner()->GetAssaultCards().Size(); i++)
 	{
 		if (aCard->GetOwner()->GetAssaultCards()[i] == aCard)
@@ -35,6 +45,7 @@ void LegionAbility::OnPreCombat(Card * aCard)
 				{
 					aCard->Heal(myNumber);
 					aCard->Rally(myNumber);
+					//AnimationManager::AddAnimation(legionAnimation,aCard->GetPosition(),legionAnimationSize);
 				}
 			}
 		}
