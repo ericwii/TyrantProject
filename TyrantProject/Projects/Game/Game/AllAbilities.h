@@ -20,3 +20,4 @@
 #include "RegenerateAbility.h"
 #include "LegionAbility.h"
 #include "SupplyAbility.h"
+#include "FearAbility.h"

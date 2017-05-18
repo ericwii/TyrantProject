@@ -295,6 +295,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new SupplyAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "fear")
+	{
+		return new FearAbility();
+	}
 	return nullptr;
 }
 
