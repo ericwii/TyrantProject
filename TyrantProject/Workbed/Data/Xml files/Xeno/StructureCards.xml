@@ -2,16 +2,45 @@
 
 <root>
 
-	<card>
-		<name>Radio Officer</name>
-		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
-		<faction>raider</faction>
-		<cardType>assault</cardType>
-		<rarity>rare</rarity>
-		<unique>false</unique>
-		<cooldown>4</cooldown>
-		<attack>1</attack>
-		<health>9</health>
-	</card>
+  <card>
+    <name>Warpway Fortress</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Structure/Warpway Fortress.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>structure</cardType>
+    <rarity>rare</rarity>
+    <unique>true</unique>
+    <cooldown>3</cooldown>
+    <health>7</health>
+    <skill name="strike" number="2"/>
+    <skill name="siege" number="3"/>
+    <skill name="summon" suffix="Vaporwing"/>
+  </card>
+
+  <card>
+    <name>Zarak</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Structure/Zarak.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>structure</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>4</cooldown>
+    <health>5</health>
+    <skill name="enfeeble" number ="1" suffix="all"/>
+    <skill name="strike" number="1" suffix="all"/>
+  </card>
+
+  <card>
+    <name>Invix Source</name>
+    <illustration>Data/Textures/Illustrations/Xeno/Structure/Invix Source.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>structure</cardType>
+    <rarity>rare</rarity>
+    <unique>false</unique>
+    <cooldown>4</cooldown>
+    <health>10</health>
+    <skill name="regenerate" number="5"/>
+    <skill name="heal" number="3" suffix ="all" faction="xeno"/>
+    <skill name="rally" number="2" suffix ="all" faction="xeno"/>
+  </card>
 
 </root>

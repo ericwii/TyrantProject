@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	
+	<card>
+		<name>Kleave</name>
+		<illustration>BloodThirsty/Commander/Dementia.jpg</illustration>
+		<faction>xeno</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>9</health>
+    <skill name="protect" number="1" suffix="all" faction="xeno"/>
+    <skill name="Siege" number="2"/>
+	</card>
+
+</root>

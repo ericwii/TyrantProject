@@ -63,8 +63,9 @@
 		<cooldown>4</cooldown>
 		<attack>2</attack>
 		<health>7</health>
-		<skill name="strike" number="1" suffix="all"/>
+		<skill name="strike" number="2" suffix="all"/>
 		<skill name="refresh"/>
+    <skill name="fear"/>
 	</card>
 	
 	<card>
@@ -93,7 +94,7 @@
 		<health>6</health>
 		<skill name="siphon" number="2"/>
     <skill name="supply" number="3" suffix = ""/>
-    <skill name="regenerate" number="4"/>
+    <skill name="fear"/>
 	</card>
 	
 	<card>
