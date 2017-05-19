@@ -10,7 +10,7 @@ enum eGamePhase
 	Priority,
 	PreCombat,
 	Combat,
-	Cleanup
+	Cleanup,
 };
 
 enum eCombatState
