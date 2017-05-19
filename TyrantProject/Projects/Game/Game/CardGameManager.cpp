@@ -513,6 +513,11 @@ void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 
 	if (finalDamage > 0)
 	{
+		myCurrentAbilities = anAttacker->GetAbilities();
+		for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+		{
+			myCurrentAbilities[i]->OnDamageDealt(anAttacker, aDefender, finalDamage);
+		}
 		aDefender->TakeDamage(finalDamage);
 	}
 }
