@@ -27,29 +27,14 @@ void AbilityBase::OnAttack(Card* defendingCard, char& someDamage) { defendingCar
 void AbilityBase::OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker) { someDamage; aCard; anAttacker; }
 void AbilityBase::OnKill(Card* aCard, Card* aKilledCard) { aCard; aKilledCard; }
 void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
-void AbilityBase::OnCalculateAttack(AttackData& data)
-{
-	data;
-}
+void AbilityBase::OnPriority(Card* aCard) { aCard; }
+void AbilityBase::OnCalculateAttack(AttackData& data) { data; }
 void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
 void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }
 void AbilityBase::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) { someDamage; anAttacker; aUser; }
-void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser)
-{
-	aCurrentTarget;
-	aUser;
-}
-void AbilityBase::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
-{
-	aCard;
-	aDamagedCard;
-	someDamage;
-}
-void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
-{
-	aCaster;
-	someTargets;
-}
+void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser) { aCurrentTarget; aUser; }
+void AbilityBase::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage) { aCard; aDamagedCard; someDamage; }
+void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) { aCaster; someTargets; }
 
 const eAbilityTypes AbilityBase::GetAbilityType()
 {

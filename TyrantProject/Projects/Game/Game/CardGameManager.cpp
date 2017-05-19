@@ -34,6 +34,11 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 				instance->myPhaseUpdateDone = instance->PlayCard(anActivePlayer);
 				break;
 			}
+			case(eGamePhase::Priority) :
+			{
+				instance->myPhaseUpdateDone = instance->Priority(anActivePlayer);
+				break;
+			}
 			case(eGamePhase::PreCombat) :
 			{
 				instance->myPhaseUpdateDone = instance->PreCombat(anActivePlayer);
@@ -108,13 +113,44 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 	return false;
 }
 
+bool CardGameManager::Priority(Player& anActivePlayer)
+{
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	{
+		if (myHasUpdatedCommander == false)
+		{
+			myHasUpdatedCommander = UpdateAbilities(anActivePlayer.myComander, eAbilityMethod::ePriority);
+		}
+		else if (myCurrentStructureCardIndex < anActivePlayer.myStructureCards.Size())
+		{
+			if (UpdateAbilities(anActivePlayer.myStructureCards[myCurrentStructureCardIndex], eAbilityMethod::ePriority) == true)
+			{
+				++myCurrentStructureCardIndex;
+			}
+		}
+		else if (myCurrentAssaultCardIndex < anActivePlayer.myAssaultCards.Size())
+		{
+			if (UpdateAbilities(anActivePlayer.myAssaultCards[myCurrentAssaultCardIndex], eAbilityMethod::ePriority) == true)
+			{
+				++myCurrentAssaultCardIndex;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool CardGameManager::PreCombat(Player& anActivePlayer)
 {
 	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 	{
 		if (myHasUpdatedCommander == false)
 		{
-			myHasUpdatedCommander = UpdateAbilities(anActivePlayer.myComander, eAbilityMethod::eCalculateAttack);
+			myHasUpdatedCommander = UpdateAbilities(anActivePlayer.myComander, eAbilityMethod::ePreCombat);
 		}
 		else if (myCurrentStructureCardIndex < anActivePlayer.myStructureCards.Size())
 		{
@@ -141,22 +177,14 @@ bool CardGameManager::PreCombat(Player& anActivePlayer)
 
 bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 {
-	//Vector2<float> size(2.f, 2.f);
-
 	switch (myCombatState)
 	{
 		case (eCombatState::Setup):
 		{
 			if (myCurrentAssaultCardIndex < anAttacker.myAssaultCards.Size())
 			{
-				if (CombatSetup(anAttacker, aDefender) == true)
-				{
-					myCombatState = eCombatState::CalculateAttack;
-				}
-				else
-				{
-					++myCurrentAssaultCardIndex;
-				}
+				CombatSetup(anAttacker, aDefender);
+				myCombatState = eCombatState::CalculateAttack;
 			}
 			else
 			{
@@ -194,6 +222,12 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 		}
 	}
 
+	if (myIgnoreAttack == true)
+	{
+		++myCurrentAssaultCardIndex;
+		myCombatState = eCombatState::Setup;
+		myIgnoreAttack = false;
+	}
 	return false;
 }
 
@@ -363,10 +397,9 @@ bool CardGameManager::UpdateAbilities(Card* aCard, eAbilityMethod aMethod)
 				myCurrentAbilities[myCurrentAbilityIndex]->OnPreCombat(aCard);
 				break;
 			}
-			case (eAbilityMethod::eCalculateAttack):
+			case (eAbilityMethod::ePriority):
 			{
-				myCurrentAttackData.attacker = aCard;
-				myCurrentAbilities[myCurrentAbilityIndex]->OnCalculateAttack(myCurrentAttackData);
+				myCurrentAbilities[myCurrentAbilityIndex]->OnPriority(aCard);
 				break;
 			}
 			default:
@@ -388,9 +421,9 @@ bool CardGameManager::UpdateAbilities(Card* aCard, eAbilityMethod aMethod)
 
 //Combat
 
-bool CardGameManager::CombatSetup(Player& anAttacker, Player& aDefender)
+void CardGameManager::CombatSetup(Player& anAttacker, Player& aDefender)
 {
-	if (anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetCooldown() < 1 && anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetAttack() > 0)
+	if (anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetCooldown() < 1)
 	{
 		myCurrentAttackData.extraTargets[0] = nullptr;
 		myCurrentAttackData.extraTargets[1] = nullptr;
@@ -408,9 +441,11 @@ bool CardGameManager::CombatSetup(Player& anAttacker, Player& aDefender)
 		}
 
 		myCurrentAbilities = myCurrentAttackData.attacker->GetAbilities();
-		return true;
 	}
-	return false;
+	else
+	{
+		myIgnoreAttack = true;
+	}
 }
 
 bool CardGameManager::CombatCalculations(Player& aDefender)
@@ -424,20 +459,27 @@ bool CardGameManager::CombatCalculations(Player& aDefender)
 		}
 		else
 		{
-			if (myCurrentAttackData.mainTarget == aDefender.GetCommander())
+			if (myCurrentAttackData.attacker->GetAttack() > 0)
 			{
-				CU::GrowingArray<Card*>& structures = aDefender.GetStructureCards();
-				for (int i = 0; i < structures.Size(); ++i)
+				if (myCurrentAttackData.mainTarget == aDefender.GetCommander())
 				{
-					myCurrentAbilities = structures[i]->GetAbilities();
-					for (int j = 0; j < myCurrentAbilities.Size(); ++j)
+					CU::GrowingArray<Card*>& structures = aDefender.GetStructureCards();
+					for (int i = 0; i < structures.Size(); ++i)
 					{
-						if (myCurrentAbilities[i] != nullptr)
+						myCurrentAbilities = structures[i]->GetAbilities();
+						for (int j = 0; j < myCurrentAbilities.Size(); ++j)
 						{
-							myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+							if (myCurrentAbilities[i] != nullptr)
+							{
+								myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+							}
 						}
 					}
 				}
+			}
+			else
+			{
+				myIgnoreAttack = true;
 			}
 			myCurrentAbilityIndex = 0;
 			return true;
@@ -463,16 +505,33 @@ bool CardGameManager::CombatAttack()
 					AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f), PI);
 				}
 
-				if (myCurrentAttackData.extraTargets[0] != nullptr)
+				if (myCurrentAttackData.extraTargets[0] != nullptr && !myCurrentAttackData.extraTargets[0]->IsDying())
 				{
 					AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.extraTargets[0]);
 				}
 
 				AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.mainTarget);
+				if (myCurrentAttackData.mainTarget->IsDying())
+				{
+					Player* opponent = myCurrentAttackData.mainTarget->GetOwner();
+					myCurrentAttackData.mainTarget = opponent->GetCommander();
+					CU::GrowingArray<Card*>& structures = opponent->GetStructureCards();
+					for (int i = 0; i < structures.Size(); ++i)
+					{
+						myCurrentAbilities = structures[i]->GetAbilities();
+						for (int j = 0; j < myCurrentAbilities.Size(); ++j)
+						{
+							if (myCurrentAbilities[i] != nullptr)
+							{
+								myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+							}
+						}
+					}
+				}
 
 				if (!myCurrentAttackData.mainTarget->GetOwner()->CommanderIsDead())
 				{
-					if (myCurrentAttackData.extraTargets[1] != nullptr)
+					if (myCurrentAttackData.extraTargets[1] != nullptr && !myCurrentAttackData.extraTargets[1]->IsDying())
 					{
 						AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.extraTargets[1]);
 					}

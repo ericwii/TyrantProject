@@ -7,6 +7,7 @@ enum eGamePhase
 {
 	Upkeep,
 	Play,
+	Priority,
 	PreCombat,
 	Combat,
 	Cleanup
@@ -21,9 +22,9 @@ enum eCombatState
 
 enum eAbilityMethod
 {
-	eCleanup,
 	ePreCombat,
-	eCalculateAttack
+	ePriority,
+	eCleanup
 };
 
 class Player;
@@ -35,6 +36,7 @@ public:
 
 	 void Upkeep(Player& anActivePlayer);
 	 bool PlayCard(Player& anActivePlayer);
+	 bool Priority(Player& anActivePlayer);
 	 bool PreCombat(Player& anActivePlayer);
 	 bool Combat(Player& anAttacker, Player& aDefender);
 	 bool CleanUp(Player& anActivePlayer, Player& anOpponentPlayer);
@@ -50,7 +52,7 @@ private:
 	void RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer);
 	bool UpdateAbilities(Card* aCard, eAbilityMethod aMethod);
 
-	bool CombatSetup(Player& anAttacker, Player& aDefender);
+	void CombatSetup(Player& anAttacker, Player& aDefender);
 	bool CombatCalculations(Player& aDefender);
 	bool CombatAttack();
 	void AttackCard(Card* anAttacker, Card* aDefender);
@@ -72,5 +74,6 @@ private:
 	bool myPhaseUpdateDone = false;
 	bool myHasUpdatedCommander = false;
 	bool myHasRemovedDeadCards = false;
+	bool myIgnoreAttack = false;
 };
 

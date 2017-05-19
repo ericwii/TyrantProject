@@ -63,11 +63,37 @@ void HealAbility::OnCalculateAttack(AttackData& data)
 
 void HealAbility::OnPreCombat(Card* aCard)
 {
-	aCard;
+	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
+	{
+		if (mySuffix.Lenght() == 0)
+		{
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			if (target != nullptr)
+			{
+				AbilityStack::AddAbility(this, aCard, target);
+			}
+		}
+		else if (mySuffix == "all")
+		{
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+
+			if (targets.Size() > 0)
+			{
+				//for (int i = 0; i < targets.Size(); ++i)
+				//{
+				//AnimationManager::AddAnimation(healAnimation, targets[i]->GetPosition(), healAnimationSize);
+				//}
+				AbilityStack::AddAbility(this, aCard, targets);
+			}
+		}
+	}
 }
 
 void HealAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 {
+	anAttacker;
+	someDamage;
+
 	if (mySuffix == "onattacked")
 	{
 		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);

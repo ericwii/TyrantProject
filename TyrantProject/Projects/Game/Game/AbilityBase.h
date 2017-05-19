@@ -30,6 +30,7 @@ public:
 	virtual void OnDeath(Card* aCard);
 	virtual void OnTargeted(Card* aTarget);
 	virtual void OnKill(Card* aCard, Card* aKilledCard);
+	virtual void OnPriority(Card* aCard);
 	virtual void OnPreCombat(Card* aCard);
 	virtual void OnCleanUp(Card* aCard);
 

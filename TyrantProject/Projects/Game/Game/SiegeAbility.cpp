@@ -12,8 +12,6 @@ AnimationData siegeAnimation = AnimationData
 	false
 );
 
-float siegeDelay = 0.2f;
-
 SiegeAbility::SiegeAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix,aNumber,aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/siegeIcon.png";
@@ -51,7 +49,7 @@ void SiegeAbility::OnCalculateAttack(AttackData& data)
 				if (target != nullptr)
 				{
 					AnimationManager::AddAnimation(siegeAnimation, target->GetPosition(), siegeAnimationSize);
-					AbilityStack::AddAbility(this, data.attacker, target, siegeDelay);
+					AbilityStack::AddAbility(this, data.attacker, target);
 				}
 			}
 		}
@@ -64,7 +62,7 @@ void SiegeAbility::OnCalculateAttack(AttackData& data)
 				{
 					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
 				}
-				AbilityStack::AddAbility(this, data.attacker, targets, siegeDelay);
+				AbilityStack::AddAbility(this, data.attacker, targets);
 			}
 		}
 	}
@@ -72,5 +70,27 @@ void SiegeAbility::OnCalculateAttack(AttackData& data)
 
 void SiegeAbility::OnPreCombat(Card * aCard)
 {
-	aCard;
+	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
+	{
+		if (mySuffix.Lenght() == 0)
+		{
+			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards());
+			if (target != nullptr)
+			{
+				AbilityStack::AddAbility(this, aCard, target);
+			}
+		}
+		else if (mySuffix == "all")
+		{
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetStructureCards());
+			if (targets.Size() > 0)
+			{
+				for (int i = targets.Size() - 1; i >= 0; --i)
+				{
+					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
+				}
+				AbilityStack::AddAbility(this, aCard, targets);
+			}
+		}
+	}
 }

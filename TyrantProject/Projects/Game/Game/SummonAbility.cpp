@@ -42,7 +42,13 @@ SummonAbility::~SummonAbility()
 
 void SummonAbility::OnPreCombat(Card* aCard)
 {
-	aCard;
+	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
+	{
+		if (mySuffix.Lenght() == 0)
+		{
+			aCard->GetOwner()->SummonCard(myCardToSummon);
+		}
+	}
 }
 
 void SummonAbility::OnPlay(Card * aCard)

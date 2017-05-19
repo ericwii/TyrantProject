@@ -25,7 +25,26 @@ RallyAbility::~RallyAbility()
 
 void RallyAbility::OnPreCombat(Card* aCard)
 {
-	aCard;
+	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
+	{
+		if (mySuffix.Lenght() == 0)
+		{
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			if (target != nullptr)
+			{
+				AbilityStack::AddAbility(this, aCard, target);
+			}
+		}
+		else if (mySuffix == "all")
+		{
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+
+			if (targets.Size() > 0)
+			{
+				AbilityStack::AddAbility(this, aCard, targets);
+			}
+		}
+	}
 }
 
 void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)

@@ -23,7 +23,26 @@ WeakenAbility::~WeakenAbility()
 
 void WeakenAbility::OnPreCombat(Card * aCard)
 {
-	aCard;
+	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
+	{
+		if (mySuffix.Lenght() == 0)
+		{
+			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
+			if (target != nullptr)
+			{
+				AbilityStack::AddAbility(this, aCard, target);
+			}
+		}
+		else if (mySuffix == "all")
+		{
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
+
+			if (targets.Size() > 0)
+			{
+				AbilityStack::AddAbility(this, aCard, targets);
+			}
+		}
+	}
 }
 
 void WeakenAbility::OnCalculateAttack(AttackData& data)
