@@ -109,7 +109,9 @@
     <ClCompile Include="FearAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="FlurryAbility.cpp" />
+    <ClCompile Include="FlurryAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -229,7 +231,9 @@
     <ClInclude Include="FearAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="FlurryAbility.h" />
+    <ClInclude Include="FlurryAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
