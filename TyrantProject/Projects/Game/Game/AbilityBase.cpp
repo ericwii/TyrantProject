@@ -30,7 +30,7 @@ void AbilityBase::OnPreCombat(Card* aCard) { aCard; }
 void AbilityBase::OnPriority(Card* aCard) { aCard; }
 void AbilityBase::OnCalculateAttack(AttackData& data) { data; }
 void AbilityBase::OnCleanUp(Card * aCard) { aCard; }
-void AbilityBase::OnTargeted(Card* aTarget) { aTarget; }
+void AbilityBase::OnTargeted(Card* aTarget, AbilityBase* aTargetingAbility) { aTarget; aTargetingAbility; }
 void AbilityBase::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) { someDamage; anAttacker; aUser; }
 void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser) { aCurrentTarget; aUser; }
 void AbilityBase::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage) { aCard; aDamagedCard; someDamage; }

@@ -42,7 +42,7 @@ void HealAbility::OnCalculateAttack(AttackData& data)
 			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, data.attacker, target);
+				AbilityStack::AddAbility(this, data.attacker, target, nullptr, healAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -51,11 +51,7 @@ void HealAbility::OnCalculateAttack(AttackData& data)
 
 			if (targets.Size() > 0)
 			{
-				//for (int i = 0; i < targets.Size(); ++i)
-				//{
-				//AnimationManager::AddAnimation(healAnimation, targets[i]->GetPosition(), healAnimationSize);
-				//}
-				AbilityStack::AddAbility(this, data.attacker, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets, nullptr, healAnimationSize);
 			}
 		}
 	}
@@ -70,7 +66,7 @@ void HealAbility::OnPreCombat(Card* aCard)
 			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, aCard, target, nullptr, healAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -79,11 +75,7 @@ void HealAbility::OnPreCombat(Card* aCard)
 
 			if (targets.Size() > 0)
 			{
-				//for (int i = 0; i < targets.Size(); ++i)
-				//{
-				//AnimationManager::AddAnimation(healAnimation, targets[i]->GetPosition(), healAnimationSize);
-				//}
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, aCard, targets, nullptr, healAnimationSize);
 			}
 		}
 	}
@@ -99,16 +91,15 @@ void HealAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
 		if (target != nullptr)
 		{
-			AbilityStack::AddAbility(this, aUser, target);
+			AbilityStack::AddAbility(this, aUser, target, nullptr, healAnimationSize);
 		}
 	}
 	else if(mySuffix == "all onattacked")
 	{
 		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
-
 		if (targets.Size() > 0)
 		{
-			AbilityStack::AddAbility(this, aUser, targets);
+			AbilityStack::AddAbility(this, aUser, targets, nullptr, healAnimationSize);
 		}
 	}
 }

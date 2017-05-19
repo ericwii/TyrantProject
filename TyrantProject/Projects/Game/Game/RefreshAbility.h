@@ -9,7 +9,5 @@ public:
 
 
 	void OnCleanUp(Card* aCard) override;
-
-	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;
 };
 

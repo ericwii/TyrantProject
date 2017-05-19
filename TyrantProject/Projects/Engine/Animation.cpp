@@ -15,6 +15,18 @@ Animation::~Animation()
 
 //Public Methods
 
+void Animation::Init(const AnimationData& someData, const Vector2<float> aSize)
+{
+	Model* model = ModelLoader::LoadRectangle(aSize, eEffectType::Animated, someData.textureFileName);
+
+	myInstance.Init(model);
+	myTexture = model->GetTexture("AlbedoTexture");
+
+	DEBUG_ASSERT(myTexture != nullptr, "Failed to get texture from model");
+
+	InitAnimation(someData.amountOfFrames, someData.amountOfRows, someData.framesPerSecond, someData.loop);
+}
+
 void Animation::Init(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float> aSize)
 {
 	Model* model = ModelLoader::LoadRectangle(aSize, eEffectType::Animated, someData.textureFileName);
@@ -28,6 +40,11 @@ void Animation::Init(const AnimationData& someData, const Vector3<float>& aPosit
 	DEBUG_ASSERT(myTexture != nullptr, "Failed to get texture from model");
 
 	InitAnimation(someData.amountOfFrames, someData.amountOfRows, someData.framesPerSecond, someData.loop);
+}
+
+void Animation::SetPosition(Vector3<float>& aPosition)
+{
+	myInstance.SetPosition(aPosition);
 }
 
 void Animation::SetRotation(float someRadians)

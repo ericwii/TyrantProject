@@ -23,7 +23,7 @@ public:
 	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker);
 	void OnKill(Card* aCard, Card* akilledCard);
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
-	Card* OnTargeted();
+	Card* OnTargeted(AbilityBase* targetingAbility);
 
 	void TakeDamage(char someDamage);
 	void Heal(char someHealth);

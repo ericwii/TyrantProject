@@ -28,7 +28,7 @@ public:
 	virtual void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
 	virtual void OnPlay(Card* aCard);
 	virtual void OnDeath(Card* aCard);
-	virtual void OnTargeted(Card* aTarget);
+	virtual void OnTargeted(Card* aTarget, AbilityBase* aTargetingAbility);
 	virtual void OnKill(Card* aCard, Card* aKilledCard);
 	virtual void OnPriority(Card* aCard);
 	virtual void OnPreCombat(Card* aCard);

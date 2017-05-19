@@ -469,7 +469,7 @@ bool CardGameManager::CombatCalculations(Player& aDefender)
 						myCurrentAbilities = structures[i]->GetAbilities();
 						for (int j = 0; j < myCurrentAbilities.Size(); ++j)
 						{
-							if (myCurrentAbilities[i] != nullptr)
+							if (myCurrentAbilities[j] != nullptr)
 							{
 								myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
 							}
@@ -521,7 +521,7 @@ bool CardGameManager::CombatAttack()
 						myCurrentAbilities = structures[i]->GetAbilities();
 						for (int j = 0; j < myCurrentAbilities.Size(); ++j)
 						{
-							if (myCurrentAbilities[i] != nullptr)
+							if (myCurrentAbilities[j] != nullptr)
 							{
 								myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
 							}

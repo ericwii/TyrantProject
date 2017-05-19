@@ -14,15 +14,6 @@ SummonAbility::SummonAbility(const string& aSuffix, char aNumber, eCardFaction a
 		{
 			myCardToSummon = aSuffix.SubStr(0, i);
 			break;
-
-			//if (i + 1 < aSuffix.Lenght())
-			//{
-			//	mySuffix.SetAsSubStr(i + 1);
-			//}
-			//else
-			//{
-			//	mySuffix = "";
-			//}
 		}
 	}
 	if (myCardToSummon.Lenght() < mySuffix.Lenght())

@@ -45,12 +45,7 @@ void SiegeAbility::OnCalculateAttack(AttackData& data)
 
 			if (target != nullptr)
 			{
-				target = target->OnTargeted();
-				if (target != nullptr)
-				{
-					AnimationManager::AddAnimation(siegeAnimation, target->GetPosition(), siegeAnimationSize);
-					AbilityStack::AddAbility(this, data.attacker, target);
-				}
+				AbilityStack::AddAbility(this, data.attacker, target, &siegeAnimation, siegeAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -58,11 +53,7 @@ void SiegeAbility::OnCalculateAttack(AttackData& data)
 			CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetStructureCards());
 			if (targets.Size() > 0)
 			{
-				for (int i = targets.Size() - 1; i >= 0; --i)
-				{
-					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
-				}
-				AbilityStack::AddAbility(this, data.attacker, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets, &siegeAnimation, siegeAnimationSize);
 			}
 		}
 	}
@@ -74,10 +65,10 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards());
+			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetStructureCards());
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, aCard, target, &siegeAnimation, siegeAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -85,11 +76,7 @@ void SiegeAbility::OnPreCombat(Card * aCard)
 			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetStructureCards());
 			if (targets.Size() > 0)
 			{
-				for (int i = targets.Size() - 1; i >= 0; --i)
-				{
-					AnimationManager::AddAnimation(siegeAnimation, targets[i]->GetPosition(), siegeAnimationSize);
-				}
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, aCard, targets, &siegeAnimation, siegeAnimationSize);
 			}
 		}
 	}

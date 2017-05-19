@@ -327,14 +327,14 @@ void Card::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
 	}
 }
 
-Card* Card::OnTargeted()
+Card* Card::OnTargeted(AbilityBase* targetingAbility)
 {
 	Card* target = this;
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
 		if (target == this)
 		{
-			myCardData->abilities[i]->OnTargeted(target);
+			myCardData->abilities[i]->OnTargeted(target, targetingAbility);
 		}
 	}
 

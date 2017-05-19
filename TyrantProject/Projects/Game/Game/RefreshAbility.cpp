@@ -18,24 +18,17 @@ RefreshAbility::RefreshAbility() : AbilityBase()
 	myAbilityType = eAbilityTypes::eRefresh;
 }
 
-
 RefreshAbility::~RefreshAbility()
 {
 }
+
 
 void RefreshAbility::OnCleanUp(Card * aCard)
 {
 	if (aCard->IsAtMaxHealth() == false)
 	{
-		AbilityStack::AddAbility(this, aCard, aCard, 0.2f);
+		int heal = 100;
+		aCard->Heal((char)heal);
+		AnimationManager::AddAnimation(refreshAnimation, aCard->GetPosition(), refreshAnimationSize);
 	}
-}
-
-void RefreshAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
-{
-	someTargets;
-
-	int heal = 100;
-	aCaster->Heal((char)heal);
-	AnimationManager::AddAnimation(refreshAnimation, aCaster->GetPosition(), refreshAnimationSize);
 }

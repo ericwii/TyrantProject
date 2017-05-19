@@ -30,16 +30,15 @@ void WeakenAbility::OnPreCombat(Card * aCard)
 			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, aCard, target, &weakenAnimation, weakenAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
 		{
 			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
-
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, aCard, targets);
+				AbilityStack::AddAbility(this, aCard, targets, &weakenAnimation, weakenAnimationSize);
 			}
 		}
 	}
@@ -52,19 +51,17 @@ void WeakenAbility::OnCalculateAttack(AttackData& data)
 		if (mySuffix.Lenght() == 0)
 		{
 			Card* target = FindTarget(data.attacker->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
-
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, data.attacker, target);
+				AbilityStack::AddAbility(this, data.attacker, target, &weakenAnimation, weakenAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
 		{
 			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetOpponent()->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn | eFindTargetCondition::HasAttack);
-
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, data.attacker, targets);
+				AbilityStack::AddAbility(this, data.attacker, targets, &weakenAnimation, weakenAnimationSize);
 			}
 		}
 	}
@@ -76,6 +73,5 @@ void WeakenAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTarget
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
 		someTargets[i]->Weaken(myNumber);
-		AnimationManager::AddAnimation(weakenAnimation, someTargets[i]->GetPosition(), weakenAnimationSize);
 	}
 }

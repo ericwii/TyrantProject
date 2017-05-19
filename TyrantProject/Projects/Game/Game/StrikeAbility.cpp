@@ -49,12 +49,7 @@ void StrikeAbility::OnCalculateAttack(AttackData& data)
 
 			if (target != nullptr)
 			{
-				target = target->OnTargeted();
-				if (target != nullptr)
-				{
-					AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
-					AbilityStack::AddAbility(this, data.attacker, target, strikeDelay);
-				}
+				AbilityStack::AddAbility(this, data.attacker, target, &strikeAnimation,strikeAnimationSize, strikeDelay);
 			}
 		}
 		else if (mySuffix == "all")
@@ -63,11 +58,7 @@ void StrikeAbility::OnCalculateAttack(AttackData& data)
 
 			if (targets.Size() > 0)
 			{
-				for (int i = 0; i < targets.Size(); ++i)
-				{
-					AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
-				}
-				AbilityStack::AddAbility(this, data.attacker, targets, strikeDelay);
+				AbilityStack::AddAbility(this, data.attacker, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
 			}
 		}
 	}
@@ -82,8 +73,7 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 			Card* target = FindTarget(aCard->GetOwner()->GetOpponent()->GetAssaultCards());
 			if (target != nullptr)
 			{
-				AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
-				AbilityStack::AddAbility(this, aCard, target);
+				AbilityStack::AddAbility(this, aCard, target, &strikeAnimation, strikeAnimationSize, strikeDelay);
 			}
 		}
 		else if (mySuffix == "all")
@@ -92,11 +82,7 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 
 			if (targets.Size() > 0)
 			{
-				for (int i = 0; i < targets.Size(); ++i)
-				{
-					AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
-				}
-				AbilityStack::AddAbility(this, aCard, targets, strikeDelay);
+				AbilityStack::AddAbility(this, aCard, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
 			}
 		}
 	}
@@ -108,18 +94,12 @@ void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 	Player* opponent = aUser->GetOwner()->GetOpponent();
 	if (mySuffix == "onattacked")
-	{
-		
+	{	
 		Card* target = FindTarget(opponent->GetAssaultCards());
 
 		if (target != nullptr)
 		{
-			target = target->OnTargeted();
-			if (target != nullptr)
-			{
-				AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
-				AbilityStack::AddAbility(this, anAttacker, target, strikeDelay);
-			}
+			AbilityStack::AddAbility(this, anAttacker, target, &strikeAnimation, strikeAnimationSize, strikeDelay);
 		}
 		
 	}
@@ -129,11 +109,7 @@ void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 		if (targets.Size() > 0)
 		{
-			for (int i = 0; i < targets.Size(); ++i)
-			{
-				AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
-			}
-			AbilityStack::AddAbility(this, anAttacker, targets, strikeDelay);
+			AbilityStack::AddAbility(this, anAttacker, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
 		}
 	}
 }

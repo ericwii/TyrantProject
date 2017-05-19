@@ -40,8 +40,10 @@ public:
 	Animation();
 	~Animation();
 
+	void Init(const AnimationData& someData, const Vector2<float> aSize);
 	void Init(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float> aSize);
 	void SetRotation(float someRadians);
+	void SetPosition(Vector3<float>& aPosition);
 
 	void Update(float aDeltaTime);
 	void Render();

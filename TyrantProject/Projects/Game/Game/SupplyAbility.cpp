@@ -31,7 +31,7 @@ void SupplyAbility::OnCalculateAttack(AttackData& data)
 	if (data.attacker->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
 		FindAdjecentTargets(data.attacker, myTargets);
-		AbilityStack::AddAbility(this, data.attacker, myTargets);
+		AbilityStack::AddAbility(this, data.attacker, myTargets, &supplyAnimation, supplyAnimationSize);
 	}
 }
 
@@ -43,19 +43,17 @@ void SupplyAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 	if (mySuffix == "onattacked")
 	{
 		FindAdjecentTargets(aUser, myTargets);
-		AbilityStack::AddAbility(this, aUser, myTargets);
+		AbilityStack::AddAbility(this, aUser, myTargets, &supplyAnimation, supplyAnimationSize);
 	}
 }
 
 void SupplyAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster->Heal(myNumber);
-	AnimationManager::AddAnimation(supplyAnimation, aCaster->GetPosition(), supplyAnimationSize);
 	
 	for (int i = 0; i < someTargets.Size(); i++)
 	{
 		someTargets[i]->Heal(myNumber);
-		AnimationManager::AddAnimation(supplyAnimation, someTargets[i]->GetPosition(), supplyAnimationSize);
 	}
 
 	myTargets.RemoveAll();
