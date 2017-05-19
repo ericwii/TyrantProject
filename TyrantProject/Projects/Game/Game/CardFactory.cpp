@@ -309,6 +309,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new FearAbility();
 	}
+	else if (aName == "flurry")
+	{
+		return new FlurryAbility(aSuffix, aNumber, aFaction);
+	}
 	return nullptr;
 }
 

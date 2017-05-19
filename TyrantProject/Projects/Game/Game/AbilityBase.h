@@ -13,7 +13,7 @@ struct AttackData
 	Card* extraTargets[2];
 	Card* mainTarget;
 	Card* attacker;
-	int amountOfAttacks;
+	char amountOfAttacks;
 };
 
 

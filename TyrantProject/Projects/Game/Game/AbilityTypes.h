@@ -22,5 +22,6 @@ enum class eAbilityTypes
 	eRegenerate,
 	eLegion,
 	eSupply,
-	eFear
+	eFear,
+	eFlurry,
 };

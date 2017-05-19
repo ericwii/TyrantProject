@@ -79,6 +79,7 @@
 		<health>6</health>
 		<skill name="crush" number="5" />
 		<skill name="counter" number="3" />
+    <skill name="flurry" number="2"/>
 	</card>
 
 	<card>
