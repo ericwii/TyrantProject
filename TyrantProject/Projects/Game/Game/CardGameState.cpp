@@ -17,8 +17,8 @@ CardGameState::~CardGameState()
 
 void CardGameState::OnEnter()
 {
-	myPlayerUser.Init("Data/Xml files/starterDeck.xml", ePlayerType::User, &myPlayerOpponent);
-	myPlayerOpponent.Init("Data/Xml files/starterDeck.xml", ePlayerType::AI_Opponent, &myPlayerUser);
+	myPlayerUser.Init("Data/Xml files/PlayerDeck.xml", ePlayerType::User, &myPlayerOpponent);
+	myPlayerOpponent.Init("Data/Xml files/OpponentDeck.xml", ePlayerType::AI_Opponent, &myPlayerUser);
 
 	Model* backgroundModel = ModelLoader::LoadRectangle(Vector2<float>(2.f, 2.f), eEffectType::Sprite, "Data/Textures/Field/playingField.png");
 	myBackground.Init(backgroundModel);

@@ -4,7 +4,7 @@
 	
 	<card>
 		<name>Kleave</name>
-		<illustration>BloodThirsty/Commander/Dementia.jpg</illustration>
+		<illustration>Xeno/Commander/Kleave.jpg</illustration>
 		<faction>xeno</faction>
 		<cardType>commander</cardType>
 		<rarity>rare</rarity>

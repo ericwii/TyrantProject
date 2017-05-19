@@ -48,7 +48,6 @@
 		<cooldown>2</cooldown>
 		<attack>2</attack>
 		<health>8</health>
-		<skill name="legion" number="2"/>
 		<skill name="weaken" number="2"/>
 		<skill name="summon" suffix="Redeemer onplay" />
 	</card>
@@ -93,8 +92,6 @@
 		<attack>2</attack>
 		<health>6</health>
 		<skill name="siphon" number="2"/>
-    <skill name="supply" number="3" suffix = ""/>
-    <skill name="fear"/>
 	</card>
 	
 	<card>

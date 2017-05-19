@@ -65,3 +65,24 @@ void HealAbility::OnPreCombat(Card* aCard)
 {
 	aCard;
 }
+
+void HealAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+{
+	if (mySuffix == "onattacked")
+	{
+		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+		if (target != nullptr)
+		{
+			AbilityStack::AddAbility(this, aUser, target);
+		}
+	}
+	else if(mySuffix == "all onattacked")
+	{
+		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+
+		if (targets.Size() > 0)
+		{
+			AbilityStack::AddAbility(this, aUser, targets);
+		}
+	}
+}

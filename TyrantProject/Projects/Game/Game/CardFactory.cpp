@@ -67,8 +67,18 @@ CU::VectorOnStack<CardData*, DECK_MAX_SIZE> CardFactory::GetDeck(const string& a
 {
 	CU::VectorOnStack<CardData*, DECK_MAX_SIZE> deckToReturn;
 
+	XMLReader docread;
+	docread.OpenDocument(anXmlFile.c_str());
+
+	XMLElement* docelement = docread.FindFirstChild("root");
+	docelement = docelement->FirstChildElement();
+
+	string path = "Data/Xml files/";
+
+	path += docelement->Attribute("name");
+
 	XMLReader reader;
-	reader.OpenDocument(anXmlFile.c_str());
+	reader.OpenDocument(path.c_str());
 
 	XMLElement* element = reader.FindFirstChild("root");
 	element = element->FirstChildElement();

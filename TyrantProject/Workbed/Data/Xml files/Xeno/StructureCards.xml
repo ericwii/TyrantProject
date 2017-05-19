@@ -4,7 +4,7 @@
 
   <card>
     <name>Warpway Fortress</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Structure/Warpway Fortress.jpg</illustration>
+    <illustration>Xeno/Structure/Warpway Fortress.jpg</illustration>
     <faction>xeno</faction>
     <cardType>structure</cardType>
     <rarity>rare</rarity>
@@ -18,7 +18,7 @@
 
   <card>
     <name>Zarak</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Structure/Zarak.jpg</illustration>
+    <illustration>Xeno/Structure/Zarak.jpg</illustration>
     <faction>xeno</faction>
     <cardType>structure</cardType>
     <rarity>rare</rarity>
@@ -26,12 +26,12 @@
     <cooldown>4</cooldown>
     <health>5</health>
     <skill name="enfeeble" number ="1" suffix="all"/>
-    <skill name="strike" number="1" suffix="all"/>
+    <skill name="strike" number="2" suffix="all"/>
   </card>
 
   <card>
     <name>Invix Source</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Structure/Invix Source.jpg</illustration>
+    <illustration>Xeno/Structure/Invix Source.jpg</illustration>
     <faction>xeno</faction>
     <cardType>structure</cardType>
     <rarity>rare</rarity>

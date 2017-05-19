@@ -7,9 +7,13 @@
 		assultPath = "Data/XML files/Bloodthirsty/AssaultCards.xml"
 		commanderPath = "Data/XML files/Bloodthirsty/CommanderCards.xml"
 	/>
-	
-	<!--
-	
+	<CardList
+		structuresPath = "Data/XML files/Xeno/StructureCards.xml"
+		assultPath = "Data/XML files/Xeno/AssaultCards.xml"
+		commanderPath = "Data/XML files/Xeno/CommanderCards.xml"
+	/>
+  
+  <!--
 	<CardList
 		structuresPath = "Data/XML files/Imperial/StructureCards.xml"
 		assultPath = "Data/XML files/Imperial/AssaultCards.xml"
@@ -25,14 +29,9 @@
 		assultPath = "Data/XML files/Righteous/AssaultCards.xml"
 		commanderPath = ""
 	/>
-	<CardList
-		structuresPath = "Data/XML files/Xeno/StructureCards.xml"
-		assultPath = "Data/XML files/Xeno/AssaultCards.xml"
-		commanderPath = ""
-	/>
 	<ActionCardList
 		actionsPath = "Data/XML files/ActionCards.xml"
 	/>
-	
 	-->
+	
 </root>

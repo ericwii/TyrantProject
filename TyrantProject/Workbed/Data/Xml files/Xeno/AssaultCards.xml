@@ -4,7 +4,7 @@
 
 	<card>
 		<name>Thule Hound</name>
-		<illustration>Data/Textures/Illustrations/Xeno/Assault/Thule Hound.jpg</illustration>
+		<illustration>Xeno/Assault/Thule Hound.jpg</illustration>
 		<faction>xeno</faction>
 		<cardType>assault</cardType>
 		<rarity>rare</rarity>
@@ -18,7 +18,7 @@
 
   <card>
     <name>Marrow Alerion</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Marrow Aileron.jpg</illustration>
+    <illustration>Xeno/Assault/Marrow Aileron.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>legendary</rarity>
@@ -33,7 +33,7 @@
 
   <card>
     <name>Vaporwing</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <illustration>Xeno/Assault/Vaporwing.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -47,23 +47,23 @@
   </card>
 
   <card>
-    <name>Warp Sculpture</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Warp Sculpture.jpg</illustration>
+    <name>Warp_Sculpture</name>
+    <illustration>Xeno/Assault/Warp Sculpture.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>legendary</rarity>
     <unique>true</unique>
     <cooldown>1</cooldown>
-    <attack>0</attack>
+    <attack>1</attack>
     <health>9</health>
-    <skill name="summon" suffix = "Monstrosity "/>
+    <skill name="summon" suffix = "Monstrosity"/>
     <skill name="heal" number= "2" suffix ="all" faction ="xeno"/>
     <skill name="rally" number="1" suffix = "all" faction ="xeno"/>
   </card>
 
   <card>
     <name>Monstrosity</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Monstrosity.jpg</illustration>
+    <illustration>Xeno/Assault/Monstrosity.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>common</rarity>
@@ -71,11 +71,12 @@
     <cooldown>3</cooldown>
     <attack>3</attack>
     <health>7</health>
+    <skill name="summon" suffix = "Warp_Sculpture"/>
   </card>
 
   <card>
     <name>Terraformer</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/terraformer.jpg</illustration>
+    <illustration>Xeno/Assault/terraformer.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -84,13 +85,13 @@
     <attack>3</attack>
     <health>9</health>
     <skill name="stun"/>
-    <skill name="strike" number="4" suffix="onattack"/>
-    <skill name="heal" number="4" suffix="onattack"/>
+    <skill name="strike" number="4" suffix="onattacked"/>
+    <skill name="heal" number="4" suffix="onattacked"/>
   </card>
 
   <card>
     <name>Talon</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <illustration>Xeno/Assault/RadioOfficer.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -105,7 +106,7 @@
 
   <card>
     <name>Goreus</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <illustration>Xeno/Assault/RadioOfficer.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -120,7 +121,7 @@
 
   <card>
     <name>Pherous</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Pherous.jpg</illustration>
+    <illustration>Xeno/Assault/Pherous.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>uncommon</rarity>
@@ -129,12 +130,12 @@
     <attack>2</attack>
     <health>6</health>
     <skill name="flying"/>
-    <skill name="legion" number="3"/>
+    <skill name="legion" number="2"/>
   </card>
 
   <card>
     <name>Tremor Wyrm</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Tremor Wyrm.jpg</illustration>
+    <illustration>Xeno/Assault/Tremor Wyrm.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -148,7 +149,7 @@
 
   <card>
     <name>Spew Glider</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <illustration>Xeno/Assault/RadioOfficer.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>uncommon</rarity>
@@ -163,7 +164,7 @@
 
   <card>
     <name>Lightning Strider</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Lightning Strider.jpg</illustration>
+    <illustration>Xeno/Assault/Lightning Strider.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -178,7 +179,7 @@
 
   <card>
     <name>Apex Overdrive</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Apex Overdrive.jpg</illustration>
+    <illustration>Xeno/Assault/Apex Overdrive.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -193,7 +194,7 @@
 
   <card>
     <name>Invigilator</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Invigilator.jpg</illustration>
+    <illustration>Xeno/Assault/Invigilator.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>
@@ -208,7 +209,7 @@
 
   <card>
     <name>Kazzerrot</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Kazzerrot.jpg</illustration>
+    <illustration>Xeno/Assault/Kazzerrot.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>legendary</rarity>
@@ -223,7 +224,7 @@
 
   <card>
     <name>Serak</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/RadioOfficer.jpg</illustration>
+    <illustration>Xeno/Assault/Glaive.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>common</rarity>
@@ -236,7 +237,7 @@
 
   <card>
     <name>Cyclops</name>
-    <illustration>Data/Textures/Illustrations/Xeno/Assault/Cyclops.jpg</illustration>
+    <illustration>Xeno/Assault/Cyclops.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>rare</rarity>

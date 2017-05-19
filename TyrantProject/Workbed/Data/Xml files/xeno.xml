@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+  <deck>
+		<commander name="Kleave"/>
+		
+		<card name="Warp_Sculpture"/>
+		<card name="Terraformer"/>
+		<card name="Terraformer"/> 
+		<card name="Terraformer"/> 
+		<card name="Kazzerrot"/> 
+		<card name="Zarak"/>
+		<card name="Warpway Fortress"/> 
+		<card name="Invix Source"/>
+		<card name="Zarak"/> 
+  </deck>
+
+</root>

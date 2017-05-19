@@ -77,3 +77,39 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 {
 	aCard;
 }
+
+void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+{
+	someDamage;
+
+	Player* opponent = aUser->GetOwner()->GetOpponent();
+	if (mySuffix == "onattacked")
+	{
+		
+		Card* target = FindTarget(opponent->GetAssaultCards());
+
+		if (target != nullptr)
+		{
+			target = target->OnTargeted();
+			if (target != nullptr)
+			{
+				AnimationManager::AddAnimation(strikeAnimation, target->GetPosition(), strikeAnimationSize);
+				AbilityStack::AddAbility(this, anAttacker, target, strikeDelay);
+			}
+		}
+		
+	}
+	else if(mySuffix == "all onattacked")
+	{
+		CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetAssaultCards());
+
+		if (targets.Size() > 0)
+		{
+			for (int i = 0; i < targets.Size(); ++i)
+			{
+				AnimationManager::AddAnimation(strikeAnimation, targets[i]->GetPosition(), strikeAnimationSize);
+			}
+			AbilityStack::AddAbility(this, anAttacker, targets, strikeDelay);
+		}
+	}
+}
