@@ -119,6 +119,7 @@
     <ClInclude Include="CounterAbility.h" />
     <ClInclude Include="CrushAbility.h" />
     <ClInclude Include="FearAbility.h" />
+    <ClInclude Include="FlurryAbility.h" />
     <ClInclude Include="FlyingAbility.h" />
     <ClInclude Include="FPS_Counter.h" />
     <ClInclude Include="Game.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="CounterAbility.cpp" />
     <ClCompile Include="CrushAbility.cpp" />
     <ClCompile Include="FearAbility.cpp" />
+    <ClCompile Include="FlurryAbility.cpp" />
     <ClCompile Include="FlyingAbility.cpp" />
     <ClCompile Include="FPS_Counter.cpp" />
     <ClCompile Include="Game.cpp">
