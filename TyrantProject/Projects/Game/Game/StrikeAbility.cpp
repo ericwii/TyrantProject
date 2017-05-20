@@ -90,6 +90,7 @@ void StrikeAbility::OnPreCombat(Card* aCard)
 
 void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 {
+	anAttacker;
 	someDamage;
 
 	Player* opponent = aUser->GetOwner()->GetOpponent();
