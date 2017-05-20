@@ -26,7 +26,7 @@ public:
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
 	Card* OnTargeted(AbilityBase* targetingAbility);
 
-	void TakeDamage(char someDamage);
+	void TakeDamage(char& someDamage);
 	void Heal(char someHealth);
 	void Weaken(char someWeaken);
 	void Rally(char someRally);

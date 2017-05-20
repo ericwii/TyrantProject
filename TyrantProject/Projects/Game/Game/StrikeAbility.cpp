@@ -29,11 +29,12 @@ StrikeAbility::~StrikeAbility()
 void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster;
+	char damage = myNumber + aCaster->GetAgumentation();
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
 		if (!someTargets[i]->IsDying())
 		{
-			someTargets[i]->TakeDamage(myNumber+aCaster->GetAgumentation());
+			someTargets[i]->TakeDamage(damage);
 		}
 	}
 }

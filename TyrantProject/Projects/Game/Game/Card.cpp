@@ -177,7 +177,7 @@ void Card::CleanUp()
 	}
 }
 
-void Card::TakeDamage(char someDamage)
+void Card::TakeDamage(char& someDamage)
 {
 	someDamage += myEnfeeble;
 

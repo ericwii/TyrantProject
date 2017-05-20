@@ -8,5 +8,6 @@ public:
 	~BerserkAbility();
 
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage) override;
+	void OnCombatDamaged(char someDamage, Card* aCard, Card* anAttacker) override;
 };
 

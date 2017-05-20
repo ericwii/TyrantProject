@@ -598,24 +598,29 @@ void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 
 		if (finalDamage > 0)
 		{
-			myCurrentAbilities = anAttacker->GetAbilities();
-			for (int i = 0; i < myCurrentAbilities.Size(); ++i)
-			{
-				myCurrentAbilities[i]->OnDamageDealt(anAttacker, aDefender, finalDamage);
-			}
+			aDefender->TakeDamage(finalDamage);
 
-			myCurrentAbilities = aDefender->GetAbilities();
-			for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+			if (finalDamage > 0)
 			{
-				myCurrentAbilities[i]->OnCombatDamaged(finalDamage, aDefender, anAttacker);
+
+				myCurrentAbilities = aDefender->GetAbilities();
+				for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+				{
+					myCurrentAbilities[i]->OnCombatDamaged(finalDamage, aDefender, anAttacker);
+				}
+
+				myCurrentAbilities = anAttacker->GetAbilities();
+				for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+				{
+					myCurrentAbilities[i]->OnDamageDealt(anAttacker, aDefender, finalDamage);
+				}
+
 			}
 
 			if (aDefender->GetHealth() <= finalDamage)
 			{
 				anAttacker->OnKill(anAttacker, aDefender);
 			}
-
-			aDefender->TakeDamage(finalDamage);
 		}
 	}
 }
