@@ -57,3 +57,11 @@ void SummonAbility::OnCalculateAttack(AttackData& data)
 		data.attacker->GetOwner()->SummonCard(myCardToSummon);
 	}
 }
+
+void SummonAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+{
+	if (mySuffix == " onattacked")
+	{
+		aUser->GetOwner()->SummonCard(myCardToSummon);
+	}
+}
