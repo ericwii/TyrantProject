@@ -139,7 +139,9 @@
     <ClCompile Include="AgumentAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
-    <ClCompile Include="CleanseAbility.cpp" />
+    <ClCompile Include="CleanseAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -289,7 +291,9 @@
     <ClInclude Include="AgumentAbility.h">
       <Filter>Abilities\Activation</Filter>
     </ClInclude>
-    <ClInclude Include="CleanseAbility.h" />
+    <ClInclude Include="CleanseAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
