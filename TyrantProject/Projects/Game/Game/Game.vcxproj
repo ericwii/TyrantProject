@@ -118,6 +118,8 @@
     <ClInclude Include="CardHand.h" />
     <ClInclude Include="CounterAbility.h" />
     <ClInclude Include="CrushAbility.h" />
+    <ClInclude Include="DiseaseAbility.h" />
+    <ClInclude Include="EnfeebleAbility.h" />
     <ClInclude Include="FearAbility.h" />
     <ClInclude Include="FlurryAbility.h" />
     <ClInclude Include="FlyingAbility.h" />
@@ -125,10 +127,14 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="HealAbility.h" />
+    <ClInclude Include="ImmobiliseAbility.h" />
+    <ClInclude Include="JamAbility.h" />
     <ClInclude Include="LeechAbility.h" />
     <ClInclude Include="LegionAbility.h" />
     <ClInclude Include="PierceAbility.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PoisonAbility.h" />
+    <ClInclude Include="ProtectAbility.h" />
     <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="RefreshAbility.h" />
     <ClInclude Include="RegenerateAbility.h" />
@@ -136,6 +142,7 @@
     <ClInclude Include="SiphonAbility.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StrikeAbility.h" />
+    <ClInclude Include="StunAbility.h" />
     <ClInclude Include="SummonAbility.h" />
     <ClInclude Include="SupplyAbility.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -159,6 +166,8 @@
     <ClCompile Include="CardHand.cpp" />
     <ClCompile Include="CounterAbility.cpp" />
     <ClCompile Include="CrushAbility.cpp" />
+    <ClCompile Include="DiseaseAbility.cpp" />
+    <ClCompile Include="EnfeebleAbility.cpp" />
     <ClCompile Include="FearAbility.cpp" />
     <ClCompile Include="FlurryAbility.cpp" />
     <ClCompile Include="FlyingAbility.cpp" />
@@ -168,10 +177,14 @@
     </ClCompile>
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="HealAbility.cpp" />
+    <ClCompile Include="ImmobiliseAbility.cpp" />
+    <ClCompile Include="JamAbility.cpp" />
     <ClCompile Include="LeechAbility.cpp" />
     <ClCompile Include="LegionAbility.cpp" />
     <ClCompile Include="PierceAbility.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PoisonAbility.cpp" />
+    <ClCompile Include="ProtectAbility.cpp" />
     <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="RefreshAbility.cpp" />
     <ClCompile Include="RegenerateAbility.cpp" />
@@ -182,6 +195,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StrikeAbility.cpp" />
+    <ClCompile Include="StunAbility.cpp" />
     <ClCompile Include="SummonAbility.cpp" />
     <ClCompile Include="SupplyAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />

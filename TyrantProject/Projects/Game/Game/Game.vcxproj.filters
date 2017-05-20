@@ -112,6 +112,27 @@
     <ClCompile Include="FlurryAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="StunAbility.cpp">
+      <Filter>Abilities\Defensive</Filter>
+    </ClCompile>
+    <ClCompile Include="DiseaseAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="ImmobiliseAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="JamAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="EnfeebleAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtectAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="PoisonAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -232,6 +253,27 @@
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="FlurryAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="StunAbility.h">
+      <Filter>Abilities\Defensive</Filter>
+    </ClInclude>
+    <ClInclude Include="DiseaseAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="ImmobiliseAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="JamAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="EnfeebleAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtectAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="PoisonAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
   </ItemGroup>

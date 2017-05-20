@@ -24,4 +24,11 @@ enum class eAbilityTypes
 	eSupply,
 	eFear,
 	eFlurry,
+	eStun,
+	eDisease,
+	eImmobilise,
+	eJam,
+	eEnfeeble,
+	eProtect,
+	ePoison,
 };
