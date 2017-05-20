@@ -341,6 +341,14 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new PoisonAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "agument")
+	{
+		return new AgumentAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "swipe")
+	{
+		return new SwipeAbility();
+	}
 	return nullptr;
 }
 
@@ -364,7 +372,7 @@ eCardFaction CardFactory::GetFactionFromString(string& aString)
 	}
 	else if (aString == "xeno")
 	{
-		return eCardFaction::BloodThirsty;
+		return eCardFaction::Xeno;
 	}
 
 	return eCardFaction::Action;

@@ -133,6 +133,8 @@
     <ClCompile Include="PoisonAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
+    <ClCompile Include="AgumentAbility.cpp" />
+    <ClCompile Include="SwipeAbility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -276,6 +278,8 @@
     <ClInclude Include="PoisonAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
+    <ClInclude Include="AgumentAbility.h" />
+    <ClInclude Include="SwipeAbility.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

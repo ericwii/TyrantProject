@@ -29,3 +29,5 @@
 #include "EnfeebleAbility.h"
 #include "ProtectAbility.h"
 #include "PoisonAbility.h"
+#include "AgumentAbility.h"
+#include "SwipeAbility.h"

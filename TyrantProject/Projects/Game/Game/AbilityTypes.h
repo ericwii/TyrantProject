@@ -31,4 +31,6 @@ enum class eAbilityTypes
 	eEnfeeble,
 	eProtect,
 	ePoison,
+	eAgument,
+	eSwipe,
 };

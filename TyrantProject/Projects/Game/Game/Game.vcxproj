@@ -104,6 +104,7 @@
     <ClInclude Include="AbilityBase.h" />
     <ClInclude Include="AbilityStack.h" />
     <ClInclude Include="AbilityTypes.h" />
+    <ClInclude Include="AgumentAbility.h" />
     <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="AntiAirAbility.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="StunAbility.h" />
     <ClInclude Include="SummonAbility.h" />
     <ClInclude Include="SupplyAbility.h" />
+    <ClInclude Include="SwipeAbility.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="WallAbility.h" />
     <ClInclude Include="WeakenAbility.h" />
@@ -154,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="AbilityBase.cpp" />
     <ClCompile Include="AbilityStack.cpp" />
+    <ClCompile Include="AgumentAbility.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="AntiAirAbility.cpp" />
     <ClCompile Include="ArmorAbility.cpp" />
@@ -198,6 +201,7 @@
     <ClCompile Include="StunAbility.cpp" />
     <ClCompile Include="SummonAbility.cpp" />
     <ClCompile Include="SupplyAbility.cpp" />
+    <ClCompile Include="SwipeAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="WallAbility.cpp" />
     <ClCompile Include="WeakenAbility.cpp" />
