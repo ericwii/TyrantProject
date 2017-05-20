@@ -12,11 +12,15 @@ using namespace tinyxml2;
 
 float deathFadeTime = 0.8f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(nullptr), myTempAttackChange(0), myPermanentAttackChange(0)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false),
+	myOwner(nullptr), myTempAttackChange(0), myPermanentAttackChange(0),myProtect(0),myEnfeeble(0),myPoison(0),myAgument(0),
+	myIsStunned(false),myIsChaosed(false),myIsDiseased(false),myIsImmobilised(false),myIsJammed(false),myIsPhased(false),myIsSundered(false),myIsFreezed(false),myHasBeenStunnedThisTurn(false)
 {
 }
 
-Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myOwner(anOwner), myTempAttackChange(0), myPermanentAttackChange(0)
+Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), 
+	myOwner(anOwner), myTempAttackChange(0), myPermanentAttackChange(0), myProtect(0), myEnfeeble(0), myPoison(0), myAgument(0), 
+	myIsStunned(false), myIsChaosed(false), myIsDiseased(false), myIsImmobilised(false), myIsJammed(false), myIsPhased(false), myIsSundered(false), myIsFreezed(false),myHasBeenStunnedThisTurn(false)
 {
 }
 
@@ -110,7 +114,7 @@ void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
 
 void Card::LowerCooldown()
 {
-	if (myCooldown > 0)
+	if (myCooldown > 0 && myIsFreezed == false)
 	{
 		--myCooldown;
 
@@ -126,10 +130,37 @@ void Card::LowerCooldown()
 	}
 }
 
+void Card::Uppkeep()
+{
+	LowerCooldown();
+	myProtect = 0;
+
+	if (myPoison > 0)
+	{
+		TakeDamage(myPoison);
+	}
+}
+
 void Card::CleanUp()
 {
 	if (myCardData != nullptr && myCardData->cardType == eCardType::Assault)
 	{
+
+		if (myHasBeenStunnedThisTurn == false)
+		{
+			myIsStunned = false;
+		}
+		myHasBeenStunnedThisTurn = false;
+
+
+		myIsChaosed = false;
+		myIsImmobilised = false;
+		myIsJammed = false;
+		myIsPhased = false;
+
+		myEnfeeble = 0;
+		myAgument = 0;
+
 		myTempAttackChange = 0;
 		string attack;
 		attack += myAttack;
@@ -148,6 +179,14 @@ void Card::CleanUp()
 
 void Card::TakeDamage(char someDamage)
 {
+	someDamage += myEnfeeble;
+
+	someDamage -= myProtect;
+	if (someDamage < 0)
+	{
+		someDamage = 0;
+	}
+
 	CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
 
 	myHealth -= someDamage;
@@ -180,7 +219,7 @@ void Card::TakeDamage(char someDamage)
 
 void Card::Heal(char someHealth)
 {
-	if (myCardData != nullptr && myHealth < myCardData->health)
+	if (myCardData != nullptr && myHealth < myCardData->health && myIsDiseased == false)
 	{
 		if (myHealth + someHealth <= myCardData->health)
 		{
@@ -237,64 +276,92 @@ void Card::Weaken(char someWeaken)
 
 void Card::Rally(char someRally)
 {
-	myTempAttackChange += someRally;
+	if (myIsSundered == false)
+	{
+		myTempAttackChange += someRally;
 
-	string attack;
+		string attack;
 
-	if(myAttack + myTempAttackChange < 0)
-	{
-		attack += "-";
-		attack += ABS(myAttack + myTempAttackChange);
-	}
-	else
-	{
-		attack += (myAttack + myTempAttackChange);
-	}
-	myAttackText.SetText(attack);
+		if (myAttack + myTempAttackChange < 0)
+		{
+			attack += "-";
+			attack += ABS(myAttack + myTempAttackChange);
+		}
+		else
+		{
+			attack += (myAttack + myTempAttackChange);
+		}
+		myAttackText.SetText(attack);
 
-	if (myTempAttackChange > 0)
-	{
-		myAttackText.SetColor(ralliedAttackColor);	
-	}
-	else if (myTempAttackChange < 0)
-	{
-		myAttackText.SetColor(weakenedAttackColor);
-	}
-	else
-	{
-		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		if (myTempAttackChange > 0)
+		{
+			myAttackText.SetColor(ralliedAttackColor);
+		}
+		else if (myTempAttackChange < 0)
+		{
+			myAttackText.SetColor(weakenedAttackColor);
+		}
+		else
+		{
+			myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		}
 	}
 }
 
 void Card::Berserk(char someAttackIncrese)
 {
-	myAttack += someAttackIncrese;
+	if (myIsSundered == false)
+	{
+		myAttack += someAttackIncrese;
 
-	string attack;
+		string attack;
 
-	if (myAttack < 0)
-	{
-		attack += "-";
-		attack += ABS(myAttack + myTempAttackChange);
-	}
-	else
-	{
-		attack += (myAttack + myTempAttackChange);
-	}
-	myAttackText.SetText(attack);
+		if (myAttack < 0)
+		{
+			attack += "-";
+			attack += ABS(myAttack + myTempAttackChange);
+		}
+		else
+		{
+			attack += (myAttack + myTempAttackChange);
+		}
+		myAttackText.SetText(attack);
 
-	if (myAttack > myCardData->attack)
-	{
-		myAttackText.SetColor(ralliedAttackColor);
+		if (myAttack > myCardData->attack)
+		{
+			myAttackText.SetColor(ralliedAttackColor);
+		}
+		else if (myAttack < myCardData->attack)
+		{
+			myAttackText.SetColor(weakenedAttackColor);
+		}
+		else
+		{
+			myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
+		}
 	}
-	else if (myAttack < myCardData->attack)
+}
+
+void Card::Poison(char aPoisonAmount)
+{
+	if (aPoisonAmount > myPoison)
 	{
-		myAttackText.SetColor(weakenedAttackColor);
+		myPoison = aPoisonAmount;
 	}
-	else
-	{
-		myAttackText.SetColor(Vector4<float>(1.f, 1.f, 1.f, 1.f));
-	}
+}
+
+void Card::Cleanse()
+{
+	myEnfeeble = 0;
+	myPoison = 0;
+	myIsChaosed = false;
+	myIsDiseased = false;
+	myIsFreezed = false;
+	myIsImmobilised = false;
+	myIsJammed = false;
+	myIsStunned = false;
+	myHasBeenStunnedThisTurn = false;
+	myIsSundered = false;
 }
 
 void Card::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker)
@@ -343,7 +410,12 @@ Card* Card::OnTargeted(AbilityBase* targetingAbility)
 
 bool Card::CanAttack()
 {
-	return !myIsDying && (myAttack + myTempAttackChange) > 0;
+	return !myIsDying && !myIsStunned && !myIsJammed && !myIsImmobilised && !myIsFreezed && (myAttack + myTempAttackChange) > 0;
+}
+
+bool Card::CanUseActivationAbility()
+{
+	return !myIsJammed && !myIsFreezed;
 }
 
 
