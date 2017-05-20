@@ -3,15 +3,17 @@
 <root>
 
 	<card>
-		<name>Radio Officer</name>
-		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
+		<name>Cannon Wall</name>
+		<illustration>Raider/Structure/Cannon Wall.jpg</illustration>
 		<faction>raider</faction>
-		<cardType>assault</cardType>
+		<cardType>structure</cardType>
 		<rarity>rare</rarity>
 		<unique>false</unique>
 		<cooldown>4</cooldown>
-		<attack>1</attack>
 		<health>9</health>
+    <skill name="wall"/>
+    <skill name="strike" number="2" suffix="all"/>
+    <skill name="summon" suffix="Thunderer onplay"/>
 	</card>
 
 </root>
