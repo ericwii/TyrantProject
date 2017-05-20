@@ -51,7 +51,7 @@ void RallyAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Rally(myNumber);
+		someTargets[i]->Rally(myNumber+aCaster->GetAgumentation());
 		AnimationManager::AddAnimation(rallyAnimation, someTargets[i]->GetPosition(), rallyAnimationSize);
 	}
 }

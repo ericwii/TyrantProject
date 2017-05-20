@@ -33,7 +33,7 @@ void StrikeAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets
 	{
 		if (!someTargets[i]->IsDying())
 		{
-			someTargets[i]->TakeDamage(myNumber);
+			someTargets[i]->TakeDamage(myNumber+aCaster->GetAgumentation());
 		}
 	}
 }

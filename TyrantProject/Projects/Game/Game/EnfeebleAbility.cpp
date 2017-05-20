@@ -25,10 +25,9 @@ EnfeebleAbility::~EnfeebleAbility()
 
 void EnfeebleAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Enfeeble(myNumber);
+		someTargets[i]->Enfeeble(myNumber + aCaster->GetAgumentation());
 	}
 }
 

@@ -26,10 +26,9 @@ HealAbility::~HealAbility()
 
 void HealAbility::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Heal(myNumber);
+		someTargets[i]->Heal(myNumber + aCaster->GetAgumentation());
 	}
 }
 

@@ -49,11 +49,11 @@ void SupplyAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 void SupplyAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	aCaster->Heal(myNumber);
+	aCaster->Heal(myNumber+aCaster->GetAgumentation());
 	
 	for (int i = 0; i < someTargets.Size(); i++)
 	{
-		someTargets[i]->Heal(myNumber);
+		someTargets[i]->Heal(myNumber+aCaster->GetAgumentation());
 	}
 
 	myTargets.RemoveAll();

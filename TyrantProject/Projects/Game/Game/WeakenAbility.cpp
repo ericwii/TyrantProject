@@ -69,9 +69,8 @@ void WeakenAbility::OnCalculateAttack(AttackData& data)
 
 void WeakenAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
-	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Weaken(myNumber);
+		someTargets[i]->Weaken(myNumber+aCaster->GetAgumentation());
 	}
 }
