@@ -18,6 +18,8 @@ struct EffectData
 
 	static float rotation_2D;
 	static float alpha;
+	static bool flipX;
+	static bool flipY;
 
 private:
 	EffectData() = default;

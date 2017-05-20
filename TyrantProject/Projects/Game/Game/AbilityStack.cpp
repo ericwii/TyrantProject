@@ -49,7 +49,7 @@ void AbilityStack::Update(float aDeltaTime)
 				{
 					Card* target = currentAbility.targets[i]->OnTargeted(currentAbility.ability);
 
-					if (target != nullptr)
+					if (target != nullptr && !target->IsDying())
 					{
 						AnimationManager::AddAnimation(*currentAbility.animationData, target->GetPosition(), currentAbility.animationSize);
 					}

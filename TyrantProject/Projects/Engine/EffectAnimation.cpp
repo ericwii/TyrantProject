@@ -29,6 +29,20 @@ bool EffectAnimation::Init(const string& anEffectFile)
 		return false;
 	}
 
+	myFlipXVariable = myEffect->GetVariableByName("FlipX")->AsScalar();
+	if (myFlipXVariable->IsValid() == false)
+	{
+		DEBUG_ASSERT(false, "Failed to find variable 'FlipX' in shader");
+		return false;
+	}
+
+	myFlipYVariable = myEffect->GetVariableByName("FlipY")->AsScalar();
+	if (myFlipYVariable->IsValid() == false)
+	{
+		DEBUG_ASSERT(false, "Failed to find variable 'FlipY' in shader");
+		return false;
+	}
+
 	return true;
 }
 
@@ -38,4 +52,7 @@ void EffectAnimation::Update()
 
 	myFrameSizeVariable->SetFloatVector(EffectData::animationFrameSize.array);
 	myFrameUvVariable->SetFloatVector(EffectData::animationUV.array);
+
+	myFlipXVariable->SetBool(EffectData::flipX);
+	myFlipYVariable->SetBool(EffectData::flipY);
 }

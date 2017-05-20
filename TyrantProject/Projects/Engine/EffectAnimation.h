@@ -12,5 +12,7 @@ public:
 private:
 	ID3DX11EffectVectorVariable* myFrameSizeVariable;
 	ID3DX11EffectVectorVariable* myFrameUvVariable;
+	ID3DX11EffectScalarVariable* myFlipXVariable;
+	ID3DX11EffectScalarVariable* myFlipYVariable;
 };
 

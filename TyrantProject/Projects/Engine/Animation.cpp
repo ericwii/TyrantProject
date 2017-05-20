@@ -5,7 +5,7 @@
 #include "../Time/Time.h"
 
 
-Animation::Animation() : myShouldRender(false)
+Animation::Animation() : myShouldRender(false), myFlipX(false), myFlipY(false)
 {
 }
 
@@ -85,6 +85,8 @@ void Animation::Render()
 	{
 		EffectData::animationFrameSize = myNormalizedFrameSize;
 		EffectData::animationUV = Vector2<float>(myCurrentFrame_X * myNormalizedFrameSize.x, myCurrentFrame_Y * myNormalizedFrameSize.y);
+		EffectData::flipX = myFlipX;
+		EffectData::flipY = myFlipY;
 		myInstance.Render();
 	}
 }

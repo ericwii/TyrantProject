@@ -17,3 +17,6 @@ Vector2<float> EffectData::animationUV;
 
 float EffectData::rotation_2D;
 float EffectData::alpha;
+
+bool EffectData::flipX;
+bool EffectData::flipY;

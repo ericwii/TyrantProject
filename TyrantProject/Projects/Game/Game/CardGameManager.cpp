@@ -502,7 +502,7 @@ bool CardGameManager::CombatAttack()
 				}
 				else
 				{
-					AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f), PI);
+					AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f), PI, true);
 				}
 
 				if (myCurrentAttackData.extraTargets[0] != nullptr && !myCurrentAttackData.extraTargets[0]->IsDying())
@@ -556,39 +556,42 @@ bool CardGameManager::CombatAttack()
 
 void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 {
-	char finalDamage = anAttacker->GetAttack();
-
-	myCurrentAbilities = anAttacker->GetAbilities();
-	for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+	if (anAttacker->CanAttack())
 	{
-		myCurrentAbilities[i]->OnAttack(aDefender, finalDamage);
-	}
+		char finalDamage = anAttacker->GetAttack();
 
-	myCurrentAbilities = aDefender->GetAbilities();
-	for (int i = 0; i < myCurrentAbilities.Size(); ++i)
-	{
-		myCurrentAbilities[i]->OnAttacked(aDefender, finalDamage, anAttacker);
-	}
-
-	if (finalDamage > 0)
-	{
 		myCurrentAbilities = anAttacker->GetAbilities();
 		for (int i = 0; i < myCurrentAbilities.Size(); ++i)
 		{
-			myCurrentAbilities[i]->OnDamageDealt(anAttacker, aDefender, finalDamage);
+			myCurrentAbilities[i]->OnAttack(aDefender, finalDamage);
 		}
 
 		myCurrentAbilities = aDefender->GetAbilities();
 		for (int i = 0; i < myCurrentAbilities.Size(); ++i)
 		{
-			myCurrentAbilities[i]->OnCombatDamaged(finalDamage, aDefender, anAttacker);
+			myCurrentAbilities[i]->OnAttacked(aDefender, finalDamage, anAttacker);
 		}
 
-		if (aDefender->GetHealth() <= finalDamage)
+		if (finalDamage > 0)
 		{
-			anAttacker->OnKill(anAttacker, aDefender);
-		}
+			myCurrentAbilities = anAttacker->GetAbilities();
+			for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+			{
+				myCurrentAbilities[i]->OnDamageDealt(anAttacker, aDefender, finalDamage);
+			}
 
-		aDefender->TakeDamage(finalDamage);
+			myCurrentAbilities = aDefender->GetAbilities();
+			for (int i = 0; i < myCurrentAbilities.Size(); ++i)
+			{
+				myCurrentAbilities[i]->OnCombatDamaged(finalDamage, aDefender, anAttacker);
+			}
+
+			if (aDefender->GetHealth() <= finalDamage)
+			{
+				anAttacker->OnKill(anAttacker, aDefender);
+			}
+
+			aDefender->TakeDamage(finalDamage);
+		}
 	}
 }

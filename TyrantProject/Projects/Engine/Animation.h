@@ -53,6 +53,8 @@ public:
 	inline const Instance& GetInstance();
 	inline bool IsPlaying();
 
+	inline void SetFlip(bool aFlipX, bool aFlipY = false);
+
 private:
 	void InitAnimation(int amountOfFrames, int amountOfRows, float framesPerSecond, bool loop);
 
@@ -68,6 +70,8 @@ private:
 	int myRowLength;
 	bool myShouldRender;
 	bool myLoop;
+	bool myFlipX;
+	bool myFlipY;
 };
 
 inline void Animation::Play()
@@ -81,6 +85,12 @@ inline void Animation::Stop()
 	myCurrentFrame_X = 0;
 	myCurrentFrame_Y = 0;
 	myCurrentFrameDelay = 0;
+}
+
+inline void Animation::SetFlip(bool aFlipX, bool aFlipY)
+{
+	myFlipX = aFlipX;
+	myFlipY = aFlipY;
 }
 
 inline const Instance& Animation::GetInstance()

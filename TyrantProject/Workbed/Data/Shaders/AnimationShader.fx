@@ -3,6 +3,8 @@
 
 float2 FrameSize;
 float2 FrameUV;
+bool FlipX;
+bool FlipY;
 
 struct VS_INPUT
 {
@@ -27,8 +29,8 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 
 	output.TexUV = FrameUV;
 
-	float x = ((input.Pos.x / abs(input.Pos.x)) + 1) / 2;
-	float y = ((input.Pos.y / abs(input.Pos.y)) + 1) / -2;
+	float x = FlipX + ((input.Pos.x / abs(input.Pos.x)) + 1) / (2 - 4 * FlipX);
+	float y = FlipY + ((input.Pos.y / abs(input.Pos.y)) + 1) / (-2 + 4 * FlipY);
 	output.TexUV.x += FrameSize.x * x;
 	output.TexUV.y += FrameSize.y * y + FrameSize.y;
 
