@@ -31,3 +31,4 @@
 #include "PoisonAbility.h"
 #include "AgumentAbility.h"
 #include "SwipeAbility.h"
+#include "CleanseAbility.h"

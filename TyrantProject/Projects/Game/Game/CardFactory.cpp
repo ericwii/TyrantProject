@@ -349,6 +349,10 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new SwipeAbility();
 	}
+	else if (aName == "cleanse")
+	{
+		return new CleanseAbility(aSuffix,aNumber,aFaction);
+	}
 	return nullptr;
 }
 
