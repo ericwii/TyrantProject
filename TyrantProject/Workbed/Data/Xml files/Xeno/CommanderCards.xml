@@ -11,7 +11,7 @@
 		<unique>false</unique>
 		<health>9</health>
     <skill name="protect" number="1" suffix="all" faction="xeno"/>
-    <skill name="Siege" number="2"/>
+    <skill name="siege" number="2"/>
 	</card>
 
 </root>

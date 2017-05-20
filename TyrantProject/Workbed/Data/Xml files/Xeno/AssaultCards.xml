@@ -71,7 +71,6 @@
     <cooldown>3</cooldown>
     <attack>3</attack>
     <health>7</health>
-    <skill name="summon" suffix = "Warp_Sculpture"/>
   </card>
 
   <card>

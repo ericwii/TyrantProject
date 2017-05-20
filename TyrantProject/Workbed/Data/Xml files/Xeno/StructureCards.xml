@@ -26,7 +26,7 @@
     <cooldown>4</cooldown>
     <health>5</health>
     <skill name="enfeeble" number ="1" suffix="all"/>
-    <skill name="strike" number="2" suffix="all"/>
+    <skill name="strike" number="1" suffix="all"/>
   </card>
 
   <card>
