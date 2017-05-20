@@ -37,6 +37,8 @@ void CardGameState::OnEnter()
 	myCurrentPhase = Upkeep;
 	myUsersTurn = true;
 	myGameIsOver = false;
+
+	AbilityStack::Init();
 }
 
 
@@ -76,6 +78,7 @@ void CardGameState::Render()
 	myPlayerOpponent.Render();
 	myPlayerUser.Render();
 
+	AbilityStack::Render();
 	AnimationManager::Render();
 	CardGameTextManager::Render();
 

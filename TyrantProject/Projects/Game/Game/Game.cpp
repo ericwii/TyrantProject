@@ -118,6 +118,25 @@ void Game::UpdateDebugInput()
 		Time::SetTimeScale(4.f);
 	}
 
+	if (InputManager::Keyboard.WasKeyJustPressed(DIK_F9))
+	{
+		Time::SetTimeScale(0.5f);
+	}
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F10))
+	{
+		Time::SetTimeScale(0.25f);
+	}
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F11))
+	{
+		Time::SetTimeScale(0.12f);
+	}
+	else if (InputManager::Keyboard.WasKeyJustPressed(DIK_F12))
+	{
+		Time::SetTimeScale(0.06f);
+	}
+
+
+
 	if (InputManager::Keyboard.WasKeyJustPressed(DIK_F5))
 	{
 		myShowFrameRate = !myShowFrameRate;

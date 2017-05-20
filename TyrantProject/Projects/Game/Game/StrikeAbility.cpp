@@ -99,7 +99,7 @@ void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 		if (target != nullptr)
 		{
-			AbilityStack::AddAbility(this, anAttacker, target, &strikeAnimation, strikeAnimationSize, strikeDelay);
+			AbilityStack::AddAbility(this, aUser, target, &strikeAnimation, strikeAnimationSize, strikeDelay);
 		}
 		
 	}
@@ -109,7 +109,7 @@ void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 		if (targets.Size() > 0)
 		{
-			AbilityStack::AddAbility(this, anAttacker, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
+			AbilityStack::AddAbility(this, aUser, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
 		}
 	}
 }

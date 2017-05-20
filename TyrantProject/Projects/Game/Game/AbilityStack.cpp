@@ -3,12 +3,22 @@
 #include "AbilityBase.h"
 
 CU::GrowingArray<AbilityStack::StoredAbility> AbilityStack::myAbilities = CU::GrowingArray<AbilityStack::StoredAbility>(4);
-float AbilityStack::myDelayTimer = 0;
-int AbilityStack::myCurrentAbilityIndex = -1;
-bool AbilityStack::myHasPlayedAnimations = false;
+float myDelayTimer = 0;
+int myCurrentAbilityIndex = -1;
+bool myHasPlayedAnimations = false;
+bool myShowAbilityFrame = false;
+
+string abilityFrameTexturePath = "Data/Textures/Icons/abilityFrame.png";
+Card* myAbilityFrameUser;
+Instance myAbilityFrameInstance;
 
 
 
+void AbilityStack::Init()
+{
+	Model* abilityFrameModel = ModelLoader::LoadRectangle(Vector2<float>(1.6f, 2.1f), eEffectType::Textured, abilityFrameTexturePath);
+	myAbilityFrameInstance.Init(abilityFrameModel);
+}
 
 void AbilityStack::Update(float aDeltaTime)
 {
@@ -50,8 +60,24 @@ void AbilityStack::Update(float aDeltaTime)
 					}
 				}
 			}
+
+			myAbilityFrameUser = currentAbility.caster;
+			myAbilityFrameInstance.SetPosition(myAbilityFrameUser->GetPosition());
+			myShowAbilityFrame = true;
 			myHasPlayedAnimations = true;
 		}
+	}
+	else if(myShowAbilityFrame && AnimationManager::IsEmpty())
+	{
+		myShowAbilityFrame = false;
+	}
+}
+
+void AbilityStack::Render()
+{
+	if (myShowAbilityFrame && !myAbilityFrameUser->IsDying())
+	{
+		myAbilityFrameInstance.Render();
 	}
 }
 

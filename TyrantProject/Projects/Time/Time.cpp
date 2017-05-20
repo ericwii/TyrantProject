@@ -15,7 +15,7 @@ float Time::DeltaTime()
 
 	float deltaTime(static_cast<float>((currentTime.QuadPart - instance.lastUpdateTime.QuadPart)) / instance.frequency.QuadPart);
 
-	deltaTime = min(max(deltaTime, 0.00001f),0.3f);
+	deltaTime = min(max(deltaTime, 0.00001f),0.1f);
 
 	return deltaTime * instance.timeScale;
 }
