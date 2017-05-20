@@ -66,7 +66,7 @@ protected:
 
 	Card* FindTarget(CU::GrowingArray<Card*>& cards, int conditions = 0);
 	CU::GrowingArray<Card*>& FindAllTargets(CU::GrowingArray<Card*>& cards, int conditions = 0);
-	CU::GrowingArray<Card*>& FindAdjecentTargets(Card* aSearcher, CU::GrowingArray<Card*>& cards, int conditions = 0);
+	CU::GrowingArray<Card*>& FindAdjecentTargets(Card* originalTarget);
 	
 private:
 

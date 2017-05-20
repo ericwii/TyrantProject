@@ -26,16 +26,25 @@ SwipeAbility::~SwipeAbility()
 
 void SwipeAbility::OnCalculateAttack(AttackData & data)
 {
-	FindAdjecentTargets(data.mainTarget, myTargets, 1);
-	if (myTargets.Size() == 1)
+	CU::GrowingArray<Card*>& cardsToSearch = data.mainTarget->GetOwner()->GetAssaultCards();
+
+	for (int i = 0; i < cardsToSearch.Size(); ++i)
 	{
-		data.extraTargets[0] = myTargets[0];
-		data.attackAnimation = &swipeAnimation;
-	}
-	else if (myTargets.Size() == 2)
-	{
-		data.extraTargets[0] = myTargets[0];
-		data.extraTargets[1] = myTargets[1];
-		data.attackAnimation = &swipeAnimation;
+		if (cardsToSearch[i] == data.mainTarget)
+		{
+			if (i > 0 && cardsToSearch[i - 1]->IsDying() == false)
+			{
+				data.extraTargets[0] = cardsToSearch[i - 1];
+				data.attackAnimation = &swipeAnimation;
+			}
+
+			if (i + 1 < cardsToSearch.Size() && cardsToSearch[i + 1]->IsDying() == false)
+			{
+				data.extraTargets[1] = cardsToSearch[i + 1];
+				data.attackAnimation = &swipeAnimation;
+			}
+
+			break;
+		}
 	}
 }

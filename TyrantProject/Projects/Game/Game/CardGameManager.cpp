@@ -13,6 +13,7 @@ AnimationData attackAnimation
 		30.f,
 		false
 };
+float delayBetweenAttackTargets = 0.3f;
 
 
 
@@ -459,7 +460,7 @@ bool CardGameManager::CombatCalculations(Player& aDefender)
 		}
 		else
 		{
-			if (myCurrentAttackData.attacker->GetAttack() > 0)
+			if (myCurrentAttackData.attacker->CanAttack())
 			{
 				if (myCurrentAttackData.mainTarget == aDefender.GetCommander())
 				{
@@ -482,6 +483,7 @@ bool CardGameManager::CombatCalculations(Player& aDefender)
 				myIgnoreAttack = true;
 			}
 			myCurrentAbilityIndex = 0;
+			myCurrentDelayBetweenAttackTargets = 0;
 			return true;
 		}
 	}
@@ -490,73 +492,95 @@ bool CardGameManager::CombatCalculations(Player& aDefender)
 
 bool CardGameManager::CombatAttack()
 {
-	if (myCurrentAttackIndex < myCurrentAttackData.amountOfAttacks)
+	if (myCurrentAttackIndex < myCurrentAttackData.amountOfAttacks && myCurrentAttackData.attacker->CanAttack())
 	{
-		if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+		if (!myHasPlayedCurrentAttackAnimation && AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
 		{
-			if (myCurrentAttackData.attacker->CanAttack())
+			if (myCurrentAttackData.attacker->GetOwner()->myPlayerType == ePlayerType::User)
 			{
-				if (myCurrentAttackData.attacker->GetOwner()->myPlayerType == ePlayerType::User)
-				{
-					AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f));
-				}
-				else
-				{
-					AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f), PI, true);
-				}
+				AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f));
+			}
+			else
+			{
+				AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f), PI, true);
+			}
+			myHasPlayedCurrentAttackAnimation = true;
+			myCurrentAttackTargetIndex = 0;
+		}
+		else if(myHasPlayedCurrentAttackAnimation)
+		{
+			myCurrentDelayBetweenAttackTargets -= Time::DeltaTime();
 
-				if (myCurrentAttackData.extraTargets[0] != nullptr && !myCurrentAttackData.extraTargets[0]->IsDying())
+			if (myCurrentDelayBetweenAttackTargets < 0)
+			{
+				myCurrentDelayBetweenAttackTargets = delayBetweenAttackTargets;
+
+				if (myCurrentAttackTargetIndex == 0 && myCurrentAttackData.extraTargets[0] != nullptr)
 				{
 					AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.extraTargets[0]);
+					myCurrentAttackTargetIndex = 1;
 				}
-
-				AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.mainTarget);
-				if (myCurrentAttackData.mainTarget->IsDying())
+				else if (myCurrentAttackTargetIndex == 1 || (myCurrentAttackTargetIndex != 2 && myCurrentAttackData.extraTargets[0] == nullptr))
 				{
-					Player* opponent = myCurrentAttackData.mainTarget->GetOwner();
-					myCurrentAttackData.mainTarget = opponent->GetCommander();
-					CU::GrowingArray<Card*>& structures = opponent->GetStructureCards();
-					for (int i = 0; i < structures.Size(); ++i)
+					AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.mainTarget);
+
+					if (myCurrentAttackData.extraTargets[1] != nullptr)
 					{
-						myCurrentAbilities = structures[i]->GetAbilities();
-						for (int j = 0; j < myCurrentAbilities.Size(); ++j)
+						myCurrentAttackTargetIndex = 2;
+					}
+					else
+					{
+						myCurrentAttackTargetIndex = 3;
+					}
+					if (myCurrentAttackData.mainTarget->IsDying())
+					{
+						Player* opponent = myCurrentAttackData.mainTarget->GetOwner();
+						myCurrentAttackData.mainTarget = opponent->GetCommander();
+						CU::GrowingArray<Card*>& structures = opponent->GetStructureCards();
+						for (int i = 0; i < structures.Size(); ++i)
 						{
-							if (myCurrentAbilities[j] != nullptr)
+							myCurrentAbilities = structures[i]->GetAbilities();
+							for (int j = 0; j < myCurrentAbilities.Size(); ++j)
 							{
-								myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+								if (myCurrentAbilities[j] != nullptr)
+								{
+									myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+								}
 							}
 						}
 					}
 				}
-
-				if (!myCurrentAttackData.mainTarget->GetOwner()->CommanderIsDead())
+				else if (myCurrentAttackTargetIndex == 2 || myCurrentAttackData.extraTargets[1] != nullptr)
 				{
-					if (myCurrentAttackData.extraTargets[1] != nullptr && !myCurrentAttackData.extraTargets[1]->IsDying())
-					{
-						AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.extraTargets[1]);
-					}
+					AttackCard(myCurrentAttackData.attacker, myCurrentAttackData.extraTargets[1]);
+					myCurrentAttackTargetIndex = 3;
+				}
+				
+				if(myCurrentAttackTargetIndex == 3)
+				{
+					myHasPlayedCurrentAttackAnimation = false;
+					myCurrentDelayBetweenAttackTargets = 0;
+					myCurrentAttackTargetIndex = 0;
 					++myCurrentAttackIndex;
 				}
-				else
+			
+				if (myCurrentAttackData.mainTarget->GetOwner()->CommanderIsDead())
 				{
 					return true;
 				}
-			}
-			else
-			{
-				myCurrentAttackIndex = myCurrentAttackData.amountOfAttacks;
 			}
 		}
 		return false;
 	}
 
+	myHasPlayedCurrentAttackAnimation = false;
 	myCurrentAttackIndex = 0;
 	return true;
 }
 
 void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 {
-	if (anAttacker->CanAttack())
+	if (!aDefender->IsDying() && anAttacker->CanAttack())
 	{
 		char finalDamage = anAttacker->GetAttack();
 

@@ -30,7 +30,7 @@ void SupplyAbility::OnCalculateAttack(AttackData& data)
 {
 	if (data.attacker->GetCooldown() < 1 && mySuffix.Lenght() == 0)
 	{
-		FindAdjecentTargets(data.attacker, myTargets);
+		FindAdjecentTargets(data.attacker);
 		AbilityStack::AddAbility(this, data.attacker, myTargets, &supplyAnimation, supplyAnimationSize);
 	}
 }
@@ -42,7 +42,7 @@ void SupplyAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 
 	if (mySuffix == "onattacked")
 	{
-		FindAdjecentTargets(aUser, myTargets);
+		FindAdjecentTargets(aUser);
 		AbilityStack::AddAbility(this, aUser, myTargets, &supplyAnimation, supplyAnimationSize);
 	}
 }

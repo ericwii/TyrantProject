@@ -67,13 +67,16 @@ private:
 	Player* myDefender;
 	Card* myChoosenCard;
 	eCombatState myCombatState;
+	float myCurrentDelayBetweenAttackTargets;
 	int myCurrentAssaultCardIndex;
 	int myCurrentStructureCardIndex;
 	int myCurrentAbilityIndex;
 	int myCurrentAttackIndex = 0;
+	int myCurrentAttackTargetIndex = 0;
 	bool myPhaseUpdateDone = false;
 	bool myHasUpdatedCommander = false;
 	bool myHasRemovedDeadCards = false;
 	bool myIgnoreAttack = false;
+	bool myHasPlayedCurrentAttackAnimation = false;
 };
 

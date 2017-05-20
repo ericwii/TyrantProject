@@ -103,32 +103,26 @@ CU::GrowingArray<Card*>& AbilityBase::FindAllTargets(CU::GrowingArray<Card*>& ca
 	return myTargets;
 }
 
-CU::GrowingArray<Card*>& AbilityBase::FindAdjecentTargets(Card * aSearcher, CU::GrowingArray<Card*>& cards, int conditions)
+CU::GrowingArray<Card*>& AbilityBase::FindAdjecentTargets(Card * originalTarget)
 {
-	cards;
-	conditions;
 	myTargets.RemoveAll();
+	CU::GrowingArray<Card*>& cardsToSearch = originalTarget->GetOwner()->GetAssaultCards();
 
-	for (int i = 0; i < aSearcher->GetOwner()->GetAssaultCards().Size(); i++)
+	for (int i = 0; i < cardsToSearch.Size(); ++i)
 	{
-		if (aSearcher->GetOwner()->GetAssaultCards()[i] == aSearcher)
+		if (cardsToSearch[i] == originalTarget)
 		{
-
-			if (i - 1 >= 0)
+			if (i > 0 && cardsToSearch[i - 1]->IsDying() == false)
 			{
-				if (aSearcher->GetOwner()->GetAssaultCards()[i - 1]->IsDying() == false)
-				{
-					myTargets.Add(aSearcher->GetOwner()->GetAssaultCards()[i - 1]);
-				}
+				myTargets.Add(cardsToSearch[i - 1]);
 			}
 
-			if (i + 1 <= aSearcher->GetOwner()->GetAssaultCards().Size() - 1)
+			if (i + 1 < cardsToSearch.Size() && cardsToSearch[i + 1]->IsDying() == false)
 			{
-				if (aSearcher->GetOwner()->GetAssaultCards()[i + 1]->IsDying() == false)
-				{
-					myTargets.Add(aSearcher->GetOwner()->GetAssaultCards()[i + 1]);
-				}
+				myTargets.Add(cardsToSearch[i + 1]);
 			}
+
+			break;
 		}
 	}
 
