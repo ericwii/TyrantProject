@@ -352,19 +352,19 @@ eCardFaction CardFactory::GetFactionFromString(string& aString)
 	}
 	else if (aString == "imperial")
 	{
-		return eCardFaction::BloodThirsty;
+		return eCardFaction::Imperial;
 	}
 	else if (aString == "raider")
 	{
-		return eCardFaction::BloodThirsty;
+		return eCardFaction::Raider;
 	}
 	else if (aString == "righteous")
 	{
-		return eCardFaction::BloodThirsty;
+		return eCardFaction::Righteous;
 	}
 	else if (aString == "xeno")
 	{
-		return eCardFaction::BloodThirsty;
+		return eCardFaction::Xeno;
 	}
 
 	return eCardFaction::Action;

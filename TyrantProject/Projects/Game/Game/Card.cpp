@@ -84,7 +84,7 @@ void Card::LoadCard(string aCardName)
 	LoadText();
 	LoadIcons();
 
-	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
+	myRenderPassIndex = 0;
 	myCooldown = myCardData->cooldown;
 	myAttack = myCardData->attack;
 	myHealth = myCardData->health;
@@ -98,7 +98,7 @@ void Card::LoadCard(CardData* someData)
 	LoadIcons();
 	LoadText();
 
-	myRenderPassIndex = static_cast<unsigned int>(myCardData->faction);
+	myRenderPassIndex = 0;
 	myCooldown = myCardData->cooldown;
 	myAttack = myCardData->attack;
 	myHealth = myCardData->health;
@@ -187,33 +187,36 @@ void Card::TakeDamage(char someDamage)
 		someDamage = 0;
 	}
 
-	CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
 
-	myHealth -= someDamage;
-
-
-	if (myHealth <= 0)
-	{
-		myHealth = 0;
-		for (char j = 0; j < myCardData->abilities.Size(); j++)
-		{
-			myCardData->abilities[j]->OnDeath(this);
-		}
-	}
-
-	if (myHealth <= 0)
-	{
-		myIsDying = true;
-		myCurrentDeathFadeTime = 0;
-	}
-
-	string health;
-	health += myHealth;
-	myHealthText.SetText(health);
 
 	if (someDamage > 0)
 	{
-		myHealthText.SetColor(damagedHealthColor);
+		CardGameTextManager::AddDamageText(someDamage, myCanvas.GetPosition());
+
+		myHealth -= someDamage;
+		if (myHealth <= 0)
+		{
+			myHealth = 0;
+			for (char j = 0; j < myCardData->abilities.Size(); j++)
+			{
+				myCardData->abilities[j]->OnDeath(this);
+			}
+		}
+
+		if (myHealth <= 0)
+		{
+			myIsDying = true;
+			myCurrentDeathFadeTime = 0;
+		}
+
+		string health;
+		health += myHealth;
+		myHealthText.SetText(health);
+
+		if (someDamage > 0)
+		{
+			myHealthText.SetColor(damagedHealthColor);
+		}
 	}
 }
 
