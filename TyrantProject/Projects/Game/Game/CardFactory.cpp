@@ -313,6 +313,34 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	{
 		return new FlurryAbility(aSuffix, aNumber, aFaction);
 	}
+	else if (aName == "stun")
+	{
+		return new StunAbility();
+	}
+	else if (aName == "disease")
+	{
+		return new DiseaseAbility();
+	}
+	else if (aName == "immobilize")
+	{
+		return new ImmobiliseAbility();
+	}
+	else if (aName == "jam")
+	{
+		return new JamAbility(aSuffix,aNumber,aFaction);
+	}
+	else if (aName == "enfeeble")
+	{
+		return new EnfeebleAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "protect")
+	{
+		return new ProtectAbility(aSuffix, aNumber, aFaction);
+	}
+	else if (aName == "poison")
+	{
+		return new PoisonAbility(aSuffix, aNumber, aFaction);
+	}
 	return nullptr;
 }
 

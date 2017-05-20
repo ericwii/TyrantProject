@@ -50,6 +50,7 @@
 		<health>8</health>
 		<skill name="weaken" number="2"/>
 		<skill name="summon" suffix="Redeemer onplay" />
+    <skill name="disease"/>
 	</card>
 	
 	<card>
@@ -93,6 +94,8 @@
 		<attack>2</attack>
 		<health>6</health>
 		<skill name="siphon" number="2"/>
+    <skill name="disease"/>
+    <skill name="immobilize"/>
 	</card>
 	
 	<card>

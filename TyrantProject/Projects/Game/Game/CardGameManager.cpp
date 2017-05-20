@@ -79,11 +79,11 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 {
 	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
 	{
-		anActivePlayer.myAssaultCards[i]->LowerCooldown();
+		anActivePlayer.myAssaultCards[i]->Uppkeep();
 	}
 	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
 	{
-		anActivePlayer.myStructureCards[i]->LowerCooldown();
+		anActivePlayer.myStructureCards[i]->Uppkeep();
 	}
 }
 
@@ -423,7 +423,7 @@ bool CardGameManager::UpdateAbilities(Card* aCard, eAbilityMethod aMethod)
 
 void CardGameManager::CombatSetup(Player& anAttacker, Player& aDefender)
 {
-	if (anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetCooldown() < 1)
+	if (anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->GetCooldown() < 1 && anAttacker.myAssaultCards[myCurrentAssaultCardIndex]->CanUseActivationAbility())
 	{
 		myCurrentAttackData.extraTargets[0] = nullptr;
 		myCurrentAttackData.extraTargets[1] = nullptr;
@@ -583,6 +583,12 @@ void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 		{
 			myCurrentAbilities[i]->OnCombatDamaged(finalDamage, aDefender, anAttacker);
 		}
+
+		if (aDefender->GetHealth() <= finalDamage)
+		{
+			anAttacker->OnKill(anAttacker, aDefender);
+		}
+
 		aDefender->TakeDamage(finalDamage);
 	}
 }

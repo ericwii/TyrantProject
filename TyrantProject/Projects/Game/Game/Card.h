@@ -18,6 +18,7 @@ public:
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
+	void Uppkeep();
 	void CleanUp();
 
 	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker);
@@ -30,8 +31,11 @@ public:
 	void Weaken(char someWeaken);
 	void Rally(char someRally);
 	void Berserk(char someAttackIncrese);
+	void Poison(char aPoisonAmount);
+	void Cleanse();
 
 	bool CanAttack();
+	bool CanUseActivationAbility();
 
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
@@ -49,6 +53,20 @@ public:
 	inline char GetAttack();
 	inline char GetCooldown();
 	inline char GetHealth();
+
+	inline char GetAgumentation();
+	inline void Enfeeble(char aAmount);
+	inline void Agument(char aAmount);
+	inline void Protect(char aAmount);
+
+	inline void Stun();
+	inline void Jam();
+	inline void Freeze();
+	inline void Immobilize();
+	inline void Disease();
+	inline void Chaos();
+	inline void Sunder();
+	inline void Phase();
 
 private:
 	void UpdateText();
@@ -82,6 +100,23 @@ private:
 	char myAttack;
 	char myTempAttackChange;
 	char myPermanentAttackChange;
+
+	char myProtect;
+	char myEnfeeble;
+	char myPoison;
+	char myAgument;
+
+
+	bool myIsStunned;
+	bool myHasBeenStunnedThisTurn;
+
+	bool myIsImmobilised;
+	bool myIsJammed;
+	bool myIsFreezed;
+	bool myIsDiseased;
+	bool myIsChaosed;
+	bool myIsSundered;
+	bool myIsPhased;
 
 	void LoadModels();
 	void LoadText();
@@ -158,6 +193,67 @@ inline char Card::GetCooldown()
 inline char Card::GetHealth()
 {
 	return myHealth;
+}
+
+inline char Card::GetAgumentation()
+{
+	return myAgument;
+}
+
+inline void Card::Enfeeble(char aAmount)
+{
+	myEnfeeble += aAmount;
+}
+
+inline void Card::Agument(char aAmount)
+{
+	myAgument += aAmount;
+}
+
+inline void Card::Protect(char aAmount)
+{
+	myProtect += aAmount;
+}
+
+inline void Card::Stun()
+{
+	myHasBeenStunnedThisTurn = true;
+	myIsStunned = true;
+}
+
+inline void Card::Jam()
+{
+	myIsJammed = true;
+}
+
+inline void Card::Freeze()
+{
+	myIsFreezed = true;
+}
+
+inline void Card::Immobilize()
+{
+	myIsImmobilised = true;
+}
+
+inline void Card::Disease()
+{
+	myIsDiseased = true;
+}
+
+inline void Card::Chaos()
+{
+	myIsChaosed = true;
+}
+
+inline void Card::Sunder()
+{
+	myIsSundered = true;
+}
+
+inline void Card::Phase()
+{
+	myIsPhased = true;
 }
 
 inline bool Card::IsDying() const
