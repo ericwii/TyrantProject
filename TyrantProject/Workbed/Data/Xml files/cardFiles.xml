@@ -13,15 +13,15 @@
 		commanderPath = "Data/XML files/Xeno/CommanderCards.xml"
 	/>
   
+	<CardList
+		structuresPath = "Data/XML files/Raider/StructureCards.xml"
+		assultPath = "Data/XML files/Raider/AssaultCards.xml"
+		commanderPath = "Data/XML files/Raider/CommanderCards.xml"
+	/>
   <!--
 	<CardList
 		structuresPath = "Data/XML files/Imperial/StructureCards.xml"
 		assultPath = "Data/XML files/Imperial/AssaultCards.xml"
-		commanderPath = ""
-	/>
-	<CardList
-		structuresPath = "Data/XML files/Raider/StructureCards.xml"
-		assultPath = "Data/XML files/Raider/AssaultCards.xml"
 		commanderPath = ""
 	/>
 	<CardList

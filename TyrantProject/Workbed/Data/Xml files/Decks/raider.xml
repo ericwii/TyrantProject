@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+  <deck>
+		<commander name="Kleave"/>
+		
+		<card name="Cannon Wall"/>
+		<card name="Radio Officer"/>
+		<card name="Radio Officer"/> 
+		<card name="Radio Officer"/> 
+		<card name="Usail"/> 
+		<card name="Usail"/>
+		<card name="Usail"/> 
+		<card name="Mammoth Tank"/>
+		<card name="Mammoth Tank"/> 
+  </deck>
+
+</root>

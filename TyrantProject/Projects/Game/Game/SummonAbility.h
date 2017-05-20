@@ -10,6 +10,7 @@ public:
 	void OnPreCombat(Card* aCard) override;
 	void OnPlay(Card* aCard) override;
 	void OnCalculateAttack(AttackData& data) override;
+	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker);
 
 private:
 	string myCardToSummon;

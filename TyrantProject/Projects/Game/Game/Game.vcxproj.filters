@@ -133,8 +133,12 @@
     <ClCompile Include="PoisonAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="AgumentAbility.cpp" />
-    <ClCompile Include="SwipeAbility.cpp" />
+    <ClCompile Include="SwipeAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="AgumentAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -278,8 +282,12 @@
     <ClInclude Include="PoisonAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="AgumentAbility.h" />
-    <ClInclude Include="SwipeAbility.h" />
+    <ClInclude Include="SwipeAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="AgumentAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
@@ -300,11 +308,11 @@
     <Filter Include="Abilities\Activation">
       <UniqueIdentifier>{1fc38ea5-c8c3-45c0-8b77-bdc21812b348}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Abilities\Combat">
-      <UniqueIdentifier>{1bc4ea0e-3701-41af-b358-49448fd8f338}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Abilities\Defensive">
       <UniqueIdentifier>{43568b22-2d4b-4de6-8092-67072ef75a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Abilities\Combat">
+      <UniqueIdentifier>{1bc4ea0e-3701-41af-b358-49448fd8f338}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

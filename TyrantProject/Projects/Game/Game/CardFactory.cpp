@@ -73,7 +73,7 @@ CU::VectorOnStack<CardData*, DECK_MAX_SIZE> CardFactory::GetDeck(const string& a
 	XMLElement* docelement = docread.FindFirstChild("root");
 	docelement = docelement->FirstChildElement();
 
-	string path = "Data/Xml files/";
+	string path = "Data/Xml files/Decks/";
 
 	path += docelement->Attribute("name");
 
@@ -204,7 +204,7 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 			}
 			if (currentElement->Attribute("faction") != nullptr)
 			{
-				currentFactionString = currentElement->Attribute("suffix");
+				currentFactionString = currentElement->Attribute("faction");
 				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, GetFactionFromString(currentFactionString));
 			}
 			else

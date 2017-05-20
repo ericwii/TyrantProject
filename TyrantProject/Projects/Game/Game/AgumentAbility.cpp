@@ -14,8 +14,8 @@ AnimationData agumentAnimation = AnimationData
 
 AgumentAbility::AgumentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
-	iconTexturePath = "Data/Textures/Icons/Skills/agumentIcon.png";
-	myAbilityType = eAbilityTypes::eHeal;
+	iconTexturePath = "Data/Textures/Icons/Skills/augmentIcon.png";
+	myAbilityType = eAbilityTypes::eAgument;
 }
 
 

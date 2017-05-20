@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+  <deck>
+		<commander name="Kleave"/>
+		
+		<card name="Thule Hound"/>
+		<card name="Thule Hound"/>
+		<card name="Thule Hound"/> 
+		<card name="Thule Hound"/> 
+		<card name="Thule Hound"/> 
+		<card name="Thule Hound"/>
+		<card name="Marrow Alerion"/> 
+		<card name="Terraformer"/>
+		<card name="Terraformer"/> 
+  </deck>
+
+</root>
