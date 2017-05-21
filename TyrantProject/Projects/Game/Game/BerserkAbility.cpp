@@ -25,10 +25,14 @@ void BerserkAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someD
 
 void BerserkAbility::OnCombatDamaged(char someDamage, Card * aCard, Card * anAttacker)
 {
+}
+
+void BerserkAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+{
 	if (mySuffix == "onattacked")
 	{
 		someDamage;
 		anAttacker;
-		aCard->Berserk(myNumber);
+		aUser->Berserk(myNumber);
 	}
 }
