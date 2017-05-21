@@ -197,7 +197,7 @@ bool CardGameManager::Combat(Player& anAttacker, Player& aDefender)
 		}
 		case (eCombatState::CalculateAttack):
 		{
-			if (CombatCalculations(anAttacker) == true)
+			if (CombatCalculations(aDefender) == true)
 			{
 				myCombatState = eCombatState::DoAtack;
 			}
@@ -548,7 +548,12 @@ bool CardGameManager::CombatAttack()
 								if (myCurrentAbilities[j] != nullptr)
 								{
 									myCurrentAbilities[j]->OnCommanderAttack(myCurrentAttackData.mainTarget, structures[i]);
+								
 								}
+							}
+							if (myCurrentAttackData.mainTarget != opponent->GetCommander())
+							{
+								break;
 							}
 						}
 					}
@@ -620,7 +625,7 @@ void CardGameManager::AttackCard(Card* anAttacker, Card* aDefender)
 
 			}
 
-			if (aDefender->GetHealth() <= finalDamage)
+			if (aDefender->GetHealth() <= finalDamage && aDefender->IsDying() == true)
 			{
 				anAttacker->OnKill(anAttacker, aDefender);
 			}
