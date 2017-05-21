@@ -3,7 +3,7 @@
 #include "AbilityBase.h"
 #include "CardGameCameraManager.h"
 
-CU::GrowingArray<AbilityStack::StoredAbility> AbilityStack::myAbilities = CU::GrowingArray<AbilityStack::StoredAbility>(4);
+CU::GrowingArray<StoredAbility> AbilityStack::myAbilities = CU::GrowingArray<StoredAbility>(4);
 float myDelayTimer = 0;
 int myCurrentAbilityIndex = -1;
 bool myHasPlayedAnimations = false;
@@ -52,7 +52,7 @@ void AbilityStack::Update(float aDeltaTime)
 
 					if (target != nullptr && !target->IsDying())
 					{
-						AnimationManager::AddAnimation(*currentAbility.animationData, target->GetPosition(), currentAbility.animationSize);
+						AnimationManager::AddAnimation(*currentAbility.animationData, target->GetPosition(), currentAbility.animationSize,currentAbility.animationRotation,currentAbility.animationFlipX,currentAbility.animationFlipY);
 					}
 					else
 					{
@@ -80,6 +80,16 @@ void AbilityStack::Render()
 	if (myShowAbilityFrame && !myAbilityFrameUser->IsDying())
 	{
 		myAbilityFrameInstance.Render();
+	}
+}
+
+void AbilityStack::AddAbility(StoredAbility aStoredAbility)
+{
+	myAbilities.Add(aStoredAbility);
+
+	if (myCurrentAbilityIndex == -1)
+	{
+		myCurrentAbilityIndex = 0;
 	}
 }
 
