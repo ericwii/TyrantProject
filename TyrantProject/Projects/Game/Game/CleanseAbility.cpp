@@ -25,6 +25,7 @@ CleanseAbility::~CleanseAbility()
 
 void CleanseAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
+	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
 		someTargets[i]->Cleanse();
