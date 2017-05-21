@@ -28,6 +28,6 @@ void StunAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 {
 	aUser;
 	someDamage;
-	AnimationManager::AddAnimation(stunAnimation, anAttacker->GetPosition(), stunAnimationSize);
 	anAttacker->AddStatusEffect(eStatusEffectType::Stun);
+	AnimationManager::AddAnimation(stunAnimation, anAttacker->GetPosition(), stunAnimationSize);
 }
