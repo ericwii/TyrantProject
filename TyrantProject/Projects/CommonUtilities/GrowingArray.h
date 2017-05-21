@@ -10,7 +10,7 @@ namespace CommonUtilities
 	{
 	public:
 		GrowingArray(); 
-		GrowingArray(int aNrOfRecommendedItems, bool aUseMemoryCopying = true); 
+		GrowingArray(int aNrOfRecommendedItems, bool aUseMemoryCopying = false); 
 		GrowingArray(const GrowingArray& aGrowingArray); 
 		~GrowingArray(); 
 
@@ -70,7 +70,7 @@ namespace CU = CommonUtilities;
 template<typename ObjectType>
 CU::GrowingArray<ObjectType>::GrowingArray()
 {
-	myUseMemoryCopying = true;
+	myUseMemoryCopying = false;
 	myMaxSize = 0;
 	myCurrentSize = 0;
 	myListPointer = nullptr;
