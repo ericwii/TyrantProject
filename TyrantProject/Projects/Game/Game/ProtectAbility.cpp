@@ -10,7 +10,7 @@ AnimationData protectAnimation = AnimationData
 	4,
 	30.f,
 	false
-	);
+);
 
 ProtectAbility::ProtectAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {

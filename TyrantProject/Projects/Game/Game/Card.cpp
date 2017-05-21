@@ -224,6 +224,16 @@ void Card::TakeDamage(char& someDamage)
 		{
 			myIsDying = true;
 			myCurrentDeathFadeTime = 0;
+
+			for (int i = 0; i < myStatusEffects.Size(); ++i)
+			{
+				if (myStatusEffects[i].hasIcon)
+				{
+					myCanvas.RemoveChild(&myStatusEffects[i].background);
+					myCanvas.RemoveChild(&myStatusEffects[i].icon);
+					myCanvas.RemoveChild(&myStatusEffects[i].text);
+				}
+			}
 		}
 
 		string health;
@@ -427,7 +437,7 @@ void Card::RemoveStatusEffect(eStatusEffectType aStatusEffectType)
 				myCanvas.RemoveChild(&myStatusEffects[i].text);
 			}
 
-			if (myStatusEffects.Size() > 1 && i < myStatusEffects.Size() - 1)
+			if (i < myStatusEffects.Size() - 1)
 			{
 				StatusEffect& lastStatus = myStatusEffects.GetLast();
 				if (lastStatus.hasIcon)
