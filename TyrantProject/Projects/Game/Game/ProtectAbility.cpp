@@ -5,7 +5,7 @@
 Vector2<float> protectAnimationSize(1.5f, 2.f);
 AnimationData protectAnimation = AnimationData
 (
-	"Data/Textures/Animations/magic_007.png",
+	"Data/Textures/Animations/protectAnimation.png",
 	20,
 	4,
 	30.f,
