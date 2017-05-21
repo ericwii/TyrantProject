@@ -106,12 +106,12 @@ bool Player::ChooseCardToPlay(Card*& chosenCard)
 	return false;
 }
 
-void Player::SummonCard(const string& aCardToSummon)
+Card* Player::SummonCard(const string& aCardToSummon)
 {
 	CardData* newCardData = CardFactory::GetInstance().GetCard(aCardToSummon);
 	if (newCardData == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	mySummonedCards.Add(Card(this));
@@ -143,6 +143,8 @@ void Player::SummonCard(const string& aCardToSummon)
 		mySummonedCards.GetLast().SetPosition(position);
 		myStructureCards.Add(&mySummonedCards.GetLast());
 	}
+
+	return &mySummonedCards.GetLast();
 }
 
 
@@ -194,6 +196,7 @@ void Player::PlayCard(Card* aCard)
 void Player::ShuffleDeck()
 {
 	srand(static_cast<unsigned int>(time(0)) + rand());
+	if (myDeckCards.Size() < 1) return;
 
 	CU::GrowingArray<int> indexes(myDeckCards.Size());
 	for (int i = 0; i < myDeckCards.Size(); ++i)
@@ -205,11 +208,11 @@ void Player::ShuffleDeck()
 	Vector3<float> deckPosition;
 	if (myPlayerType == ePlayerType::User)
 	{
-		deckPosition.Set(-4.77f, -1.8f, -0.55f);
+		deckPosition.Set(-5.35f, -2.0f, -0.11f);
 	}
 	else
 	{
-		deckPosition.Set(-4.8f, 2.97f, -0.55f);
+		deckPosition.Set(-5.35f, 3.4f, -0.11f);
 	}
 
 	int currentRandomIndex;

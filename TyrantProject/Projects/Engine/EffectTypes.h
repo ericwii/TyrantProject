@@ -8,6 +8,7 @@ enum class eEffectType
 	Textured,
 	Card,
 	Sprite,
+	SpriteWrap,
 	Text2D,
 	Text3D,
 	Animated

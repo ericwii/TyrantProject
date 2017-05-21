@@ -49,7 +49,7 @@ public:
 	
 	Vector2<TYPE> AsVector2() const;
 
-	void Set(TYPE aX, TYPE aY = y, TYPE aZ = z);
+	void Set(TYPE aX, TYPE aY, TYPE aZ);
 	void Set(const Vector3<TYPE> aVector3);
 	void Set(const Vector2<TYPE> aVector2);
 	const TYPE Length() const;
@@ -114,8 +114,7 @@ Vector3<TYPE>::~Vector3()
 template<typename TYPE>
 bool Vector3<TYPE>::operator==(const Vector3<TYPE>& aVector3) const
 {
-	if (aVector3.x == aSecondVector3.x && aVector3.y == aSecondVector3.y 
-		&& aVector3.z == aSecondVector3.z)
+	if (aVector3.x == x && aVector3.y == y && aVector3.z == z)
 	{
 		return true;
 	}

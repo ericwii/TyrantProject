@@ -86,9 +86,6 @@ bool Effect::Init(const string& anEffectFile)
 	{
 		DEBUG_ASSERT(false, "Technique in effect is not valid");
 	}
-
-
-	if (myCompileOnly) return true;
 	
 
 	// Obtain the variables

@@ -6,7 +6,6 @@
 #include "../CommonUtilities/Assert.h"
 #include "../CommonUtilities/String.h"
 #include "../CommonUtilities/Macro.h"
-#include "../CommonUtilities/Vector3.h"
 
 #include "Engine.h"
 #include "EffectData.h"

@@ -12,7 +12,6 @@ Effect2D::~Effect2D()
 
 bool Effect2D::Init(const string& anEffectFile)
 {
-	myCompileOnly = true;
 	if (Effect::Init(anEffectFile))
 	{
 		myResolutionVariable = myEffect->GetVariableByName("Resolution")->AsVector();
@@ -21,11 +20,11 @@ bool Effect2D::Init(const string& anEffectFile)
 		myPositionVariable = myEffect->GetVariableByName("Position")->AsVector();
 		DEBUG_ASSERT(myResolutionVariable->IsValid(), "Failed to find variable 'Position' in shader");
 
-		myScaleVariable = myEffect->GetVariableByName("Scale")->AsVector();
-		DEBUG_ASSERT(myResolutionVariable->IsValid(), "Failed to find variable 'Scale' in shader");
-
 		myColorVariable = myEffect->GetVariableByName("Color")->AsVector();
 		DEBUG_ASSERT(myResolutionVariable->IsValid(), "Failed to find variable 'Color' in shader");
+
+		myScaleVariable = myEffect->GetVariableByName("Scale")->AsVector();
+		DEBUG_ASSERT(myScaleVariable->IsValid(), "Failed to find variable 'Scale' in shader");
 
 		myRotationVariable = myEffect->GetVariableByName("Rotation")->AsScalar();
 		DEBUG_ASSERT(myResolutionVariable->IsValid(), "Failed to find variable 'Rotation' in shader");
@@ -38,6 +37,7 @@ bool Effect2D::Init(const string& anEffectFile)
 
 void Effect2D::Update() 
 {
+	Effect::Update();
 	myColorVariable->SetFloatVector(EffectData::color.array);
 	myPositionVariable->SetFloatVector(EffectData::position.array);
 	myScaleVariable->SetFloatVector(EffectData::scale.array);

@@ -135,8 +135,7 @@ Vector4<TYPE>::~Vector4()
 template<typename TYPE>
 bool Vector4<TYPE>::operator==(const Vector4<TYPE>& aVector4) const
 {
-	if (x == aSecondVector4.X && y == aSecondVector4.Y 
-		&& z == aSecondVector4.Z && w == aSecondVector4.W)
+	if (x == aVector4.X && y == aVector4.Y && z == aVector4.Z && w == aVector4.W)
 	{
 		return true;
 	}

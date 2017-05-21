@@ -38,7 +38,6 @@ void Camera::SetScreenSize(int aScreenWidth, int aScreenHeight)
 	CreateProjectionMatrix(myNearPlane, myFarPlane, ratio, PI_2);
 }
 
-
 void Camera::MoveForward(const float aSpeed, const float aDeltatime)
 {
 	Vector4<float> move(myOrientation.GetTranslation());
@@ -104,7 +103,6 @@ void Camera::RotateX(const float anAngle)
 	Vector4<float> oldPos = myOrientation.GetTranslation();
 	myOrientation.SetTranslation(Vector4<float>(0, 0, 0, 1.f));
 	myOrientation = CU::Matrix44<float>::CreateRotateAroundX(anAngle) * myOrientation;
-	//myOrientation *= CU::Matrix44<float>::CreateRotateAroundX(anAngle);
 	myOrientation.SetTranslation(oldPos);
 }
 

@@ -13,7 +13,7 @@ public:
 private:
 	ID3DX11EffectVectorVariable* myResolutionVariable;
 	ID3DX11EffectVectorVariable* myPositionVariable;
-	ID3DX11EffectVectorVariable* myScaleVariable;
 	ID3DX11EffectVectorVariable* myColorVariable;
+	ID3DX11EffectVectorVariable* myScaleVariable;
 	ID3DX11EffectScalarVariable* myRotationVariable;
 };

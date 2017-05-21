@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CardGameState.h"
 #include "CardGameTextManager.h"
+#include "CardGameCameraManager.h"
 
 
 
@@ -20,17 +21,18 @@ void CardGameState::OnEnter()
 	myPlayerUser.Init("Data/Xml files/PlayerDeck.xml", ePlayerType::User, &myPlayerOpponent);
 	myPlayerOpponent.Init("Data/Xml files/OpponentDeck.xml", ePlayerType::AI_Opponent, &myPlayerUser);
 
-	Model* backgroundModel = ModelLoader::LoadRectangle(Vector2<float>(2.f, 2.f), eEffectType::Sprite, "Data/Textures/Field/playingField.png");
+	Model* backgroundModel = ModelLoader::LoadRectangle(Vector2<float>(2.f, 2.f), eEffectType::SpriteWrap, "Data/Textures/Field/playingField.png");
 	myBackground.Init(backgroundModel);
 
-	Model* deckGuiModel = ModelLoader::LoadRectangle(Vector2<float>(0.5f, 2.f), eEffectType::Sprite, "Data/Textures/Field/deckGUI2.png");
+	Model* deckGuiModel = ModelLoader::LoadRectangle(Vector2<float>(3.8f, 10.f), eEffectType::Textured, "Data/Textures/Field/deckGUI2.png");
 	myDeckGUI.Init(deckGuiModel);
-	myDeckGUI.SetPosition(Vector3<float>(-0.75f, -0.01f, 0));
+	myDeckGUI.SetPosition(Vector3<float>(-5.62f, 0, 0));
 
 	TextFont* font = Engine::GetInstance()->GetFontContainer().GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
 	string text = "Turn:0";
 	myTurnCounterText.Init(font);
-	myTurnCounterText.SetPosition(Vector3<float>(-1.25f, 0.1f, -4.f));
+	myTurnCounterText.SetPosition(Vector3<float>(-6.25f, 0.52f, 0));
+	myTurnCounterText.SetCharacterScale(Vector2<float>(5.f, 5.f));
 	myTurnCounterText.SetText(text);
 	myTurnCount = 0;
 
@@ -59,13 +61,13 @@ void CardGameState::Update()
 			{
 				ChangePhase();
 			}
-
 		}
 	}
 
 	float deltaTime = Time::DeltaTime();
 	AnimationManager::Update(deltaTime);
 	CardGameTextManager::Update(deltaTime);
+	CardGameCameraManager::Update(deltaTime);
 	AbilityStack::Update(deltaTime);
 }
 
@@ -118,12 +120,20 @@ void CardGameState::ChangePhase()
 		myUsersTurn = !myUsersTurn;
 
 		++myTurnCount;
-		string turnText("Turn:");
-		turnText += myTurnCount;
-		myTurnCounterText.SetText(turnText);
+		if (myTurnCount > 50)
+		{
+			myGameIsOver = true;
+		}
+		else
+		{
+			string turnText("Turn:");
+			turnText += myTurnCount;
+			myTurnCounterText.SetText(turnText);
+		}
 	}
 	else
 	{
 		myCurrentPhase = eGamePhase(myCurrentPhase + 1);
+		CardGameCameraManager::SetLerpTarget(Vector3<float>());
 	}
 }

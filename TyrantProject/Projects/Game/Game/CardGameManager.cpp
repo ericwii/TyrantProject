@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "AbilityBase.h"
+#include "CardGameCameraManager.h"
 
 CardGameManager* CardGameManager::instance = new CardGameManager();
 AnimationData attackAnimation
@@ -14,6 +15,7 @@ AnimationData attackAnimation
 		false
 };
 float delayBetweenAttackTargets = 0.3f;
+float waitAfterPlayedCard = 0.5f;
 
 
 
@@ -98,6 +100,7 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 	if (anActivePlayer.ChooseCardToPlay(myChoosenCard) == true)
 	{
 		anActivePlayer.PlayCard(myChoosenCard);
+		CardGameCameraManager::SetLerpTarget(myChoosenCard->GetPosition(), waitAfterPlayedCard);
 
 		CU::VectorOnStack<AbilityBase*, 3> currentAbilities;
 
@@ -107,7 +110,6 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 		{
 			currentAbilities[j]->OnPlay(myChoosenCard);
 		}
-
 		return true;
 	}
 
@@ -116,7 +118,7 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 
 bool CardGameManager::Priority(Player& anActivePlayer)
 {
-	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving())
 	{
 		if (myHasUpdatedCommander == false)
 		{
@@ -147,7 +149,7 @@ bool CardGameManager::Priority(Player& anActivePlayer)
 
 bool CardGameManager::PreCombat(Player& anActivePlayer)
 {
-	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving())
 	{
 		if (myHasUpdatedCommander == false)
 		{
@@ -242,7 +244,7 @@ bool CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 		myHasRemovedDeadCards = true;
 	}
 
-	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving())
 	{
 		if (myHasUpdatedCommander == false)
 		{
@@ -322,7 +324,7 @@ bool CardGameManager::AllActionsDone(Player& aPlayer, Player& aOtherPlayer)
 	int actions = UpdateCards(aPlayer);
 	actions += UpdateCards(aOtherPlayer);
 
-	return actions < 1 && AnimationManager::IsEmpty() && AbilityStack::IsEmpty();
+	return actions < 1 && AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving();
 }
 
 void CardGameManager::RemoveDeadCards(Player& anActivePlayer, Player& anOpponentPlayer)
@@ -451,7 +453,7 @@ void CardGameManager::CombatSetup(Player& anAttacker, Player& aDefender)
 
 bool CardGameManager::CombatCalculations(Player& aDefender)
 {
-	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+	if (AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving())
 	{
 		if (myCurrentAbilityIndex < myCurrentAbilities.Size() && myCurrentAbilities[myCurrentAbilityIndex] != nullptr)
 		{
@@ -494,8 +496,9 @@ bool CardGameManager::CombatAttack()
 {
 	if (myCurrentAttackIndex < myCurrentAttackData.amountOfAttacks && myCurrentAttackData.attacker->CanAttack())
 	{
-		if (!myHasPlayedCurrentAttackAnimation && AnimationManager::IsEmpty() && AbilityStack::IsEmpty())
+		if (!myHasPlayedCurrentAttackAnimation && AnimationManager::IsEmpty() && AbilityStack::IsEmpty() && !CardGameCameraManager::IsMoving())
 		{
+			CardGameCameraManager::SetLerpTarget(myCurrentAttackData.attacker->GetPosition());
 			if (myCurrentAttackData.attacker->GetOwner()->myPlayerType == ePlayerType::User)
 			{
 				AnimationManager::AddAnimation(*myCurrentAttackData.attackAnimation, myCurrentAttackData.attacker->GetPosition(), Vector2<float>(2.f, 2.f));

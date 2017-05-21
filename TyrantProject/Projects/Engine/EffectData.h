@@ -9,8 +9,7 @@ struct EffectData
 	static Vector4<float> color;
 	static Vector4<float> position;
 
-	static Vector3<float> scale;
-
+	static Vector2<float> scale;
 	static Vector2<float> resolution;
 	static Vector2<float> characterSize;
 	static Vector2<float> animationFrameSize;

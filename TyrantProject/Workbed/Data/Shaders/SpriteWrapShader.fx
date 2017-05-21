@@ -20,10 +20,14 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 
 	output.Pos = input.Pos;
 	output.Pos += Position;
-
 	output.Pos.z = 0;
 	output.Pos.w = 1;
-	output.TexUV = input.TexUV;
+
+	float4 cameraPos = mul(input.Pos, World);
+	cameraPos = mul(cameraPos, View);
+	cameraPos = mul(cameraPos, Projection);
+
+	output.TexUV = input.TexUV - (cameraPos.xy / cameraPos.w) * 0.44f;
 
 	return output;
 }
@@ -31,7 +35,6 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 float4 Pixel_Shader(PS_INPUT input) : SV_Target
 {
 	float4 albedoColor = AlbedoTexture.Sample(sampleLinear_Wrap, input.TexUV);
-
 	return albedoColor;
 }
 

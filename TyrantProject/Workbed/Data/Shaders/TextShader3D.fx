@@ -2,8 +2,6 @@
 #include "Utilities/ShaderVariables.fx"
 
 
-float4 Color;
-float2 Scale;
 float2 CharacterSize;
 
 struct VS_INPUT

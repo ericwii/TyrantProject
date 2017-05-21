@@ -71,7 +71,10 @@ bool Game::Update()
 {
 	myStates.GetLast()->Update();
 
-	myFpsCounter.AddFrame(Time::DeltaTime());
+	if (myShowFrameRate)
+	{
+		myFpsCounter.AddFrame(Time::DeltaTime());
+	}
 	UpdateDebugInput();
 	UpdateUtilities();
 

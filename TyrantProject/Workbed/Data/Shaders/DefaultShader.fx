@@ -19,7 +19,11 @@ PS_INPUT Vertex_Shader(VS_INPUT input)
 {
 	PS_INPUT output = (PS_INPUT)0;
 
-	output.Pos = mul(input.Pos, World);
+	output.Pos = input.Pos;
+	output.Pos.xy *= float2(1 - World._m32, 1 - World._m32);
+	output.Pos = mul(output.Pos, World);
+	output.Pos.z = 0;
+
 	output.Pos = mul(output.Pos, View);
 	output.Pos = mul(output.Pos, Projection);
 	output.TexUV = input.TexUV;

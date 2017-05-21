@@ -35,8 +35,8 @@ public:
 	template<typename T>
 	operator Vector2<T>() const;
 
-	void Set(TYPE aX, TYPE aY);
-	void Set(Vector2<TYPE> aVector2);
+	inline void Set(TYPE aX, TYPE aY);
+	inline void Set(Vector2<TYPE> aVector2);
 	const TYPE Dot(const Vector2<TYPE>& aVector2) const;
 	const Vector2<TYPE> GetNormalized() const;
 	const Vector2<TYPE> GetInversed() const;
@@ -84,7 +84,7 @@ Vector2<TYPE>::~Vector2()
 template<typename TYPE>
 bool Vector2<TYPE>::operator==(const Vector2<TYPE>& aVector2) const
 {
-	if (aVector2.x == aSecondVector2.x && aVector2.y == aSecondVector2.y)
+	if (aVector2.x == x && aVector2.y == y)
 	{
 		return true;	
 	}

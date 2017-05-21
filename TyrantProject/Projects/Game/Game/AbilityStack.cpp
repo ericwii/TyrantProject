@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AbilityStack.h"
 #include "AbilityBase.h"
+#include "CardGameCameraManager.h"
 
 CU::GrowingArray<AbilityStack::StoredAbility> AbilityStack::myAbilities = CU::GrowingArray<AbilityStack::StoredAbility>(4);
 float myDelayTimer = 0;
@@ -65,6 +66,7 @@ void AbilityStack::Update(float aDeltaTime)
 			myAbilityFrameInstance.SetPosition(myAbilityFrameUser->GetPosition());
 			myShowAbilityFrame = true;
 			myHasPlayedAnimations = true;
+			CardGameCameraManager::SetLerpTarget(myAbilityFrameUser->GetPosition());
 		}
 	}
 	else if(myShowAbilityFrame && AnimationManager::IsEmpty())

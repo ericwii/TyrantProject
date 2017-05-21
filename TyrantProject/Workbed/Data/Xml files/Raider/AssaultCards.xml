@@ -12,273 +12,273 @@
 		<cooldown>4</cooldown>
 		<attack>1</attack>
 		<health>9</health>
-    <skill name="summon" suffix="Thunderer"/>
-    <skill name="heal" number="1" suffix="all" faction="raider"/>
-    <skill name="protect" number="1" suffix="all" faction="raider"/>
+		<skill name="summon" suffix="Thunderer"/>
+		<skill name="heal" number="1" suffix="all" faction="raider"/>
+		<skill name="protect" number="1" suffix="all" faction="raider"/>
 	</card>
 
-  <card>
-    <name>Usail</name>
-    <illustration>Raider/Assault/Usial.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>4</cooldown>
-    <attack>3</attack>
-    <health>10</health>
-    <skill name="stun"/>
-    <skill name="summon" suffix="Salvager onattacked"/>
-    <skill name="legion" number="1"/>
-  </card>
+	<card>
+		<name>Usail</name>
+		<illustration>Raider/Assault/Usial.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>10</health>
+		<skill name="stun"/>
+		<skill name="summon" suffix="Salvager onattacked"/>
+		<skill name="legion" number="1"/>
+	</card>
 
-  <card>
-    <name>Mammoth Tank</name>
-    <illustration>Raider/Assault/Mammoth Tank.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>4</cooldown>
-    <attack>7</attack>
-    <health>8</health>
-    <skill name="armor" number="3"/>
-    <skill name="agument" number="1" suffix="all" faction="raider"/>
-    <skill name="weaken" number="1" suffix="all"/>
-  </card>
+	<card>
+		<name>Mammoth Tank</name>
+		<illustration>Raider/Assault/Mammoth Tank.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>7</attack>
+		<health>8</health>
+		<skill name="armor" number="3"/>
+		<skill name="agument" number="1" suffix="all" faction="raider"/>
+		<skill name="weaken" number="1" suffix="all"/>
+	</card>
 
-  <card>
-    <name>Thunderer</name>
-    <illustration>Raider/Assault/Thunderer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>uncommon</rarity>
-    <unique>false</unique>
-    <cooldown>2</cooldown>
-    <attack>1</attack>
-    <health>6</health>
-    <skill name="tribute"/>
-    <skill name="berserk" number="1" suffix="onattacked"/>
-    <skill name="crush" number="3"/>
-  </card>
+	<card>
+		<name>Thunderer</name>
+		<illustration>Raider/Assault/Thunderer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>uncommon</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>1</attack>
+		<health>6</health>
+		<skill name="tribute"/>
+		<skill name="berserk" number="1" suffix="onattacked"/>
+		<skill name="crush" number="3"/>
+	</card>
 
-  <card>
-    <name>Salvager</name>
-    <illustration>Raider/Assault/Salvager.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>1</cooldown>
-    <attack>2</attack>
-    <health>5</health>
-    <skill name="heal" number="1" faction="raider"/>
-  </card>
+	<card>
+		<name>Salvager</name>
+		<illustration>Raider/Assault/Salvager.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>1</cooldown>
+		<attack>2</attack>
+		<health>5</health>
+		<skill name="heal" number="1" faction="raider"/>
+	</card>
 
-  <card>
-    <name>Orwold's Reckoning</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>4</cooldown>
-    <attack>3</attack>
-    <health>7</health>
-    <skill name="summon" suffix="Springkill onattacked"/>
-    <skill name="agument" number="1" suffix="all" faction="raider"/>
-    <skill name="refresh"/>
-  </card>
-
-  <card>
-    <name>Springkill</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>2</cooldown>
-    <attack>1</attack>
-    <health>6</health>
-    <skill name="rally" number="1" faction="raider"/>
-    <skill name="weaken" number="1"/>
-  </card>
-
-  <card>
-    <name>Primus</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>3</cooldown>
-    <attack>1</attack>
-    <health>10</health>
-    <skill name="protect" number="1" suffix="all" faction="raider"/>
-    <skill name="rally" number="1" suffix="all" faction="raider"/>
-    <skill name="weaken" number="1" suffix="all"/>
-  </card>
-
-  <card>
-    <name>Springpod</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>3</cooldown>
-    <attack>2</attack>
-    <health>6</health>
-    <skill name="flying"/>
-    <skill name="protect" number="2" suffix="all" faction="raider"/>
-    <skill name="flurry" number="2"/>
-  </card>
-
-  <card>
-    <name>Jagatai</name>
-    <illustration>Raider/Assault/Jagatai.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>3</cooldown>
-    <attack>3</attack>
-    <health>8</health>
-    <skill name="intercept"/>
-    <skill name="refresh"/>
-    <skill name="counter" number="4"/>
-  </card>
-
-  <card>
-    <name>Scale Hull</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>3</cooldown>
-    <attack>3</attack>
-    <health>8</health>
-    <skill name="armor" number="3"/>
-    <skill name="flurry" number="2"/>
-    <skill name="berserk" number="1"/>
-  </card>
-
-  <card>
-    <name>Hijaker</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>legendary</rarity>
-    <unique>true</unique>
-    <cooldown>2</cooldown>
-    <attack>2</attack>
-    <health>6</health>
-    <skill name="enfeeble" number="2" suffix="all onattacked"/>
-    <skill name="strike" number="1" suffix="all onattacked"/>
-    <skill name="counter" number="2"/>
-  </card>
-
-  <card>
-    <name>Hammerthorn</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>4</cooldown>
-    <attack>6</attack>
-    <health>11</health>
-    <skill name="tribute"/>
-    <skill name="armor" number="2"/>
-    <skill name="enfeeble" number="2" suffix="all"/>
-  </card>
-
-  <card>
-    <name>Iron Maiden</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>4</cooldown>
-    <attack>6</attack>
-    <health>6</health>
-    <skill name="crush" number="4"/>
-    <skill name="enfeeble" number="2" suffix="all onplay"/>
-  </card>
-
-  <card>
-    <name>Son of Khor</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>4</cooldown>
-    <attack>2</attack>
-    <health>9</health>
-    <skill name="blitz"/>
-    <skill name="legion" number="2"/>
-    <skill name="berserk" number="2" suffix="onattacked"/>
-  </card>
-
-  <card>
-    <name>Drake Tooth</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>3</cooldown>
-    <attack>1</attack>
-    <health>6</health>
-    <skill name="blitz"/>
-    <skill name="summon" suffix="Berzerker"/>
-    <skill name="rally" number="1" suffix="all" faction="raider"/>
-  </card>
-
-  <card>
-    <name>Berzerker</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>1</cooldown>
-    <attack>2</attack>
-    <health>1</health>
-    <skill name="crush" number="3"/>
-  </card>
-
-  <card>
-    <name>Twincannon Buoy</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>2</cooldown>
-    <attack>1</attack>
-    <health>6</health>
-    <skill name="legion" number="1"/>
-    <skill name="heal" number="1" suffix="all" faction="raider"/>
-    <skill name="rally" number="1" suffix="all" faction="raider"/>
-  </card>
-
-  <card>
-    <name>Concussive Guard</name>
-    <illustration>Raider/Assault/RadioOfficer.jpg</illustration>
-    <faction>raider</faction>
-    <cardType>assault</cardType>
-    <rarity>rare</rarity>
-    <unique>false</unique>
-    <cooldown>2</cooldown>
-    <attack>1</attack>
-    <health>6</health>
-    <skill name="rally" number="2"/>
-    <skill name="jam"/>
-    <skill name="fear"/>
-  </card>
+	<card>
+		<name>Orwold's Reckoning</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>4</cooldown>
+		<attack>3</attack>
+		<health>7</health>
+		<skill name="summon" suffix="Springkill onattacked"/>
+		<skill name="agument" number="1" suffix="all" faction="raider"/>
+		<skill name="refresh"/>
+	</card>
+	
+	<card>
+		<name>Springkill</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>1</attack>
+		<health>6</health>
+		<skill name="rally" number="1" faction="raider"/>
+		<skill name="weaken" number="1"/>
+	</card>
+	
+	<card>
+		<name>Primus</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>1</attack>
+		<health>10</health>
+		<skill name="protect" number="1" suffix="all" faction="raider"/>
+		<skill name="rally" number="1" suffix="all" faction="raider"/>
+		<skill name="weaken" number="1" suffix="all"/>
+	</card>
+	
+	<card>
+		<name>Springpod</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>2</attack>
+		<health>6</health>
+		<skill name="flying"/>
+		<skill name="protect" number="2" suffix="all" faction="raider"/>
+		<skill name="flurry" number="2"/>
+	</card>
+	
+	<card>
+		<name>Jagatai</name>
+		<illustration>Raider/Assault/Jagatai.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>3</attack>
+		<health>8</health>
+		<skill name="intercept"/>
+		<skill name="refresh"/>
+		<skill name="counter" number="4"/>
+	</card>
+	
+	<card>
+		<name>Scale Hull</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>3</attack>
+		<health>8</health>
+		<skill name="armor" number="3"/>
+		<skill name="flurry" number="2"/>
+		<skill name="berserk" number="1"/>
+	</card>
+	
+	<card>
+		<name>Hijaker</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>6</health>
+		<skill name="enfeeble" number="2" suffix="all onattacked"/>
+		<skill name="strike" number="1" suffix="all onattacked"/>
+		<skill name="counter" number="2"/>
+	</card>
+	
+	<card>
+		<name>Hammerthorn</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>6</attack>
+		<health>11</health>
+		<skill name="tribute"/>
+		<skill name="armor" number="2"/>
+		<skill name="enfeeble" number="2" suffix="all"/>
+	</card>
+	
+	<card>
+		<name>Iron Maiden</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>6</attack>
+		<health>6</health>
+		<skill name="crush" number="4"/>
+		<skill name="enfeeble" number="2" suffix="all onplay"/>
+	</card>
+	
+	<card>
+		<name>Son of Khor</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>4</cooldown>
+		<attack>2</attack>
+		<health>9</health>
+		<skill name="blitz"/>
+		<skill name="legion" number="2"/>
+		<skill name="berserk" number="2" suffix="onattacked"/>
+	</card>
+	
+	<card>
+		<name>Drake Tooth</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>3</cooldown>
+		<attack>1</attack>
+		<health>6</health>
+		<skill name="blitz"/>
+		<skill name="summon" suffix="Berzerker"/>
+		<skill name="rally" number="1" suffix="all" faction="raider"/>
+	</card>
+	
+	<card>
+		<name>Berzerker</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>1</cooldown>
+		<attack>2</attack>
+		<health>1</health>
+		<skill name="crush" number="3"/>
+	</card>
+	
+	<card>
+		<name>Twincannon Buoy</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>1</attack>
+		<health>6</health>
+		<skill name="legion" number="1"/>
+		<skill name="heal" number="1" suffix="all" faction="raider"/>
+		<skill name="rally" number="1" suffix="all" faction="raider"/>
+	</card>
+	
+	<card>
+		<name>Concussive Guard</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>1</attack>
+		<health>6</health>
+		<skill name="rally" number="2"/>
+		<skill name="jam"/>
+		<skill name="fear"/>
+	</card>
 
 </root>

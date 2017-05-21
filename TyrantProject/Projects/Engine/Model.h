@@ -35,13 +35,12 @@ private:
 	CU::GrowingArray<Surface> mySurfaces;
 	CU::GrowingArray<D3D11_INPUT_ELEMENT_DESC> myVertexFormat;
 
-	Effect* myEffect;
-
 	VertexIndexWrapper myIndexData;
 	IndexBufferWrapper myIndexBuffer;
 	VertexDataWrapper myVertexData;
 	VertexBufferWrapper myVertexBuffer;
 
+	Effect* myEffect;
 	ID3D11InputLayout* myVertexLayout;
 
 	float myAlpha;
@@ -62,7 +61,6 @@ inline void Model::SetAlpha(float anAlpha)
 {
 	myAlpha = anAlpha;
 }
-
 
 inline const Effect* Model::GetEffect() const
 {

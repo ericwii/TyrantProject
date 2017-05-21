@@ -1,5 +1,5 @@
 #include "Utilities/ShaderSamplerStates.fx"
-#include "Utilities/ShaderVariables2D.fx"
+#include "Utilities/ShaderVariables.fx"
 
 
 float2 CharacterSize;

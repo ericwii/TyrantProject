@@ -200,9 +200,6 @@
     <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderVariables.fx">
       <Filter>Shading\Shaders\Utilites</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Workbed\Data\Shaders\Utilities\ShaderVariables2D.fx">
-      <Filter>Shading\Shaders\Utilites</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\CardShader.fx">
       <Filter>Shading\Shaders\3D</Filter>
     </FxCompile>
@@ -228,6 +225,9 @@
       <Filter>Shading\Shaders\3D</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Workbed\Data\Shaders\VertexColorShader2D.fx">
+      <Filter>Shading\Shaders\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Workbed\Data\Shaders\SpriteWrapShader.fx">
       <Filter>Shading\Shaders\2D</Filter>
     </FxCompile>
   </ItemGroup>

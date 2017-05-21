@@ -72,6 +72,14 @@ Effect* EffectContainer::GetEffectFromType(const eEffectType anEffectType)
 			newEffect = spriteEffect;
 			break;
 		}
+		case(eEffectType::SpriteWrap) :
+		{
+			Effect2D* spriteEffect = new Effect2D();
+			spriteEffect->Init("Data/Shaders/SpriteWrapShader.fx");
+
+			newEffect = spriteEffect;
+			break;
+		}
 		case(eEffectType::Text2D) :
 		{
 			EffectText2D* textEffect = new EffectText2D();

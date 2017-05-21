@@ -24,7 +24,7 @@ public:
 	void Render();
 
 	bool ChooseCardToPlay(Card*& chosenCard);
-	void SummonCard(const string& aCardToSummon);
+	Card* SummonCard(const string& aCardToSummon);
 
 	inline bool CommanderIsDead();
 	inline Player* GetOpponent();
