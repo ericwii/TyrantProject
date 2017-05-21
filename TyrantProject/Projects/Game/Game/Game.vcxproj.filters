@@ -142,6 +142,7 @@
     <ClCompile Include="CleanseAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
+    <ClCompile Include="CardGameCameraManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -294,6 +295,7 @@
     <ClInclude Include="CleanseAbility.h">
       <Filter>Abilities\Activation</Filter>
     </ClInclude>
+    <ClInclude Include="CardGameCameraManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">

@@ -5,10 +5,10 @@
 Vector2<float> cleanseAnimationSize(2.f, 2.f);
 AnimationData cleanseAnimation = AnimationData
 (
-	"Data/Textures/Animations/strikeAnimation.png",
-	18,
-	4,
-	30.f,
+	"Data/Textures/Animations/cleanseAnimation.png",
+	8,
+	2,
+	20.f,
 	false
 	);
 
@@ -41,7 +41,7 @@ void CleanseAbility::OnCalculateAttack(AttackData & data)
 			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, data.attacker, target, nullptr, cleanseAnimationSize);
+				AbilityStack::AddAbility(this, data.attacker, target, &cleanseAnimation, cleanseAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -50,7 +50,7 @@ void CleanseAbility::OnCalculateAttack(AttackData & data)
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, data.attacker, targets, nullptr, cleanseAnimationSize);
+				AbilityStack::AddAbility(this, data.attacker, targets, &cleanseAnimation, cleanseAnimationSize);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ void CleanseAbility::OnPreCombat(Card * aCard)
 			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target, nullptr, cleanseAnimationSize);
+				AbilityStack::AddAbility(this, aCard, target, &cleanseAnimation, cleanseAnimationSize);
 			}
 		}
 		else if (mySuffix == "all")
@@ -74,7 +74,7 @@ void CleanseAbility::OnPreCombat(Card * aCard)
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, aCard, targets, nullptr, cleanseAnimationSize);
+				AbilityStack::AddAbility(this, aCard, targets, &cleanseAnimation, cleanseAnimationSize);
 			}
 		}
 	}
@@ -90,7 +90,7 @@ void CleanseAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 		if (target != nullptr)
 		{
-			AbilityStack::AddAbility(this, aUser, target, nullptr, cleanseAnimationSize);
+			AbilityStack::AddAbility(this, aUser, target, &cleanseAnimation, cleanseAnimationSize);
 		}
 	}
 	else if (mySuffix == "all onattacked")
@@ -98,7 +98,7 @@ void CleanseAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 		if (targets.Size() > 0)
 		{
-			AbilityStack::AddAbility(this, aUser, targets, nullptr, cleanseAnimationSize);
+			AbilityStack::AddAbility(this, aUser, targets, &cleanseAnimation, cleanseAnimationSize);
 		}
 	}
 }

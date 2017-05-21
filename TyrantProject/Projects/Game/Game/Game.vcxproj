@@ -113,6 +113,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardData.h" />
     <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="CardGameCameraManager.h" />
     <ClInclude Include="CardGameState.h" />
     <ClInclude Include="CardGameManager.h" />
     <ClInclude Include="CardGameTextManager.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="BerserkAbility.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
+    <ClCompile Include="CardGameCameraManager.cpp" />
     <ClCompile Include="CardGameState.cpp" />
     <ClCompile Include="CardGameManager.cpp" />
     <ClCompile Include="CardGameTextManager.cpp" />
