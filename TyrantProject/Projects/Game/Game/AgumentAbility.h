@@ -1,11 +1,11 @@
 #pragma once
 #include "AbilityBase.h"
 
-class AgumentAbility: public AbilityBase
+class AugmentAbility: public AbilityBase
 {
 public:
-	AgumentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
-	~AgumentAbility();
+	AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	~AugmentAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;
 	void OnCalculateAttack(AttackData& data) override;

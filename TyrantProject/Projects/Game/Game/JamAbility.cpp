@@ -48,19 +48,6 @@ void JamAbility::OnCalculateAttack(AttackData & data)
 	}
 }
 
-void JamAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
-{
-	aCaster;
-
-	for (int i = 0; i < someTargets.Size(); ++i)
-	{
-		if ((rand() % 2) == 1)
-		{
-			someTargets[i]->Jam();
-		}
-	}
-}
-
 void JamAbility::OnPreCombat(Card * aCard)
 {
 	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
@@ -84,3 +71,18 @@ void JamAbility::OnPreCombat(Card * aCard)
 		}
 	}
 }
+
+
+void JamAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
+{
+	aCaster;
+
+	for (int i = 0; i < someTargets.Size(); ++i)
+	{
+		if ((rand() % 2) == 1)
+		{
+			someTargets[i]->AddStatusEffect(eStatusEffectType::Jam);
+		}
+	}
+}
+

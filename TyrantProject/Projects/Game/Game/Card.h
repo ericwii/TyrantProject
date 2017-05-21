@@ -4,6 +4,66 @@
 struct OnComingAction;
 class Player;
 
+enum eStatusEffectType
+{
+	Protect,
+	Augment,
+	Enfeeble,
+	Poison,
+	Stun,
+	Jam,
+	Immobilize,
+	Sunder,
+	Disease,
+	Phase,
+	Chaos,
+	Freeze,
+};
+
+struct StatusEffect
+{
+	StatusEffect() : icon(nullptr), effectType(eStatusEffectType (-1)),number(-1), hasIcon(false)
+	{
+
+	}
+
+	StatusEffect(eStatusEffectType aType) : effectType(aType), hasIcon(false), number(1)
+	{
+	}
+
+	StatusEffect(string anIconPath, Model* aBackgroundModel, TextFont* aFont, eStatusEffectType aType, char aNumber)
+	{
+		icon.Init(ModelLoader::LoadRectangle(Vector2<float>(0.15f, 0.15f), eEffectType::Textured, anIconPath));
+		background.Init(aBackgroundModel);
+		text.Init(aFont);
+		text.SetCharacterScale(Vector2<float>(1.5f, 1.5f));
+
+		effectType = aType;
+		number = aNumber;
+		UpdateText();
+
+		background.SetAlpha(0.5f);
+		icon.SetAlpha(0.5f);
+	}
+
+	void UpdateText()
+	{
+		if (hasIcon)
+		{
+			string textString;
+			textString += number;
+			text.SetText(textString);
+		}
+	}
+
+	Instance background;
+	Instance icon;
+	Text3D text;
+	eStatusEffectType effectType;
+	bool hasIcon;
+	char number;
+};
+
 class Card
 {
 public:
@@ -18,7 +78,7 @@ public:
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
 	void LowerCooldown();
-	void Uppkeep();
+	void Upkeep();
 	void CleanUp();
 
 	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker);
@@ -31,8 +91,10 @@ public:
 	void Weaken(char someWeaken);
 	void Rally(char someRally);
 	void Berserk(char someAttackIncrese);
-	void Poison(char aPoisonAmount);
 	void Cleanse();
+
+	void AddStatusEffect(eStatusEffectType aType, string iconPath = string(), char anAmount = 1);
+	void RemoveStatusEffect(eStatusEffectType aStatusEffectType);
 
 	bool CanAttack();
 	bool CanUseActivationAbility();
@@ -40,6 +102,7 @@ public:
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
+	inline char GetStatusEffectNumber(eStatusEffectType aStatusEffectType);
 	inline CU::VectorOnStack<AbilityBase*, 3> GetAbilities();
 	inline eCardType GetCardType();
 	inline eCardFaction GetFaction();
@@ -53,23 +116,6 @@ public:
 	inline char GetAttack();
 	inline char GetCooldown();
 	inline char GetHealth();
-
-	inline char GetAgumentation();
-	inline void Enfeeble(char aAmount);
-	inline void Agument(char aAmount);
-	inline void Protect(char aAmount);
-
-	inline void Stun();
-	inline void Jam();
-	inline void Freeze();
-	inline void Immobilize();
-	inline void Disease();
-	inline void Chaos();
-	inline void Sunder();
-	inline void Phase();
-
-private:
-	void UpdateText();
 
 
 private:
@@ -86,6 +132,7 @@ private:
 
 	CU::Matrix44<float> myLerpStart;
 	CU::Matrix44<float> myLerpTarget;
+	CU::GrowingArray<StatusEffect> myStatusEffects;
 	CU::VectorOnStack<Instance, 3> myAbilityIcons;
 	float myCurrentLerpTime;
 	float myTargetLerpTime;
@@ -101,23 +148,9 @@ private:
 	char myTempAttackChange;
 	char myPermanentAttackChange;
 
-	char myProtect;
-	char myEnfeeble;
-	char myPoison;
-	char myAgument;
-
-
-	bool myIsStunned;
 	bool myHasBeenStunnedThisTurn;
 
-	bool myIsImmobilised;
-	bool myIsJammed;
-	bool myIsFreezed;
-	bool myIsDiseased;
-	bool myIsChaosed;
-	bool myIsSundered;
-	bool myIsPhased;
-
+	void PositionStatusEffectIcons();
 	void LoadModels();
 	void LoadText();
 	void LoadCanvas();
@@ -175,6 +208,18 @@ inline Vector3<float> Card::GetPosition()
 	return myCanvas.GetPosition();
 }
 
+inline char Card::GetStatusEffectNumber(eStatusEffectType aStatusEffectType)
+{
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
+	{
+		if (myStatusEffects[i].effectType == aStatusEffectType)
+		{
+			return myStatusEffects[i].number;
+		}
+	}
+	return 0;
+}
+
 inline bool Card::IsLerping() const
 {
 	return myTargetLerpTime > 0;
@@ -193,67 +238,6 @@ inline char Card::GetCooldown()
 inline char Card::GetHealth()
 {
 	return myHealth;
-}
-
-inline char Card::GetAgumentation()
-{
-	return myAgument;
-}
-
-inline void Card::Enfeeble(char aAmount)
-{
-	myEnfeeble += aAmount;
-}
-
-inline void Card::Agument(char aAmount)
-{
-	myAgument += aAmount;
-}
-
-inline void Card::Protect(char aAmount)
-{
-	myProtect += aAmount;
-}
-
-inline void Card::Stun()
-{
-	myHasBeenStunnedThisTurn = true;
-	myIsStunned = true;
-}
-
-inline void Card::Jam()
-{
-	myIsJammed = true;
-}
-
-inline void Card::Freeze()
-{
-	myIsFreezed = true;
-}
-
-inline void Card::Immobilize()
-{
-	myIsImmobilised = true;
-}
-
-inline void Card::Disease()
-{
-	myIsDiseased = true;
-}
-
-inline void Card::Chaos()
-{
-	myIsChaosed = true;
-}
-
-inline void Card::Sunder()
-{
-	myIsSundered = true;
-}
-
-inline void Card::Phase()
-{
-	myIsPhased = true;
 }
 
 inline bool Card::IsDying() const

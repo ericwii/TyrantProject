@@ -7,20 +7,24 @@ Vector4<float> damagedHealthColor(1.f, 0, 0, 1.f);
 Vector4<float> ralliedAttackColor(0, 1.f, 0, 1.f);
 Vector4<float> weakenedAttackColor(1.f, 0, 0, 1.f);
 
+TextFont* textFont;
+string currentStatusEffectText;
+Model* statusEffectIconBackgrund;
+Vector2<float> statusEffectIconOffset(-0.6f, 0.85f);
+float statusEffectIconSpacing = 0.2f;
+
 
 using namespace tinyxml2;
 
 float deathFadeTime = 0.8f;
 
-Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false),
-	myOwner(nullptr), myTempAttackChange(0), myPermanentAttackChange(0),myProtect(0),myEnfeeble(0),myPoison(0),myAgument(0),
-	myIsStunned(false),myIsChaosed(false),myIsDiseased(false),myIsImmobilised(false),myIsJammed(false),myIsPhased(false),myIsSundered(false),myIsFreezed(false),myHasBeenStunnedThisTurn(false)
+Card::Card() : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myHasBeenStunnedThisTurn(false),
+	myOwner(nullptr), myTempAttackChange(0), myPermanentAttackChange(0)
 {
 }
 
-Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), 
-	myOwner(anOwner), myTempAttackChange(0), myPermanentAttackChange(0), myProtect(0), myEnfeeble(0), myPoison(0), myAgument(0), 
-	myIsStunned(false), myIsChaosed(false), myIsDiseased(false), myIsImmobilised(false), myIsJammed(false), myIsPhased(false), myIsSundered(false), myIsFreezed(false),myHasBeenStunnedThisTurn(false)
+Card::Card(Player* anOwner) : myRenderPassIndex(0), myTargetLerpTime(-1.f), myIsDying(false), myIsDead(false), myHasBeenStunnedThisTurn(false),
+	myOwner(anOwner), myTempAttackChange(0), myPermanentAttackChange(0)
 {
 }
 
@@ -85,9 +89,16 @@ void Card::LoadCard(string aCardName)
 	LoadIcons();
 
 	myRenderPassIndex = 0;
+	myStatusEffects.Allocate(4);
 	myCooldown = myCardData->cooldown;
 	myAttack = myCardData->attack;
 	myHealth = myCardData->health;
+
+	if (statusEffectIconBackgrund == nullptr)
+	{
+		textFont = Engine::GetInstance()->GetFontContainer().GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
+		statusEffectIconBackgrund = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/statusEffectBackground.png");
+	}
 }
 
 void Card::LoadCard(CardData* someData)
@@ -99,9 +110,16 @@ void Card::LoadCard(CardData* someData)
 	LoadText();
 
 	myRenderPassIndex = 0;
+	myStatusEffects.Allocate(4);
 	myCooldown = myCardData->cooldown;
 	myAttack = myCardData->attack;
 	myHealth = myCardData->health;
+
+	if (statusEffectIconBackgrund == nullptr)
+	{
+		textFont = Engine::GetInstance()->GetFontContainer().GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
+		statusEffectIconBackgrund = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/statusEffectBackground.png");
+	}
 }
 
 void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
@@ -114,7 +132,7 @@ void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
 
 void Card::LowerCooldown()
 {
-	if (myCooldown > 0 && myIsFreezed == false)
+	if (myCooldown > 0 && GetStatusEffectNumber(eStatusEffectType::Freeze) < 1)
 	{
 		--myCooldown;
 
@@ -130,14 +148,17 @@ void Card::LowerCooldown()
 	}
 }
 
-void Card::Uppkeep()
+void Card::Upkeep()
 {
-	LowerCooldown();
-	myProtect = 0;
+	RemoveStatusEffect(eStatusEffectType::Protect);
+	RemoveStatusEffect(eStatusEffectType::Enfeeble);
 
-	if (myPoison > 0)
+	char poison = GetStatusEffectNumber(eStatusEffectType::Poison);
+	TakeDamage(poison);
+
+	if (!myIsDying)
 	{
-		TakeDamage(myPoison);
+		LowerCooldown();
 	}
 }
 
@@ -145,21 +166,17 @@ void Card::CleanUp()
 {
 	if (myCardData != nullptr && myCardData->cardType == eCardType::Assault)
 	{
-
 		if (myHasBeenStunnedThisTurn == false)
 		{
-			myIsStunned = false;
+			RemoveStatusEffect(eStatusEffectType::Stun);
 		}
 		myHasBeenStunnedThisTurn = false;
 
-
-		myIsChaosed = false;
-		myIsImmobilised = false;
-		myIsJammed = false;
-		myIsPhased = false;
-
-		myEnfeeble = 0;
-		myAgument = 0;
+		RemoveStatusEffect(eStatusEffectType::Augment);
+		RemoveStatusEffect(eStatusEffectType::Chaos);
+		RemoveStatusEffect(eStatusEffectType::Immobilize);
+		RemoveStatusEffect(eStatusEffectType::Jam);
+		RemoveStatusEffect(eStatusEffectType::Phase);
 
 		myTempAttackChange = 0;
 		string attack;
@@ -179,9 +196,9 @@ void Card::CleanUp()
 
 void Card::TakeDamage(char& someDamage)
 {
-	someDamage += myEnfeeble;
+	someDamage += GetStatusEffectNumber(eStatusEffectType::Enfeeble);
 
-	someDamage -= myProtect;
+	someDamage -= GetStatusEffectNumber(eStatusEffectType::Protect);
 	if (someDamage < 0)
 	{
 		someDamage = 0;
@@ -222,7 +239,7 @@ void Card::TakeDamage(char& someDamage)
 
 void Card::Heal(char someHealth)
 {
-	if (myCardData != nullptr && myHealth < myCardData->health && myIsDiseased == false)
+	if (myCardData != nullptr && myHealth < myCardData->health && GetStatusEffectNumber(eStatusEffectType::Disease) < 1)
 	{
 		if (myHealth + someHealth <= myCardData->health)
 		{
@@ -279,7 +296,7 @@ void Card::Weaken(char someWeaken)
 
 void Card::Rally(char someRally)
 {
-	if (myIsSundered == false)
+	if (GetStatusEffectNumber(eStatusEffectType::Sunder) < 1)
 	{
 		myTempAttackChange += someRally;
 
@@ -313,7 +330,7 @@ void Card::Rally(char someRally)
 
 void Card::Berserk(char someAttackIncrese)
 {
-	if (myIsSundered == false)
+	if (GetStatusEffectNumber(eStatusEffectType::Sunder) < 1)
 	{
 		myAttack += someAttackIncrese;
 
@@ -345,26 +362,98 @@ void Card::Berserk(char someAttackIncrese)
 	}
 }
 
-void Card::Poison(char aPoisonAmount)
-{
-	if (aPoisonAmount > myPoison)
-	{
-		myPoison = aPoisonAmount;
-	}
-}
-
 void Card::Cleanse()
 {
-	myEnfeeble = 0;
-	myPoison = 0;
-	myIsChaosed = false;
-	myIsDiseased = false;
-	myIsFreezed = false;
-	myIsImmobilised = false;
-	myIsJammed = false;
-	myIsStunned = false;
+	if (GetStatusEffectNumber(eStatusEffectType::Phase) == 0)
+	{
+		eStatusEffectType currentStatusEffect;
+		for (int i = 0; i < myStatusEffects.Size(); ++i)
+		{
+			currentStatusEffect = myStatusEffects[i].effectType;
+			if (currentStatusEffect != eStatusEffectType::Augment && currentStatusEffect != eStatusEffectType::Protect)
+			{
+				myStatusEffects.RemoveCyclicAtIndex(i);
+			}
+		}
+	}
+
 	myHasBeenStunnedThisTurn = false;
-	myIsSundered = false;
+}
+
+void Card::AddStatusEffect(eStatusEffectType aType, string iconPath, char anAmount)
+{
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
+	{
+		if (myStatusEffects[i].effectType == aType)
+		{
+			myStatusEffects[i].number += anAmount;	
+			myStatusEffects[i].UpdateText();
+			return;
+		}
+	}
+
+
+	if (iconPath.Lenght() > 0)
+	{
+		myStatusEffects.Add(StatusEffect(iconPath, statusEffectIconBackgrund, textFont, aType, anAmount));
+		StatusEffect& newStatus = myStatusEffects.GetLast();
+
+		myCanvas.AddChild(&newStatus.background);
+		myCanvas.AddChild(&newStatus.icon);
+		myCanvas.AddChild(&newStatus.text);
+	}
+	else
+	{
+		myStatusEffects.Add(StatusEffect(aType));
+		if (aType == eStatusEffectType::Stun)
+		{
+			myHasBeenStunnedThisTurn = true;
+		}
+	}
+
+	PositionStatusEffectIcons();
+}
+
+void Card::RemoveStatusEffect(eStatusEffectType aStatusEffectType)
+{
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
+	{
+		if (myStatusEffects[i].effectType == aStatusEffectType)
+		{
+			if (myStatusEffects[i].hasIcon)
+			{
+				myCanvas.RemoveChild(&myStatusEffects[i].background);
+				myCanvas.RemoveChild(&myStatusEffects[i].icon);
+				myCanvas.RemoveChild(&myStatusEffects[i].text);
+			}
+
+			if (myStatusEffects.Size() > 1 && i < myStatusEffects.Size() - 1)
+			{
+				StatusEffect& lastStatus = myStatusEffects.GetLast();
+				if (lastStatus.hasIcon)
+				{
+					myCanvas.RemoveChild(&lastStatus.background);
+					myCanvas.RemoveChild(&lastStatus.icon);
+					myCanvas.RemoveChild(&lastStatus.text);
+				}
+
+				myStatusEffects.RemoveCyclicAtIndex(i);
+
+				if (myStatusEffects[i].hasIcon)
+				{
+					myCanvas.AddChild(&myStatusEffects[i].background);
+					myCanvas.AddChild(&myStatusEffects[i].icon);
+					myCanvas.AddChild(&myStatusEffects[i].text);
+				}
+
+				PositionStatusEffectIcons();
+			}
+			else
+			{
+				myStatusEffects.RemoveCyclicAtIndex(i);
+			}
+		}
+	}
 }
 
 void Card::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker)
@@ -413,12 +502,25 @@ Card* Card::OnTargeted(AbilityBase* targetingAbility)
 
 bool Card::CanAttack()
 {
-	return !myIsDying && !myIsStunned && !myIsJammed && !myIsImmobilised && !myIsFreezed && (myAttack + myTempAttackChange) > 0;
+	bool canAttack = true;
+	eStatusEffectType currentEffectType;
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
+	{
+		currentEffectType = myStatusEffects[i].effectType;
+		if (currentEffectType == eStatusEffectType::Jam || currentEffectType == eStatusEffectType::Immobilize || 
+			currentEffectType == eStatusEffectType::Freeze || currentEffectType == eStatusEffectType::Stun)
+		{
+			canAttack = false;
+			break;
+		}
+	}
+
+	return canAttack && !myIsDying && myAttack + myTempAttackChange > 0;
 }
 
 bool Card::CanUseActivationAbility()
 {
-	return !myIsJammed && !myIsFreezed;
+	return GetStatusEffectNumber(eStatusEffectType::Jam) < 1 && GetStatusEffectNumber(eStatusEffectType::Freeze) < 1;
 }
 
 
@@ -437,27 +539,20 @@ void Card::SetPosition(const Vector3<float>& aPosition)
 
 //Private methods
 
-void Card::UpdateText()
+void Card::PositionStatusEffectIcons()
 {
-	if (myCardData->cardType != eCardType::Action)
+	Vector2<float> currentPosition = statusEffectIconOffset;
+	Vector2<float> textOffset(-0.07f,0.05f);
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
 	{
-		string healthText;
-		healthText += static_cast<int>(myCardData->health);
-		myHealthText.SetText(healthText);
-	}
-
-	if (myCardData->cardType == eCardType::Assault)
-	{
-		string attackText;
-		attackText += static_cast<int>(myCardData->attack);
-		myAttackText.SetText(attackText);
-	}
-
-	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
-	{
-		string cooldownText;
-		cooldownText += static_cast<int>(myCardData->cooldown);
-		myCooldownText.SetText(cooldownText);
+		if (myStatusEffects[i].hasIcon)
+		{
+			myCanvas.SetChildPosition(&myStatusEffects[i].background, currentPosition);
+			myCanvas.SetChildPosition(&myStatusEffects[i].icon, currentPosition);
+			myCanvas.SetChildPosition(&myStatusEffects[i].text, currentPosition + textOffset);
+			myStatusEffects[i].UpdateText();
+			currentPosition.x += statusEffectIconSpacing;
+		}
 	}
 }
 

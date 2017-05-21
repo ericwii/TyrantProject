@@ -27,7 +27,7 @@ void EnfeebleAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTarg
 {
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Enfeeble(myNumber + aCaster->GetAgumentation());
+		someTargets[i]->AddStatusEffect(eStatusEffectType::Enfeeble, iconTexturePath, myNumber + aCaster->GetStatusEffectNumber(eStatusEffectType::Augment));
 	}
 }
 

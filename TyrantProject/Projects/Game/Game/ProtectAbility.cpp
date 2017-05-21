@@ -28,7 +28,7 @@ void ProtectAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTarge
 	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Protect(myNumber + aCaster->GetAgumentation());
+		someTargets[i]->AddStatusEffect(eStatusEffectType::Protect, iconTexturePath, myNumber + aCaster->GetStatusEffectNumber(eStatusEffectType::Augment));
 	}
 }
 

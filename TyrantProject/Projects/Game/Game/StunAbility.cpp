@@ -17,5 +17,5 @@ void StunAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 {
 	aUser;
 	someDamage;
-	anAttacker->Stun();
+	anAttacker->AddStatusEffect(eStatusEffectType::Stun);
 }

@@ -25,7 +25,7 @@ SiegeAbility::~SiegeAbility()
 void SiegeAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster;
-	char damage = myNumber + aCaster->GetAgumentation();
+	char damage = myNumber + aCaster->GetStatusEffectNumber(eStatusEffectType::Augment);
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
 		if (!someTargets[i]->IsDying())

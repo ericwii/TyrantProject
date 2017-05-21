@@ -125,6 +125,36 @@ void Instance::AddChild(Text3D* aText)
 	myTexts.Add(aText);
 }
 
+void Instance::SetChildPosition(Instance* aChild, Vector3<float> aPosition)
+{
+	for (int i = 0; i < myInstances.Size(); ++i)
+	{
+		if (myInstances[i] == aChild)
+		{
+			aChild->SetPosition(aPosition);
+			aChild->SetCurrentOrientationAsOriginal();
+			CU::Matrix44<float> orientation = myOrientation;
+			orientation *= aChild->GetOrientation();
+			aChild->SetOrientation(orientation);
+		}
+	}
+}
+
+void Instance::SetChildPosition(Text3D* aChild, Vector3<float> aPosition)
+{
+	for (int i = 0; i < myTexts.Size(); ++i)
+	{
+		if (myTexts[i] == aChild)
+		{
+			aChild->SetPosition(aPosition);
+			aChild->SetCurrentOrientationAsOriginal();
+			CU::Matrix44<float> orientation = myOrientation;
+			orientation *= aChild->GetOrientation();
+			aChild->SetOrientation(orientation);
+		}
+	}
+}
+
 void Instance::RemoveChild(Instance* anInstance)
 {
 	myInstances.RemoveNonCyclic(anInstance);

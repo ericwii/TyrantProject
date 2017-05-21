@@ -12,33 +12,33 @@ AnimationData agumentAnimation = AnimationData
 	false
 	);
 
-AgumentAbility::AgumentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+AugmentAbility::AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/augmentIcon.png";
 	myAbilityType = eAbilityTypes::eAgument;
 }
 
 
-AgumentAbility::~AgumentAbility()
+AugmentAbility::~AugmentAbility()
 {
 }
 
-void AgumentAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
+void AugmentAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 {
 	aCaster;
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Agument(myNumber);
+		someTargets[i]->AddStatusEffect(eStatusEffectType::Augment, iconTexturePath, myNumber);
 	}
 }
 
-void AgumentAbility::OnCalculateAttack(AttackData & data)
+void AugmentAbility::OnCalculateAttack(AttackData & data)
 {
 	if (data.attacker->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, data.attacker, target, &agumentAnimation, agumentAnimationSize);
@@ -46,7 +46,7 @@ void AgumentAbility::OnCalculateAttack(AttackData & data)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 
 			if (targets.Size() > 0)
 			{
@@ -56,13 +56,13 @@ void AgumentAbility::OnCalculateAttack(AttackData & data)
 	}
 }
 
-void AgumentAbility::OnPreCombat(Card * aCard)
+void AugmentAbility::OnPreCombat(Card * aCard)
 {
 	if ((aCard->GetCardType() == eCardType::Commander || aCard->GetCardType() == eCardType::Structure) && aCard->GetCooldown() < 1)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target, &agumentAnimation, agumentAnimationSize);
@@ -70,7 +70,7 @@ void AgumentAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 
 			if (targets.Size() > 0)
 			{
@@ -80,14 +80,14 @@ void AgumentAbility::OnPreCombat(Card * aCard)
 	}
 }
 
-void AgumentAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
+void AugmentAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 {
 	anAttacker;
 	someDamage;
 
 	if (mySuffix == "onattacked")
 	{
-		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 		if (target != nullptr)
 		{
 			AbilityStack::AddAbility(this, aUser, target, &agumentAnimation, agumentAnimationSize);
@@ -95,7 +95,7 @@ void AgumentAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 	}
 	else if (mySuffix == "all onattacked")
 	{
-		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
 		if (targets.Size() > 0)
 		{
 			AbilityStack::AddAbility(this, aUser, targets, &agumentAnimation, agumentAnimationSize);

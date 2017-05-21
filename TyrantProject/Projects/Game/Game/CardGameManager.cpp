@@ -82,11 +82,11 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 {
 	for (int i = 0; i < anActivePlayer.myAssaultCards.Size(); ++i)
 	{
-		anActivePlayer.myAssaultCards[i]->Uppkeep();
+		anActivePlayer.myAssaultCards[i]->Upkeep();
 	}
 	for (int i = 0; i < anActivePlayer.myStructureCards.Size(); ++i)
 	{
-		anActivePlayer.myStructureCards[i]->Uppkeep();
+		anActivePlayer.myStructureCards[i]->Upkeep();
 	}
 }
 

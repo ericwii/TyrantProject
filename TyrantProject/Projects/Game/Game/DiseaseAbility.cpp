@@ -18,5 +18,5 @@ void DiseaseAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someD
 	aCard;
 	someDamage;
 
-	aDamagedCard->Disease();
+	aDamagedCard->AddStatusEffect(eStatusEffectType::Disease);
 }

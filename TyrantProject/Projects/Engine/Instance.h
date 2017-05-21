@@ -18,6 +18,7 @@ public:
 	void SetOrientation(CU::Matrix44<float> anOrientation);
 	void SetAlpha(float alpha);
 
+
 	inline CU::Matrix44<float>& GetOrientation();
 	inline const CU::Matrix44<float>& GetOriginalOrientation() const;
 	inline Vector3<float> GetPosition() const;
@@ -25,6 +26,8 @@ public:
 
 	void AddChild(Instance* anInstance);
 	void AddChild(Text3D* aText);
+	void SetChildPosition(Instance* aChild, Vector3<float> aPosition);
+	void SetChildPosition(Text3D* aChild, Vector3<float> aPosition);
 
 	void RemoveChild(Instance* anInstance);
 	void RemoveChild(Text3D* aText);

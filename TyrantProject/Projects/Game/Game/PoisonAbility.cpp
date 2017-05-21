@@ -18,5 +18,5 @@ void PoisonAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDa
 	aCard;
 	someDamage;
 
-	aDamagedCard->Poison(myNumber);
+	aDamagedCard->AddStatusEffect(eStatusEffectType::Poison, iconTexturePath, myNumber);
 }

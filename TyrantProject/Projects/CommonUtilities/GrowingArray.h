@@ -152,27 +152,28 @@ inline void CU::GrowingArray<ObjectType>::ReAllocate(int aNrOfRecommendedItems)
 template<typename ObjectType>
 CU::GrowingArray<ObjectType>& CU::GrowingArray<ObjectType>::operator=(const GrowingArray& aGrowingArray)
 {
-	DEBUG_ASSERT(aGrowingArray.myMaxSize > 0, "Operator '=' cannot copy an unallocated array");
-
-	delete[] myListPointer;
+	//DEBUG_ASSERT(aGrowingArray.myMaxSize > 0, "Operator '=' cannot copy an unallocated array");
 
 	myUseMemoryCopying = aGrowingArray.myUseMemoryCopying;
-	myMaxSize = aGrowingArray.myMaxSize;
-	myListPointer = new ObjectType[aGrowingArray.myMaxSize];
-
-	if (myUseMemoryCopying == false)
+	if (aGrowingArray.myMaxSize > 0)
 	{
-		for (int i = 0; i < aGrowingArray.myCurrentSize; ++i)
+		delete[] myListPointer;
+		myMaxSize = aGrowingArray.myMaxSize;
+		myListPointer = new ObjectType[aGrowingArray.myMaxSize];
+
+		if (myUseMemoryCopying == false)
 		{
-			myListPointer[i] = aGrowingArray.myListPointer[i];
+			for (int i = 0; i < aGrowingArray.myCurrentSize; ++i)
+			{
+				myListPointer[i] = aGrowingArray.myListPointer[i];
+			}
 		}
+		else
+		{
+			memcpy(myListPointer, aGrowingArray.myListPointer, sizeof(ObjectType) * aGrowingArray.myMaxSize);
+		}
+		myCurrentSize = aGrowingArray.myCurrentSize;
 	}
-	else
-	{
-		memcpy(myListPointer, aGrowingArray.myListPointer, sizeof(ObjectType) * aGrowingArray.myMaxSize);
-	}
-
-	myCurrentSize = aGrowingArray.myCurrentSize;
 
 	return (*this);
 }

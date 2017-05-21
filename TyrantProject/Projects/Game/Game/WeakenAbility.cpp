@@ -71,6 +71,6 @@ void WeakenAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTarget
 {
 	for (int i = 0; i < someTargets.Size(); ++i)
 	{
-		someTargets[i]->Weaken(myNumber+aCaster->GetAgumentation());
+		someTargets[i]->Weaken(myNumber + aCaster->GetStatusEffectNumber(eStatusEffectType::Augment));
 	}
 }

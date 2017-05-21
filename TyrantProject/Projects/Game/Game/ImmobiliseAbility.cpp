@@ -31,7 +31,7 @@ void ImmobiliseAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char so
 
 	if ((rand() % 2) == 1)
 	{
-		aDamagedCard->Immobilize();
+		aDamagedCard->AddStatusEffect(eStatusEffectType::Immobilize);
 		AnimationManager::AddAnimation(immobilizeAnimation, aDamagedCard->GetPosition(), immobilizeAnimationSize);
 	}
 }

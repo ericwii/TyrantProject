@@ -343,7 +343,7 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	}
 	else if (aName == "agument")
 	{
-		return new AgumentAbility(aSuffix, aNumber, aFaction);
+		return new AugmentAbility(aSuffix, aNumber, aFaction);
 	}
 	else if (aName == "swipe")
 	{
