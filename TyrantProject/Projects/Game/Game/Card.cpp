@@ -427,7 +427,7 @@ void Card::RemoveStatusEffect(eStatusEffectType aStatusEffectType)
 				myCanvas.RemoveChild(&myStatusEffects[i].text);
 			}
 
-			if (myStatusEffects.Size() > 1 && i < myStatusEffects.Size() - 1)
+			if (i < myStatusEffects.Size() - 1)
 			{
 				StatusEffect& lastStatus = myStatusEffects.GetLast();
 				if (lastStatus.hasIcon)
