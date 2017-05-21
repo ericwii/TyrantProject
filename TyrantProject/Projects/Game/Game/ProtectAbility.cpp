@@ -2,11 +2,11 @@
 #include "ProtectAbility.h"
 
 
-Vector2<float> protectAnimationSize(2.f, 2.f);
+Vector2<float> protectAnimationSize(1.5f, 2.f);
 AnimationData protectAnimation = AnimationData
 (
-	"Data/Textures/Animations/strikeAnimation.png",
-	18,
+	"Data/Textures/Animations/protectAnimation.png",
+	20,
 	4,
 	30.f,
 	false
@@ -41,7 +41,16 @@ void ProtectAbility::OnCalculateAttack(AttackData & data)
 			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, data.attacker, target, nullptr, protectAnimationSize);
+				//AbilityStack::AddAbility(this, data.attacker, target, &protectAnimation, protectAnimationSize);
+				StoredAbility abilityInfo;
+				abilityInfo.ability = this;
+				abilityInfo.caster = data.attacker;
+				abilityInfo.animationData = &protectAnimation;
+				abilityInfo.animationSize = protectAnimationSize;
+				abilityInfo.targets.Allocate(1);
+				abilityInfo.targets[0] = target;
+				abilityInfo.animationFlipY = true;
+				AbilityStack::AddAbility(abilityInfo);
 			}
 		}
 		else if (mySuffix == "all")
@@ -50,7 +59,15 @@ void ProtectAbility::OnCalculateAttack(AttackData & data)
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, data.attacker, targets, nullptr, protectAnimationSize);
+				//AbilityStack::AddAbility(this, data.attacker, targets, &protectAnimation, protectAnimationSize);
+				StoredAbility abilityInfo;
+				abilityInfo.ability = this;
+				abilityInfo.caster = data.attacker;
+				abilityInfo.animationData = &protectAnimation;
+				abilityInfo.animationSize = protectAnimationSize;
+				abilityInfo.targets = targets;
+				abilityInfo.animationFlipY = true;
+				AbilityStack::AddAbility(abilityInfo);
 			}
 		}
 	}
@@ -65,7 +82,16 @@ void ProtectAbility::OnPreCombat(Card * aCard)
 			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
 			if (target != nullptr)
 			{
-				AbilityStack::AddAbility(this, aCard, target, nullptr, protectAnimationSize);
+				//AbilityStack::AddAbility(this, aCard, target, &protectAnimation, protectAnimationSize);
+				StoredAbility abilityInfo;
+				abilityInfo.ability = this;
+				abilityInfo.caster = aCard;
+				abilityInfo.animationData = &protectAnimation;
+				abilityInfo.animationSize = protectAnimationSize;
+				abilityInfo.targets.Allocate(1);
+				abilityInfo.targets[0] = target;
+				abilityInfo.animationFlipY = true;
+				AbilityStack::AddAbility(abilityInfo);
 			}
 		}
 		else if (mySuffix == "all")
@@ -74,7 +100,15 @@ void ProtectAbility::OnPreCombat(Card * aCard)
 
 			if (targets.Size() > 0)
 			{
-				AbilityStack::AddAbility(this, aCard, targets, nullptr, protectAnimationSize);
+				//AbilityStack::AddAbility(this, aCard, targets, &protectAnimation, protectAnimationSize);
+				StoredAbility abilityInfo;
+				abilityInfo.ability = this;
+				abilityInfo.caster = aCard;
+				abilityInfo.animationData = &protectAnimation;
+				abilityInfo.animationSize = protectAnimationSize;
+				abilityInfo.targets = targets;
+				abilityInfo.animationFlipY = true;
+				AbilityStack::AddAbility(abilityInfo);
 			}
 		}
 	}

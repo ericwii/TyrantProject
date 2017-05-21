@@ -36,13 +36,13 @@ void AnimationManager::AddAnimation(const Animation& anAnimation)
 	myAnimations.Add(anAnimation);
 }
 
-void AnimationManager::AddAnimation(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float>& aSize, float aRotation, bool flipX)
+void AnimationManager::AddAnimation(const AnimationData& someData, const Vector3<float>& aPosition, const Vector2<float>& aSize, float aRotation, bool aflipX, bool aflipY)
 {
 	Animation newAnimation;
 	newAnimation.Init(someData, aPosition, aSize);
 	myAnimations.Add(newAnimation);
 
 	myAnimations.GetLast().SetRotation(aRotation);
-	myAnimations.GetLast().SetFlip(flipX);
+	myAnimations.GetLast().SetFlip(aflipX,aflipY);
 	myAnimations.GetLast().Play();
 }

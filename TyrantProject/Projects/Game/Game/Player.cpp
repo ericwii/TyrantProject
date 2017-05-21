@@ -54,7 +54,7 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 
 	myAssaultCards.Allocate(16);
 	myStructureCards.Allocate(16);
-	mySummonedCards.Allocate(16);
+	mySummonedCards.Allocate(255);
 
 	ShuffleDeck();	
 	DrawCard();
@@ -108,6 +108,10 @@ bool Player::ChooseCardToPlay(Card*& chosenCard)
 
 Card* Player::SummonCard(const string& aCardToSummon)
 {
+	if (mySummonedCards.Size() >= 256)
+	{
+		return nullptr;
+	}
 	CardData* newCardData = CardFactory::GetInstance().GetCard(aCardToSummon);
 	if (newCardData == nullptr)
 	{

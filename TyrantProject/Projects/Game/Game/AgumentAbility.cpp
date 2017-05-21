@@ -2,7 +2,7 @@
 #include "AgumentAbility.h"
 
 
-Vector2<float> agumentAnimationSize(2.f, 2.f);
+Vector2<float> agumentAnimationSize(1.5f, 2.f);
 AnimationData agumentAnimation = AnimationData
 (
 	"Data/Textures/Animations/AugmentAnimation.png",

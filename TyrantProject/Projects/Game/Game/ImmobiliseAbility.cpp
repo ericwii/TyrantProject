@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ImmobiliseAbility.h"
 
-Vector2<float> immobilizeAnimationSize(2.f, 2.f);
+Vector2<float> immobilizeAnimationSize(1.5f, 2.f);
 AnimationData immobilizeAnimation = AnimationData
 (
 	"Data/Textures/Animations/ImmobilizeAnimation.png",

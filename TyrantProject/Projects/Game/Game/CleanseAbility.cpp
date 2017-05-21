@@ -2,7 +2,7 @@
 #include "CleanseAbility.h"
 
 
-Vector2<float> cleanseAnimationSize(2.f, 2.f);
+Vector2<float> cleanseAnimationSize(1.5f, 2.f);
 AnimationData cleanseAnimation = AnimationData
 (
 	"Data/Textures/Animations/cleanseAnimation.png",
