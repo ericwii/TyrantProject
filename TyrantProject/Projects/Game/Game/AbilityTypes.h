@@ -33,4 +33,5 @@ enum class eAbilityTypes
 	ePoison,
 	eAgument,
 	eSwipe,
+	eCleanse,
 };

@@ -3,13 +3,15 @@
 <root>
 	
 	<card>
-		<name>Dementia</name>
-		<illustration>BloodThirsty/Commander/Dementia.jpg</illustration>
-		<faction>bloodthirsty</faction>
+		<name>Mayumi</name>
+		<illustration>Raider/Commander/mayumi.jpg</illustration>
+		<faction>raider</faction>
 		<cardType>commander</cardType>
 		<rarity>rare</rarity>
 		<unique>false</unique>
 		<health>16</health>
+    <skill name="weaken" number="2"/>
+    <skill name="cleanse"/>
 	</card>
 
 </root>

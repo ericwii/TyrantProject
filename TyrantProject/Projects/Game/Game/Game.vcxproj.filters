@@ -139,6 +139,9 @@
     <ClCompile Include="AgumentAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
+    <ClCompile Include="CleanseAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -286,6 +289,9 @@
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="AgumentAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="CleanseAbility.h">
       <Filter>Abilities\Activation</Filter>
     </ClInclude>
   </ItemGroup>
