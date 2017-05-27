@@ -6,7 +6,7 @@
 
 
 
-CardGameState::CardGameState()
+CardGameState::CardGameState() : myRenderDebugHitboxes(false)
 {
 
 }
@@ -71,6 +71,11 @@ void CardGameState::Update()
 	CardGameCameraManager::Update(deltaTime);
 	AbilityStack::Update(deltaTime);
 	GUIManager::Update(deltaTime);
+
+	if (InputManager::Keyboard.WasKeyJustPressed(DIK_F5))
+	{
+		myRenderDebugHitboxes = !myRenderDebugHitboxes;
+	}
 }
 
 void CardGameState::Render()
@@ -86,7 +91,11 @@ void CardGameState::Render()
 	AnimationManager::Render();
 	CardGameTextManager::Render();
 	GUIManager::Render();
-	//GUIManager::RenderDebugHitboxes();
+
+	if (myRenderDebugHitboxes)
+	{
+		GUIManager::RenderDebugHitboxes();
+	}
 
 	if (myGameIsOver)
 	{

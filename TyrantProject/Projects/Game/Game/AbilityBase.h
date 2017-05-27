@@ -56,7 +56,8 @@ protected:
 		IsDamaged = 2,
 		HasAttack = 4,
 		IsOffCooldown = 8,
-		IsOffCooldownNextTurn = 16
+		IsOffCooldownNextTurn = 16,
+		CanBeCleansed = 32
 	};
 
 	eAbilityTypes myAbilityType;

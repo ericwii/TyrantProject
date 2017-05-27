@@ -545,6 +545,17 @@ bool Card::CanUseActivationAbility()
 	return GetStatusEffectNumber(eStatusEffectType::Jam) < 1 && GetStatusEffectNumber(eStatusEffectType::Freeze) < 1;
 }
 
+bool Card::HasNegativeStatusEffect()
+{
+	for (int i = 0; i < myStatusEffects.Size(); ++i)
+	{
+		if (myStatusEffects[i].effectType != eStatusEffectType::Augment && myStatusEffects[i].effectType != eStatusEffectType::Protect)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
 void Card::SetPopupHitbox()
 {

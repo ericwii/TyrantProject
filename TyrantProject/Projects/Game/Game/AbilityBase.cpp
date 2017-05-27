@@ -223,9 +223,14 @@ bool AbilityBase::CheckConditions(Card* aCard, int conditions)
 		{
 			meetsConditions &= aCard->GetCooldown() < 1;
 		}
-		else
+		else if (conditions & eFindTargetCondition::IsOffCooldownNextTurn)
 		{
 			meetsConditions &= aCard->GetCooldown() < 2;
+		}
+
+		if (meetsConditions && conditions & eFindTargetCondition::CanBeCleansed)
+		{
+			meetsConditions &= (aCard->HasNegativeStatusEffect() && aCard->GetStatusEffectNumber(eStatusEffectType::Phase) < 1);
 		}
 	}
 	if (conditions & eFindTargetCondition::HasAttack)

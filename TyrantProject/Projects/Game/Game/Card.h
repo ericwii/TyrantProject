@@ -100,6 +100,7 @@ public:
 
 	bool CanAttack();
 	bool CanUseActivationAbility();
+	bool HasNegativeStatusEffect();
 
 	void SetPopupHitbox();
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);

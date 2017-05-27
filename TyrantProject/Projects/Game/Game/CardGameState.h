@@ -27,5 +27,6 @@ private:
 	int myTurnCount;
 	bool myGameIsOver;
 	bool myUsersTurn;
+	bool myRenderDebugHitboxes;
 };
 
