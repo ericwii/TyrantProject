@@ -6,6 +6,7 @@ LeechAbility::LeechAbility(const string& aSuffix, char aNumber, eCardFaction aSp
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/leechIcon.png";
 	myAbilityType = eAbilityTypes::eLeech;
+	myCardText.Insert("Leech", 0);
 }
 
 

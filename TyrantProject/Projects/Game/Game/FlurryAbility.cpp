@@ -6,6 +6,7 @@ FlurryAbility::FlurryAbility(const string& aSuffix, char aNumber, eCardFaction a
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/flurryIcon.png";
 	myAbilityType = eAbilityTypes::eFlurry;
+	myCardText.Insert("Flurry", 0);
 }
 
 

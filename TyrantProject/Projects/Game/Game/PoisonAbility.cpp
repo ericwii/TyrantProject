@@ -6,6 +6,7 @@ PoisonAbility::PoisonAbility(const string& aSuffix, char aNumber, eCardFaction a
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/poisonIcon.png";
 	myAbilityType = eAbilityTypes::ePoison;
+	myCardText.Insert("Poison", 0);
 }
 
 

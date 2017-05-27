@@ -6,6 +6,7 @@ CounterAbility::CounterAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/counterIcon.png";
 	myAbilityType = eAbilityTypes::eCounter;
+	myCardText.Insert("Counter", 0);
 }
 
 CounterAbility::~CounterAbility()

@@ -19,6 +19,7 @@ StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber, eCardFaction a
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/strikeIcon.png";
 	myAbilityType = eAbilityTypes::eStrike;
+	myCardText.Insert("Strike", 0);
 }
 
 StrikeAbility::~StrikeAbility()

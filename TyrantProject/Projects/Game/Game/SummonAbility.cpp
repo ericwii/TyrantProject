@@ -10,6 +10,7 @@ SummonAbility::SummonAbility(const string& aSuffix, char aNumber, eCardFaction a
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/summonIcon.png";
 	myAbilityType = eAbilityTypes::eSummon;
+	myCardText.Insert("Summon", 0);
 
 	myCardToSummon = mySuffix;
 	for (int i = 0; i < aSuffix.Lenght(); ++i)

@@ -15,6 +15,7 @@ RallyAbility::RallyAbility(const string& aSuffix, char aNumber, eCardFaction aSp
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/rallyIcon.png";
 	myAbilityType = eAbilityTypes::eRally;
+	myCardText.Insert("Rally", 0);
 }
 
 

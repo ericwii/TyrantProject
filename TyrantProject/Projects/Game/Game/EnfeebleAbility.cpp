@@ -16,6 +16,8 @@ EnfeebleAbility::EnfeebleAbility(const string& aSuffix, char aNumber, eCardFacti
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/enfeebleIcon.png";
 	myAbilityType = eAbilityTypes::eEnfeeble;
+
+	myCardText.Insert("Enfeeble", 0);
 }
 
 

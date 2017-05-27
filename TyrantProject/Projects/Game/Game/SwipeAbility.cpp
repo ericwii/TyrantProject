@@ -17,6 +17,7 @@ SwipeAbility::SwipeAbility()
 	myAbilityType = eAbilityTypes::eSwipe;
 	iconTexturePath = "Data/Textures/Icons/Skills/swipeIcon.png";
 	myTargets.Allocate(2);
+	myCardText = "Swipe";
 }
 
 

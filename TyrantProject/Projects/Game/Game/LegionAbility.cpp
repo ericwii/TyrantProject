@@ -17,6 +17,7 @@ LegionAbility::LegionAbility(const string & aSuffix, char aNumber, eCardFaction 
 {
 	myAbilityType = eAbilityTypes::eLegion;
 	iconTexturePath = "Data/Textures/Icons/Skills/legionIcon.png";
+	myCardText.Insert("Legion", 0);
 }
 
 LegionAbility::~LegionAbility()

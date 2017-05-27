@@ -6,6 +6,7 @@ DiseaseAbility::DiseaseAbility()
 {
 	myAbilityType = eAbilityTypes::eDisease;
 	iconTexturePath = "Data/Textures/Icons/Skills/diseaseIcon.png";
+	myCardText = "Disease";
 }
 
 

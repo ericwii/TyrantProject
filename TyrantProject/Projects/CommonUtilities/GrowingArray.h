@@ -49,6 +49,7 @@ namespace CommonUtilities
 
 		void OptimizeSize();
 		inline void Reserve(const int aSize); 
+		inline bool IsAllocated() const;
 		__forceinline int Size() const; 
 
 	private:
@@ -294,7 +295,7 @@ template<typename ObjectType>
 inline void CU::GrowingArray<ObjectType>::AddAtIndex(int aIndex, const ObjectType& aObject)
 {
 	DEBUG_ASSERT(myMaxSize > 0, "Array is not initialized");
-	DEBUG_ASSERT(aIndex >= 0 && aIndex < myCurrentSize, "Index is out of range");
+	DEBUG_ASSERT(aIndex >= 0 && aIndex <= myCurrentSize, "Index is out of range");
 
 	if (myCurrentSize == myMaxSize)
 	{
@@ -513,11 +514,15 @@ inline const ObjectType& CU::GrowingArray<ObjectType>::GetLast() const
 	return myListPointer[myCurrentSize - 1];
 }
 
-
-//Size
+template<typename ObjectType>
+inline bool CU::GrowingArray<ObjectType>::IsAllocated() const
+{
+	return myMaxSize > 0;
+}
 
 template<typename ObjectType>
 __forceinline int CU::GrowingArray<ObjectType>::Size() const
 {
 	return myCurrentSize;
 } 
+

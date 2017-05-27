@@ -16,6 +16,8 @@ CleanseAbility::CleanseAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/cleanseIcon.png";
 	myAbilityType = eAbilityTypes::eCleanse;
+
+	myCardText.Insert("Cleanse", 0);
 }
 
 

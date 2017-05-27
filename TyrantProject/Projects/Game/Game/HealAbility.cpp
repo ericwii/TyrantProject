@@ -16,6 +16,8 @@ HealAbility::HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpec
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/healIcon.png";
 	myAbilityType = eAbilityTypes::eHeal;
+
+	myCardText.Insert("Heal", 0);
 }
 
 HealAbility::~HealAbility()

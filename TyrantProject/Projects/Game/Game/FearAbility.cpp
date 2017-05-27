@@ -6,6 +6,7 @@ FearAbility::FearAbility()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/fearIcon.png";
 	myAbilityType = eAbilityTypes::eFear;
+	myCardText = "Fear";
 }
 
 

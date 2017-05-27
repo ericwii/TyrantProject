@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Engine/Text3D.h"
+#include "GUIPopupWindow.h"
 
 struct OnComingAction;
 class Player;
@@ -77,6 +78,7 @@ public:
 	void LoadCard(string aCardName);
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
+	void TogglePopup(bool toggle);
 	void LowerCooldown();
 	void Upkeep();
 	void CleanUp();
@@ -99,6 +101,7 @@ public:
 	bool CanAttack();
 	bool CanUseActivationAbility();
 
+	void SetPopupHitbox();
 	void SetOrientation(const CU::Matrix44<float>& anOrientation);
 	void SetPosition(const Vector3<float>& aPosition);
 
@@ -119,13 +122,13 @@ public:
 
 
 private:
+	GUIPopupWindow myPopup;
 	Instance myCanvas;
 	Instance myIllustration;
 	Instance myHealthIcon;
 	Instance myAttackIcon;
 	Instance myCooldownIcon;
 	Instance myCardTypeIcon;
-	Text3D myNameText;
 	Text3D myAttackText;
 	Text3D myHealthText;
 	Text3D myCooldownText;

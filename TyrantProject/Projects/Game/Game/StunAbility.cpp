@@ -17,6 +17,7 @@ StunAbility::StunAbility()
 {
 	myAbilityType = eAbilityTypes::eStun;
 	iconTexturePath = "Data/Textures/Icons/Skills/stunIcon.png";
+	myCardText = "Stun";
 }
 
 

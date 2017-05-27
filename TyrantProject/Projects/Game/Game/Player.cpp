@@ -51,6 +51,7 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myComander = &myOwnedCards[0];
 	myComander->SetOrientation(CU::Matrix44<float>());
 	myComander->SetPosition(commanderPosition);
+	myComander->SetPopupHitbox();
 
 	myAssaultCards.Allocate(16);
 	myStructureCards.Allocate(16);
@@ -60,6 +61,19 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	DrawCard();
 	DrawCard();
 	DrawCard();	
+}
+
+void Player::ToggleCardPopups(bool toggle)
+{
+	myComander->TogglePopup(toggle);
+	for (int i = 0; i < myAssaultCards.Size(); ++i)
+	{
+		myAssaultCards[i]->TogglePopup(toggle);
+	}
+	for (int i = 0; i < myStructureCards.Size(); ++i)
+	{
+		myStructureCards[i]->TogglePopup(toggle);
+	}
 }
 
 void Player::Render()
@@ -132,7 +146,8 @@ Card* Player::SummonCard(const string& aCardToSummon)
 			position.y *= -1;
 		}
 
-		mySummonedCards.GetLast().SetPosition(position);
+		newCard.SetPosition(position);
+		newCard.SetPopupHitbox();
 		myAssaultCards.Add(&mySummonedCards.GetLast());
 	}
 	else if (newCard.GetCardType() == eCardType::Structure)
@@ -144,7 +159,8 @@ Card* Player::SummonCard(const string& aCardToSummon)
 			position.y *= -1.f;
 		}
 
-		mySummonedCards.GetLast().SetPosition(position);
+		newCard.SetPosition(position);
+		newCard.SetPopupHitbox();
 		myStructureCards.Add(&mySummonedCards.GetLast());
 	}
 
@@ -254,12 +270,14 @@ void Player::RepositionPlayedCards()
 	for (int i = 0; i < myAssaultCards.Size(); ++i)
 	{
 		myAssaultCards[i]->SetPosition(currentPosition);
+		myAssaultCards[i]->SetPopupHitbox();
 		currentPosition.x += playedCardsOffset;
 	}
 
 	for (int i = 0; i < myStructureCards.Size(); ++i)
 	{
 		myStructureCards[i]->SetPosition(currentStructurePosition);
+		myStructureCards[i]->SetPopupHitbox();
 		currentStructurePosition.x += playedCardsOffset;
 	}
 }

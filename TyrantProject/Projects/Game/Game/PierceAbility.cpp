@@ -6,6 +6,7 @@ PierceAbility::PierceAbility(const string & aSuffix, char aNumber, eCardFaction 
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/pierceIcon.png";
 	myAbilityType = eAbilityTypes::ePierce;
+	myCardText.Insert("Pierce", 0);
 }
 
 PierceAbility::~PierceAbility()

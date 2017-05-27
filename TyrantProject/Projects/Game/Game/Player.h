@@ -20,6 +20,7 @@ public:
 	~Player();
 
 	void Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* anOpponent);
+	void ToggleCardPopups(bool toggle);
 
 	void Render();
 

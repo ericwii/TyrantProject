@@ -15,6 +15,7 @@ WeakenAbility::WeakenAbility(const string & aSuffix, char aNumber, eCardFaction 
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/weakenIcon.png";
 	myAbilityType = eAbilityTypes::eWeaken;
+	myCardText.Insert("Weaken", 0);
 }
 
 WeakenAbility::~WeakenAbility()

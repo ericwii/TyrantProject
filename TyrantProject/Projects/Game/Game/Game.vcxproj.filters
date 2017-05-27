@@ -100,9 +100,6 @@
       <Filter>Abilities\Defensive</Filter>
     </ClCompile>
     <ClCompile Include="FPS_Counter.cpp" />
-    <ClCompile Include="LegionAbility.cpp">
-      <Filter>Abilities</Filter>
-    </ClCompile>
     <ClCompile Include="SupplyAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
       <Filter>Abilities\Defensive</Filter>
     </ClCompile>
     <ClCompile Include="DiseaseAbility.cpp">
-      <Filter>Abilities\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="ImmobiliseAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
     <ClCompile Include="JamAbility.cpp">
@@ -136,16 +130,30 @@
     <ClCompile Include="SwipeAbility.cpp">
       <Filter>Abilities\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="AgumentAbility.cpp">
-      <Filter>Abilities\Activation</Filter>
-    </ClCompile>
     <ClCompile Include="CleanseAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
     <ClCompile Include="CardGameCameraManager.cpp" />
+    <ClCompile Include="GUIPopupWindow.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIWindow.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIManager.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AugumentAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="ImmobilizeAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="LegionAbility.cpp">
+      <Filter>Abilities\Activation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyxml2.h">
       <Filter>XML</Filter>
@@ -253,9 +261,6 @@
       <Filter>Abilities\Defensive</Filter>
     </ClInclude>
     <ClInclude Include="FPS_Counter.h" />
-    <ClInclude Include="LegionAbility.h">
-      <Filter>Abilities</Filter>
-    </ClInclude>
     <ClInclude Include="SupplyAbility.h">
       <Filter>Abilities\Activation</Filter>
     </ClInclude>
@@ -269,9 +274,6 @@
       <Filter>Abilities\Defensive</Filter>
     </ClInclude>
     <ClInclude Include="DiseaseAbility.h">
-      <Filter>Abilities\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="ImmobiliseAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
     <ClInclude Include="JamAbility.h">
@@ -289,13 +291,29 @@
     <ClInclude Include="SwipeAbility.h">
       <Filter>Abilities\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="AgumentAbility.h">
-      <Filter>Abilities\Activation</Filter>
-    </ClInclude>
     <ClInclude Include="CleanseAbility.h">
       <Filter>Abilities\Activation</Filter>
     </ClInclude>
     <ClInclude Include="CardGameCameraManager.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GUIPopupWindow.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIWindow.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIManager.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="AugumentAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="ImmobilizeAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="LegionAbility.h">
+      <Filter>Abilities\Activation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="XML">
@@ -321,6 +339,9 @@
     </Filter>
     <Filter Include="Abilities\Combat">
       <UniqueIdentifier>{1bc4ea0e-3701-41af-b358-49448fd8f338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{91b6bb61-aa01-46ea-a6e0-3afc7febeaad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

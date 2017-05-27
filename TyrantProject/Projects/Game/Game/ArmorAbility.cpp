@@ -6,6 +6,8 @@ ArmorAbility::ArmorAbility(const string& aSuffix, char aNumber, eCardFaction aSp
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/armoredIcon.png";
 	myAbilityType = eAbilityTypes::eArmor;
+
+	myCardText.Insert("Armor", 0);
 }
 
 

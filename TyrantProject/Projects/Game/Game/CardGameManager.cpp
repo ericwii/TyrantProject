@@ -30,6 +30,9 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 			{
 				instance->Upkeep(anActivePlayer);
 				instance->myPhaseUpdateDone = true;
+
+				anActivePlayer.ToggleCardPopups(true);
+				aOtherPlayer.ToggleCardPopups(true);
 				break;
 			}
 			case(eGamePhase::Play) :
@@ -110,6 +113,10 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 		{
 			currentAbilities[j]->OnPlay(myChoosenCard);
 		}
+
+		myChoosenCard->SetPopupHitbox();
+		anActivePlayer.ToggleCardPopups(false);
+		anActivePlayer.GetOpponent()->ToggleCardPopups(false);
 		return true;
 	}
 

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ImmobiliseAbility.h"
+#include "ImmobilizeAbility.h"
 
 Vector2<float> immobilizeAnimationSize(1.5f, 2.f);
 AnimationData immobilizeAnimation = AnimationData
@@ -13,18 +13,19 @@ AnimationData immobilizeAnimation = AnimationData
 
 
 
-ImmobiliseAbility::ImmobiliseAbility()
+ImmobilizeAbility::ImmobilizeAbility()
 {
 	myAbilityType = eAbilityTypes::eImmobilise;
 	iconTexturePath = "Data/Textures/Icons/Skills/immobilizeIcon.png";
+	myCardText = "Immobilize";
 }
 
 
-ImmobiliseAbility::~ImmobiliseAbility()
+ImmobilizeAbility::~ImmobilizeAbility()
 {
 }
 
-void ImmobiliseAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
+void ImmobilizeAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage)
 {
 	aCard;
 	someDamage;

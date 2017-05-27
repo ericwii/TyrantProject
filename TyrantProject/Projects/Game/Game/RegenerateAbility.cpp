@@ -6,6 +6,7 @@ RegenerateAbility::RegenerateAbility(const string& aSuffix, char aNumber, eCardF
 {
 	myAbilityType = eAbilityTypes::eRegenerate;
 	iconTexturePath = "Data/Textures/Icons/Skills/regenerateIcon.png";
+	myCardText.Insert("Regenerate", 0);
 }
 
 

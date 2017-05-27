@@ -16,6 +16,7 @@ RefreshAbility::RefreshAbility() : AbilityBase()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/refreshIcon.png";
 	myAbilityType = eAbilityTypes::eRefresh;
+	myCardText = "Refresh";
 }
 
 RefreshAbility::~RefreshAbility()

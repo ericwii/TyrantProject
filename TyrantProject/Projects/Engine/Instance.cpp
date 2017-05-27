@@ -71,7 +71,8 @@ void Instance::SetPosition(Vector3<float> aPosition)
 	{
 		currentPosition = myTexts[i]->GetPosition();
 
-		myTexts[i]->SetPosition(currentPosition + deltaPosition);
+		float zConsideration = 1.f - (-currentPosition.z / 5.f);
+		myTexts[i]->SetPosition(currentPosition + deltaPosition * zConsideration);
 	}
 }
 

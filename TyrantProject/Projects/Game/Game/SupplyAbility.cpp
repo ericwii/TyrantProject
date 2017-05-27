@@ -17,7 +17,7 @@ SupplyAbility::SupplyAbility(const string& aSuffix, char aNumber, eCardFaction a
 	iconTexturePath = "Data/Textures/Icons/Skills/supplyIcon.png";
 	myAbilityType = eAbilityTypes::eSupply;
 	myTargets.Allocate(2);
-	
+	myCardText.Insert("Supply", 0);
 }
 
 

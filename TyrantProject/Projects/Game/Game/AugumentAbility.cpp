@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "AgumentAbility.h"
+#include "AugumentAbility.h"
 
 
 Vector2<float> agumentAnimationSize(1.5f, 2.f);
@@ -16,6 +16,7 @@ AugmentAbility::AugmentAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/augmentIcon.png";
 	myAbilityType = eAbilityTypes::eAgument;
+	myCardText.Insert("Augment", 0);
 }
 
 

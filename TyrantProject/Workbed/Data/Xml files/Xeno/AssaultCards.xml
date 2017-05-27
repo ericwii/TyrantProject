@@ -47,7 +47,7 @@
   </card>
 
   <card>
-    <name>Warp_Sculpture</name>
+    <name>Warp Sculpture</name>
     <illustration>Xeno/Assault/Warp Sculpture.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
@@ -223,7 +223,7 @@
 
   <card>
     <name>Serak</name>
-    <illustration>Xeno/Assault/Glaive.jpg</illustration>
+    <illustration>Xeno/Assault/Serak.jpg</illustration>
     <faction>xeno</faction>
     <cardType>assault</cardType>
     <rarity>common</rarity>

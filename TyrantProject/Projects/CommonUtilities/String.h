@@ -40,6 +40,7 @@ namespace CommonUtilities
 		void operator=(const char* aLiteralString);
 
 		int Find(const char* aLiteralString) const;
+		void Insert(const char* aLiteralString, int aIndex);
 
 
 		String SubStr(const int aIndex, const int aLenght = Size) const;
@@ -363,7 +364,7 @@ namespace CommonUtilities
 	{
 		DEBUG_ASSERT(myCurrentSize > 0, "Size is equal to zero!");
 
-		unsigned int size = strlen(aLiteralString);
+		int size = strlen(aLiteralString);
 
 		if(size > myCurrentSize) 
 		{
@@ -371,7 +372,7 @@ namespace CommonUtilities
 		}
 		std::map<char, unsigned int>table;
 
-		for (unsigned int c = 0; c < size - 1; ++c)
+		for (int c = 0; c < size - 1; ++c)
 			table.insert(std::pair<char, unsigned int>(aLiteralString[c], size - c - 1));
 
 		if (table.find(aLiteralString[size]) == table.end())
@@ -380,9 +381,9 @@ namespace CommonUtilities
 		}
 
 		int i = 0;
-		unsigned char success = 0;
+		char success = 0;
 
-		while (static_cast<unsigned int>(i) <= myCurrentSize - size) // vi har inte flyttat ordet utanför
+		while (i <= myCurrentSize - size) // vi har inte flyttat ordet utanför
 		{
 			success = 0;
 
@@ -408,6 +409,28 @@ namespace CommonUtilities
 		}
 
 		return -1;
+	}
+
+	StringTemplate
+	void String<Size>::Insert(const char* aLiteralString, int aIndex)
+	{
+		DEBUG_ASSERT(aIndex >= 0 && aIndex <= myCurrentSize, "Index is out of range");
+
+		int size = strlen(aLiteralString);
+
+		int endIndex = myCurrentSize + size - 1;
+		for (int i = endIndex; i > aIndex; --i)
+		{
+			myArray[i] = myArray[myCurrentSize - (endIndex-i) - 1];
+		}
+
+		for (int i = aIndex; i < size; ++i)
+		{
+			myArray[i] = aLiteralString[i];
+		}
+
+		myCurrentSize += size;
+		myArray[myCurrentSize] = '\0';
 	}
 
 	//Private methods

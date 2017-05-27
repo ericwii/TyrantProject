@@ -15,6 +15,7 @@ JamAbility::JamAbility(const string& aSuffix, char aNumber, eCardFaction aSpecif
 {
 	myAbilityType = eAbilityTypes::eJam;
 	iconTexturePath = "Data/Textures/Icons/Skills/jamIcon.png";
+	myCardText.Insert("Jam", 0);
 }
 
 

@@ -8,6 +8,20 @@ Text3D::Text3D() : myFont(nullptr), myCharacterSpace(1.f)
 {
 }
 
+Text3D::Text3D(const Text3D& aText)
+{
+	myFont = aText.myFont;
+	myTextPositioning = aText.myTextPositioning;
+	myCharacterScale = aText.myCharacterScale;
+	myCharacterSpace = aText.myCharacterSpace;
+	myOrientation = aText.GetOrientation();
+	myColor = aText.myColor;
+
+	InitVertexBuffer();
+	InitInputLayout();
+	SetText(aText.myText);
+}
+
 Text3D::~Text3D()
 {
 }

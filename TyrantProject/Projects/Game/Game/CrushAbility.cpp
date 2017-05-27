@@ -6,6 +6,7 @@ CrushAbility::CrushAbility(const string& aSuffix, char aNumber, eCardFaction aSp
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/crushIcon.png";
 	myAbilityType = eAbilityTypes::eCrush;
+	myCardText.Insert("Crush", 0);
 }
 
 

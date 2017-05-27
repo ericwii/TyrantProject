@@ -2,6 +2,7 @@
 #include "CardGameState.h"
 #include "CardGameTextManager.h"
 #include "CardGameCameraManager.h"
+#include "GUIManager.h"
 
 
 
@@ -69,6 +70,7 @@ void CardGameState::Update()
 	CardGameTextManager::Update(deltaTime);
 	CardGameCameraManager::Update(deltaTime);
 	AbilityStack::Update(deltaTime);
+	GUIManager::Update(deltaTime);
 }
 
 void CardGameState::Render()
@@ -83,6 +85,8 @@ void CardGameState::Render()
 	AbilityStack::Render();
 	AnimationManager::Render();
 	CardGameTextManager::Render();
+	GUIManager::Render();
+	//GUIManager::RenderDebugHitboxes();
 
 	if (myGameIsOver)
 	{

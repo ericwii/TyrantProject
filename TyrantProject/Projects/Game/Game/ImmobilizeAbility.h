@@ -1,11 +1,11 @@
 #pragma once
 #include "AbilityBase.h"
 
-class ImmobiliseAbility: public AbilityBase
+class ImmobilizeAbility: public AbilityBase
 {
 public:
-	ImmobiliseAbility();
-	~ImmobiliseAbility();
+	ImmobilizeAbility();
+	~ImmobilizeAbility();
 
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage) override;
 };

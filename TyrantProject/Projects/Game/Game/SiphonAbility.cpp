@@ -6,6 +6,7 @@ SiphonAbility::SiphonAbility(const string& aSuffix, char aNumber, eCardFaction a
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/siphonIcon.png";
 	myAbilityType = eAbilityTypes::eSiphon;
+	myCardText.Insert("Siphon", 0);
 }
 
 

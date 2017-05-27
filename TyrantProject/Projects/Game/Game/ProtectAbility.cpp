@@ -16,6 +16,7 @@ ProtectAbility::ProtectAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/protectIcon.png";
 	myAbilityType = eAbilityTypes::eProtect;
+	myCardText.Insert("Protect", 0);
 }
 
 

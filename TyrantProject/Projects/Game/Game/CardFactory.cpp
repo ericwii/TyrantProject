@@ -323,7 +323,7 @@ AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix,
 	}
 	else if (aName == "immobilize")
 	{
-		return new ImmobiliseAbility();
+		return new ImmobilizeAbility();
 	}
 	else if (aName == "jam")
 	{

@@ -6,6 +6,7 @@ BerserkAbility::BerserkAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/berserkIcon.png";
 	myAbilityType = eAbilityTypes::eBerserk;
+	myCardText.Insert("Berserk", 0);
 }
 
 
@@ -25,6 +26,9 @@ void BerserkAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someD
 
 void BerserkAbility::OnCombatDamaged(char someDamage, Card * aCard, Card * anAttacker)
 {
+	someDamage;
+	aCard;
+	anAttacker;
 }
 
 void BerserkAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)

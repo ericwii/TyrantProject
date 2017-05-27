@@ -104,7 +104,7 @@
     <ClInclude Include="AbilityBase.h" />
     <ClInclude Include="AbilityStack.h" />
     <ClInclude Include="AbilityTypes.h" />
-    <ClInclude Include="AgumentAbility.h" />
+    <ClInclude Include="AugumentAbility.h" />
     <ClInclude Include="AllAbilities.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="AntiAirAbility.h" />
@@ -129,14 +129,17 @@
     <ClInclude Include="FPS_Counter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="GUIManager.h" />
+    <ClInclude Include="GUIWindow.h" />
     <ClInclude Include="HealAbility.h" />
-    <ClInclude Include="ImmobiliseAbility.h" />
+    <ClInclude Include="ImmobilizeAbility.h" />
     <ClInclude Include="JamAbility.h" />
     <ClInclude Include="LeechAbility.h" />
     <ClInclude Include="LegionAbility.h" />
     <ClInclude Include="PierceAbility.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PoisonAbility.h" />
+    <ClInclude Include="GUIPopupWindow.h" />
     <ClInclude Include="ProtectAbility.h" />
     <ClInclude Include="RallyAbility.h" />
     <ClInclude Include="RefreshAbility.h" />
@@ -158,7 +161,7 @@
   <ItemGroup>
     <ClCompile Include="AbilityBase.cpp" />
     <ClCompile Include="AbilityStack.cpp" />
-    <ClCompile Include="AgumentAbility.cpp" />
+    <ClCompile Include="AugumentAbility.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="AntiAirAbility.cpp" />
     <ClCompile Include="ArmorAbility.cpp" />
@@ -183,14 +186,17 @@
       <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
     </ClCompile>
     <ClCompile Include="BaseState.cpp" />
+    <ClCompile Include="GUIManager.cpp" />
+    <ClCompile Include="GUIWindow.cpp" />
     <ClCompile Include="HealAbility.cpp" />
-    <ClCompile Include="ImmobiliseAbility.cpp" />
+    <ClCompile Include="ImmobilizeAbility.cpp" />
     <ClCompile Include="JamAbility.cpp" />
     <ClCompile Include="LeechAbility.cpp" />
     <ClCompile Include="LegionAbility.cpp" />
     <ClCompile Include="PierceAbility.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PoisonAbility.cpp" />
+    <ClCompile Include="GUIPopupWindow.cpp" />
     <ClCompile Include="ProtectAbility.cpp" />
     <ClCompile Include="RallyAbility.cpp" />
     <ClCompile Include="RefreshAbility.cpp" />

@@ -6,6 +6,7 @@ AntiAirAbility::AntiAirAbility(const string& aSuffix, char aNumber, eCardFaction
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/antiAirIcon.png";
 	myAbilityType = eAbilityTypes::eAntiAir;
+	myCardText.Insert("AntiAir", 0);
 }
 
 

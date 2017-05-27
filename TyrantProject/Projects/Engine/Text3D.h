@@ -17,6 +17,7 @@ class Text3D
 {
 public:
 	Text3D();
+	Text3D(const Text3D& aText);
 	~Text3D();
 
 	void Destroy();

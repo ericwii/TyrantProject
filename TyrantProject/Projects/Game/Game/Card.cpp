@@ -13,6 +13,9 @@ Model* statusEffectIconBackgrund;
 Vector2<float> statusEffectIconOffset(-0.6f, 0.85f);
 float statusEffectIconSpacing = 0.2f;
 
+string factionName;
+float popupOffset = 1.5f;
+
 
 using namespace tinyxml2;
 
@@ -66,6 +69,8 @@ void Card::Update(float aDeltaTime)
 		{
 			alpha = 0;
 			myIsDead = true;
+
+			myPopup.Destroy();
 		}
 
 		myCanvas.SetAlpha(alpha);		
@@ -88,6 +93,7 @@ void Card::LoadCard(string aCardName)
 	LoadText();
 	LoadIcons();
 
+	myPopup.SetPosition(Vector3<float>(0, 0, -1.f));
 	myRenderPassIndex = 0;
 	myStatusEffects.Allocate(4);
 	myCooldown = myCardData->cooldown;
@@ -109,6 +115,7 @@ void Card::LoadCard(CardData* someData)
 	LoadIcons();
 	LoadText();
 
+	myPopup.SetPosition(Vector3<float>(0, 0, -1.f));
 	myRenderPassIndex = 0;
 	myStatusEffects.Allocate(4);
 	myCooldown = myCardData->cooldown;
@@ -128,6 +135,11 @@ void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
 	myLerpTarget = aOrientation;
 	myTargetLerpTime = aTime;
 	myCurrentLerpTime = 0;
+}
+
+void Card::TogglePopup(bool toggle)
+{
+	myPopup.SetActive(toggle);
 }
 
 void Card::LowerCooldown()
@@ -534,6 +546,16 @@ bool Card::CanUseActivationAbility()
 }
 
 
+void Card::SetPopupHitbox()
+{
+	Vector2<float> screenPosition = Engine::GetInstance()->GetCamera().ToScreenPosition(myCanvas.GetPosition());
+	Vector2<float> hitboxOffset(0.1f, 0.2f);
+
+	screenPosition.y *= -1.f;
+	Hitbox2D popupHitbox(screenPosition - hitboxOffset, Vector2<float>(0.2f, 0.4f));
+	myPopup.SetHitbox(popupHitbox);
+}
+
 void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
 {
 	myCanvas.SetOrientation(anOrientation);
@@ -566,13 +588,61 @@ void Card::PositionStatusEffectIcons()
 	}
 }
 
+void Card::LoadCanvas()
+{
+	string canvasPath;
+	switch (myCardData->faction)
+	{
+		case(eCardFaction::BloodThirsty) :
+		{
+			canvasPath = "Data/Textures/CardCanvas/BloodThirstyCanvas.png";
+			factionName = "Bloodthirsty";
+			break;
+		}
+		case(eCardFaction::Imperial) :
+		{
+			canvasPath = "Data/Textures/CardCanvas/ImperialCanvas.png";
+			factionName = "Imperial";
+			break;
+		}
+		case(eCardFaction::Raider) :
+		{
+			canvasPath = "Data/Textures/CardCanvas/RaiderCanvas.png";
+			factionName = "Raider";
+			break;
+		}
+		case(eCardFaction::Righteous) :
+		{
+			canvasPath = "Data/Textures/CardCanvas/RighteousCanvas.png";
+			factionName = "Righteous";
+			break;
+		}
+		case(eCardFaction::Xeno) :
+		{
+			canvasPath = "Data/Textures/CardCanvas/XenoCanvas.png";
+			factionName = "Xeno";
+			break;
+		}
+		default: //Action
+		{
+			canvasPath = "Data/Textures/CardCanvas/canvas.png";
+			break;
+		}
+	}
+	Model* canvasModel = ModelLoader::LoadRectangle(Vector2<float>(1.5f, 2.f), eEffectType::Card, canvasPath, true);
+	myCanvas.Init(canvasModel);
+
+	myPopup.Init(myCanvas, popupOffset);
+}
+
 void Card::LoadModels()
 {
 	Model* illustrationModel = ModelLoader::LoadRectangle(Vector2<float>(1.4f, 1.1f), eEffectType::Textured, myCardData->illustrationPath);
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));
-	
 	myCanvas.AddChild(&myIllustration);
+	myPopup.AddChildInstance(myIllustration, Vector3<float>(0, 0.47f, 0));
+
 
 	if (myCardData->cardType != eCardType::Action)
 	{
@@ -580,6 +650,13 @@ void Card::LoadModels()
 		myHealthIcon.Init(healthIconModel);
 		myHealthIcon.SetPosition(Vector3<float>(0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myHealthIcon);
+
+		myPopup.AddChildInstance(myHealthIcon, Vector3<float>(1.2f, -1.75f, 0));
+
+		Model* factionStripModel = ModelLoader::LoadRectangle(Vector2<float>(0.85f, 0.15f), eEffectType::Textured, "Data/Textures/CardCanvas/factionStrip.png");
+		Instance factionStripInstance;
+		factionStripInstance.Init(factionStripModel);
+		myPopup.AddChildInstance(factionStripInstance, Vector3<float>(-0.56f, -0.5f, 0));
 	}
 
 	if (myCardData->cardType == eCardType::Assault)
@@ -588,6 +665,8 @@ void Card::LoadModels()
 		myAttackIcon.Init(attackIconModel);
 		myAttackIcon.SetPosition(Vector3<float>(-0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myAttackIcon);
+
+		myPopup.AddChildInstance(myAttackIcon, Vector3<float>(-1.2f, -1.75f, 0));
 	}
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
 	{
@@ -595,6 +674,8 @@ void Card::LoadModels()
 		myCooldownIcon.Init(cooldownIconModel);
 		myCooldownIcon.SetPosition(Vector3<float>(0.48f, 0.82f, 0));
 		myCanvas.AddChild(&myCooldownIcon);
+
+		myPopup.AddChildInstance(myCooldownIcon, Vector3<float>(1.1f, 1.75f, 0.5f));
 	}
 }
 
@@ -602,15 +683,6 @@ void Card::LoadText()
 {
 	FontContainer& container = Engine::GetInstance()->GetFontContainer();
 	TextFont* font = container.GetFont("Data/Fonts/debugFont.dds", eEffectType::Text3D);
-	
-	myNameText.Init(font);
-	myNameText.SetCharacterSpace(0.8f);
-	myNameText.SetText(myCardData->name);
-	myNameText.SetPosition(Vector2<float>(-0.55f, 0.88f));
-	myNameText.SetCurrentOrientationAsOriginal();
-
-	//myCanvas.AddChild(&myNameText);
-
 
 	if (myCardData->cardType != eCardType::Action)
 	{
@@ -625,6 +697,8 @@ void Card::LoadText()
 		myHealthText.SetPosition(Vector2<float>(0.4f, -0.86f));
 		myHealthText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myHealthText);
+
+		myPopup.AddChildText(myHealthText, Vector3<float>(0.52f, -1.05f, -1.2f));
 	}
 
 	if (myCardData->cardType == eCardType::Assault)
@@ -639,6 +713,8 @@ void Card::LoadText()
 		myAttackText.SetPosition(Vector2<float>(-0.4f, -0.86f));
 		myAttackText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myAttackText);
+
+		myPopup.AddChildText(myAttackText, Vector3<float>(-0.52f, -1.05f, -1.2f));
 	}
 	
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
@@ -653,84 +729,103 @@ void Card::LoadText()
 		myCooldownText.SetPosition(Vector2<float>(0.48f, 0.84f));
 		myCooldownText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myCooldownText);
-	}
-}
 
-void Card::LoadCanvas()
-{
-	string canvasPath;
-	switch (myCardData->faction)
-	{
-		case(eCardFaction::BloodThirsty) :
-		{
-			canvasPath = "Data/Textures/CardCanvas/BloodThirstyCanvas.png";
-			break;
-		}
-		case(eCardFaction::Imperial) :
-		{
-			canvasPath = "Data/Textures/CardCanvas/ImperialCanvas.png";
-			break;
-		}
-		case(eCardFaction::Raider) :
-		{
-			canvasPath = "Data/Textures/CardCanvas/RaiderCanvas.png";
-			break;
-		}
-		case(eCardFaction::Righteous) :
-		{
-			canvasPath = "Data/Textures/CardCanvas/RighteousCanvas.png";
-			break;
-		}
-		case(eCardFaction::Xeno) :
-		{
-			canvasPath = "Data/Textures/CardCanvas/XenoCanvas.png";
-			break;
-		}
-		default: //Action
-		{
-			canvasPath = "Data/Textures/CardCanvas/canvas.png";
-			break;
-		}
+		myPopup.AddChildText(myCooldownText, Vector2<float>(0.87f, 1.41f));
 	}
-	Model* canvasModel = ModelLoader::LoadRectangle(Vector2<float>(1.5f, 2.f), eEffectType::Card, canvasPath, true);
-	myCanvas.Init(canvasModel);
+
+	//Name
+	Text3D tempText;
+	tempText.Init(font);
+	tempText.SetCharacterSpace(1.1f);
+	tempText.SetCharacterScale(1.4f);
+	tempText.SetText(myCardData->name);
+	myPopup.AddChildText(tempText, Vector2<float>(-0.70f, 1.4f));
+
+	//Abilities
+	tempText.SetCharacterSpace(1.1f);
+	tempText.SetCharacterScale(1.4f);
+	for (int i = 0; i < myCardData->abilities.Size(); ++i)
+	{
+		tempText.SetText(myCardData->abilities[i]->GetCardText());
+		myPopup.AddChildText(tempText, Vector3<float>(-0.98f, -0.85f - (0.25f * i), 0.9f));
+	}
+
+	//Faction Name
+	if (myCardData->cardType != eCardType::Action)
+	{
+		tempText.SetCharacterSpace(1.1f);
+		tempText.SetCharacterScale(1.4f);
+		tempText.SetText(factionName);
+		myPopup.AddChildText(tempText, Vector2<float>(-1.0f, -0.42f));
+	}
 }
 
 void Card::LoadIcons()
 {
-	//Model* cardTypeIcon = nullptr;
-	//
-	//switch (myCardData->cardType)
-	//{
-	//	case(eCardType::Action):
-	//	{
-	//		cardTypeIcon = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/actionIcon.png");
-	//		break;
-	//	}
-	//	case(eCardType::Assault):
-	//	{
-	//		cardTypeIcon = ModelLoader::LoadRectangle3D(Vector2<float>(0.15f, 0.15f), eEffectType::Textured, "Data/Textures/Icons/assaultIcon.png");
-	//		break;
-	//	}
-	//	case(eCardType::Commander):
-	//	{
-	//		cardTypeIcon = ModelLoader::LoadRectangle3D(Vector2<float>(0.1f, 0.15f), eEffectType::Textured, "Data/Textures/Icons/commanderIcon.png");
-	//		break;
-	//	}
-	//	case(eCardType::Structure):
-	//	{
-	//		cardTypeIcon = ModelLoader::LoadRectangle3D(Vector2<float>(0.2f, 0.2f), eEffectType::Textured, "Data/Textures/Icons/structureIcon.png");
-	//		break;
-	//	}
-	//	default:
-	//	{
-	//		break;
-	//	}
-	//}
-	//
-	//myCardTypeIcon.Init(cardTypeIcon);
-	//myCardTypeIcon.SetPosition(Vector3<float>(-0.53f, 0.87f, 0));
-	//
+	Model* cardTypeIcon = nullptr;
+	string cardTypeIconPath = "Data/Textures/Icons/";
+	switch (myCardData->rarity)
+	{
+		case(eRarity::Common) :
+		{
+			cardTypeIconPath += "common";
+			break;
+		}
+		case(eRarity::Uncommon) :
+		{
+			cardTypeIconPath += "uncommon";
+			break;
+		}
+		case(eRarity::Rare) :
+		{
+			cardTypeIconPath += "rare";
+			break;
+		}
+		case(eRarity::Legendary) :
+		{
+			cardTypeIconPath += "legendary";
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+
+	
+	switch (myCardData->cardType)
+	{
+		case(eCardType::Action):
+		{
+			cardTypeIconPath += "ActionIcon.png";
+			break;
+		}
+		case(eCardType::Assault):
+		{
+			cardTypeIconPath += "AssaultIcon.png";
+			break;
+		}
+		case(eCardType::Commander):
+		{
+			cardTypeIconPath += "CommanderIcon.png";
+			break;
+		}
+		case(eCardType::Structure):
+		{
+			cardTypeIconPath += "StructureIcon.png";
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+	
+	cardTypeIcon = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.15f), eEffectType::Textured, cardTypeIconPath);
+	myCardTypeIcon.Init(cardTypeIcon);
+	myCardTypeIcon.SetPosition(Vector3<float>(-0.53f, 0.87f, 0));
+	
+	myPopup.AddChildInstance(myCardTypeIcon, Vector3<float>(-1.2f, 1.76f, 0));
 	//myCanvas.AddChild(&myCardTypeIcon);
 
 
@@ -747,5 +842,6 @@ void Card::LoadIcons()
 		
 		myAbilityIcons.Add(iconInstance);
 		myCanvas.AddChild(&myAbilityIcons[i]);
+		myPopup.AddChildInstance(iconInstance, Vector3<float>(-1.25f, -0.9f - (0.25f * i), 0.9f));
 	}
 }

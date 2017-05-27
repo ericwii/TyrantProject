@@ -16,6 +16,7 @@ FlyingAbility::FlyingAbility()
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/flyingIcon.png";
 	myAbilityType = eAbilityTypes::eFlying;
+	myCardText = "Flying";
 }
 
 

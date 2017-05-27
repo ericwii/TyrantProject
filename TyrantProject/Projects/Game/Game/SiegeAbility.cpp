@@ -16,6 +16,7 @@ SiegeAbility::SiegeAbility(const string & aSuffix, char aNumber, eCardFaction aS
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/siegeIcon.png";
 	myAbilityType = eAbilityTypes::eSiege;
+	myCardText.Insert("Siege", 0);
 }
 
 SiegeAbility::~SiegeAbility()

@@ -43,6 +43,7 @@ public:
 	virtual void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage);
 
 
+	const string& GetCardText();
 	const eAbilityTypes GetAbilityType();
 	const char GetNumber();
 
@@ -61,6 +62,7 @@ protected:
 	eAbilityTypes myAbilityType;
 	CU::GrowingArray<Card*> myTargets;
 	string mySuffix;
+	string myCardText;
 	eCardFaction mySpecificFaction;
 	char myNumber;
 
@@ -70,5 +72,6 @@ protected:
 	
 private:
 
+	void SetCardText();
 	bool CheckConditions(Card* aCard, int conditions);
 };

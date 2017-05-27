@@ -2,15 +2,25 @@
 #include "AbilityBase.h"
 
 
-AbilityBase::AbilityBase() : myNumber(0)
+AbilityBase::AbilityBase() : myCardText("Not Implemented"), myNumber(0)
 {
 }
 
-AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction)
+AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : myCardText("Not Implemented"), mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction)
 {
 	if (mySuffix == "all")
 	{
 		myTargets.Allocate(8);
+	}
+
+	myCardText = " ";
+	if (mySuffix.Lenght() > 0)
+	{
+		SetCardText();
+	}
+	else if(myNumber > 0)
+	{
+		myCardText += myNumber;
 	}
 }
 
@@ -35,6 +45,11 @@ void AbilityBase::OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) { 
 void AbilityBase::OnCommanderAttack(Card*& aCurrentTarget, Card* aUser) { aCurrentTarget; aUser; }
 void AbilityBase::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDamage) { aCard; aDamagedCard; someDamage; }
 void AbilityBase::DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) { aCaster; someTargets; }
+
+const string& AbilityBase::GetCardText()
+{
+	return myCardText;
+}
 
 const eAbilityTypes AbilityBase::GetAbilityType()
 {
@@ -131,6 +146,70 @@ CU::GrowingArray<Card*>& AbilityBase::FindAdjecentTargets(Card * originalTarget)
 
 
 //Private Methods
+
+void AbilityBase::SetCardText()
+{
+	bool hasAllSuffix = false;
+
+	if (mySuffix.Find("all") != -1)
+	{
+		hasAllSuffix = true;
+		myCardText += "All ";
+	}
+	if (mySpecificFaction != eCardFaction::Action)
+	{
+		switch (mySpecificFaction)
+		{
+			case BloodThirsty:
+			{
+				myCardText += "BloodThirsty ";
+				break;
+			}
+			case Imperial:
+			{
+				myCardText += "Imperial ";
+				break;
+			}
+			case Raider:
+			{
+				myCardText += "Raider ";
+				break;
+			}
+			case Righteous:
+			{
+				myCardText += "Righteous ";
+				break;
+			}
+			case Xeno:
+			{
+				myCardText += "Xeno ";
+				break;
+			}
+			default:
+			{
+				break;
+			}
+		}
+	}
+
+	if (myNumber > 0)
+	{
+		myCardText += myNumber;
+		myCardText += " ";
+	}
+
+	if (hasAllSuffix)
+	{
+		if (mySuffix.Lenght() > 3)
+		{
+			myCardText += mySuffix.SubStr(3);
+		}
+	}
+	else
+	{
+		myCardText += mySuffix;
+	}
+}
 
 bool AbilityBase::CheckConditions(Card* aCard, int conditions)
 {

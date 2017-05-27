@@ -191,7 +191,8 @@ namespace Collider
 				Bottom_Right
 			};
 
-			Hitbox2D() {};
+			Hitbox2D() : x(0), y(0), width(0), height(0)
+			{};
 
 			Hitbox2D(Vector2<float> aPosition, Vector2<float> aSize)
 			{
@@ -244,6 +245,11 @@ namespace Collider
 						return Vector2<float>(x, y);
 					}
 				}
+			}
+
+			Vector2<float> GetCenter()
+			{
+				return Vector2<float>(x + width * 0.5f, y + height * 0.5f);
 			}
 
 			void SetPosition(Vector2<float> aPosition)
