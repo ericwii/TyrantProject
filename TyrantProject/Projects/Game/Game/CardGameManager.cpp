@@ -273,6 +273,27 @@ bool CardGameManager::CleanUp(Player& anActivePlayer, Player& anOpponentPlayer)
 		}
 		else
 		{
+			CU::GrowingArray<Card*>* currentCardList = &anActivePlayer.GetAssaultCards();
+			for (int i = 0; i < currentCardList->Size(); ++i)
+			{
+				(*currentCardList)[i]->SetPopupHitbox();
+			}
+			currentCardList = &anActivePlayer.GetStructureCards();
+			for (int i = 0; i < currentCardList->Size(); ++i)
+			{
+				(*currentCardList)[i]->SetPopupHitbox();
+			}
+
+			currentCardList = &anOpponentPlayer.GetAssaultCards();
+			for (int i = 0; i < currentCardList->Size(); ++i)
+			{
+				(*currentCardList)[i]->SetPopupHitbox();
+			}
+			currentCardList = &anOpponentPlayer.GetStructureCards();
+			for (int i = 0; i < currentCardList->Size(); ++i)
+			{
+				(*currentCardList)[i]->SetPopupHitbox();
+			}
 			return true;
 		}
 	}

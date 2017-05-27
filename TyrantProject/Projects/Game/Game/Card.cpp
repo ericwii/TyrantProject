@@ -834,10 +834,10 @@ void Card::LoadIcons()
 	
 	cardTypeIcon = ModelLoader::LoadRectangle(Vector2<float>(0.2f, 0.15f), eEffectType::Textured, cardTypeIconPath);
 	myCardTypeIcon.Init(cardTypeIcon);
-	myCardTypeIcon.SetPosition(Vector3<float>(-0.53f, 0.87f, 0));
+	myCardTypeIcon.SetPosition(Vector3<float>(-0.60f, 0.87f, 0));
 	
 	myPopup.AddChildInstance(myCardTypeIcon, Vector3<float>(-1.2f, 1.76f, 0));
-	//myCanvas.AddChild(&myCardTypeIcon);
+	myCanvas.AddChild(&myCardTypeIcon);
 
 
 

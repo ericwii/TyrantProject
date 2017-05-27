@@ -270,14 +270,12 @@ void Player::RepositionPlayedCards()
 	for (int i = 0; i < myAssaultCards.Size(); ++i)
 	{
 		myAssaultCards[i]->SetPosition(currentPosition);
-		myAssaultCards[i]->SetPopupHitbox();
 		currentPosition.x += playedCardsOffset;
 	}
 
 	for (int i = 0; i < myStructureCards.Size(); ++i)
 	{
 		myStructureCards[i]->SetPosition(currentStructurePosition);
-		myStructureCards[i]->SetPopupHitbox();
 		currentStructurePosition.x += playedCardsOffset;
 	}
 }
