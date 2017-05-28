@@ -255,7 +255,11 @@ void Player::DrawCard()
 		myHand.AddCard(myDeckCards.GetLast());
 		myDeckCards.RemoveLast();
 	}
-	myHand.SetActive(true);
+
+	if (myHand.HasCards())
+	{
+		myHand.SetActive(true);
+	}
 }
 
 void Player::RepositionPlayedCards()
