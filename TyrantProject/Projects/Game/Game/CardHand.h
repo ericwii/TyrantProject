@@ -1,31 +1,33 @@
 #pragma once
-
+#include "GUIWindow.h"
 
 class Card;
-
 
 class CardHand
 {
 public:
 	CardHand();
 	~CardHand();
+
+	void Init(bool aIsUser);
 	
 	void AddCard(Card* aCard);
 	void RemoveCard(Card* aCard);
-	void Render();
-
-
 	bool ChooseCardToPlay(Card*& chosenCard);
 
+	void SetActive(bool active);
 	inline bool HasCards();
 	inline CU::VectorOnStack<Card*, 3>& GetCards();
 
 private:
-	void LoadGUI();
-	int HitBoxCheck();
+	void UpdateDrag(Vector2<float>& aMousePosition);
 
+	GUIWindow myHandGUI;
 	CU::VectorOnStack<Card*,3> myCards;
-	Instance myHandGUI;
+	Hitbox2D myDragHitbox;
+	Vector2<float> myDragOffset;
+	Vector2<float> myGUIPos;
+	bool myPlayerIsUser;
 };
 
 

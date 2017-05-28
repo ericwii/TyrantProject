@@ -137,11 +137,6 @@ void Card::LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime)
 	myCurrentLerpTime = 0;
 }
 
-void Card::TogglePopup(bool toggle)
-{
-	myPopup.SetActive(toggle);
-}
-
 void Card::LowerCooldown()
 {
 	if (myCooldown > 0 && GetStatusEffectNumber(eStatusEffectType::Freeze) < 1)
@@ -561,10 +556,11 @@ void Card::SetPopupHitbox()
 {
 	Vector2<float> screenPosition = Engine::GetInstance()->GetCamera().ToScreenPosition(myCanvas.GetPosition());
 	Vector2<float> hitboxOffset(0.1f, 0.2f);
-
 	screenPosition.y *= -1.f;
-	Hitbox2D popupHitbox(screenPosition - hitboxOffset, Vector2<float>(0.2f, 0.4f));
-	myPopup.SetHitbox(popupHitbox);
+
+	myPopupHitbox.SetPosition(screenPosition - hitboxOffset);
+	myPopupHitbox.SetSize(0.2f, 0.4f);
+	myPopup.SetHitbox(myPopupHitbox);
 }
 
 void Card::SetOrientation(const CU::Matrix44<float>& anOrientation)
@@ -652,7 +648,7 @@ void Card::LoadModels()
 	myIllustration.Init(illustrationModel);
 	myIllustration.SetPosition(Vector3<float>(0, 0.235f, 0));
 	myCanvas.AddChild(&myIllustration);
-	myPopup.AddChildInstance(myIllustration, Vector3<float>(0, 0.47f, 0));
+	myPopup.AddChildCopy(myIllustration, Vector3<float>(0, 0.47f, 0));
 
 
 	if (myCardData->cardType != eCardType::Action)
@@ -662,12 +658,12 @@ void Card::LoadModels()
 		myHealthIcon.SetPosition(Vector3<float>(0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myHealthIcon);
 
-		myPopup.AddChildInstance(myHealthIcon, Vector3<float>(1.2f, -1.75f, 0));
+		myPopup.AddChildCopy(myHealthIcon, Vector3<float>(1.2f, -1.75f, 0));
 
 		Model* factionStripModel = ModelLoader::LoadRectangle(Vector2<float>(0.85f, 0.15f), eEffectType::Textured, "Data/Textures/CardCanvas/factionStrip.png");
 		Instance factionStripInstance;
 		factionStripInstance.Init(factionStripModel);
-		myPopup.AddChildInstance(factionStripInstance, Vector3<float>(-0.56f, -0.5f, 0));
+		myPopup.AddChildCopy(factionStripInstance, Vector3<float>(-0.56f, -0.5f, 0));
 	}
 
 	if (myCardData->cardType == eCardType::Assault)
@@ -677,7 +673,7 @@ void Card::LoadModels()
 		myAttackIcon.SetPosition(Vector3<float>(-0.6f, -0.88f, 0));
 		myCanvas.AddChild(&myAttackIcon);
 
-		myPopup.AddChildInstance(myAttackIcon, Vector3<float>(-1.2f, -1.75f, 0));
+		myPopup.AddChildCopy(myAttackIcon, Vector3<float>(-1.2f, -1.75f, 0));
 	}
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
 	{
@@ -686,7 +682,7 @@ void Card::LoadModels()
 		myCooldownIcon.SetPosition(Vector3<float>(0.48f, 0.82f, 0));
 		myCanvas.AddChild(&myCooldownIcon);
 
-		myPopup.AddChildInstance(myCooldownIcon, Vector3<float>(1.1f, 1.75f, 0.5f));
+		myPopup.AddChildCopy(myCooldownIcon, Vector3<float>(1.1f, 1.75f, 0.5f));
 	}
 }
 
@@ -709,7 +705,7 @@ void Card::LoadText()
 		myHealthText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myHealthText);
 
-		myPopup.AddChildText(myHealthText, Vector3<float>(0.52f, -1.05f, -1.2f));
+		myPopup.AddChildCopy(myHealthText, Vector3<float>(0.52f, -1.05f, -1.2f));
 	}
 
 	if (myCardData->cardType == eCardType::Assault)
@@ -725,7 +721,7 @@ void Card::LoadText()
 		myAttackText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myAttackText);
 
-		myPopup.AddChildText(myAttackText, Vector3<float>(-0.52f, -1.05f, -1.2f));
+		myPopup.AddChildCopy(myAttackText, Vector3<float>(-0.52f, -1.05f, -1.2f));
 	}
 	
 	if (myCardData->cardType == eCardType::Assault || myCardData->cardType == eCardType::Structure)
@@ -741,7 +737,7 @@ void Card::LoadText()
 		myCooldownText.SetCurrentOrientationAsOriginal();
 		myCanvas.AddChild(&myCooldownText);
 
-		myPopup.AddChildText(myCooldownText, Vector2<float>(0.87f, 1.41f));
+		myPopup.AddChildCopy(myCooldownText, Vector2<float>(0.87f, 1.41f));
 	}
 
 	//Name
@@ -750,7 +746,7 @@ void Card::LoadText()
 	tempText.SetCharacterSpace(1.1f);
 	tempText.SetCharacterScale(1.4f);
 	tempText.SetText(myCardData->name);
-	myPopup.AddChildText(tempText, Vector2<float>(-0.70f, 1.4f));
+	myPopup.AddChildCopy(tempText, Vector2<float>(-0.70f, 1.4f));
 
 	//Abilities
 	tempText.SetCharacterSpace(1.1f);
@@ -758,7 +754,7 @@ void Card::LoadText()
 	for (int i = 0; i < myCardData->abilities.Size(); ++i)
 	{
 		tempText.SetText(myCardData->abilities[i]->GetCardText());
-		myPopup.AddChildText(tempText, Vector3<float>(-0.98f, -0.85f - (0.25f * i), 0.9f));
+		myPopup.AddChildCopy(tempText, Vector3<float>(-0.98f, -0.85f - (0.25f * i), 0.9f));
 	}
 
 	//Faction Name
@@ -767,7 +763,7 @@ void Card::LoadText()
 		tempText.SetCharacterSpace(1.1f);
 		tempText.SetCharacterScale(1.4f);
 		tempText.SetText(factionName);
-		myPopup.AddChildText(tempText, Vector2<float>(-1.0f, -0.42f));
+		myPopup.AddChildCopy(tempText, Vector2<float>(-1.0f, -0.42f));
 	}
 }
 
@@ -836,7 +832,7 @@ void Card::LoadIcons()
 	myCardTypeIcon.Init(cardTypeIcon);
 	myCardTypeIcon.SetPosition(Vector3<float>(-0.60f, 0.87f, 0));
 	
-	myPopup.AddChildInstance(myCardTypeIcon, Vector3<float>(-1.2f, 1.76f, 0));
+	myPopup.AddChildCopy(myCardTypeIcon, Vector3<float>(-1.2f, 1.76f, 0));
 	myCanvas.AddChild(&myCardTypeIcon);
 
 
@@ -853,6 +849,6 @@ void Card::LoadIcons()
 		
 		myAbilityIcons.Add(iconInstance);
 		myCanvas.AddChild(&myAbilityIcons[i]);
-		myPopup.AddChildInstance(iconInstance, Vector3<float>(-1.25f, -0.9f - (0.25f * i), 0.9f));
+		myPopup.AddChildCopy(iconInstance, Vector3<float>(-1.25f, -0.9f - (0.25f * i), 0.9f));
 	}
 }

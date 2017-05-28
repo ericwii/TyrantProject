@@ -9,9 +9,10 @@ void GUIManager::AddGUIWindow(GUIWindow* aWindow)
 	int insertIndex = 0;
 	for (int i = myGUIWindows.Size() - 1; i >= 0; --i)
 	{
-		if (aWindow->myLayer >= myGUIWindows[i]->myLayer)
+		if (aWindow->myRenderLayer >= myGUIWindows[i]->myRenderLayer)
 		{
 			insertIndex = i + 1;
+			break;
 		}
 	}
 
@@ -31,18 +32,29 @@ void GUIManager::RemoveGUIWindow(GUIWindow* aWindow)
 }
 
 
+GUIWindow* currentWindow;
 Vector2<float> mousePosition;
+int bestIndex;
 void GUIManager::Update(float aDeltaTime)
 {
 	mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle(), Engine::GetInstance()->GetResolution());
 
+	bestIndex = -1;
 	for (int i = myGUIWindows.Size() - 1; i >= 0; --i)
 	{
-		if (myGUIWindows[i]->myIsActive && myGUIWindows[i]->myHitbox.Inside(mousePosition))
+		currentWindow = myGUIWindows[i];
+		if (currentWindow->myIsActive && currentWindow->myHitbox.Inside(mousePosition))
 		{
-			myGUIWindows[i]->UpdateMouseInside(mousePosition, aDeltaTime);
-			break;
+			if (bestIndex < 0 || currentWindow->myHitboxLayer > myGUIWindows[bestIndex]->myHitboxLayer)
+			{
+				bestIndex = i;
+			}
 		}
+	}
+
+	if (bestIndex != -1)
+	{
+		myGUIWindows[bestIndex]->UpdateMouseInside(mousePosition, aDeltaTime);
 	}
 }
 

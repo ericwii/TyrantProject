@@ -69,7 +69,6 @@ bool CardGameManager::Update(eGamePhase aCurrentPhase, Player& anActivePlayer, P
 
 	if (instance->AllActionsDone(anActivePlayer, aOtherPlayer) == true && instance->myPhaseUpdateDone)
 	{
-		instance->myChoosenCard = nullptr;
 		instance->myCurrentStructureCardIndex = 0;
 		instance->myCurrentAssaultCardIndex = 0;
 		instance->myCurrentAbilityIndex = 0;
@@ -91,6 +90,7 @@ void CardGameManager::Upkeep(Player& anActivePlayer)
 	{
 		anActivePlayer.myStructureCards[i]->Upkeep();
 	}
+	anActivePlayer.DrawCard();
 }
 
 bool CardGameManager::PlayCard(Player& anActivePlayer)
@@ -100,21 +100,25 @@ bool CardGameManager::PlayCard(Player& anActivePlayer)
 		return true;
 	}
 
-	if (anActivePlayer.ChooseCardToPlay(myChoosenCard) == true)
+	myChosenCardIndex = anActivePlayer.ChooseCardToPlay();
+
+	if (myChosenCardIndex >= 0)
 	{
-		anActivePlayer.PlayCard(myChoosenCard);
-		CardGameCameraManager::SetLerpTarget(myChoosenCard->GetPosition(), waitAfterPlayedCard);
+		Card* cardToPlay = &anActivePlayer.myOwnedCards[myChosenCardIndex];
+
+		anActivePlayer.PlayCard(cardToPlay);
+		CardGameCameraManager::SetLerpTarget(cardToPlay->GetPosition(), waitAfterPlayedCard);
 
 		CU::VectorOnStack<AbilityBase*, 3> currentAbilities;
 
-		currentAbilities = myChoosenCard->GetAbilities();
+		currentAbilities = cardToPlay->GetAbilities();
 
 		for (char j = 0; j < currentAbilities.Size(); j++)
 		{
-			currentAbilities[j]->OnPlay(myChoosenCard);
+			currentAbilities[j]->OnPlay(cardToPlay);
 		}
 
-		myChoosenCard->SetPopupHitbox();
+		cardToPlay->SetPopupHitbox();
 		anActivePlayer.ToggleCardPopups(false);
 		anActivePlayer.GetOpponent()->ToggleCardPopups(false);
 		return true;

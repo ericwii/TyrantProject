@@ -14,7 +14,7 @@ GUIPopupWindow::~GUIPopupWindow()
 
 void GUIPopupWindow::Init(Instance& anInstance, float anOffset, float aPopupDelay)
 {
-	GUIWindow::Init(anInstance);
+	GUIWindow::Init(anInstance, 5);
 	myOffset = anOffset;
 	myDelay = aPopupDelay;
 }
@@ -26,7 +26,6 @@ void GUIPopupWindow::Init(Instance& anInstance, float anOffset, float aPopupDela
 
 void GUIPopupWindow::UpdateMouseInside(Vector2<float> aMousePosition, float aDeltaTime)
 {
-	myHasUpdatedThisFrame = true;
 	if (myCurrentDelay < myDelay)
 	{
 		myCurrentDelay += aDeltaTime;
@@ -57,6 +56,7 @@ void GUIPopupWindow::UpdateMouseInside(Vector2<float> aMousePosition, float aDel
 			myCanvas.SetPosition(position);
 		}
 	}
+	myHasUpdatedThisFrame = true;
 }
 
 void GUIPopupWindow::Render()

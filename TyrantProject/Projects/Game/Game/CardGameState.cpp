@@ -83,7 +83,6 @@ void CardGameState::Render()
 	myBackground.Render();
 	myDeckGUI.Render();
 	myTurnCounterText.Render();
-
 	myPlayerOpponent.Render();
 	myPlayerUser.Render();
 

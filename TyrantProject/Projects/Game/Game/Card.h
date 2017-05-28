@@ -78,7 +78,6 @@ public:
 	void LoadCard(string aCardName);
 	void LoadCard(CardData* someData);
 	void LerpToOrientation(CU::Matrix44<float> aOrientation, float aTime);
-	void TogglePopup(bool toggle);
 	void LowerCooldown();
 	void Upkeep();
 	void CleanUp();
@@ -107,12 +106,14 @@ public:
 	void SetPosition(const Vector3<float>& aPosition);
 
 	inline char GetStatusEffectNumber(eStatusEffectType aStatusEffectType);
+	inline GUIPopupWindow& GetPopup();
 	inline CU::VectorOnStack<AbilityBase*, 3> GetAbilities();
 	inline eCardType GetCardType();
 	inline eCardFaction GetFaction();
 	inline CU::Matrix44<float>& GetOrientation();
 	inline Vector3<float> GetPosition();
 	inline Player* GetOwner();
+	inline Instance& GetInstance();
 	inline bool IsLerping() const;
 	inline bool IsDying() const;
 	inline bool IsDead() const;
@@ -134,15 +135,16 @@ private:
 	Text3D myHealthText;
 	Text3D myCooldownText;
 
+	CU::VectorOnStack<Instance, 3> myAbilityIcons;
+	CU::GrowingArray<StatusEffect> myStatusEffects;
 	CU::Matrix44<float> myLerpStart;
 	CU::Matrix44<float> myLerpTarget;
-	CU::GrowingArray<StatusEffect> myStatusEffects;
-	CU::VectorOnStack<Instance, 3> myAbilityIcons;
+	Collider::Hitbox2D myPopupHitbox;
+	Player* myOwner;
+	CardData* myCardData;
 	float myCurrentLerpTime;
 	float myTargetLerpTime;
 	float myCurrentDeathFadeTime;
-	Player* myOwner;
-	CardData* myCardData;
 	unsigned int myRenderPassIndex;
 	bool myIsDying;
 	bool myIsDead;
@@ -171,6 +173,11 @@ inline CU::VectorOnStack<AbilityBase*, 3> Card::GetAbilities()
 	{
 		return CU::VectorOnStack<AbilityBase*, 3>();
 	}
+}
+
+inline GUIPopupWindow& Card::GetPopup()
+{
+	return myPopup;
 }
 
 inline eCardType Card::GetCardType()
@@ -205,6 +212,11 @@ inline CU::Matrix44<float>& Card::GetOrientation()
 inline Player* Card::GetOwner()
 {
 	return myOwner;
+}
+
+inline Instance& Card::GetInstance()
+{
+	return myCanvas;
 }
 
 inline Vector3<float> Card::GetPosition()

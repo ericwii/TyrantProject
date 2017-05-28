@@ -23,8 +23,9 @@ public:
 	void ToggleCardPopups(bool toggle);
 
 	void Render();
+	void DrawCard();
 
-	bool ChooseCardToPlay(Card*& chosenCard);
+	int ChooseCardToPlay();
 	Card* SummonCard(const string& aCardToSummon);
 
 	inline bool CommanderIsDead();
@@ -38,7 +39,6 @@ private:
 	void RepositionPlayedCards();
 	void PlayCard(Card* aCard);
 	void ShuffleDeck();
-	void DrawCard();
 	
 	CardHand myHand;
 	CU::GrowingArray<Card*> myDeckCards;
@@ -48,9 +48,8 @@ private:
 	CU::VectorOnStack<Card, DECK_MAX_SIZE> myOwnedCards;
 	ePlayerType myPlayerType;
 	Card* myComander;
+	Card* myCurrentChosenCard;
 	Player* myOpponent;
-
-	bool myShouldRenderhand;
 };
 
 inline bool Player::CommanderIsDead()

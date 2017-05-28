@@ -2,106 +2,145 @@
 #include "CardHand.h"
 #include "Card.h"
 
-Vector2<float> canvasSize(1.5f, 2.0f);
-Vector2<float> handStartPosition(0.1f, 0.1f);
+Vector2<float> canvasHitboxSize(0.795f, 0.59f);
+Vector3<float> cardStartPos(-1.8f, -0.15f, 0);
+Vector2<float> dragHitboxOffset(-0.396f, -0.38f);
+Vector2<float> dragHitboxSize(0.795f, 0.1f);
+Vector2<float> projectionOffset(7.5, -5.f);
 float cardOffset = 1.8f;
+Camera* camera;
 
 
 
 CardHand::CardHand()
-{
-	LoadGUI();
-}
-
+{ }
 
 CardHand::~CardHand()
+{ }
+
+
+void CardHand::Init(bool aIsUser)
 {
+	myPlayerIsUser = aIsUser;
+
+	if (aIsUser == true)
+	{
+		Instance guiCanvas(ModelLoader::LoadRectangle(Vector2<float>(6.f, 3.f), eEffectType::Textured, "Data/Textures/playerHand.png"));
+		myHandGUI.Init(guiCanvas, 1, 1);
+		myHandGUI.SetPosition(Vector3<float>(1.8f, 0.2f));
+		myHandGUI.SetHitbox(Hitbox2D(Vector2<float>(-0.157f, -0.335f), canvasHitboxSize));
+
+		camera = &Engine::GetInstance()->GetCamera();
+
+		Vector2<float> guiPos = camera->ToScreenPosition(myHandGUI.GetPosition());
+		myDragHitbox.SetPosition(camera->ToScreenPosition(myHandGUI.GetPosition()) + dragHitboxOffset);
+		myDragHitbox.SetSize(dragHitboxSize);
+	}
 }
 
 void CardHand::AddCard(Card* aCard)
 {
-	aCard->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
-	myCards.Add(aCard);
-
-	Vector2<float> position = handStartPosition;
-	for (int i = 0; i < myCards.Size(); ++i)
+	if (myPlayerIsUser == true)
 	{
-		position.x = handStartPosition.x + cardOffset* i;
-		myCards[i]->SetPosition(position);
+		myHandGUI.AddChild(&aCard->GetInstance());
+
+		aCard->SetOrientation(CU::Matrix44<float>::CreateRotateAroundY(PI * 2));
+		aCard->SetPosition(myHandGUI.GetPosition() + Vector3<float>(cardStartPos.x + cardOffset * myCards.Size(), cardStartPos.y, cardStartPos.z));
+
+		aCard->SetPopupHitbox();
 	}
+
+	myCards.Add(aCard);
 }
 
 void CardHand::RemoveCard(Card* aCard)
 {
 	myCards.RemoveNonCyclic(aCard);
+	aCard->GetPopup().SetHitboxLayer(0);
 
-	Vector2<float> position = handStartPosition;
-	for (int i = 0; i < myCards.Size(); ++i)
+	if (myPlayerIsUser == true)
 	{
-		position.x = handStartPosition.x + cardOffset* i;
-		myCards[i]->SetPosition(position);
+		myHandGUI.RemoveChild(&aCard->GetInstance());
+		for (int i = 0; i < myCards.Size(); ++i)
+		{
+			myCards[i]->SetPosition(myHandGUI.GetPosition() + Vector3<float>(cardStartPos.x + cardOffset * i, cardStartPos.y, cardStartPos.z));
+			myCards[i]->SetPopupHitbox();
+			myCards[i]->GetPopup().SetHitboxLayer(0);
+		}
 	}
 }
-
-void CardHand::Render()
-{
-	//render gui
-	myHandGUI.Render();
-
-	for (int i = 0; i < myCards.Size(); ++i)
-	{
-		myCards[i]->Render();
-	}
-
-	//Hitbox2D currentHitbox(0, 0, 0.2f, 0.4f);
-	//Vector2<float> hitboxOffset(0.1f, 0.24f);
-	//Camera camera = Engine::GetInstance()->GetCamera();
-	//for (int i = 0; i < myCards.Size(); ++i)
-	//{
-	//	currentHitbox.SetPosition(camera.ToScreenPosition(myCards[i]->GetPosition()) - hitboxOffset);
-	//	Engine::GetInstance()->RenderDebugHitbox2D(currentHitbox);
-	//}
-}
-
 
 bool CardHand::ChooseCardToPlay(Card*& chosenCard)
 {
-	if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
+	if (InputManager::Mouse.IsButtonDown(eMouseButton::LEFTBUTTON))
 	{
-		int hitIndex = HitBoxCheck();
-		if (hitIndex >= 0)
+		Vector2<float> mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle(), Engine::GetInstance()->GetResolution());
+
+		if (InputManager::Mouse.WasButtonJustPressed(eMouseButton::LEFTBUTTON))
 		{
-			chosenCard = myCards[hitIndex];
-			return true;
+			for (int i = 0; i < myCards.Size(); ++i)
+			{
+				if (myCards[i]->GetPopup().GetHitbox().Inside(mousePosition))
+				{
+					chosenCard = myCards[i];
+					return true;
+				}
+			}
+			if (myDragHitbox.Inside(mousePosition))
+			{
+				myGUIPos = camera->ToScreenPosition(myHandGUI.GetPosition());
+				myGUIPos.y *= -1.f;
+				myDragOffset = (myGUIPos - mousePosition) * projectionOffset;
+			}
+		}
+		else if (myDragOffset.Length2() > 0)
+		{
+			UpdateDrag(mousePosition);
 		}
 	}
-
+	else
+	{
+		myDragOffset.x = 0;
+		myDragOffset.y = 0;
+	}
+	
 	return false;
 }
 
-void CardHand::LoadGUI()
+void CardHand::SetActive(bool active)
 {
-	Model* GUI = ModelLoader::LoadRectangle(Vector2<float>(6.f, 3.f), eEffectType::Textured, "Data/Textures/yourHand.png");
-	myHandGUI.Init(GUI);
-	myHandGUI.SetPosition(Vector2<float>(1.8f, 0.2f));
-}
-
-int CardHand::HitBoxCheck()
-{
-	Vector2<float> mousePosition = InputManager::Mouse.GetWindowPosition(Engine::GetInstance()->GetWindowHandle(), Engine::GetInstance()->GetResolution());
-	Camera camera = Engine::GetInstance()->GetCamera();
-
-	Hitbox2D currentHitbox(0, 0, 0.2f, 0.4f);
-	Vector2<float> hitboxOffset(0.1f, 0.24f);
-	for (int i = 0; i < myCards.Size(); i++)
+	if (myPlayerIsUser == true)
 	{
-		currentHitbox.SetPosition(camera.ToScreenPosition(myCards[i]->GetPosition()) - hitboxOffset);
-	
-		if (currentHitbox.Inside(mousePosition))
+		myHandGUI.SetActive(active);
+		for (int i = 0; i < myCards.Size(); ++i)
 		{
-			return i;
+			myCards[i]->GetPopup().SetActive(active);
+			myCards[i]->GetPopup().SetHitboxLayer(2);
 		}
 	}
+}
 
-	return -1;
+
+//Private Methods
+
+Vector2<float> dragPosition;
+void CardHand::UpdateDrag(Vector2<float>& aMousePosition)
+{
+	dragPosition = aMousePosition * projectionOffset + myDragOffset;
+	dragPosition.x = MAX(MIN(dragPosition.x, 4.5f), -4.5f);
+	dragPosition.y = MAX(MIN(dragPosition.y, 3.5f), -3.5f);
+
+	myHandGUI.SetPosition(dragPosition);
+
+	myGUIPos = camera->ToScreenPosition(myHandGUI.GetPosition());
+	myGUIPos.y *= -1.f;
+	myGUIPos.y += myDragHitbox.height * 0.8f;
+	myDragHitbox.SetPosition(myGUIPos + dragHitboxOffset);
+
+
+	myHandGUI.SetHitbox(Hitbox2D(myGUIPos + dragHitboxOffset, canvasHitboxSize));
+	for (int i = 0; i < myCards.Size(); ++i)
+	{
+		myCards[i]->SetPopupHitbox();
+	}
 }

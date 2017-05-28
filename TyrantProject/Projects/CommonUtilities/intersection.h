@@ -276,7 +276,7 @@ namespace Collider
 				height = aY;
 			}
 
-			bool Inside(Vector2<float> aPoint) const
+			bool Inside(const Vector2<float>& aPoint) const
 			{
 				if (aPoint.x > x && aPoint.x < x + width)
 				{

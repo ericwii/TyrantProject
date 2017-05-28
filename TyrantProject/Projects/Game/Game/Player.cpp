@@ -9,9 +9,8 @@ float playedCardsOffset = 1.8f;
 float cardPlayLerpTime = 0.2f;
 
 
-Player::Player()
+Player::Player() : myCurrentChosenCard(nullptr)
 {
-	myShouldRenderhand = false;
 }
 
 Player::~Player()
@@ -57,6 +56,7 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 	myStructureCards.Allocate(16);
 	mySummonedCards.Allocate(255);
 
+	myHand.Init(myPlayerType == ePlayerType::User);
 	ShuffleDeck();	
 	DrawCard();
 	DrawCard();
@@ -65,14 +65,14 @@ void Player::Init(const string& aDeckXmlFile, ePlayerType aPlayerType, Player* a
 
 void Player::ToggleCardPopups(bool toggle)
 {
-	myComander->TogglePopup(toggle);
+	myComander->GetPopup().SetActive(toggle);
 	for (int i = 0; i < myAssaultCards.Size(); ++i)
 	{
-		myAssaultCards[i]->TogglePopup(toggle);
+		myAssaultCards[i]->GetPopup().SetActive(toggle);
 	}
 	for (int i = 0; i < myStructureCards.Size(); ++i)
 	{
-		myStructureCards[i]->TogglePopup(toggle);
+		myStructureCards[i]->GetPopup().SetActive(toggle);
 	}
 }
 
@@ -91,33 +91,37 @@ void Player::Render()
 	{
 		myStructureCards[i]->Render();
 	}
-
-	if (myPlayerType == ePlayerType::User && myShouldRenderhand == true)
-	{
-		myHand.Render();
-	}
 }
 
-bool Player::ChooseCardToPlay(Card*& chosenCard)
+int Player::ChooseCardToPlay()
 {
 	DEBUG_ASSERT(myHand.HasCards(), "Can't choose a card with no cards in hand");
 
 	if (myPlayerType == ePlayerType::User)
 	{
-		myShouldRenderhand = true;
-		if(myHand.ChooseCardToPlay(chosenCard) == true)
+		if(myHand.ChooseCardToPlay(myCurrentChosenCard) == true)
 		{
-			myShouldRenderhand = false;
-			return true;
+			myHand.SetActive(false);
 		}
 	}
 	else if (myPlayerType == ePlayerType::AI_Opponent)
 	{
-		chosenCard = myHand.GetCards().GetLast();
-		return true;
+		myCurrentChosenCard = myHand.GetCards().GetLast();
 	}
 
-	return false;
+
+	if (myCurrentChosenCard != nullptr)
+	{
+		for (int i = 0; i < myOwnedCards.Size(); ++i)
+		{
+			if (myCurrentChosenCard == &myOwnedCards[i])
+			{
+				myCurrentChosenCard = nullptr;
+				return i;
+			}
+		}
+	}
+	return -1;
 }
 
 Card* Player::SummonCard(const string& aCardToSummon)
@@ -207,10 +211,6 @@ void Player::PlayCard(Card* aCard)
 	aCard->LerpToOrientation(lerpTarget, cardPlayLerpTime);
 
 	myHand.RemoveCard(aCard);
-	if (aCard != nullptr)
-	{
-		DrawCard();
-	}
 }
 
 void Player::ShuffleDeck()
@@ -250,11 +250,12 @@ void Player::ShuffleDeck()
 
 void Player::DrawCard()
 {
-	if (myDeckCards.Size() > 0)
+	if (myDeckCards.Size() > 0 && myHand.GetCards().Size() < 3)
 	{
 		myHand.AddCard(myDeckCards.GetLast());
 		myDeckCards.RemoveLast();
 	}
+	myHand.SetActive(true);
 }
 
 void Player::RepositionPlayedCards()

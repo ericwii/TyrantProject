@@ -65,7 +65,6 @@ private:
 	CU::VectorOnStack<AbilityBase*, 3> myCurrentAbilities;
 	Player* myAttacker;
 	Player* myDefender;
-	Card* myChoosenCard;
 	eCombatState myCombatState;
 	float myCurrentDelayBetweenAttackTargets;
 	int myCurrentAssaultCardIndex;
@@ -73,6 +72,7 @@ private:
 	int myCurrentAbilityIndex;
 	int myCurrentAttackIndex = 0;
 	int myCurrentAttackTargetIndex = 0;
+	int myChosenCardIndex;
 	bool myPhaseUpdateDone = false;
 	bool myHasUpdatedCommander = false;
 	bool myHasRemovedDeadCards = false;
