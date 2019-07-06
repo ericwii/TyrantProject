@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -14,7 +14,7 @@
     <ProjectGuid>{2891A3F7-701E-441B-8641-6ED19D2F929C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -26,7 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -136,6 +136,7 @@
     <ClInclude Include="JamAbility.h" />
     <ClInclude Include="LeechAbility.h" />
     <ClInclude Include="LegionAbility.h" />
+    <ClInclude Include="PhaseAbility.h" />
     <ClInclude Include="PierceAbility.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PoisonAbility.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="StrikeAbility.h" />
     <ClInclude Include="StunAbility.h" />
     <ClInclude Include="SummonAbility.h" />
+    <ClInclude Include="SunderAbility.h" />
     <ClInclude Include="SupplyAbility.h" />
     <ClInclude Include="SwipeAbility.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -193,6 +195,7 @@
     <ClCompile Include="JamAbility.cpp" />
     <ClCompile Include="LeechAbility.cpp" />
     <ClCompile Include="LegionAbility.cpp" />
+    <ClCompile Include="PhaseAbility.cpp" />
     <ClCompile Include="PierceAbility.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PoisonAbility.cpp" />
@@ -210,6 +213,7 @@
     <ClCompile Include="StrikeAbility.cpp" />
     <ClCompile Include="StunAbility.cpp" />
     <ClCompile Include="SummonAbility.cpp" />
+    <ClCompile Include="SunderAbility.cpp" />
     <ClCompile Include="SupplyAbility.cpp" />
     <ClCompile Include="SwipeAbility.cpp" />
     <ClCompile Include="tinyxml2.cpp" />

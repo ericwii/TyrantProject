@@ -152,6 +152,12 @@
     <ClCompile Include="LegionAbility.cpp">
       <Filter>Abilities\Activation</Filter>
     </ClCompile>
+    <ClCompile Include="PhaseAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="SunderAbility.cpp">
+      <Filter>Abilities\Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -313,6 +319,12 @@
     </ClInclude>
     <ClInclude Include="LegionAbility.h">
       <Filter>Abilities\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="PhaseAbility.h">
+      <Filter>Abilities\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="SunderAbility.h">
+      <Filter>Abilities\Combat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
