@@ -4,7 +4,7 @@
 class RefreshAbility : public AbilityBase
 {
 public:
-	RefreshAbility();
+	RefreshAbility(CardData& aCardData);
 	~RefreshAbility();
 
 

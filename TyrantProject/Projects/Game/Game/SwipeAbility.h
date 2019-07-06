@@ -4,7 +4,7 @@
 class SwipeAbility: public AbilityBase
 {
 public:
-	SwipeAbility();
+	SwipeAbility(CardData& aCardData);
 	~SwipeAbility();
 
 	void OnCalculateAttack(AttackData& data) override;

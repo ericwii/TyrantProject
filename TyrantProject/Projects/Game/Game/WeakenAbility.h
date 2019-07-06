@@ -4,7 +4,7 @@
 class WeakenAbility : public AbilityBase
 {
 public:
-	WeakenAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	WeakenAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~WeakenAbility();
 
 	void OnPreCombat(Card* aCard) override;

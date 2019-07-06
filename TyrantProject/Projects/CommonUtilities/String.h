@@ -4,12 +4,12 @@
 #include "Macro.h"
 #include "Assert.h"
 
-
-#define StringTemplate template<unsigned int Size=64>
+#define StringTemplateDec template<unsigned int Size=64>
+#define StringTemplate template<unsigned int Size>
 
 namespace CommonUtilities
 {
-	StringTemplate
+	StringTemplateDec
 	class String
 	{
 	public:
@@ -393,7 +393,7 @@ namespace CommonUtilities
 				{
 					success = 0;
 					auto it = table.find(aLiteralString[j]);				
-					i += MAX(1, (int)(it._Mynode()->_Myval.second - j));
+					i += MAX(1, (int)(it._Ptr->_Myval.second - j));
 					break;
 				}
 				else

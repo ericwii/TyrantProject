@@ -12,7 +12,7 @@ AnimationData agumentAnimation = AnimationData
 	false
 	);
 
-AugmentAbility::AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+AugmentAbility::AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/augmentIcon.png";
 	myAbilityType = eAbilityTypes::eAgument;
@@ -39,7 +39,7 @@ void AugmentAbility::OnCalculateAttack(AttackData & data)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, data.attacker, target, &agumentAnimation, agumentAnimationSize);
@@ -47,7 +47,7 @@ void AugmentAbility::OnCalculateAttack(AttackData & data)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -63,7 +63,7 @@ void AugmentAbility::OnPreCombat(Card * aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target, &agumentAnimation, agumentAnimationSize);
@@ -71,7 +71,7 @@ void AugmentAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -88,7 +88,7 @@ void AugmentAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 
 	if (mySuffix == "onattacked")
 	{
-		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeTargetedByFriendly);
 		if (target != nullptr)
 		{
 			AbilityStack::AddAbility(this, aUser, target, &agumentAnimation, agumentAnimationSize);
@@ -96,7 +96,7 @@ void AugmentAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 	}
 	else if (mySuffix == "all onattacked")
 	{
-		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown);
+		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 		if (targets.Size() > 0)
 		{
 			AbilityStack::AddAbility(this, aUser, targets, &agumentAnimation, agumentAnimationSize);

@@ -12,7 +12,7 @@ AnimationData healAnimation = AnimationData
 );
 
 
-HealAbility::HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+HealAbility::HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/healIcon.png";
 	myAbilityType = eAbilityTypes::eHeal;
@@ -40,7 +40,7 @@ void HealAbility::OnCalculateAttack(AttackData& data)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, data.attacker, target, nullptr, healAnimationSize);
@@ -48,7 +48,7 @@ void HealAbility::OnCalculateAttack(AttackData& data)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -64,7 +64,7 @@ void HealAbility::OnPreCombat(Card* aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target, nullptr, healAnimationSize);
@@ -72,7 +72,7 @@ void HealAbility::OnPreCombat(Card* aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -89,7 +89,7 @@ void HealAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 
 	if (mySuffix == "onattacked")
 	{
-		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 		if (target != nullptr)
 		{
 			AbilityStack::AddAbility(this, aUser, target, nullptr, healAnimationSize);
@@ -97,7 +97,7 @@ void HealAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacker)
 	}
 	else if(mySuffix == "all onattacked")
 	{
-		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged);
+		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsDamaged | eFindTargetCondition::CanBeTargetedByFriendly);
 		if (targets.Size() > 0)
 		{
 			AbilityStack::AddAbility(this, aUser, targets, nullptr, healAnimationSize);

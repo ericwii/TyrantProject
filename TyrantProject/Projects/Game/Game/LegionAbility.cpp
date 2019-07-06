@@ -13,7 +13,7 @@ AnimationData legionAnimation = AnimationData
 	);
 
 
-LegionAbility::LegionAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+LegionAbility::LegionAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	myAbilityType = eAbilityTypes::eLegion;
 	iconTexturePath = "Data/Textures/Icons/Skills/legionIcon.png";

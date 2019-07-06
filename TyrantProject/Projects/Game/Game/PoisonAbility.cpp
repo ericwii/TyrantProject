@@ -2,7 +2,7 @@
 #include "PoisonAbility.h"
 
 
-PoisonAbility::PoisonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+PoisonAbility::PoisonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/poisonIcon.png";
 	myAbilityType = eAbilityTypes::ePoison;
@@ -18,6 +18,9 @@ void PoisonAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someDa
 {
 	aCard;
 	someDamage;
+
+	if (aDamagedCard->GetCardType() != eCardType::Assault)
+		return;
 
 	aDamagedCard->AddStatusEffect(eStatusEffectType::Poison, iconTexturePath, myNumber);
 }

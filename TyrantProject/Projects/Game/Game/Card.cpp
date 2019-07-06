@@ -254,7 +254,7 @@ void Card::TakeDamage(char& someDamage)
 	}
 }
 
-void Card::Heal(char someHealth)
+void Card::Heal(short someHealth)
 {
 	if (myCardData != nullptr && myHealth < myCardData->health && GetStatusEffectNumber(eStatusEffectType::Disease) < 1)
 	{

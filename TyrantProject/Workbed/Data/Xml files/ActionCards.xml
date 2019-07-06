@@ -2,9 +2,15 @@
 
 <root>
 
-	<card
-		name = "Radio Officer"
-		illustration = "Raider/Assault/RadioOfficer.jpg"
-	/>
+	<card>
+		<name>Death from Above</name>
+		<illustration>Action/DeathfromAbove.jpg</illustration>
+		<cardType>action</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<skill name="strike" number="2" suffix="all onplay" />
+		<skill name="jam" suffix="all onplay" />
+		<skill name="summon" suffix="Thunderer_ onplay"/>
+	</card>
 
 </root>

@@ -2,13 +2,13 @@
 #include "AbilityBase.h"
 
 
-AbilityBase::AbilityBase() : myCardText("Not Implemented"), myNumber(0)
+AbilityBase::AbilityBase(CardData& aCardData) : myCardText("Not Implemented"), myNumber(0)
 {
 }
 
-AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : myCardText("Not Implemented"), mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction)
+AbilityBase::AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : myCardText("Not Implemented"), mySuffix(aSuffix), myNumber(aNumber), mySpecificFaction(aSpecificFaction), myCardsData(&aCardData)
 {
-	if (mySuffix == "all")
+	if (mySuffix.Lenght() > 0 && mySuffix.Find("all") > -1)
 	{
 		myTargets.Allocate(8);
 	}
@@ -150,12 +150,19 @@ CU::GrowingArray<Card*>& AbilityBase::FindAdjecentTargets(Card * originalTarget)
 void AbilityBase::SetCardText()
 {
 	bool hasAllSuffix = false;
+	bool hasOnPlaySuffix = false;
 
 	if (mySuffix.Find("all") != -1)
 	{
 		hasAllSuffix = true;
 		myCardText += "All ";
 	}
+
+	if (mySuffix.Find("onplay") != -1)
+	{
+		hasOnPlaySuffix = true;
+	}
+
 	if (mySpecificFaction != eCardFaction::Action)
 	{
 		switch (mySpecificFaction)
@@ -209,6 +216,13 @@ void AbilityBase::SetCardText()
 	{
 		myCardText += mySuffix;
 	}
+
+	//removes the "onplay" part of the card text for action cards 
+	if (myCardsData->cardType == eCardType::Action)
+	{
+		const char onPlayLenght = 6;
+		myCardText = myCardText.SubStr(0, myCardText.Lenght() - onPlayLenght);
+	}
 }
 
 bool AbilityBase::CheckConditions(Card* aCard, int conditions)
@@ -227,11 +241,11 @@ bool AbilityBase::CheckConditions(Card* aCard, int conditions)
 		{
 			meetsConditions &= aCard->GetCooldown() < 2;
 		}
+	}
 
-		if (meetsConditions && conditions & eFindTargetCondition::CanBeCleansed)
-		{
-			meetsConditions &= (aCard->HasNegativeStatusEffect() && aCard->GetStatusEffectNumber(eStatusEffectType::Phase) < 1);
-		}
+	if (conditions & eFindTargetCondition::CanBeCleansed)
+	{
+		meetsConditions &= (aCard->HasNegativeStatusEffect() && aCard->GetStatusEffectNumber(eStatusEffectType::Phase) < 1);
 	}
 	if (conditions & eFindTargetCondition::HasAttack)
 	{
@@ -240,6 +254,11 @@ bool AbilityBase::CheckConditions(Card* aCard, int conditions)
 	if (conditions & eFindTargetCondition::IsDamaged)
 	{
 		meetsConditions &= !aCard->IsAtMaxHealth();
+	}
+
+	if (conditions & eFindTargetCondition::CanBeTargetedByFriendly)
+	{
+		meetsConditions &= aCard->GetStatusEffectNumber(eStatusEffectType::Phase) < 1;
 	}
 
 	return meetsConditions;

@@ -12,7 +12,7 @@ AnimationData flyingAnimation = AnimationData
 	false
 	);
 
-FlyingAbility::FlyingAbility()
+FlyingAbility::FlyingAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/flyingIcon.png";
 	myAbilityType = eAbilityTypes::eFlying;

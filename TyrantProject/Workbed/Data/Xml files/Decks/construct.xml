@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+  <deck>
+		<commander name="Moya"/>
+		
+		<card name="Death from Above"/>
+		<card name="Death from Above"/>
+		<card name="Zarak"/>
+		<card name="Zarak"/>
+		<card name="Zarak"/>
+		<card name="Warpway Fortress"/> 
+		<card name="Enclave Warp Gate"/> 
+		<card name="Enclave Warp Gate"/> 
+  </deck>
+
+</root>

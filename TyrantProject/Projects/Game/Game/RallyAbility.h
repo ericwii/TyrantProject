@@ -4,7 +4,7 @@
 class RallyAbility : public AbilityBase
 {
 public:
-	RallyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	RallyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~RallyAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

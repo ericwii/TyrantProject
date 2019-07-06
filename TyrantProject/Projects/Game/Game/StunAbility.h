@@ -4,7 +4,7 @@
 class StunAbility: public AbilityBase
 {
 public:
-	StunAbility();
+	StunAbility(CardData& aCardData);
 	~StunAbility();
 
 	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) override;

@@ -4,7 +4,7 @@
 class ImmobilizeAbility: public AbilityBase
 {
 public:
-	ImmobilizeAbility();
+	ImmobilizeAbility(CardData& aCardData);
 	~ImmobilizeAbility();
 
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage) override;

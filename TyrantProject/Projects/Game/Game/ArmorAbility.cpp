@@ -2,7 +2,7 @@
 #include "ArmorAbility.h"
 
 
-ArmorAbility::ArmorAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix, aNumber, aSpecificFaction)
+ArmorAbility::ArmorAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/armoredIcon.png";
 	myAbilityType = eAbilityTypes::eArmor;

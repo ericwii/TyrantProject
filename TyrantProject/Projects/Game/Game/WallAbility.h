@@ -4,7 +4,7 @@
 class WallAbility: public AbilityBase
 {
 public:
-	WallAbility();
+	WallAbility(CardData& aCardData);
 	~WallAbility();
 
 	void OnCommanderAttack(Card*& aCurrentTarget, Card* aUser) override;

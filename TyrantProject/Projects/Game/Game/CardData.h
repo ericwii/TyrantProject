@@ -43,5 +43,5 @@ struct CardData
 	bool unique = false;
 	char cooldown = 0;
 	char attack = 1;
-	char health = 1;
+	short health = 1;
 };

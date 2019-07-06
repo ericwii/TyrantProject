@@ -6,7 +6,7 @@ float cameraWaitDelay = 0.5f;
 float cameraSpeed = 10.f;
 
 
-SummonAbility::SummonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+SummonAbility::SummonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/summonIcon.png";
 	myAbilityType = eAbilityTypes::eSummon;
@@ -15,15 +15,15 @@ SummonAbility::SummonAbility(const string& aSuffix, char aNumber, eCardFaction a
 	myCardToSummon = mySuffix;
 	for (int i = 0; i < aSuffix.Lenght(); ++i)
 	{
-		if (aSuffix[i] == ' ')
+		if (aSuffix[i] == '_')
 		{
 			myCardToSummon = aSuffix.SubStr(0, i);
 			break;
 		}
 	}
-	if (myCardToSummon.Lenght() < mySuffix.Lenght())
+	if (myCardToSummon.Lenght()+1 < mySuffix.Lenght())
 	{
-		mySuffix.SetAsSubStr(myCardToSummon.Lenght());
+		mySuffix.SetAsSubStr(myCardToSummon.Lenght()+1);
 	}
 	else
 	{

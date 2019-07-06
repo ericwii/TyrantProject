@@ -2,7 +2,7 @@
 #include "FlurryAbility.h"
 
 
-FlurryAbility::FlurryAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction):AbilityBase(aSuffix,aNumber,aSpecificFaction)
+FlurryAbility::FlurryAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData):AbilityBase(aSuffix,aNumber,aSpecificFaction,aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/flurryIcon.png";
 	myAbilityType = eAbilityTypes::eFlurry;

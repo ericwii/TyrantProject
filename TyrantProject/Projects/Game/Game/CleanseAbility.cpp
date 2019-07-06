@@ -12,7 +12,7 @@ AnimationData cleanseAnimation = AnimationData
 	false
 	);
 
-CleanseAbility::CleanseAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+CleanseAbility::CleanseAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/cleanseIcon.png";
 	myAbilityType = eAbilityTypes::eCleanse;
@@ -40,7 +40,7 @@ void CleanseAbility::OnCalculateAttack(AttackData & data)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, data.attacker, target, &cleanseAnimation, cleanseAnimationSize);
@@ -48,7 +48,7 @@ void CleanseAbility::OnCalculateAttack(AttackData & data)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -64,7 +64,7 @@ void CleanseAbility::OnPreCombat(Card * aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				AbilityStack::AddAbility(this, aCard, target, &cleanseAnimation, cleanseAnimationSize);
@@ -72,7 +72,7 @@ void CleanseAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -89,7 +89,7 @@ void CleanseAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 
 	if (mySuffix == "onattacked")
 	{
-		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+		Card* target = FindTarget(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 		if (target != nullptr)
 		{
 			AbilityStack::AddAbility(this, aUser, target, &cleanseAnimation, cleanseAnimationSize);
@@ -97,7 +97,7 @@ void CleanseAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttack
 	}
 	else if (mySuffix == "all onattacked")
 	{
-		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed);
+		CU::GrowingArray<Card*> targets = FindAllTargets(aUser->GetOwner()->GetAssaultCards(), eFindTargetCondition::IsOffCooldown | eFindTargetCondition::CanBeCleansed | eFindTargetCondition::CanBeTargetedByFriendly);
 		if (targets.Size() > 0)
 		{
 			AbilityStack::AddAbility(this, aUser, targets, &cleanseAnimation, cleanseAnimationSize);

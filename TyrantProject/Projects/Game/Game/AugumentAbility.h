@@ -4,7 +4,7 @@
 class AugmentAbility: public AbilityBase
 {
 public:
-	AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	AugmentAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~AugmentAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

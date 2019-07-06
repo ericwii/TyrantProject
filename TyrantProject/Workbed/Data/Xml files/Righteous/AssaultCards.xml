@@ -3,15 +3,62 @@
 <root>
 
 	<card>
-		<name>Radio Officer</name>
-		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
-		<faction>raider</faction>
+		<name>Frost Bite</name>
+		<illustration>Righteous/Assault/Frost Bite.jpg</illustration>
+		<faction>righteous</faction>
 		<cardType>assault</cardType>
 		<rarity>rare</rarity>
 		<unique>false</unique>
-		<cooldown>4</cooldown>
-		<attack>1</attack>
+		<cooldown>3</cooldown>
+		<attack>7</attack>
+		<health>7</health>
+		<skill name="crush" number="8"/>
+		<skill name="evade"/>
+		<skill name="siphon" number="4"/>
+	</card>
+	
+	<card>
+		<name>Templar</name>
+		<illustration>Righteous/Assault/Templar.jpg</illustration>
+		<faction>righteous</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>1</cooldown>
+		<attack>2</attack>
+		<health>5</health>
+		<skill name="armor" number="2"/>
+		<skill name="evade"/>
+		<skill name="protect" number="1" suffix="all" faction="righteous"/>
+	</card>
+	
+	<card>
+		<name>Lion's Mane</name>
+		<illustration>Righteous/Assault/Lion's Mane.jpg</illustration>
+		<faction>righteous</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>true</unique>
+		<cooldown>3</cooldown>
+		<attack>2</attack>
 		<health>9</health>
+		<skill name="legion" number="2"/>
+		<skill name="agument" number="1" suffix="all" faction="righteous"/>
+		<skill name="protect" number="1" suffix="all" faction="righteous"/>
+	</card>
+	
+	<card>
+		<name>Odin</name>
+		<illustration>Righteous/Assault/Odin.jpg</illustration>
+		<faction>righteous</faction>
+		<cardType>assault</cardType>
+		<rarity>legendary</rarity>
+		<unique>true</unique>
+		<cooldown>2</cooldown>
+		<attack>5</attack>
+		<health>4</health>
+		<skill name="strike" number="1" suffix="all"/>
+		<skill name="protect" number="1" suffix="all"/>
 	</card>
 
 </root>

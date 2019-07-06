@@ -13,7 +13,7 @@ AnimationData stunAnimation = AnimationData
 	);
 
 
-StunAbility::StunAbility()
+StunAbility::StunAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	myAbilityType = eAbilityTypes::eStun;
 	iconTexturePath = "Data/Textures/Icons/Skills/stunIcon.png";

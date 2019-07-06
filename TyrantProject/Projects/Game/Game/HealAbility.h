@@ -5,7 +5,7 @@
 class HealAbility : public AbilityBase
 {
 public:
-	HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	HealAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~HealAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

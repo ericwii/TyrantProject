@@ -2,7 +2,7 @@
 #include "FearAbility.h"
 
 
-FearAbility::FearAbility()
+FearAbility::FearAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/fearIcon.png";
 	myAbilityType = eAbilityTypes::eFear;

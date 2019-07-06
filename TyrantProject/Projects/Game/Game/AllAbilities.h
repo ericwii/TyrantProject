@@ -32,3 +32,5 @@
 #include "AugumentAbility.h"
 #include "SwipeAbility.h"
 #include "CleanseAbility.h"
+#include "PhaseAbility.h"
+#include "SunderAbility.h"

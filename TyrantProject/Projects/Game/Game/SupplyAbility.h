@@ -4,7 +4,7 @@
 class SupplyAbility : public AbilityBase
 {
 public:
-	SupplyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	SupplyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~SupplyAbility();
 
 	void OnCalculateAttack(AttackData& data) override;

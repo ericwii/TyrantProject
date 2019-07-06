@@ -13,5 +13,17 @@
     <skill name="weaken" number="2"/>
     <skill name="cleanse"/>
 	</card>
+	
+	<card>
+		<name>Moya</name>
+		<illustration>Raider/Commander/moya.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>11</health>
+    <skill name="weaken" number="1"/>
+    <skill name="refresh"/>
+	</card>
 
 </root>

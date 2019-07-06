@@ -24,6 +24,8 @@
 		<cooldown>2</cooldown>
 		<attack>4</attack>
 		<health>5</health>
+		<skill name="heal" number="1" suffix="all"/>
+		<skill name="enfeeble" number="1" suffix="all"/>
 	</card>
 
 	<card>
@@ -49,7 +51,7 @@
 		<attack>2</attack>
 		<health>8</health>
 		<skill name="weaken" number="2"/>
-		<skill name="summon" suffix="Redeemer onplay" />
+		<skill name="summon" suffix="Redeemer_ onplay" />
     <skill name="swipe"/>
 	</card>
 	
@@ -111,6 +113,21 @@
 		<skill name="strike" number="1" suffix="all"/>
 		<skill name="refresh"/>
 		<skill name="berserk" number="2"/>
+	</card>
+	
+	<card>
+		<name>Scythling</name>
+		<illustration>BloodThirsty/Assault/Scythling.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>assault</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<cooldown>2</cooldown>
+		<attack>2</attack>
+		<health>6</health>
+		<skill name="pierce" number="3"/>
+		<skill name="swipe"/>
+		<skill name="antiair" number="3"/>
 	</card>
 
 </root>

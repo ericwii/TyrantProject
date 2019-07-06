@@ -13,7 +13,7 @@
     <health>7</health>
     <skill name="strike" number="2"/>
     <skill name="siege" number="3"/>
-    <skill name="summon" suffix="Vaporwing"/>
+    <skill name="summon" suffix="Vaporwing_"/>
   </card>
 
   <card>
@@ -41,6 +41,19 @@
     <skill name="regenerate" number="5"/>
     <skill name="heal" number="3" suffix ="all" faction="xeno"/>
     <skill name="rally" number="2" suffix ="all" faction="xeno"/>
+  </card>
+  
+   <card>
+    <name>Enclave Warp Gate</name>
+    <illustration>Xeno/Structure/Enclave Warp Gate.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>structure</cardType>
+    <rarity>uncommon</rarity>
+    <unique>false</unique>
+    <cooldown>2</cooldown>
+    <health>3</health>
+    <skill name="strike" number="1"/>
+    <skill name="summon" suffix="Fang_"/>
   </card>
 
 </root>

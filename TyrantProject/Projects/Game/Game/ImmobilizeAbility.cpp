@@ -13,7 +13,7 @@ AnimationData immobilizeAnimation = AnimationData
 
 
 
-ImmobilizeAbility::ImmobilizeAbility()
+ImmobilizeAbility::ImmobilizeAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	myAbilityType = eAbilityTypes::eImmobilise;
 	iconTexturePath = "Data/Textures/Icons/Skills/immobilizeIcon.png";
@@ -29,6 +29,9 @@ void ImmobilizeAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char so
 {
 	aCard;
 	someDamage;
+
+	if (aDamagedCard->GetCardType() != eCardType::Assault)
+		return;
 
 	if ((rand() % 2) == 1)
 	{

@@ -1,0 +1,14 @@
+<root>
+
+  <deck>
+		<commander name="Mayumi"/>
+		
+		<card name="Templar"/>
+		<card name="Frost Bite"/>
+		<card name="Frost Bite"/>
+		<card name="Frost Bite"/>
+		<card name="Odin"/>
+		<card name="Lion's Mane"/>
+  </deck>
+
+</root>

@@ -4,7 +4,7 @@
 class EnfeebleAbility: public AbilityBase
 {
 public:
-	EnfeebleAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	EnfeebleAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~EnfeebleAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

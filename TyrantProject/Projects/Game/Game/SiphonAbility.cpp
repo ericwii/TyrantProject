@@ -2,7 +2,7 @@
 #include "SiphonAbility.h"
 
 
-SiphonAbility::SiphonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+SiphonAbility::SiphonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction,aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/siphonIcon.png";
 	myAbilityType = eAbilityTypes::eSiphon;

@@ -15,7 +15,7 @@ float strikeDelay = 0.2f;
 
 
 
-StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+StrikeAbility::StrikeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/strikeIcon.png";
 	myAbilityType = eAbilityTypes::eStrike;
@@ -115,6 +115,31 @@ void StrikeAbility::OnAttacked(Card * aUser, char & someDamage, Card * anAttacke
 		if (targets.Size() > 0)
 		{
 			AbilityStack::AddAbility(this, aUser, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
+		}
+	}
+}
+
+void StrikeAbility::OnPlay(Card* aCard)
+{
+	Player* opponent = aCard->GetOwner()->GetOpponent();
+
+	if (mySuffix == "onplay")
+	{
+		Card* target = FindTarget(opponent->GetAssaultCards());
+
+		if (target != nullptr)
+		{
+			AbilityStack::AddAbility(this, aCard, target, &strikeAnimation, strikeAnimationSize, strikeDelay);
+		}
+
+	}
+	else if (mySuffix == "all onplay")
+	{
+		CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetAssaultCards());
+
+		if (targets.Size() > 0)
+		{
+			AbilityStack::AddAbility(this, aCard, targets, &strikeAnimation, strikeAnimationSize, strikeDelay);
 		}
 	}
 }

@@ -11,7 +11,7 @@ AnimationData jamAnimation = AnimationData
 	false
 	);
 
-JamAbility::JamAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+JamAbility::JamAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	myAbilityType = eAbilityTypes::eJam;
 	iconTexturePath = "Data/Textures/Icons/Skills/jamIcon.png";
@@ -83,6 +83,31 @@ void JamAbility::DoAction(Card * aCaster, CU::GrowingArray<Card*>& someTargets)
 		if ((rand() % 2) == 1)
 		{
 			someTargets[i]->AddStatusEffect(eStatusEffectType::Jam);
+		}
+	}
+}
+
+void JamAbility::OnPlay(Card* aCard)
+{
+	Player* opponent = aCard->GetOwner()->GetOpponent();
+
+	if (mySuffix == "onplay")
+	{
+		Card* target = FindTarget(opponent->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn);
+
+		if (target != nullptr)
+		{
+			AbilityStack::AddAbility(this, aCard, target, nullptr, jamAnimationSize);
+		}
+
+	}
+	else if (mySuffix == "all onplay")
+	{
+		CU::GrowingArray<Card*> targets = FindAllTargets(opponent->GetAssaultCards(), eFindTargetCondition::IsOffCooldownNextTurn);
+
+		if (targets.Size() > 0)
+		{
+			AbilityStack::AddAbility(this, aCard, targets, nullptr, jamAnimationSize);
 		}
 	}
 }

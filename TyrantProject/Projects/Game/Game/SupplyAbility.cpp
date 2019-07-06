@@ -12,7 +12,7 @@ AnimationData supplyAnimation = AnimationData
 	false
 );
 
-SupplyAbility::SupplyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix,aNumber,aSpecificFaction)
+SupplyAbility::SupplyAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/supplyIcon.png";
 	myAbilityType = eAbilityTypes::eSupply;

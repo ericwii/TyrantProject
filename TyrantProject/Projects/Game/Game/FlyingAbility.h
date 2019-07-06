@@ -4,7 +4,7 @@
 class FlyingAbility: public AbilityBase
 {
 public:
-	FlyingAbility();
+	FlyingAbility(CardData& aCardData);
 	~FlyingAbility();
 
 	void OnAttacked(Card* aUser, char& someDamage, Card* anAttacker) override;

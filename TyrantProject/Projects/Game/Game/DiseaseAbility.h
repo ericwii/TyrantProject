@@ -4,7 +4,7 @@
 class DiseaseAbility: public AbilityBase
 {
 public:
-	DiseaseAbility();
+	DiseaseAbility(CardData& aCardData);
 	~DiseaseAbility();
 
 	void OnDamageDealt(Card* aCard, Card* aDamagedCard, char someDamage) override;

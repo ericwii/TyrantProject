@@ -12,7 +12,7 @@ AnimationData protectAnimation = AnimationData
 	false
 );
 
-ProtectAbility::ProtectAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+ProtectAbility::ProtectAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/protectIcon.png";
 	myAbilityType = eAbilityTypes::eProtect;
@@ -39,7 +39,7 @@ void ProtectAbility::OnCalculateAttack(AttackData & data)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			Card* target = FindTarget(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				//AbilityStack::AddAbility(this, data.attacker, target, &protectAnimation, protectAnimationSize);
@@ -56,7 +56,7 @@ void ProtectAbility::OnCalculateAttack(AttackData & data)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			CU::GrowingArray<Card*> targets = FindAllTargets(data.attacker->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{
@@ -80,7 +80,7 @@ void ProtectAbility::OnPreCombat(Card * aCard)
 	{
 		if (mySuffix.Lenght() == 0)
 		{
-			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			Card* target = FindTarget(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 			if (target != nullptr)
 			{
 				//AbilityStack::AddAbility(this, aCard, target, &protectAnimation, protectAnimationSize);
@@ -97,7 +97,7 @@ void ProtectAbility::OnPreCombat(Card * aCard)
 		}
 		else if (mySuffix == "all")
 		{
-			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::None);
+			CU::GrowingArray<Card*> targets = FindAllTargets(aCard->GetOwner()->GetAssaultCards(), eFindTargetCondition::CanBeTargetedByFriendly);
 
 			if (targets.Size() > 0)
 			{

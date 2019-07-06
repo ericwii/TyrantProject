@@ -4,7 +4,7 @@
 class ProtectAbility: public AbilityBase
 {
 public:
-	ProtectAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	ProtectAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~ProtectAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

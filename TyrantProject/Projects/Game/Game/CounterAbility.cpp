@@ -2,7 +2,7 @@
 #include "CounterAbility.h"
 
 
-CounterAbility::CounterAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction) : AbilityBase(aSuffix, aNumber, aSpecificFaction)
+CounterAbility::CounterAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData) : AbilityBase(aSuffix, aNumber, aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/counterIcon.png";
 	myAbilityType = eAbilityTypes::eCounter;

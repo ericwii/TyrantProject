@@ -43,7 +43,7 @@ void CardGameTextManager::AddDamageText(char damage, const Vector2<float>& aPosi
 	instance->myTexts.Add(newText);
 }
 
-void CardGameTextManager::AddHealingText(char healing, const Vector2<float>& aPosition)
+void CardGameTextManager::AddHealingText(short healing, const Vector2<float>& aPosition)
 {
 	if (instance->myFont == nullptr)
 	{

@@ -3,11 +3,12 @@
 #include "Assert.h"
 #include <memory.h>
 
-#define VectorOnStackTemplate template <typename T, int MaxSize, typename CountType = int, bool UseSafeModeFlag = true>
+#define VectorOnStackTemplate template <typename T, int MaxSize, typename CountType, bool UseSafeModeFlag>
+#define VectorOnStackTemplateDec template <typename T, int MaxSize, typename CountType = int, bool UseSafeModeFlag = true>
 
 namespace CommonUtilities
 {
-	VectorOnStackTemplate
+	VectorOnStackTemplateDec
 	class VectorOnStack
 	{
 	public:

@@ -4,7 +4,7 @@
 class SiegeAbility: public AbilityBase
 {
 public:
-	SiegeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	SiegeAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~SiegeAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

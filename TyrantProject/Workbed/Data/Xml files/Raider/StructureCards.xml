@@ -13,7 +13,7 @@
 		<health>9</health>
     <skill name="wall"/>
     <skill name="strike" number="2" suffix="all"/>
-    <skill name="summon" suffix="Thunderer onplay"/>
+    <skill name="summon" suffix="Rat Catcher_ onplay"/>
 	</card>
 
 </root>

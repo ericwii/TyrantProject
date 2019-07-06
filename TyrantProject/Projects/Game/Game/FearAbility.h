@@ -4,7 +4,7 @@
 class FearAbility: public AbilityBase
 {
 public:
-	FearAbility();
+	FearAbility(CardData& aCardData);
 	~FearAbility();
 
 	void OnCalculateAttack(AttackData& data) override;

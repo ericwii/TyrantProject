@@ -42,5 +42,18 @@
 		<unique>false</unique>
 		<health>18</health>
 	</card>
+	
+	<card>
+		<name>Scythos</name>
+		<illustration>BloodThirsty/Commander/Scythos.jpg</illustration>
+		<faction>bloodthirsty</faction>
+		<cardType>commander</cardType>
+		<rarity>rare</rarity>
+		<unique>false</unique>
+		<health>250</health>
+		<skill name="rally" number="1" suffix="all"/>
+		<skill name="enfeeble" number="1" suffix="all"/>
+		<skill name="summon" suffix="Scythling_"/>
+	</card>
 
 </root>

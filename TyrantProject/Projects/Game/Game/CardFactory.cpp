@@ -48,8 +48,8 @@ void CardFactory::LoadCards()
 		LoadCardsList(element->Attribute("commanderPath"));
 	}
 
-	/*rootelement = rootelement->NextSiblingElement("ActionCardList");
-	LoadCardsList(rootelement->Attribute("actionsPath"));*/
+	rootelement = rootelement->NextSiblingElement("ActionCardList");
+	LoadCardsList(rootelement->Attribute("actionsPath"));
 
 }
 
@@ -110,8 +110,6 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	aCardData.name = ReadStringElement(aElement->FirstChildElement("name"));
 	aCardData.illustrationPath = illustrationStartPath + ReadStringElement(aElement->FirstChildElement("illustration"));
 
-	string faction = ReadStringElement(aElement->FirstChildElement("faction"));
-	aCardData.faction = GetFactionFromString(faction);
 	
 	string cardType = ReadStringElement(aElement->FirstChildElement("cardType"));
 	if (cardType == "assault")
@@ -130,6 +128,7 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	{
 		aCardData.cardType = eCardType::Commander;
 	}
+
 	
 	string rarity = ReadStringElement(aElement->FirstChildElement("rarity"));
 	if (rarity == "rare")
@@ -150,15 +149,22 @@ void CardFactory::LoadCardData(XMLElement* aElement)
 	}
 	
 	aCardData.unique = ReadBoolElement(aElement->FirstChildElement("unique"));
-	aCardData.health = static_cast<char>(ReadIntElement(aElement->FirstChildElement("health")));
-	
-	if (aCardData.cardType == eCardType::Assault || aCardData.cardType == eCardType::Structure)
+
+	if (aCardData.cardType != eCardType::Action)
 	{
-		aCardData.cooldown = static_cast<char>(ReadIntElement(aElement->FirstChildElement("cooldown")));
-	}
-	if (aCardData.cardType == eCardType::Assault)
-	{
-		aCardData.attack = static_cast<char>(ReadIntElement(aElement->FirstChildElement("attack")));
+		string faction = ReadStringElement(aElement->FirstChildElement("faction"));
+		aCardData.faction = GetFactionFromString(faction);
+
+		aCardData.health = static_cast<short>(ReadIntElement(aElement->FirstChildElement("health")));
+
+		if (aCardData.cardType == eCardType::Assault || aCardData.cardType == eCardType::Structure)
+		{
+			aCardData.cooldown = static_cast<char>(ReadIntElement(aElement->FirstChildElement("cooldown")));
+		}
+		if (aCardData.cardType == eCardType::Assault)
+		{
+			aCardData.attack = static_cast<char>(ReadIntElement(aElement->FirstChildElement("attack")));
+		}
 	}
 
 	LoadCardAbilities(aCardData, aElement);
@@ -205,11 +211,11 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 			if (currentElement->Attribute("faction") != nullptr)
 			{
 				currentFactionString = currentElement->Attribute("faction");
-				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, GetFactionFromString(currentFactionString));
+				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, GetFactionFromString(currentFactionString), someData);
 			}
 			else
 			{
-				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, eCardFaction::Action);
+				currentAbility = GetAbility(currentName, currentSuffix, currentNumber, eCardFaction::Action, someData);
 			}
 
 			if (currentAbility != nullptr)
@@ -223,135 +229,143 @@ void CardFactory::LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aC
 	}
 }
 
-AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix, char aNumber, eCardFaction aFaction)
+AbilityBase* CardFactory::GetAbility(const string& aName, const string& aSuffix, char aNumber, eCardFaction aFaction, CardData& aCardData)
 {
 	if (aName == "strike")
 	{
-		return new StrikeAbility(aSuffix, aNumber, aFaction);
+		return new StrikeAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "heal")
 	{
-		return new HealAbility(aSuffix, aNumber, aFaction);
+		return new HealAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "refresh")
 	{
-		return new RefreshAbility();
+		return new RefreshAbility(aCardData);
 	}
 	else if (aName == "rally")
 	{
-		return new RallyAbility(aSuffix, aNumber, aFaction);
+		return new RallyAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "siege")
 	{
-		return new SiegeAbility(aSuffix, aNumber, aFaction);
+		return new SiegeAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "wall")
 	{
-		return new WallAbility();
+		return new WallAbility(aCardData);
 	}
 	else if (aName == "weaken")
 	{
-		return new WeakenAbility(aSuffix, aNumber, aFaction);
+		return new WeakenAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "armor")
 	{
-		return new ArmorAbility(aSuffix, aNumber, aFaction);
+		return new ArmorAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "pierce")
 	{
-		return new PierceAbility(aSuffix, aNumber, aFaction);
+		return new PierceAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "crush")
 	{
-		return new CrushAbility(aSuffix, aNumber, aFaction);
+		return new CrushAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "berserk")
 	{
-		return new BerserkAbility(aSuffix, aNumber, aFaction);
+		return new BerserkAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "leech")
 	{
-		return new LeechAbility(aSuffix, aNumber, aFaction);
+		return new LeechAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "siphon")
 	{
-		return new SiphonAbility(aSuffix, aNumber, aFaction);
+		return new SiphonAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "counter")
 	{
-		return new CounterAbility(aSuffix, aNumber, aFaction);
+		return new CounterAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "antiair")
 	{
-		return new AntiAirAbility(aSuffix, aNumber, aFaction);
+		return new AntiAirAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "flying")
 	{
-		return new FlyingAbility();
+		return new FlyingAbility(aCardData);
 	}	
 	else if (aName == "summon")
 	{
-		return new SummonAbility(aSuffix, aNumber, aFaction);
+		return new SummonAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "regenerate")
 	{
-		return new RegenerateAbility(aSuffix, aNumber, aFaction);
+		return new RegenerateAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "legion")
 	{
-		return new LegionAbility(aSuffix, aNumber, aFaction);
+		return new LegionAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "supply")
 	{
-		return new SupplyAbility(aSuffix, aNumber, aFaction);
+		return new SupplyAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "fear")
 	{
-		return new FearAbility();
+		return new FearAbility(aCardData);
 	}
 	else if (aName == "flurry")
 	{
-		return new FlurryAbility(aSuffix, aNumber, aFaction);
+		return new FlurryAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "stun")
 	{
-		return new StunAbility();
+		return new StunAbility(aCardData);
 	}
 	else if (aName == "disease")
 	{
-		return new DiseaseAbility();
+		return new DiseaseAbility(aCardData);
 	}
 	else if (aName == "immobilize")
 	{
-		return new ImmobilizeAbility();
+		return new ImmobilizeAbility(aCardData);
 	}
 	else if (aName == "jam")
 	{
-		return new JamAbility(aSuffix,aNumber,aFaction);
+		return new JamAbility(aSuffix,aNumber,aFaction, aCardData);
 	}
 	else if (aName == "enfeeble")
 	{
-		return new EnfeebleAbility(aSuffix, aNumber, aFaction);
+		return new EnfeebleAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "protect")
 	{
-		return new ProtectAbility(aSuffix, aNumber, aFaction);
+		return new ProtectAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "poison")
 	{
-		return new PoisonAbility(aSuffix, aNumber, aFaction);
+		return new PoisonAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "agument")
 	{
-		return new AugmentAbility(aSuffix, aNumber, aFaction);
+		return new AugmentAbility(aSuffix, aNumber, aFaction, aCardData);
 	}
 	else if (aName == "swipe")
 	{
-		return new SwipeAbility();
+		return new SwipeAbility(aCardData);
 	}
 	else if (aName == "cleanse")
 	{
-		return new CleanseAbility(aSuffix,aNumber,aFaction);
+		return new CleanseAbility(aSuffix,aNumber,aFaction, aCardData);
+	}
+	else if (aName == "phase")
+	{
+		return new PhaseAbility(aCardData);
+	}
+	else if (aName == "sunder")
+	{
+		return new SunderAbility(aCardData);
 	}
 	return nullptr;
 }

@@ -11,7 +11,7 @@ AnimationData weakenAnimation = AnimationData
 	false
 );
 
-WeakenAbility::WeakenAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+WeakenAbility::WeakenAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/weakenIcon.png";
 	myAbilityType = eAbilityTypes::eWeaken;

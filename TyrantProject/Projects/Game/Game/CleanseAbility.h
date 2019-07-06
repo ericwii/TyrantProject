@@ -4,7 +4,7 @@
 class CleanseAbility: public AbilityBase
 {
 public:
-	CleanseAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	CleanseAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~CleanseAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets) override;

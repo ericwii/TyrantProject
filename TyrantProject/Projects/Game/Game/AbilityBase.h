@@ -20,8 +20,8 @@ struct AttackData
 class AbilityBase
 {
 public:
-	AbilityBase();
-	AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	AbilityBase(CardData& aCardData);
+	AbilityBase(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~AbilityBase();
 
 
@@ -57,9 +57,11 @@ protected:
 		HasAttack = 4,
 		IsOffCooldown = 8,
 		IsOffCooldownNextTurn = 16,
-		CanBeCleansed = 32
+		CanBeCleansed = 32,
+		CanBeTargetedByFriendly = 64,
 	};
 
+	CardData* myCardsData;
 	eAbilityTypes myAbilityType;
 	CU::GrowingArray<Card*> myTargets;
 	string mySuffix;

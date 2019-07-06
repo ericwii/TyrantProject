@@ -28,7 +28,7 @@ private:
 	void LoadCardsList(const string& anXmlFile);
 	void LoadCardAbilities(CardData& someData, tinyxml2::XMLElement* aCardElement);
 
-	AbilityBase* GetAbility(const string& aName, const string& aSuffix, char aNumber, eCardFaction aFaction);
+	AbilityBase* GetAbility(const string& aName, const string& aSuffix, char aNumber, eCardFaction aFaction, CardData& aCardData);
 	eCardFaction GetFactionFromString(string& aString);
 
 	const char* ReadStringElement(tinyxml2::XMLElement* aElement);

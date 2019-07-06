@@ -88,7 +88,7 @@ public:
 	Card* OnTargeted(AbilityBase* targetingAbility);
 
 	void TakeDamage(char& someDamage);
-	void Heal(char someHealth);
+	void Heal(short someHealth);
 	void Weaken(char someWeaken);
 	void Rally(char someRally);
 	void Berserk(char someAttackIncrese);
@@ -120,7 +120,7 @@ public:
 	inline bool IsAtMaxHealth() const;
 	inline char GetAttack();
 	inline char GetCooldown();
-	inline char GetHealth();
+	inline short GetHealth();
 
 
 private:
@@ -149,7 +149,7 @@ private:
 	bool myIsDying;
 	bool myIsDead;
 	char myCooldown;
-	char myHealth;
+	short myHealth;
 	char myAttack;
 	char myTempAttackChange;
 	char myPermanentAttackChange;
@@ -251,7 +251,7 @@ inline char Card::GetCooldown()
 	return myCooldown;
 }
 
-inline char Card::GetHealth()
+inline short Card::GetHealth()
 {
 	return myHealth;
 }

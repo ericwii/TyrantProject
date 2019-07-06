@@ -1,0 +1,14 @@
+<root>
+
+  <deck>
+		<commander name="Scythos"/>
+		
+		<card name="Grimclaw"/>
+		<card name="Grimclaw"/> 
+		<card name="Scythe Overseer"/> 
+		<card name="Scythe Overseer"/> 
+		<card name="Necro Nest"/> 
+		<card name="Fenrir"/> 
+  </deck>
+
+</root>

@@ -2,7 +2,7 @@
 #include "BerserkAbility.h"
 
 
-BerserkAbility::BerserkAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+BerserkAbility::BerserkAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/berserkIcon.png";
 	myAbilityType = eAbilityTypes::eBerserk;

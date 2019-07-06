@@ -2,7 +2,7 @@
 #include "PierceAbility.h"
 
 
-PierceAbility::PierceAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+PierceAbility::PierceAbility(const string & aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/pierceIcon.png";
 	myAbilityType = eAbilityTypes::ePierce;

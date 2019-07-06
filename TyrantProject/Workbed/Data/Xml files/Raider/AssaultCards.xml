@@ -12,7 +12,7 @@
 		<cooldown>4</cooldown>
 		<attack>1</attack>
 		<health>9</health>
-		<skill name="summon" suffix="Thunderer"/>
+		<skill name="summon" suffix="Thunderer_"/>
 		<skill name="heal" number="1" suffix="all" faction="raider"/>
 		<skill name="protect" number="1" suffix="all" faction="raider"/>
 	</card>
@@ -28,7 +28,7 @@
 		<attack>3</attack>
 		<health>10</health>
 		<skill name="stun"/>
-		<skill name="summon" suffix="Salvager onattacked"/>
+		<skill name="summon" suffix="Salvager_ onattacked"/>
 		<skill name="legion" number="1"/>
 	</card>
 
@@ -85,7 +85,7 @@
 		<cooldown>4</cooldown>
 		<attack>3</attack>
 		<health>7</health>
-		<skill name="summon" suffix="Springkill onattacked"/>
+		<skill name="summon" suffix="Springkill_ onattacked"/>
 		<skill name="agument" number="1" suffix="all" faction="raider"/>
 		<skill name="refresh"/>
 	</card>
@@ -234,7 +234,7 @@
 		<attack>1</attack>
 		<health>6</health>
 		<skill name="blitz"/>
-		<skill name="summon" suffix="Berzerker"/>
+		<skill name="summon" suffix="Berzerker_"/>
 		<skill name="rally" number="1" suffix="all" faction="raider"/>
 	</card>
 	
@@ -279,6 +279,21 @@
 		<skill name="rally" number="2"/>
 		<skill name="jam"/>
 		<skill name="fear"/>
+	</card>
+	
+	<card>
+		<name>Rat Catcher</name>
+		<illustration>Raider/Assault/RatCatcher.jpg</illustration>
+		<faction>raider</faction>
+		<cardType>assault</cardType>
+		<rarity>uncommon</rarity>
+		<unique>false</unique>
+		<cooldown>1</cooldown>
+		<attack>3</attack>
+		<health>2</health>
+		<skill name="armored" number="1"/>
+		<skill name="phase"/>
+		<skill name="immobilize"/>
 	</card>
 
 </root>

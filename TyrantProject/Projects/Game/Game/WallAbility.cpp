@@ -2,7 +2,7 @@
 #include "WallAbility.h"
 
 
-WallAbility::WallAbility()
+WallAbility::WallAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/wallIcon.png";
 	myAbilityType = eAbilityTypes::eWall;

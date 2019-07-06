@@ -12,8 +12,8 @@
 		<cooldown>2</cooldown>
 		<attack>0</attack>
 		<health>6</health>
-    <skill name="fear"/>
-    <skill name="legion" number="2"/>
+		<skill name="fear"/>
+		<skill name="legion" number="2"/>
 	</card>
 
   <card>
@@ -56,7 +56,7 @@
     <cooldown>1</cooldown>
     <attack>1</attack>
     <health>9</health>
-    <skill name="summon" suffix = "Monstrosity"/>
+    <skill name="summon" suffix = "Monstrosity_"/>
     <skill name="heal" number= "2" suffix ="all" faction ="xeno"/>
     <skill name="rally" number="1" suffix = "all" faction ="xeno"/>
   </card>
@@ -115,7 +115,7 @@
     <health>11</health>
     <skill name="blitz"/>
     <skill name="stun"/>
-    <skill name="summon" suffix="Pherous"/>
+    <skill name="summon" suffix="Pherous_"/>
   </card>
 
   <card>
@@ -173,7 +173,7 @@
     <health>7</health>
     <skill name="blitz"/>
     <skill name="chaos"/>
-    <skill name="summon" suffix="Spew Glider"/>
+    <skill name="summon" suffix="Spew Glider_"/>
   </card>
 
   <card>
@@ -217,7 +217,7 @@
     <attack>1</attack>
     <health>12</health>
     <skill name="flying"/>
-    <skill name="summon" suffix="Serak"/>
+    <skill name="summon" suffix="Serak_"/>
     <skill name="rally" number="2" suffix="all" faction="xeno"/>
   </card>
 
@@ -247,6 +247,20 @@
     <skill name="evade"/>
     <skill name="stun"/>
     <skill name="siege" number="2" suffix="all"/>
+  </card>
+  
+   <card>
+    <name>Fang</name>
+    <illustration>Xeno/Assault/Fang.jpg</illustration>
+    <faction>xeno</faction>
+    <cardType>assault</cardType>
+    <rarity>common</rarity>
+    <unique>false</unique>
+    <cooldown>1</cooldown>
+    <attack>2</attack>
+    <health>1</health>
+    <skill name="flying"/>
+    <skill name="pierce" number="2"/>
   </card>
 
 </root>

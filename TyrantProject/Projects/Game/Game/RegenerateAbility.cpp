@@ -2,7 +2,7 @@
 #include "RegenerateAbility.h"
 
 
-RegenerateAbility::RegenerateAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+RegenerateAbility::RegenerateAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	myAbilityType = eAbilityTypes::eRegenerate;
 	iconTexturePath = "Data/Textures/Icons/Skills/regenerateIcon.png";

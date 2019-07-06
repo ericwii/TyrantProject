@@ -12,7 +12,7 @@ AnimationData enfeebleAnimation = AnimationData
 	false
 	);
 
-EnfeebleAbility::EnfeebleAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+EnfeebleAbility::EnfeebleAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/enfeebleIcon.png";
 	myAbilityType = eAbilityTypes::eEnfeeble;

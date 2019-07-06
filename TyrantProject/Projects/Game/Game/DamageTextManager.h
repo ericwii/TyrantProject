@@ -5,7 +5,7 @@ class CardGameTextManager
 {
 public:
 	static void AddDamageText(char damage, const Vector2<float>& aPosition);
-	static void AddHealingText(char healing, const Vector2<float>& aPosition);
+	static void AddHealingText(short healing, const Vector2<float>& aPosition);
 	static void Update(float aDeltaTime);
 	static void Render();
 

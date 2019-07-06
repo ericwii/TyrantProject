@@ -12,7 +12,7 @@ AnimationData swipeAnimation = AnimationData
 );
 
 
-SwipeAbility::SwipeAbility()
+SwipeAbility::SwipeAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	myAbilityType = eAbilityTypes::eSwipe;
 	iconTexturePath = "Data/Textures/Icons/Skills/swipeIcon.png";

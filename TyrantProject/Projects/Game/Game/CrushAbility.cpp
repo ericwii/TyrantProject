@@ -2,7 +2,7 @@
 #include "CrushAbility.h"
 
 
-CrushAbility::CrushAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction): AbilityBase(aSuffix,aNumber,aSpecificFaction)
+CrushAbility::CrushAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData): AbilityBase(aSuffix,aNumber,aSpecificFaction, aCardData)
 {
 	iconTexturePath = "Data/Textures/Icons/Skills/crushIcon.png";
 	myAbilityType = eAbilityTypes::eCrush;
@@ -16,7 +16,7 @@ CrushAbility::~CrushAbility()
 
 void CrushAbility::OnKill(Card * aCard, Card* aKilledCard)
 {
-	if (aKilledCard->GetCardType() != eCardType::Structure)
+	if (aKilledCard->GetCardType() == eCardType::Assault)
 	{
 		Card* target = aCard->GetOwner()->GetOpponent()->GetCommander();
 		CommonUtilities::VectorOnStack<AbilityBase*, 3> abilities;

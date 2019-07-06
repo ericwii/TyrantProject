@@ -2,7 +2,7 @@
 #include "DiseaseAbility.h"
 
 
-DiseaseAbility::DiseaseAbility()
+DiseaseAbility::DiseaseAbility(CardData& aCardData) : AbilityBase(aCardData)
 {
 	myAbilityType = eAbilityTypes::eDisease;
 	iconTexturePath = "Data/Textures/Icons/Skills/diseaseIcon.png";
@@ -18,6 +18,9 @@ void DiseaseAbility::OnDamageDealt(Card * aCard, Card * aDamagedCard, char someD
 {
 	aCard;
 	someDamage;
+
+	if (aDamagedCard->GetCardType() != eCardType::Assault)
+		return;
 
 	aDamagedCard->AddStatusEffect(eStatusEffectType::Disease);
 }

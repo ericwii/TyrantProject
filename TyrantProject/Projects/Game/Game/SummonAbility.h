@@ -4,7 +4,7 @@
 class SummonAbility : public AbilityBase
 {
 public:
-	SummonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction);
+	SummonAbility(const string& aSuffix, char aNumber, eCardFaction aSpecificFaction, CardData& aCardData);
 	~SummonAbility();
 
 	void DoAction(Card* aCaster, CU::GrowingArray<Card*>& someTargets);
