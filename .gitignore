@@ -46,7 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-!*.lib
+*.lib
 *.obj
 *.suo
 *.sdf
@@ -60,3 +60,4 @@ Temporary Items
 *.opensdf
 *.exe
 *.cache
+*.tmp
