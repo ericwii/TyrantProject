@@ -3,8 +3,8 @@
 <root>
 
 	<card>
-		<name>Radio Officer</name>
-		<illustration>Data/Textures/Illustrations/Raider/Assault/RadioOfficer.jpg</illustration>
+		<name>Temp Righteous Structure</name>
+		<illustration>Raider/Assault/RadioOfficer.jpg</illustration>
 		<faction>raider</faction>
 		<cardType>assault</cardType>
 		<rarity>rare</rarity>
